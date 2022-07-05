@@ -1,0 +1,72 @@
+import Vue from 'vue'
+import Toast from './toastFail.vue'
+import Vuetify from 'vuetify/lib'
+const ToastConstructor = Vue.extend(Toast)
+
+function install(Vue, globalOptions = {}) {
+  let cmp = null
+  const property = globalOptions.property || '$toastFail'
+
+  function createCmp(options) {
+    const component = new ToastConstructor()
+    const vuetifyObj = new Vuetify()
+    component.$vuetify = vuetifyObj.framework
+    const componentOptions = { ...Vue.prototype[property].globalOptions, ...options }
+
+    if (componentOptions.slot) {
+      component.$slots.default = componentOptions.slot
+      delete componentOptions.slot
+    }
+
+    Object.assign(component, componentOptions)
+    document.body.appendChild(component.$mount().$el)
+
+    return component
+  }
+
+  function show(text, title, options = {}) {
+    if (cmp) {
+      return
+    }
+    Vue.prototype.$toastLoading.hide()
+    options.title = title || '-'
+    options.text = text
+    cmp = createCmp(options)
+    cmp.$on('toastFailStatusChange', (isActive, wasActive) => {
+      if (wasActive && !isActive) {
+        cmp.$nextTick(() => {
+          cmp.$destroy()
+          cmp.$el.parentNode.removeChild(cmp.$el)
+          cmp = null
+
+        })
+      }
+    })
+  }
+
+  function hide() {
+    cmp && cmp.close()
+  }
+
+
+  function getCmp() {
+    return cmp
+  }
+
+  Vue.prototype[property] = Object.assign(show, {
+    globalOptions,
+    getCmp,
+    hide,
+  })
+}
+
+function toastFail() {
+
+}
+toastFail.install = install
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(toastFail)
+}
+
+export default toastFail

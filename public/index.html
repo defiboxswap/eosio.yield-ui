@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="Yield" />
+    <meta name="description" content="Yield" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=contain" />
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+    <title>Yield</title>
+    <style type="text/css">
+      .first-loading-wrp {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 90vh;
+        min-height: 90vh;
+      }
+
+      .first-loading-wrp > h1 {
+        font-size: 30px;
+        font-weight: bolder;
+      }
+
+      .first-loading-wrp .loading-wrp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 98px;
+      }
+
+      .first-loading-wrp .dot {
+        position: relative;
+        box-sizing: border-box;
+        display: inline-block;
+        width: 64px;
+        height: 64px;
+        font-size: 64px;
+        transform: rotate(45deg);
+        animation: antRotate 1.2s infinite linear;
+      }
+
+      .first-loading-wrp .dot i {
+        position: absolute;
+        display: block;
+        width: 28px;
+        height: 28px;
+        background-color: #1890ff;
+        border-radius: 100%;
+        opacity: 0.3;
+        transform: scale(0.75);
+        transform-origin: 50% 50%;
+        animation: antSpinMove 1s infinite linear alternate;
+      }
+
+      .first-loading-wrp .dot i:nth-child(1) {
+        top: 0;
+        left: 0;
+      }
+
+      .first-loading-wrp .dot i:nth-child(2) {
+        top: 0;
+        right: 0;
+        -webkit-animation-delay: 0.4s;
+        animation-delay: 0.4s;
+      }
+
+      .first-loading-wrp .dot i:nth-child(3) {
+        right: 0;
+        bottom: 0;
+        -webkit-animation-delay: 0.8s;
+        animation-delay: 0.8s;
+      }
+
+      .first-loading-wrp .dot i:nth-child(4) {
+        bottom: 0;
+        left: 0;
+        -webkit-animation-delay: 1.2s;
+        animation-delay: 1.2s;
+      }
+
+      @keyframes antRotate {
+        to {
+          -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+        }
+      }
+
+      @-webkit-keyframes antRotate {
+        to {
+          -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+        }
+      }
+
+      @keyframes antSpinMove {
+        to {
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes antSpinMove {
+        to {
+          opacity: 1;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .first-loading-wrp {
+          display: none;
+        }
+      }
+      ::-webkit-scrollbar{
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but Defibox EOS doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+      <div class="first-loading-wrp">
+        <div class="loading-wrp">
+          <span class="dot dot-spin">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div id="clearCacheClass" style="font-size: 16px;color:#fff;position: fixed;bottom: 0;right: 0;" onclick="handClearCache();">clearCache</div>
+    <script>
+      function handClearCache() {
+        sessionStorage.clear()
+        localStorage.clear()
+        var keys = document.cookie.match(/[^ =;]+(?==)/g)
+        if (keys) {
+          for (var i = keys.length; i--; ) document.cookie = keys[i] + "=0;expires=" + new Date(0).toUTCString()
+        }
+        // window.document.location.href = "dapp.defibox.io"
+        location.reload()
+      }
+
+      function getCacheAndClear() {
+        try {
+          var size = 0
+          for (let item in window.localStorage) {
+            // if(window.localStorage.hasOwnProperty(item)) {
+            size += JSON.stringify(window.localStorage.getItem(item)).length
+            // }
+          }
+          if ((size / 1024 / 1024) > 4.5) handClearCache()
+        } catch (error) {
+          console.error("getCache error is ",error);
+          // return error;
+        }
+      }
+      getCacheAndClear()
+    </script>
+  </body>
+</html>

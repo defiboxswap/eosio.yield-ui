@@ -1,0 +1,72 @@
+$color-this: rgba(74, 144, 226, 1);
+$color-yellow: rgba(245, 166, 35, 1);
+$color-red: rgba(234, 87, 60, 1);
+$color-green: #13a57a;
+$color-000: #000;
+$color-333: #333;
+$color-666: #666;
+$color-888: #888;
+$color-999: #999;
+$color-e3e3e3: #f3f3f3;
+$color-input: #e8e8e8;
+$color-white: #fff;
+$-btn-color: rgba(74, 144, 226, 1);
+$-btn-yellow: #feb75e;
+$color-solid: #e7e7e7;
+$color-blue: rgba(74, 144, 226, 1);
+
+.color-blue {
+  color: $color-blue !important;
+}
+
+.color-yellow {
+  color: $color-yellow !important;
+}
+
+.color-red {
+  color: $color-red !important;
+}
+
+.color-green {
+  color: $color-green !important;
+}
+
+.color-000 {
+  color: $color-000 !important;
+}
+
+.color-333 {
+  color: $color-333 !important;
+}
+
+.color-666 {
+  color: $color-666 !important;
+}
+
+.color-999 {
+  color: $color-999 !important;
+}
+
+.color-this {
+  color: $color-this !important;
+}
+
+.bgcolor-blue {
+  background-color: $color-blue !important;
+}
+
+.bgcolor-yellow {
+  background-color: $color-yellow !important;
+}
+
+.bgcolor-red {
+  background-color: $color-red !important;
+}
+
+.bgcolor-green {
+  background-color: $color-green !important;
+}
+
+.bgcolor-this {
+  background-color: $color-this !important;
+}

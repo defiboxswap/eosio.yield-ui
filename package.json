@@ -1,0 +1,95 @@
+{
+  "name": "YieldPlus",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "serve": "vue-cli-service serve",
+    "test": "vue-cli-service serve --mode test",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "analyzer": "cross-env use_analyzer=true npm run serve"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@scatterjs/core": "^2.7.54",
+    "@scatterjs/eosjs2": "^1.5.36",
+    "@walletconnect/client": "^1.6.6",
+    "@walletconnect/qrcode-modal": "^1.6.6",
+    "@waxio/waxjs": "^1.0.4",
+    "amfe-flexible": "^2.2.1",
+    "anchor-link": "^3.3.4",
+    "anchor-link-browser-transport": "^3.2.5",
+    "axios": "^0.19.0",
+    "big.js": "^6.1.1",
+    "core-js": "^3.6.4",
+    "decimal.js": "^10.2.0",
+    "echarts": "^5.3.2",
+    "fcbuffer": "^2.2.2",
+    "lodash": "^4.17.20",
+    "moment": "^2.25.3",
+    "numeral": "^2.0.6",
+    "paginationjs": "^2.1.5",
+    "text-encoding": "^0.7.0",
+    "tp-eosjs": "^1.7.0",
+    "vue": "2.6.14",
+    "vue-clipboard2": "^0.3.1",
+    "vue-i18n": "^8.17.4",
+    "vue-router": "^3.1.6",
+    "vuex": "^3.3.0",
+    "vuex-persistedstate": "^3.1.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^6.7.96",
+    "@metamask/detect-provider": "^1.2.0",
+    "@vue/cli-plugin-babel": "^4.3.0",
+    "@vue/cli-plugin-eslint": "^4.3.0",
+    "@vue/cli-service": "^4.3.0",
+    "babel-eslint": "^10.1.0",
+    "deepmerge": "^4.2.2",
+    "eslint": "6.7.2",
+    "eslint-plugin-vue": "6.2.2",
+    "postcss-pxtorem": "^5.1.1",
+    "sass": "1.32.0",
+    "sass-loader": "^8.0.2",
+    "vconsole": "^3.11.0",
+    "vue-cli-plugin-vuetify": "2.4.3",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify": "2.5.13",
+    "vuetify-loader": "1.7.3",
+    "webpack-bundle-analyzer": "^4.5.0",
+    "wowjs": "^1.1.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {
+      "no-console": "off",
+      "no-alert": "warn",
+      "no-multi-spaces": "warn",
+      "no-irregular-whitespace": "warn",
+      "no-trailing-spaces": "warn",
+      "comma-spacing": "warn",
+      "no-async-promise-executor": "off",
+      "no-debugger": "off",
+      "no-unused-vars": "warn"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

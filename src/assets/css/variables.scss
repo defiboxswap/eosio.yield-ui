@@ -1,0 +1,125 @@
+$-header-height: 50px;
+$-main-color: RGBA(0, 148, 213, 1.00);
+$-main-color-light: #689CE6;
+$-main-color-light-hover: #79A9EC;
+
+$-red-color: #f00;
+$-fff-color: #fff;
+$-menu-width: 210px;
+$-mini-menu-width: 66px;
+$-menu-hover: #e7e7e7;
+$-gray: #e7e7e7;
+$-btn-blue: #669AE9;
+$-btn-green: #47B183;
+$-btn-red: #FF1739;
+$-btn-yellow: #F7A700;
+$-font-size: 14px;
+$-min-width: 1260px;
+$-table-head: #7c91c1;
+$-btn-skyblue: #278EDA;
+
+$-topcolor:#152247;
+$-topcolor2: rgba(0, 0, 0, 0.2);
+$-topcolor3: rgba(0, 0, 0, 0.2);
+$-topcolorf7: #f3f3f3;
+$-opacity8: rgba(255, 255, 255, .8);
+
+$-black1: #152247;
+$-black2: #0d1939;
+
+@mixin translate($x:0, $y:0) {
+  -webkit-transform: translate($x, $y);
+  transform: translate($x, $y);
+}
+
+@mixin transition($type:all, $time:.5s) {
+  -webkit-transition: $type $time ease;
+  -moz-transition: $type $time ease;
+  -o-transition: $type $time ease;
+  -ms-transition: $type $time ease;
+  transition: $type $time ease;
+}
+
+@mixin flexbox() {
+  display: -webkit-box; 
+  display: -moz-box; 
+  display: -ms-flexbox; 
+  display: -webkit-flex; 
+  display: flex; 
+} 
+
+@mixin flex($values) {
+  -webkit-box-flex: $values; 
+  -moz-box-flex: $values; 
+  -webkit-flex: $values; 
+  -ms-flex: $values; 
+  flex: $values;
+}
+
+::-webkit-input-placeholder{
+  color: #ccc !important;
+}
+
+.newCoin {
+  // position: relative;
+  padding-left: 1px;
+  .newCoinImg {
+    // position: absolute;
+    // top: 50%;
+    // right: 0;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    // margin-top: -14px;
+    background-color: #fff;
+    background-image: url('/static/img/eos1.png');
+    background-size: cover;
+    border-radius: 50%;
+    
+  }
+  .newCoinImgForTron {
+    background-color: #fff;
+    background-image: url('/static/img/chain/tron-default.png');
+    background-size: cover;
+  }
+  .tradeImg {
+    right: 1px;
+    width: 17px;
+    height: 17px;
+    // margin-top: -9px;
+  }
+
+  .newCoinImg,
+  .newCoinImgForTron,
+  .tradeImg {
+    img {
+      width: 22px;
+      height: 22px;
+      background: #fff;
+      border-radius: 50%;
+      overflow: hidden;
+      &::after {
+        content: '';
+        background-image: url('/static/img/eos1.png');
+        background-size: cover;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: 23px;
+        height: 23px;
+        background-color: #fff;
+        border-radius: 50%;
+      }
+    }
+  }
+  .newCoinImgForTron {
+    img {
+      &::after {
+        content: '';
+        background-image: url('/static/img/chain/tron-default.png');
+        background-size: cover;
+      }
+    }
+  }
+}
