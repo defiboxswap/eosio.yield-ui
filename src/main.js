@@ -10,7 +10,6 @@ import './utils/directives/loading.js';
 import './router/action';
 import '@/assets/css/public.scss';
 import '@/assets/fonts/index.scss'
-import '@/components/icons';
 // Vue.use(VueClipboard)
 Vue.prototype.$errImg = 'this.src="https://defibox.s3.ap-northeast-1.amazonaws.com/eos.png"'
 // import Vconsole from 'vconsole';
