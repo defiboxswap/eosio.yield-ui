@@ -69,28 +69,30 @@
             <!-- <v-select class="basicInfo-input1 select-all" :items="categoryList" v-model="categoryItem" label="" solo :attach="true" :full-width="true"></v-select> -->
             <div class="basicInfo-input1">
               <div class="flex curPoint" @click="categoryShow = !categoryShow">
-                <div class="flex-1" style="padding:0 10px;">{{ categoryItem }}</div>
+                <div class="flex-1" style="padding: 0 10px">{{ categoryItem }}</div>
                 <v-icon v-if="!categoryShow">mdi-menu-down</v-icon>
                 <v-icon v-else>mdi-menu-up</v-icon>
               </div>
 
               <div class="input1-selectList" v-if="categoryShow == true">
-                <div class="selectList-item" v-for="(item,index) in categoryDesList" :key="index" @click="select(index)">
+                <div class="selectList-item" v-for="(item, index) in categoryDesList" :key="index" @click="select(index)">
                   <div>{{ categoryList[index] }}</div>
                   <div class="item-text">{{ $t(item) }}</div>
                 </div>
               </div>
             </div>
-            
           </div>
 
           <div class="basicInfo-box">
             <!-- Project logo (300*300) -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
-            <div class="basicInfo-logo" v-loading="uploadLoading">
+
+            <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
               <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" />
+              <img src="@/assets/img/add.png" v-else style="width: 30px; height: 30px; vertical-align: middle" />
               <input type="file" accept="image/*" @change="fileImage" title="" />
             </div>
+
             <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
           </div>
         </div>
@@ -234,13 +236,13 @@
               <!-- <v-select class="basicInfo-input1 select-all" :items="categoryList" v-model="categoryItem" label="" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select> -->
               <div class="basicInfo-input1">
                 <div class="flex curPoint" @click="categoryShow = !categoryShow">
-                  <div class="flex-1" style="padding:0 10px;">{{ categoryItem }}</div>
+                  <div class="flex-1" style="padding: 0 10px">{{ categoryItem }}</div>
                   <v-icon v-if="!categoryShow">mdi-menu-down</v-icon>
                   <v-icon v-else>mdi-menu-up</v-icon>
                 </div>
 
                 <div class="input1-selectList" v-if="categoryShow == true">
-                  <div class="selectList-item" v-for="(item,index) in categoryDesList" :key="index" @click="select(index)">
+                  <div class="selectList-item" v-for="(item, index) in categoryDesList" :key="index" @click="select(index)">
                     <div>{{ categoryList[index] }}</div>
                     <div class="item-text">{{ $t(item) }}</div>
                   </div>
@@ -268,8 +270,9 @@
             <div class="basicInfo-left">
               <!-- Project logo (300*300) -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
-              <div class="basicInfo-logo" v-loading="uploadLoading">
+              <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
                 <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" />
+                <img src="@/assets/img/add.png" v-else style="width: 30px; height: 30px; vertical-align: middle" />
                 <input type="file" accept="image/*" @change="fileImage" title="" />
               </div>
               <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -392,9 +395,9 @@ export default {
       categoryShow: false,
 
       tipsShow: false,
-      categoryItem: this.$t('yield.yield46'),
-      categoryList: [this.$t('yield.yield46'), this.$t('yield.yield47'), this.$t('yield.yield48'), this.$t('yield.yield49'), this.$t('yield.yield50')],
-      categoryDesList: ['yield.yield144', 'yield.yield145', 'yield.yield146', 'yield.yield147', 'yield.yield148'],
+      categoryItem: this.$t("yield.yield46"),
+      categoryList: [this.$t("yield.yield46"), this.$t("yield.yield47"), this.$t("yield.yield48"), this.$t("yield.yield49"), this.$t("yield.yield50")],
+      categoryDesList: ["yield.yield144", "yield.yield145", "yield.yield146", "yield.yield147", "yield.yield148"],
 
       btnLoading: false,
       uploadLoading: false,
@@ -934,33 +937,33 @@ export default {
       border-radius: 4px;
       position: relative;
       .input1-selectList {
-          position: absolute;
-          top: 40px;
-          left: 0;
-          width: 100%;
-          padding: 15px;
-          background-color: #fff;
-          box-shadow: 0px 1px 6px rgba(126, 126, 126, 0.25);
-          border-radius: 5px;
-          z-index: 5;
-          .selectList-item {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 100%;
+        padding: 15px;
+        background-color: #fff;
+        box-shadow: 0px 1px 6px rgba(126, 126, 126, 0.25);
+        border-radius: 5px;
+        z-index: 5;
+        .selectList-item {
+          font-weight: 400;
+          font-size: 14px;
+          margin-bottom: 10px;
+          cursor: pointer;
+          div {
+            line-height: 1.2;
+          }
+          .item-text {
             font-weight: 400;
-            font-size: 14px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            div {
-              line-height: 1.2;
-            }
-            .item-text {
-              font-weight: 400;
-              font-size: 12px;
-              color: #aaaaaa;
-              line-height: 1;
-              margin-top: 5px;
-              margin-bottom: 15px;
-            }
+            font-size: 12px;
+            color: #aaaaaa;
+            line-height: 1;
+            margin-top: 5px;
+            margin-bottom: 15px;
           }
         }
+      }
     }
     .basicInfo-textarea {
       width: 100%;

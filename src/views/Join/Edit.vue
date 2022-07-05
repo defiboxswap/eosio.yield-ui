@@ -68,28 +68,28 @@
             <div class="basicInfo-subtitle">{{ $t("yield.yield61") }}</div>
             <!-- <v-select class="basicInfo-input1 select-all" :items="categoryList" v-model="categoryItem" label="" solo :attach="true" :full-width="true"></v-select> -->
             <div class="basicInfo-input1" v-if="projectStatus !== 'active'">
-              <div class="flex curPoint" @click="categoryShow = !categoryShow" >
-                <div class="flex-1" style="padding:0 10px;">{{ categoryItem }}</div>
+              <div class="flex curPoint" @click="categoryShow = !categoryShow">
+                <div class="flex-1" style="padding: 0 10px">{{ categoryItem }}</div>
                 <v-icon v-if="!categoryShow">mdi-menu-down</v-icon>
                 <v-icon v-else>mdi-menu-up</v-icon>
               </div>
 
               <div class="input1-selectList" v-if="categoryShow == true">
-                <div class="selectList-item" v-for="(item,index) in categoryDesList" :key="index" @click="select(index)">
+                <div class="selectList-item" v-for="(item, index) in categoryDesList" :key="index" @click="select(index)">
                   <div>{{ categoryList[index] }}</div>
                   <div class="item-text">{{ $t(item) }}</div>
                 </div>
               </div>
             </div>
             <input type="text" class="basicInfo-input1" disabled v-model="categoryItem" v-else />
-
           </div>
 
           <div class="basicInfo-box">
             <!-- Project logo (300*300) -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
-            <div class="basicInfo-logo" v-loading="uploadLoading">
+            <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
               <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" />
+              <img src="@/assets/img/add.png" v-else style="width: 30px; height: 30px; vertical-align: middle" />
               <input type="file" accept="image/*" @change="fileImage" title="" />
             </div>
             <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -235,13 +235,13 @@
               <!-- <v-select class="basicInfo-input1 select-all" :items="categoryList" v-model="categoryItem" label="" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select> -->
               <div class="basicInfo-input1" v-if="projectStatus !== 'active'">
                 <div class="flex curPoint" @click="categoryShow = !categoryShow">
-                  <div class="flex-1" style="padding:0 10px;">{{ categoryItem }}</div>
+                  <div class="flex-1" style="padding: 0 10px">{{ categoryItem }}</div>
                   <v-icon v-if="!categoryShow">mdi-menu-down</v-icon>
                   <v-icon v-else>mdi-menu-up</v-icon>
                 </div>
 
                 <div class="input1-selectList" v-if="categoryShow == true">
-                  <div class="selectList-item" v-for="(item,index) in categoryDesList" :key="index" @click="select(index)">
+                  <div class="selectList-item" v-for="(item, index) in categoryDesList" :key="index" @click="select(index)">
                     <div>{{ categoryList[index] }}</div>
                     <div class="item-text">{{ $t(item) }}</div>
                   </div>
@@ -270,8 +270,9 @@
             <div class="basicInfo-left">
               <!-- Project logo (300*300) -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
-              <div class="basicInfo-logo" v-loading="uploadLoading">
+              <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
                 <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" />
+                <img src="@/assets/img/add.png" v-else style="width: 30px; height: 30px; vertical-align: middle" />
                 <input type="file" accept="image/*" @change="fileImage" title="" />
               </div>
               <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -395,9 +396,9 @@ export default {
       categoryShow: false,
 
       tipsShow: false,
-      categoryItem: this.$t('yield.yield46'),
-      categoryList: [this.$t('yield.yield46'), this.$t('yield.yield47'), this.$t('yield.yield48'), this.$t('yield.yield49'), this.$t('yield.yield50')],
-      categoryDesList: ['yield.yield144', 'yield.yield145', 'yield.yield146', 'yield.yield147', 'yield.yield148'],
+      categoryItem: this.$t("yield.yield46"),
+      categoryList: [this.$t("yield.yield46"), this.$t("yield.yield47"), this.$t("yield.yield48"), this.$t("yield.yield49"), this.$t("yield.yield50")],
+      categoryDesList: ["yield.yield144", "yield.yield145", "yield.yield146", "yield.yield147", "yield.yield148"],
 
       btnLoading: false,
       uploadLoading: false,
@@ -448,7 +449,7 @@ export default {
       loading: false,
       projectName: "",
       projectInfo: null,
-      projectStatus: 'active'
+      projectStatus: "active",
     }
   },
   watch: {
@@ -510,13 +511,11 @@ export default {
             else if (i.key == "audits") this.form.audits = i.value
             else if (i.key == "description") this.form.description = i.value
             else if (i.key == "website") this.form.website = i.value
-
             else if (i.key == "cmc") this.form.cmc = i.value
             else if (i.key == "recover") this.form.recover = i.value
             else if (i.key == "coingecko") this.form.coingecko = i.value
             else if (i.key == "dappradar") this.form.dappradar = i.value
             else if (i.key == "defillama") this.form.defillama = i.value
-
             else if (i.key == "discord") this.form.discord = i.value
             else if (i.key == "telegram") this.form.telegram = i.value
             else if (i.key == "twitter") this.form.twitter = i.value
@@ -524,14 +523,13 @@ export default {
             else if (i.key == "token.code") this.form.tokenCode = i.value
             else if (i.key == "token.symcode") this.form.tokenSymcode = i.value
           })
-          
+
           // item.otherInfo = {}
           // item.otherInfo.name = ''
           // item.otherInfo.multi_sig = null
           // item.otherInfo.open_source = null
           // item.otherInfo.main_contract = ''
           // item.otherInfo.audit_report = []
-
 
           this.projectInfo = item
           // if (item.recover) this.getRecoverInfo()
@@ -594,7 +592,7 @@ export default {
         actions: [],
       }
       this.btnLoading = true
-      if (this.projectStatus !== 'active') {
+      if (this.projectStatus !== "active") {
         params.actions.push({
           account: "d.e.yield",
           name: "regprotocol",
@@ -610,8 +608,7 @@ export default {
             category: this.categoryItem,
           },
         })
-      }
-      else {
+      } else {
         params.actions.push({
           account: "d.e.yield",
           name: "setmetadata",
@@ -627,7 +624,6 @@ export default {
           },
         })
       }
-      
 
       let result = await DApp.transactionApi({
         params,
@@ -1031,33 +1027,33 @@ export default {
       border-radius: 4px;
       position: relative;
       .input1-selectList {
-          position: absolute;
-          top: 40px;
-          left: 0;
-          width: 100%;
-          padding: 15px;
-          background-color: #fff;
-          box-shadow: 0px 1px 6px rgba(126, 126, 126, 0.25);
-          border-radius: 5px;
-          z-index: 5;
-          .selectList-item {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 100%;
+        padding: 15px;
+        background-color: #fff;
+        box-shadow: 0px 1px 6px rgba(126, 126, 126, 0.25);
+        border-radius: 5px;
+        z-index: 5;
+        .selectList-item {
+          font-weight: 400;
+          font-size: 14px;
+          margin-bottom: 10px;
+          cursor: pointer;
+          div {
+            line-height: 1.2;
+          }
+          .item-text {
             font-weight: 400;
-            font-size: 14px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            div {
-              line-height: 1.2;
-            }
-            .item-text {
-              font-weight: 400;
-              font-size: 12px;
-              color: #aaaaaa;
-              line-height: 1;
-              margin-top: 5px;
-              margin-bottom: 15px;
-            }
+            font-size: 12px;
+            color: #aaaaaa;
+            line-height: 1;
+            margin-top: 5px;
+            margin-bottom: 15px;
           }
         }
+      }
     }
     .basicInfo-textarea {
       width: 100%;
