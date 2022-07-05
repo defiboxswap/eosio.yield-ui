@@ -11,7 +11,6 @@ import './router/action';
 import '@/assets/css/public.scss';
 import '@/assets/fonts/index.scss'
 // Vue.use(VueClipboard)
-Vue.prototype.$errImg = 'this.src="https://defibox.s3.ap-northeast-1.amazonaws.com/eos.png"'
 // import Vconsole from 'vconsole';
 // new Vconsole();
 
@@ -35,8 +34,8 @@ Vue.prototype.openWindow = (url) => {
   if (!url) return
   window.open(url)
 }
-Vue.prototype.errorImg = 'this.src="/static/img/y+.png"'
-Vue.prototype.errImg = 'this.src="/static/img/y+.png"'
+Vue.prototype.errorImg = 'this.src="/static/img/yield.png"'
+Vue.prototype.errImg = 'this.src="/static/img/yield.png"'
 
 
 import VuetifyToast from '@/plugins/toast/index.js';
