@@ -27,7 +27,7 @@
             <div class="flex">
               <div class="box-left flex">
                 <div class="box-index">{{ index + 1 }}</div>
-                <img :src="item.logo" class="box-avatar" />
+                <img :src="item.logo" class="box-avatar" :onerror="errImg" />
               </div>
               <div class="flex-1">
                 <div class="box-name">{{ item.name }}</div>
