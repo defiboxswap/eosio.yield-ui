@@ -257,5 +257,10 @@ export default {
   bottom: 0;
   border-radius: 15px 15px 0 0;
 }
+@media screen and (max-width: 1200px) {
+  #app {
+    overflow-x: hidden;
+  }
+}
 
 </style>
