@@ -16,7 +16,7 @@
           <span class="mint-loadmore-text" v-show="!bottomAllLoaded" style="margin-left:2px;">{{ bottomText }}</span>
         </div>
       </slot>
-      <div v-if="bottomAllLoaded" style="text-align:center;color:#888888;font-size:12px;">{{ $t("defiBox.db437") }}</div>
+      <div v-if="bottomAllLoaded" style="text-align:center;color:#888888;font-size:12px;">no data</div>
     </div>
   </div>
 </template>
@@ -124,7 +124,7 @@ export default {
           this.topText = this.topDropText
           break
         case "loading":
-          this.topText = this.topLoadingText == "" ? this.$t("defiBox.db287") : this.topLoadingText
+          this.topText = this.topLoadingText == "" ? 'loading' : this.topLoadingText
           break
       }
     },
@@ -139,7 +139,7 @@ export default {
           this.bottomText = this.bottomDropText
           break
         case "loading":
-          this.bottomText = this.bottomLoadingText == "" ? this.$t("defiBox.db287") : this.bottomLoadingText
+          this.bottomText = this.bottomLoadingText == "" ? 'loading' : this.bottomLoadingText
           break
       }
     },

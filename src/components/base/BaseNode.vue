@@ -1,11 +1,9 @@
 <template>
   <div class="BaseNode">
     <div class="close" @click="handleClose">
-      <!-- <svg-icon icon="icon-huaban82" :size="10" /> -->
       <v-icon small>mdi-window-close</v-icon>
     </div>
-    <!-- 节点设置 -->
-    <!-- <div class="title">{{ $t('defiBox.db1261') }}</div> -->
+    <!-- Node list -->
     <div class="title">Node List</div>
     <div class="nodeList overflow-y-auto">
       <div class="nodeItem flexb pointer" v-for="(item, index) in list" :key="index" @click="handleChangeNode(index, item)">
@@ -17,15 +15,12 @@
           <div class="delay color-green" v-if="item.tip == 0">{{ item.time }}ms</div>
           <div class="delay color-yellow" v-else-if="item.tip == 1">{{ item.time }}ms</div>
           <div class="delay color-red" v-else-if="item.tip == 2">{{ item.time }}ms</div>
-          <!-- 超时 -->
-          <!-- <div class="delay color-red" v-else-if="item.tip == 3">{{ $t('defiBox.db1260') }}</div> -->
+          <!-- time out -->
           <div class="delay color-red" v-else-if="item.tip == 3">time out</div>
           <div v-if="node.httpEndpoint == item.url">
-            <!-- <svg-icon icon="icon-a-123huaban3" color="#FF910D" :size="16" /> -->
             <img src="@/assets/img/BaseNode/selectYes.svg" alt="" style="width: 16px;">
           </div>
           <div v-else>
-            <!-- <svg-icon icon="icon-a-123huaban3" color="#D8D8D8" :size="16" /> -->
             <img src="@/assets/img/BaseNode/select.svg" alt="" style="width: 16px;">
           </div>
         </div>
@@ -78,7 +73,8 @@ export default {
       setTimeout(() => {
         location.reload();
       }, 200);
-    }, // 获取节点
+    }, 
+    // handleGetNodeInfo
     async handleGetNodeInfo() {
       this.loading = true;
       const { status, result } = await commons.getNodeList();
@@ -101,7 +97,7 @@ export default {
         this.list = list;
         this.handleGetNodeTime();
       }
-    }, // 计算节点请求时间
+    }, // handleGetNodeTime
     async handleGetNodeTime() {
       for (let i = 0; i < this.list.length; i++) {
         const time = new Date().getTime();

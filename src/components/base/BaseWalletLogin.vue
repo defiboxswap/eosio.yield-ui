@@ -1,6 +1,5 @@
 <template>
   <div class="walletLogin">
-    <!-- <div class="tit">{{ $t('defiBox.db1193') }}</div> -->
     <div class="tit">Select wallet</div>
     <span class="close" @click="handleCloseLoginWallet">
       <v-icon small>mdi-window-close</v-icon>
@@ -10,12 +9,12 @@
         <!-- Scatter Authorize -->
         <div class="scatterbox">
           <!-- Plug in not installed -->
-          <!-- <div style="height: 43px; margin-bottom: 5px;"> -->
           <div class="supportList">
             <template v-for="(item, index) in walletsPlugList">
               <div :key="index" class="supportListImg flex" @click="handleScatterPower(item)">
-                <svg-icon v-if="item.icon" :icon="item.icon" :size="26" />
-                <img v-else :src="item.svgUrl" alt="" class="walletLogo" />
+                <!-- <svg-icon v-if="item.icon" :icon="item.icon" :size="26" /> -->
+                <!-- <img v-else :src="item.svgUrl" alt="" class="walletLogo" /> -->
+                <img :src="item.svgUrl" alt="" class="walletLogo" />
                 {{ item.name[0].toUpperCase() + item.name.substr(1) }}
               </div>
             </template>
@@ -42,56 +41,18 @@
               <div class="wlright">
                 <div class="scatterbox center pointer">
                   <div @click="handleCloudWallet" class="default-sty btnbig waxBtn flex">
-                    <svg-icon icon="icon-a-qianbaohuaban21" :size="26" />
                     WAX Cloud Wallet
                   </div>
                 </div>
               </div>
             </template>
-            <!-- <p class="center searchTip">请在以下钱包内搜索“Danchor”</p> -->
             <div class="wlistbox flex">
-              <!-- <template v-if="chainValue === 'FIBOS'">
-                <el-tooltip placement="bottom" effect="light">
-                  <div slot="content" style="text-align: center">
-                    <p style="padding-bottom: 5px">{{`${$t('wallet.banben')} ${foWallet.version}`}}</p>
-                    <a :href="foWallet.download" class="colorThis" target="_blank">{{$t('wallet.download')}} {{$t(`wallet.${foWallet.name}`)}}</a>
-                  </div>
-                  <div class="walletitem">
-                    <img :src="foWallet.logo" alt="">
-                  </div>
-                </el-tooltip>
-              </template> -->
-
-              <!-- <template v-for="(item, index) in wallets">
-                <el-tooltip
-                  v-if="item.status"
-                  :key="index"
-                  placement="bottom"
-                  effect="light"
-                >
-                  <div slot="content" style="text-align: center">
-                    <p style="padding-bottom: 5px">
-                      {{ `${$t("wallet.banben")} ${item.version}` }}
-                    </p>
-                    <a :href="item.download" class="colorThis" target="_blank"
-                      >{{ $t("wallet.download") }}
-                      {{ $t(`wallet.${item.name}`) }}</a
-                    >
-                  </div>
-                  <div class="walletitem">
-                    <img :src="item.logo" alt="" />
-                  </div>
-                </el-tooltip>
-              </template> -->
             </div>
           </div>
           <div v-if="wlstatus === -1 && chainValue !== 'ENU' && chainValue !== 'FIBOS'" class="no_wallet">
-            <!-- Please open your desktop Wallet program first, and then refresh the page -->
-            <!-- <p>{{ $t('defiBox.db1262') }}</p> -->
+            
             <p>Please open your desktop wallet program first, then refresh the page</p>
-            <!-- <p>
-              <a target="_blank" :href="hrefDesktopWallet[$store.state.app.language]" class="colorThis">未安装？下载桌面钱包</a>
-            </p> -->
+            
           </div>
         </div>
       </template>

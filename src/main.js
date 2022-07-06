@@ -40,8 +40,6 @@ Vue.prototype.errImg = 'this.src="/static/img/yield.png"'
 
 import VuetifyToast from '@/plugins/toast/index.js';
 Vue.use(VuetifyToast)
-// toastList
-import '@/plugins/toastList/index.js'
 
 new Vue({
   router,

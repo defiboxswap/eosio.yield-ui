@@ -9,7 +9,6 @@
       <div class="languageItem flexb" v-for="(item, index) in list" :key="index" @click="handleChangeLanguage(item.key)">
         <div class="name">{{ item.name }}</div>
         <div v-if="language == item.key">
-          <!-- <svg-icon icon="icon-a-123huaban3" color="#FF910D" :size="16" /> -->
           <img src="@/assets/img/BaseNode/selectYes.svg" alt="" style="width: 16px;">
         </div>
         <div v-else>
