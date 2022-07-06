@@ -115,13 +115,13 @@
             </div> -->
             <div v-if="infoTab != 'Launch'">
               <img src="@/assets/img/Home/LaunchZh.png" class="part3-img" v-if="$store.state.app.language == 'zh-TW'">
-              <img src="@/assets/img/Home/LaunchKo.png" class="part3-img" v-if="$store.state.app.language == 'ko'">
+              <img src="@/assets/img/Home/LaunchKo.png" class="part3-img" v-else-if="$store.state.app.language == 'ko'">
               <img src="@/assets/img/Home/LaunchEn.png" class="part3-img" v-else>
             </div>
             
             <div v-else>
               <img src="@/assets/img/Home/AccelerateZh.png" class="part3-img" v-if="$store.state.app.language == 'zh-TW'">
-              <img src="@/assets/img/Home/AccelerateKo.png" class="part3-img" v-if="$store.state.app.language == 'ko'">
+              <img src="@/assets/img/Home/AccelerateKo.png" class="part3-img" v-else-if="$store.state.app.language == 'ko'">
               <img src="@/assets/img/Home/AccelerateEn.png" class="part3-img" v-else>
             </div>
           </div>

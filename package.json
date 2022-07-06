@@ -23,7 +23,7 @@
     "amfe-flexible": "^2.2.1",
     "anchor-link": "^3.3.4",
     "anchor-link-browser-transport": "^3.2.5",
-    "axios": "^0.19.0",
+    "axios": "0.27.2",
     "big.js": "^6.1.1",
     "core-js": "^3.6.4",
     "decimal.js": "^10.2.0",
