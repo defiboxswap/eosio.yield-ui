@@ -53,7 +53,7 @@
               <div class="flext">
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield54") }}</div>
-                  <div class="data-number">{{ item.agg_rewards }}</div>
+                  <div class="data-number">{{ getKMBUnit(item.agg_rewards) }}</div>
                 </div>
                 <div class="data-box flex-1">
                   <!-- <div class="data-name">{{ $t("yield.yield55") }}</div> -->
@@ -195,7 +195,7 @@
 
                 <div class="box-2">{{ getKMBUnit(item.tvl_usd) }}</div>
                 <div class="box-3">{{ item.tvl_usd_change }}</div>
-                <div class="box-4">{{ item.agg_rewards }}</div>
+                <div class="box-4">{{ getKMBUnit(item.agg_rewards) }}</div>
                 <!-- <div class="box-5">$123.43M</div> -->
               </a>
 

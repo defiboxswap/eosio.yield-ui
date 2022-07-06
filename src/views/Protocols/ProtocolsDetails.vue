@@ -84,7 +84,7 @@
               <div class="flex">
                 <div class="flex-1">
                   <div class="view-title">{{ $t('yield.yield54') }}</div>
-                  <div class="view-text">{{ overViewData.agg_rewards }}</div>
+                  <div class="view-text">{{ getKMBUnit(overViewData.agg_rewards) }}</div>
                 </div>
                 <div class="flex-1">
                   
@@ -386,7 +386,7 @@
                   <div class="box2-circle"></div>
                   <div class="">{{ $t('yield.yield54') }}</div>
                 </div>
-                <div class="box2-number">{{ overViewData.agg_rewards }}</div>
+                <div class="box2-number">{{ getKMBUnit(overViewData.agg_rewards) }}</div>
               </div>
             </div>
             <div id="view1Data"></div>
