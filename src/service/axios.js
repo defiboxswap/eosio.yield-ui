@@ -1,8 +1,6 @@
 import axios from "axios"
 import store from "@/store"
-import qs from "qs" // fromData 转 string
-
-// let ApiVersion = "/" // 默认请求地址
+import qs from "qs" // fromData to string
 // const CancelToken = axios.CancelToken
 const https = axios.create({
   baseURL: process.env.NODE_ENV === "production" ? "https://eos.defibox.io": "",
@@ -17,7 +15,7 @@ const https = axios.create({
 
 https.defaults.transformRequest = [
   (data, header) => {
-    // 开始请求前期
+    
     const headerThis = header
     if (localStorage.getItem("token")) {
       headerThis.token = localStorage.getItem("token")
@@ -27,7 +25,7 @@ https.defaults.transformRequest = [
     headerThis.language = store.state.app.language || "en"
     headerThis.ref = store.state.app.accountInfo.wallet
     const token = localStorage.getItem('token');
-    if (token) { // 更新token
+    if (token) { 
       headerThis.token = token; // eslint-disable-line
     }
     if (store.state.app.scatter && store.state.app.accountInfo.account) {
@@ -47,11 +45,6 @@ https.defaults.transformRequest = [
 
 https.interceptors.request.use(
   (config) => {
-    // 请求前期后
-    // config.cancelToken = new CancelToken((c) => {
-    //   // 强行中断请求要用到的
-    //   store.commit("SET_HTTPREQUESTLIST", c)
-    // })
     return config
   },
   (error) => Promise.reject(error)
@@ -59,7 +52,7 @@ https.interceptors.request.use(
 
 https.interceptors.response.use(
   (response) => {
-    // 请求后
+    
     const res = response.data
     return res // eslint-disable-line
   },

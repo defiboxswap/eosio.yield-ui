@@ -89,7 +89,7 @@
             <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
             <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
               <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" />
-              <img src="@/assets/img/add.png" v-else style="width: 30px; height: 30px; vertical-align: middle" />
+              <img src="@/assets/img/add.png" v-else style="width: 15px; height: 15px; vertical-align: middle" />
               <input type="file" accept="image/*" @change="fileImage" title="" />
             </div>
             <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -272,7 +272,7 @@
               <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
               <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
                 <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" />
-                <img src="@/assets/img/add.png" v-else style="width: 30px; height: 30px; vertical-align: middle" />
+                <img src="@/assets/img/add.png" v-else style="width: 15px; height: 15px; vertical-align: middle" />
                 <input type="file" accept="image/*" @change="fileImage" title="" />
               </div>
               <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>

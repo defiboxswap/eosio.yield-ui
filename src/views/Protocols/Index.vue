@@ -32,7 +32,7 @@
               <div class="flex-1">
                 <div class="box-name">{{ item.name }}</div>
                 <div class="flex flex-wrap">
-                  <div class="box-label">{{ item.category }}</div>
+                  <div class="box-label">{{ handleCategory(item.category) }}</div>
                   <!-- <div class="box-label">Corss-chain</div> -->
                 </div>
               </div>
@@ -80,7 +80,7 @@
               <div class="flex-1">
                 <div class="box-name">{{ item.name }}</div>
                 <div class="flex flex-wrap">
-                  <div class="box-label">{{ item.category }}</div>
+                  <div class="box-label">{{ handleCategory(item.category) }}</div>
                   <!-- <div class="box-label">Corss-chain</div> -->
                 </div>
               </div>
@@ -90,7 +90,7 @@
               <div class="flex">
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield86") }}</div>
-                  <div class="data-number">{{ item.category }}</div>
+                  <div class="data-number">{{ handleCategory(item.category) }}</div>
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield87") }}</div>
@@ -187,7 +187,7 @@
                   <div>
                     <div class="item-name">{{ item.name }}</div>
                     <div class="flex flex-wrap">
-                      <div class="item-label">{{ item.category }}</div>
+                      <div class="item-label">{{ handleCategory(item.category) }}</div>
                       <!-- <div class="item-label">Corss-chain</div> -->
                     </div>
                   </div>
@@ -244,7 +244,7 @@
                   </div>
                 </div>
 
-                <div class="box-2">{{ item.category }}</div>
+                <div class="box-2">{{ handleCategory(item.category) }}</div>
                 <div class="box-3">{{ item.create_at | dateFormatNYRSF }}</div>
                 <div class="box-4">{{ item.status }}</div>
                 <div class="box-5 flex flex-align-center flex-jus-center">
@@ -432,7 +432,7 @@ export default {
         }
         .audit-tips1 {
           font-size: 14px;
-          font-family: PingFang SC;
+          text-align: center;
           font-weight: 500;
           color: #000000;
         }
@@ -595,7 +595,6 @@ export default {
         }
         .audit-tips1 {
           font-size: 14px;
-          font-family: PingFang SC;
           font-weight: 500;
           color: #000000;
         }

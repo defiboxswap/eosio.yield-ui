@@ -37,7 +37,7 @@
                     <div class="data-name">{{ $t("yield.yield117") }}</div>
                     <div class="data-number">
                       <a class="info-text" :href="projectInfo.website" target="_blank">
-                        <span v-if="projectInfo.website">{{ websiteDes(projectInfo.website) }}</span>
+                        <span v-if="projectInfo.website">{{ handleHttp(projectInfo.website) }}</span>
                         <span v-else>-</span>
                       </a>
                     </div>
@@ -201,7 +201,7 @@
                 <div class="box-w">
                   <!-- <div class="box3-title">token</div> -->
                   <div class="box3-text flex" @click="openWindow(projectInfo.cmc)">
-                    <img src="@/assets/img/ProtocolsDetails/item.png" alt="">
+                    <img src="@/assets/img/ProtocolsDetails/CoinMarketCap.png" alt="">
                     <span>CoinMarketCap</span>
                   </div>
                 </div>
@@ -209,7 +209,7 @@
                   <!-- <div class="box3-title">ADDRESS</div>
                   <div class="box3-text">TOKEN.DEFI</div> -->
                   <div class="box3-text flex" @click="openWindow(projectInfo.coinGecko)">
-                    <img src="@/assets/img/ProtocolsDetails/item.png" alt="">
+                    <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" alt="">
                     <span>CoinGecko</span>
                   </div>
                 </div>
@@ -220,7 +220,7 @@
                   <!-- <div class="box3-title">OPEN SURCE</div>
                   <div class="box3-text">NO</div> -->
                   <div class="box3-text flex" @click="openWindow(projectInfo.defiLlama)">
-                    <img src="@/assets/img/ProtocolsDetails/item.png">
+                    <img src="@/assets/img/ProtocolsDetails/DefiLlama.png">
                     <span>DefiLlama</span>
                   </div>
                 </div>
@@ -228,7 +228,7 @@
                   <!-- <div class="box3-title">MULTI-SIG</div>
                   <div class="box3-text">YES</div> -->
                   <div class="box3-text flex" @click="openWindow(projectInfo.dappRadar)">
-                    <img src="@/assets/img/ProtocolsDetails/item.png">
+                    <img src="@/assets/img/ProtocolsDetails/DappRadar.png">
                     <span>DappRadar</span>
                   </div>
                 </div>
@@ -240,13 +240,13 @@
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.twitter)">
                     <img src="@/assets/img/ProtocolsDetails/Twitter.png">
-                    <span>Twitter</span>
+                    <span>{{ handleHttp(projectInfo.twitter) }}</span>
                   </div>
                 </div>
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.discord)">
                     <img src="@/assets/img/ProtocolsDetails/Discord.png">
-                    <span>Discord</span>
+                    <span>{{ handleHttp(projectInfo.discord) }}</span>
                   </div>
                 </div>
               </div>
@@ -255,7 +255,7 @@
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.telegram)">
                     <img src="@/assets/img/ProtocolsDetails/Telegram.png" >
-                    <span>Telegram</span>
+                    <span>{{ handleHttp(projectInfo.telegram) }}</span>
                   </div>
                 </div>
                 <!-- <div class="box-w">
@@ -336,7 +336,7 @@
                     <!-- website -->
                     <div class="info-title">{{ $t("yield.yield117") }}</div>
                     <a class="info-text" :href="projectInfo.website" target="_blank">
-                      <span v-if="projectInfo.website">{{ websiteDes(projectInfo.website) }}</span>
+                      <span v-if="projectInfo.website">{{ handleHttp(projectInfo.website) }}</span>
                       <span v-else>-</span>
                     </a>
                   </div>
@@ -520,21 +520,21 @@
               <div class="flex-1 flext flex-column flex-jus-between" style="height: 103px">
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.cmc)">
-                    <img src="@/assets/img/ProtocolsDetails/item.png" class="box4-img" />
+                    <img src="@/assets/img/ProtocolsDetails/CoinMarketCap.png" class="box4-img" />
                     <span>CoinMarketCap</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.coinGecko)">
-                    <img src="@/assets/img/ProtocolsDetails/item.png" class="box4-img" />
+                    <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" class="box4-img" />
                     <span>CoinGecko</span>
                   </div>
                 </div>
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.defiLlama)">
-                    <img src="@/assets/img/ProtocolsDetails/item.png" class="box4-img" />
+                    <img src="@/assets/img/ProtocolsDetails/DefiLlama.png" class="box4-img" />
                     <span>DefiLlama</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.dappRadar)">
-                    <img src="@/assets/img/ProtocolsDetails/item.png" class="box4-img" />
+                    <img src="@/assets/img/ProtocolsDetails/DappRadar.png" class="box4-img" />
                     <span>DappRadar</span>
                   </div>
                 </div>
@@ -544,17 +544,17 @@
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.twitter)">
                     <img src="@/assets/img/ProtocolsDetails/Twitter.png" class="box4-img">
-                    <span>Twitter</span>
+                    <span>{{ handleHttp(projectInfo.twitter) }}</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.discord)">
                     <img src="@/assets/img/ProtocolsDetails/Discord.png" class="box4-img">
-                    <span>Discord</span>
+                    <span>{{ handleHttp(projectInfo.discord) }}</span>
                   </div>
                 </div>
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.telegram)">
                     <img src="@/assets/img/ProtocolsDetails/Telegram.png" class="box4-img">
-                    <span>Telegram</span>
+                    <span>{{ handleHttp(projectInfo.telegram) }}</span>
                   </div>
                   <div class="flex-1 box4-w flex"></div>
                 </div>
@@ -571,7 +571,6 @@
                   <div class="footer-text1">{{ $t("yield.yield96") }}</div>
                   <div class="footer-text2 flex">
                     <div>{{ rewards }}</div>
-                    <!-- <div class="text2-symbol">EOS</div> -->
                   </div>
                 </div>
 
@@ -631,9 +630,7 @@
 <script>
 import DApp from "@/utils/wallet/index"
 import axios from "axios"
-
 import chart1 from './echarts/chart1.js'
-
 import { mapState } from "vuex"
 import { protocols, lines } from "@/service"
 export default {
@@ -689,11 +686,6 @@ export default {
   mounted() {},
   beforeDestroy() {},
   methods: {
-    websiteDes(website) {
-      if (website.includes('https://')) return website.substring(8)
-      else if (website.includes('http://')) return website.substring(7)
-      return website
-    },
     gotoEdit() {
       this.$router.push('/join/edit?name=' + encodeURIComponent(this.projectName))
     },
@@ -711,7 +703,6 @@ export default {
       }
       let res = await DApp.getTableRows(params)
       if (res.length > 0) {
-        console.log('res is ', res);
         this.rewards = res[0].balance.quantity
       }
       
@@ -729,8 +720,6 @@ export default {
           item.tvl_eos = this.toFixed(item.tvl_eos, 2)
           if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${ item.tvl_usd_change }%`
           else item.tvl_usd_change = `${ item.tvl_usd_change }%`
-
-          // console.log('tvl_usd_change', item.tvl_usd_change);
           this.overViewData = item
 
           chart1.init({
@@ -756,11 +745,7 @@ export default {
           item.metadataInfo.forEach((i) => {
             if (i.key == "logo") item.logo = `https://ipfs.pink.gg/ipfs/${i.value}`
             else if (i.key == "description") item.description = i.value
-            else if (i.key == "website") {
-              item.website = i.value
-              // if (item.website.includes('https://')) item.website = item.website.substring(8)
-              // else if (item.website.includes('http://')) item.website = item.website.substring(7)
-            }
+            else if (i.key == "website") item.website = i.value
             else if (i.key == "cmc") item.cmc = i.value
             else if (i.key == "recover") item.recover = i.value
             else if (i.key == "coingecko") item.coingecko = i.value
@@ -808,7 +793,6 @@ export default {
           "content-type": "text/plain;charset=UTF-8",
         },
       }).then((res) => {
-        console.log('res is ', res);
         if (!res?.data?.length) return
         let info = res?.data[0]
 
@@ -817,7 +801,6 @@ export default {
         this.projectInfo.circulating = this.formatNumber(this.toFixed(info.supply.circulating, 2))
         this.projectInfo.maxSupply = this.formatNumber(this.toFixed(info.supply.max, 0))
 
-        // console.log('info ss', this.projectInfo);
         this.$forceUpdate()
       })
     },
@@ -830,7 +813,6 @@ export default {
           "content-type": "text/plain;charset=UTF-8",
         },
       }).then((res) => {
-        // console.log('res is ', res);
         if (!res?.data?.data) return
         let info = res?.data?.data
         this.projectInfo.otherInfo.name = info.name
@@ -873,7 +855,6 @@ export default {
 
       this.categoryDialogVisible = true
       if (result && result.code !== 0) {
-        console.log("result error is ", result)
         // error info
         DApp.handleScatterErrorBack(result, (type, text) => {
           type === "lang" ? this.$toast(this.$t(text)) : this.$toast(text)
@@ -1261,7 +1242,7 @@ export default {
     margin: 0 auto;
   }
   .ProtocolsDetailsPC-title {
-    font-size: 30px;
+    font-size: 16px;
     font-weight: 600;
     color: #101010;
     margin-bottom: 20px;
@@ -1269,7 +1250,7 @@ export default {
 
   .ProtocolsDetailsPC-box1 {
     width: 100%;
-    min-height: 243px;
+    // min-height: 243px;
     padding: 34px 45px 34px 45px;
     border-radius: 15px;
     border: 1px solid #e8e8e8;

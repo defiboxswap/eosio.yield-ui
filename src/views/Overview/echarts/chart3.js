@@ -100,10 +100,9 @@ export default {
               // formatter: `{b}: {@${this.chartsData[0][this.chartsData[0].length - 1]}} ({d}%)`,
               // formatter: `{b}:  ({d}%)`,
               formatter: (value) => {
-                // console.log('updateAxisPointer',value, dimension);
                 let dimension = this.chartsData[0].length - 1
                 let yValue = this.vueThis.getKMBUnit(value.value[dimension], 0);
-                if (document.body.clientWidth > 1200) yValue = value.value[dimension]
+                if (document.body.clientWidth > 1200) yValue = this.vueThis.getKMBUnit(value.value[dimension], 4)
                 return `${ value.name }:${ yValue }(${ value.percent }%)`
               },
               width: document.body.clientWidth > 1200? 500:100,
@@ -132,7 +131,7 @@ export default {
                 formatter: (value) => {
                   // console.log('updateAxisPointer',value, dimension);
                   let yValue = this.vueThis.getKMBUnit(value.value[dimension], 2);
-                  if (document.body.clientWidth > 1200) yValue = value.value[dimension]
+                  if (document.body.clientWidth > 1200) yValue = this.vueThis.getKMBUnit(value.value[dimension], 4)
                   return `${ value.name }: ${ yValue }(${ value.percent }%)`
                 },
                 width: document.body.clientWidth > 1200? 600:100,

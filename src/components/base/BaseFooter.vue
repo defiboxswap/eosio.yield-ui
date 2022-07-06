@@ -16,7 +16,8 @@
           <img class="BaseFooterPC-logo" src="@/assets/img/BaseHeader/logoDark.png" />
           <div class="BaseFooterPC-tips">Copyright © 2020 Yield+ All rights reserved.</div>
         </div>
-        <div class="BaseFooterPC-tips">If you have any questions please contact xxxxxx@gmail.com</div>
+        <!-- <div class="BaseFooterPC-tips">If you have any questions please contact xxxxxx@gmail.com</div> -->
+        <div class="BaseFooterPC-tips"> </div>
       </div>
     </div>
   </div>
@@ -74,6 +75,7 @@ export default {
     display: block;
   }
   .BaseFooterPC-tips {
+    margin-top: 10px;
     font-size: 16px;
     font-weight: 300;
     color: #FFFFFF;

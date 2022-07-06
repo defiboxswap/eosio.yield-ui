@@ -39,12 +39,15 @@
         <!-- Analysis report -->
         <div class="Overview-report">
           <div class="report-title">{{ $t("yield.yield44") }}</div>
-          <div class="report-card" v-for="(item, index) in 5" :key="index">
+          <!-- <div class="report-card" v-for="(item, index) in 5" :key="index">
             <div class="card-title">YEILD + DATA RESEARCH REPORT</div>
             <div class="card-time">03/23/2022</div>
             <v-btn class="card-button">View</v-btn>
           </div>
-          <div class="report-add text-flex-center">Add</div>
+          <div class="report-add text-flex-center">Add</div> -->
+          <div style="margin-top: -50px;">
+            <BaseNoData></BaseNoData>
+          </div>
         </div>
       </div>
     </div>
@@ -98,7 +101,7 @@
         <div class="report-title">{{ $t("yield.yield44") }}</div>
 
         <div class="OverviewPC-layout">
-          <div class="flex flex-align-center flex-wrap">
+          <!-- <div class="flex flex-align-center flex-wrap">
             <div class="report-card" v-for="(item, index) in 4" :key="index">
               <div class="card-title">YEILD + DATA RESEARCH REPORT</div>
               <div class="card-time">03/23/2022</div>
@@ -106,6 +109,9 @@
             </div>
 
             <div class="report-add text-flex-center">Add</div>
+          </div> -->
+          <div style="margin-top: -50px;">
+            <BaseNoData></BaseNoData>
           </div>
         </div>
       </div>
@@ -272,6 +278,7 @@ export default {
       height: 650px;
       margin-bottom: 10px;
       padding: 15px;
+      overflow: hidden;
     }
     #view3Data {
       width: 100%;

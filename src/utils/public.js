@@ -438,3 +438,22 @@ export function checkType(arg) {
   let type = Object.prototype.toString.call(arg)
   return type.substring(0, type.length - 1).split(" ")[1]
 }
+
+// handleHttp
+export function handleHttp(url) {
+  if (!url) return '-'
+  if(url.substr(0,7).toLowerCase() == "http://") return url.substring(7)
+  if(url.substr(0,8).toLowerCase() == "https://") return url.substring(8)
+  return url
+}
+
+// handleCategory
+export function handleCategory(category) {
+  if (!category) return ''
+  if(category.toLowerCase() == "cdp") return this.$t('yield.yield46')
+  if(category.toLowerCase() == "dexes") return this.$t('yield.yield47')
+  if(category.toLowerCase() == "lending") return this.$t('yield.yield48')
+  if(category.toLowerCase() == "liquid staking") return this.$t('yield.yield49')
+  if(category.toLowerCase() == "tvl rankings") return this.$t('yield.yield50')
+  return category
+}

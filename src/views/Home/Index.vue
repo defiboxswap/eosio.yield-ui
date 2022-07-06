@@ -49,7 +49,7 @@
           </div>
 
           <div class="part3-tableLayout">
-            <div class="part3-table">
+            <!-- <div class="part3-table">
               <div class="table-border1"></div>
               <div class="table-border2"></div>
               <div class="table-border3"></div>
@@ -112,6 +112,17 @@
                   <div v-for="(item, index) in info[infoTab].maxTvl[3]" :key="index">{{ item }}</div>
                 </div>
               </div>
+            </div> -->
+            <div v-if="infoTab != 'Launch'">
+              <img src="@/assets/img/Home/LaunchZh.png" class="part3-img" v-if="$store.state.app.language == 'zh-TW'">
+              <img src="@/assets/img/Home/LaunchKo.png" class="part3-img" v-if="$store.state.app.language == 'ko'">
+              <img src="@/assets/img/Home/LaunchEn.png" class="part3-img" v-else>
+            </div>
+            
+            <div v-else>
+              <img src="@/assets/img/Home/AccelerateZh.png" class="part3-img" v-if="$store.state.app.language == 'zh-TW'">
+              <img src="@/assets/img/Home/AccelerateKo.png" class="part3-img" v-if="$store.state.app.language == 'ko'">
+              <img src="@/assets/img/Home/AccelerateEn.png" class="part3-img" v-else>
             </div>
           </div>
 
@@ -143,7 +154,8 @@
 
           <v-btn class="part4-submission" @click="$router.push('/Join')">{{ $t('yield.yield37') }}</v-btn>
 
-          <div class="part4-email">If you have any questions please contact xxxxxx@gmail.com</div>
+          <!-- <div class="part4-email">If you have any questions please contact xxxxxx@gmail.com</div> -->
+          <div class="part4-email"> </div>
         </div>
 
       </div>
@@ -153,7 +165,7 @@
       <div class="HomePC-part1">
         <div class="HomePC-Layout">
           <!-- <img src="@/assets/img/Home/par1BG.png" class="part1-bg" /> -->
-          <video src="@/assets/video/home/447.mp4" class="part1-bg" style="top:-40px;width:683px;height:auto;object-fit: fill;"  loop autoplay  muted/>
+          <video src="@/assets/video/home/447.mp4" class="part1-bg" style="top:-100px;width:800px;height:auto;object-fit: fill;"  loop autoplay  muted/>
           <div class="part1-text">
             <div class="text-1">
               <!-- Yield+  Plan is on -->
@@ -478,7 +490,12 @@ export default {
 
     .part3-tableLayout {
       width: 100%;
-      overflow-x: auto;
+      // overflow-x: auto;
+    }
+    .part3-img {
+      width: 100%;
+      height: auto;
+      margin: 20px 0;
     }
     .part3-table {
       margin: 0 auto;
@@ -542,7 +559,7 @@ export default {
 
     .part3-tips {
       margin: 0 auto;
-      margin-top: 56px;
+      // margin-top: 56px;
       width: 341px;
       font-size: 16px;
       font-weight: 400;
@@ -669,7 +686,7 @@ export default {
   .HomePC-part2 {
     width: 100%;
     background-color: #000000;
-    padding-bottom: 100px;
+    padding: 80px;
     .HomePC-Layout {
       padding: 43px 0px;
       font-weight: 400;

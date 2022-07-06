@@ -7,7 +7,7 @@
         <template v-slot:activator="{ on, attrs }">
           <div v-bind="attrs" v-on="on">
             <div class="flexc" style="width: 120px;margin-right: -50px;">
-              <img src="@/assets/img/svg/more-b.svg" style="width: 25px;" class="BaseHeader-listIcon">
+              <img src="@/assets/img/svg/more-b.svg" style="width: 20px;" class="BaseHeader-listIcon">
               <!-- <img src="@/assets/img/svg/more-b.svg" style="width: 25px;" v-if="!$route.meta.HeaderDark" class="BaseHeader-listIcon"> -->
               <!-- <img src="@/assets/img/svg/more-w.svg" style="width: 25px;" v-else class="BaseHeader-listIcon"> -->
             </div>
@@ -55,8 +55,8 @@
           <template v-slot:activator="{ on, attrs }">
             <div v-bind="attrs" v-on="on">
               <div class="flexc" style="width: 120px;padding-left: 20px;">
-                <img src="@/assets/img/svg/more-b.svg" style="width: 25px;" v-if="!$route.meta.HeaderDark">
-                <img src="@/assets/img/svg/more-w.svg" style="width: 25px;" v-else>
+                <img src="@/assets/img/svg/more-b.svg" style="width: 20px;" v-if="!$route.meta.HeaderDark">
+                <img src="@/assets/img/svg/more-w.svg" style="width: 20px;" v-else>
               </div>
             </div>
           </template>
@@ -203,7 +203,7 @@ export default {
     margin: 0 auto;
   }
   .BaseHeaderPC-logo {
-    width: 125px;
+    width: 110px;
     // height: 38px;
     cursor: pointer;
     margin-right: 20px;

@@ -43,16 +43,12 @@ export default {
         text: "",
       },
       tooltip: {
+        confine: true,
         trigger: "axis",
         axisPointer: {
           type: "cross",
           label: {
             backgroundColor: "#6a7985",
-            // formatter: (value) => {
-            //   console.log('value is ', value);
-
-            //   return this.vueThis.getKMBUnit(value, 0);
-            // },
           },
         },
       },
