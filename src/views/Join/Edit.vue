@@ -74,12 +74,22 @@
                 <v-icon v-else>mdi-menu-up</v-icon>
               </div>
 
-              <div class="input1-selectList" v-if="categoryShow == true">
+              <!-- <div class="input1-selectList" v-if="categoryShow == true">
                 <div class="selectList-item" v-for="(item, index) in categoryDesList" :key="index" @click="select(index)">
                   <div>{{ categoryList[index] }}</div>
                   <div class="item-text">{{ $t(item) }}</div>
                 </div>
-              </div>
+              </div> -->
+              <v-list class="input1-selectList" dense v-if="categoryShow == true">
+                <v-list-item-group color="primary">
+                  <v-list-item v-for="(item, index) in categoryDesList" :key="index">
+                    <v-list-item-content @click="select(index)">
+                      <v-list-item-title v-html="categoryList[index]"></v-list-item-title>
+                      <v-list-item-subtitle v-html="$t(item)" style="overflow: visible; text-overflow: initial; white-space: normal"></v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
             </div>
             <input type="text" class="basicInfo-input1" disabled v-model="categoryItem" v-else />
           </div>
@@ -121,7 +131,7 @@
 
         <div class="Join-basicInfo">
           <!-- *Analytics -->
-          <div class="basicInfo-title">{{ $t('yield.yield130') }}</div>
+          <div class="basicInfo-title">{{ $t("yield.yield130") }}</div>
 
           <div class="basicInfo-box">
             <!-- CoinMarketCap -->
@@ -149,7 +159,7 @@
 
         <div class="Join-basicInfo">
           <!-- Socials -->
-          <div class="basicInfo-title">{{ $t('yield.yield129') }}</div>
+          <div class="basicInfo-title">{{ $t("yield.yield129") }}</div>
 
           <div class="basicInfo-box">
             <!-- Twitter -->
@@ -240,12 +250,22 @@
                   <v-icon v-else>mdi-menu-up</v-icon>
                 </div>
 
-                <div class="input1-selectList" v-if="categoryShow == true">
+                <!-- <div class="input1-selectList" v-if="categoryShow == true">
                   <div class="selectList-item" v-for="(item, index) in categoryDesList" :key="index" @click="select(index)">
                     <div>{{ categoryList[index] }}</div>
                     <div class="item-text">{{ $t(item) }}</div>
                   </div>
-                </div>
+                </div> -->
+                <v-list class="input1-selectList" dense v-if="categoryShow == true">
+                  <v-list-item-group color="primary">
+                    <v-list-item v-for="(item, index) in categoryDesList" :key="index">
+                      <v-list-item-content @click="select(index)">
+                        <v-list-item-title v-html="categoryList[index]"></v-list-item-title>
+                        <v-list-item-subtitle v-html="$t(item)" style="overflow: visible; text-overflow: initial; white-space: normal"></v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
               </div>
               <input type="text" class="basicInfo-input1" disabled v-model="categoryItem" v-else />
             </div>
@@ -314,7 +334,7 @@
 
         <div class="JoinPC-basicInfo">
           <!-- *Analytics -->
-          <div class="basicInfo-title">{{ $t('yield.yield130') }}</div>
+          <div class="basicInfo-title">{{ $t("yield.yield130") }}</div>
 
           <div class="flext marb-25">
             <div class="basicInfo-left">
@@ -345,7 +365,7 @@
 
         <div class="JoinPC-basicInfo">
           <!-- Socials -->
-          <div class="basicInfo-title">{{ $t('yield.yield129') }}</div>
+          <div class="basicInfo-title">{{ $t("yield.yield129") }}</div>
 
           <div class="flext marb-25">
             <div class="basicInfo-left">
