@@ -42,7 +42,7 @@
       </v-menu>
 
     </div>
-    <div class="BaseHeaderPC flex flex-align-center" :class="{ BaseHeaderPCDark: $route.meta.HeaderDark }" v-else>
+    <div class="BaseHeaderPCFixed BaseHeaderPC flex flex-align-center" :class="{ BaseHeaderPCDark: $route.meta.HeaderDark }" v-else-if="!isMobile">
       <div class="BaseHeaderPC-Layout flex flex-align-center flex-jus-between">
         <div class="flex flex-align-center">
           <img src="@/assets/img/BaseHeader/logoDark.png" class="BaseHeaderPC-logo" @click="$router.push('/')" v-if="$route.meta.HeaderDark" />
@@ -87,6 +87,7 @@
 
       </div>
     </div>
+    <div class="BaseHeaderPC" v-if="!isMobile"></div>
 
     <!-- BaseLanguage -->
     <v-dialog width="90%" max-width="420px" v-model="languageVisible"><BaseLanguage :visible.sync="languageVisible" /></v-dialog>
@@ -190,6 +191,12 @@ export default {
     height: 22px;
     cursor: pointer;
   }
+}
+
+.BaseHeaderPCFixed {
+  position: fixed;
+  top: 0;
+  z-index: 199;
 }
 
 .BaseHeaderPC {

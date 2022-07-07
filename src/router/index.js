@@ -58,7 +58,8 @@ const constantRouter = [
         path: "/ProtocolsDetails",
         name: "ProtocolsDetails",
         meta: {
-          noFooter: true
+          noFooter: true,
+          HeaderDark: true
         },
         component: () => import("@/views/Protocols/ProtocolsDetails.vue"),
       },

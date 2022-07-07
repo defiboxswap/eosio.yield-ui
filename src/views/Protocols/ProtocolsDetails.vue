@@ -297,7 +297,8 @@
       </div>
     </div>
     <div class="ProtocolsDetailsPC" v-else>
-      <div class="ProtocolsDetailsPC-layout" v-loading="loading">
+      <div class="ProtocolsDetailsPC-overLay"></div>
+      <div class="ProtocolsDetailsPC-overLayPatch  ProtocolsDetailsPC-layout" >
         <!-- Projects -->
         <div class="ProtocolsDetailsPC-title">
           {{ $t("yield.yield7") }}
@@ -306,7 +307,7 @@
           </span>
         </div>
 
-        <div v-if="projectInfo">
+        <div v-if="projectInfo" v-loading="loading">
           <div class="ProtocolsDetailsPC-box1">
             <div class="flext">
               <div class="box1-left">
@@ -603,7 +604,7 @@
           </div>
         </div>
 
-        <div v-else>
+        <div v-else-if="!loading" class="ProtocolsDetailsNodata">
           <BaseNoData></BaseNoData>
         </div>
       </div>
@@ -1234,17 +1235,35 @@ export default {
     }
   }
 }
+.ProtocolsDetailsNodata {
+  background: #fff;
+  border-radius: 15px;
+}
 
 .ProtocolsDetailsPC {
   padding: 40px 0 180px;
+  padding-top: 0;
   .ProtocolsDetailsPC-layout {
     width: 1200px;
     margin: 0 auto;
   }
+  .ProtocolsDetailsPC-overLay {
+    width: 100%;
+    background-color: #000;
+    height: 240px;
+    // padding-top: 30px;
+    position: relative;
+  }
+  .ProtocolsDetailsPC-overLayPatch {
+    position: relative;
+    top: -240px;
+    padding-top: 40px;
+  }
+
   .ProtocolsDetailsPC-title {
     font-size: 16px;
     font-weight: 600;
-    color: #101010;
+    color: #fff;
     margin-bottom: 20px;
   }
 
@@ -1255,6 +1274,7 @@ export default {
     border-radius: 15px;
     border: 1px solid #e8e8e8;
     margin-bottom: 25px;
+    background-color: #fff;
     .box1-left {
       padding-top: 20px;
       width: 280px;

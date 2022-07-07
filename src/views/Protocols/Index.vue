@@ -64,7 +64,7 @@
           </div>
           <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">MORE</div>
         </template>
-        <div v-else>
+        <div v-else-if="!loading">
           <BaseNoData></BaseNoData>
         </div>
       </div>
@@ -112,7 +112,7 @@
           </div>
           <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">MORE</div>
         </template>
-        <div v-else>
+        <div  v-else-if="!loading">
           <BaseNoData></BaseNoData>
         </div>
       </div>
@@ -201,7 +201,7 @@
 
               <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">MORE</div>
             </template>
-            <div v-else>
+            <div v-else-if="!loading">
               <BaseNoData></BaseNoData>
             </div>
           </div>
@@ -254,15 +254,12 @@
 
               <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">MORE</div>
             </template>
-            <div v-else>
+            <div v-else-if="!loading">
               <BaseNoData></BaseNoData>
             </div>
           </div>
         </div>
       </div>
-      <!-- <v-btn color="blue-grey" class="ma-2 white--text" fab>
-        <v-icon dark>mdi-cloud-upload</v-icon>
-      </v-btn> -->
     </div>
   </div>
 </template>
@@ -274,12 +271,7 @@ export default {
   name: "Protocols",
   data() {
     return {
-      // items: ["Foo", "Bar", "Fizz", "Buzz"],
-      // TVLRankings、Audit
       infoTab: "TVLRankings",
-      // info: {
-      //   'TVLRankings':
-      // }
       pageNo: 1,
       pageSize: 10,
       search: "",
@@ -287,6 +279,7 @@ export default {
       isMore: true,
       protocolsList: [],
       searchTimer: null,
+      loading: false
     }
   },
   props: {},
@@ -326,6 +319,7 @@ export default {
     },
     async getList() {
       try {
+        this.loading = true
         let result = await protocols.list({
           pageNo: this.pageNo,
           pageSize: this.pageSize,
@@ -333,7 +327,6 @@ export default {
           order: this.order,
         })
         if (result?.code === 0 && result.data) {
-          // console.log("res", result)
           result.data.forEach((item) => {
             item.logo = ""
             item.nameUrlencode = "/ProtocolsDetails?name=" + encodeURIComponent(item.name)
@@ -352,11 +345,13 @@ export default {
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]
-
+          this.loading = false
         } else {
+          this.loading = false
           this.isMore = false
         }
       } catch (error) {
+        this.loading = false
         this.isMore = false
       }
     },
