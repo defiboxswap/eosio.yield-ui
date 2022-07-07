@@ -647,7 +647,6 @@ export default {
 
       let result = await DApp.transactionApi({
         params,
-        useFreeCpu: false,
       })
 
       this.btnLoading = false

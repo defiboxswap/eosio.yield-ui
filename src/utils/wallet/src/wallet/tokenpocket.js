@@ -63,7 +63,8 @@ class TpModel {
   // transactionApi
   async transactionApi(obj) {
     try {
-      const { params, useFreeCpu } = obj;
+      // const { params, useFreeCpu } = obj;
+      const { params } = obj;
       const action = {
         blockchain: this.account.chain,
         actions: params.actions,

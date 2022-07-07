@@ -842,7 +842,6 @@ export default {
 
       let result = await DApp.transactionApi({
         params,
-        useFreeCpu: false,
       })
       this.claimLoading = false
 
@@ -884,7 +883,6 @@ export default {
 
       let result = await DApp.transactionApi({
         params,
-        useFreeCpu: false,
       })
       this.claimLoading = false
 
@@ -925,7 +923,6 @@ export default {
 
       let result = await DApp.transactionApi({
         params,
-        useFreeCpu: false,
       })
       this.claimLoading = false
       if (result && result.code !== 0) {
@@ -965,7 +962,6 @@ export default {
 
       let result = await DApp.transactionApi({
         params,
-        useFreeCpu: false,
       })
       this.claimLoading = false
       if (result && result.code !== 0) {
