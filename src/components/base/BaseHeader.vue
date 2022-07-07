@@ -19,11 +19,11 @@
 
           <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column" @click="languageVisible = true">
             <div class="flexc">
-              <span>Language</span>
+              <span>{{ $t('yield.yield9') }}</span>
             </div>
           </div>
           <!-- Node -->
-          <div class="accountMenu-item flext flex-align-center flex-jus-center" @click="nodeVisible = true">Node</div>
+          <div class="accountMenu-item flext flex-align-center flex-jus-center" @click="nodeVisible = true">{{ $t('yield.yield133') }}</div>
 
           <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column" v-if="$store.state.app.accountInfo.account">
             <div class="flexc">
@@ -33,8 +33,8 @@
 
           <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column">
             <div class="flexc">
-              <span v-if="$store.state.app.accountInfo.account" @click="handleLoginOut">LoginOut</span>
-              <span v-else  @click="handleWalletLogin" >Login</span>
+              <span v-if="$store.state.app.accountInfo.account" @click="handleLoginOut">{{ $t('yield.yield59') }}</span>
+              <span v-else  @click="handleWalletLogin" >{{ $t('yield.yield10') }}</span>
             </div>
           </div>
 
@@ -63,11 +63,11 @@
           <div class="accountMenu">
             <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column" @click="languageVisible = true">
               <div class="flexc">
-                <span>Language</span>
+                <span>{{ $t('yield.yield9') }}</span>
               </div>
             </div>
             <!-- Node -->
-            <div class="accountMenu-item flext flex-align-center flex-jus-center" @click="nodeVisible = true">Node</div>
+            <div class="accountMenu-item flext flex-align-center flex-jus-center" @click="nodeVisible = true">{{ $t('yield.yield133') }}</div>
 
             <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column" v-if="$store.state.app.accountInfo.account">
               <div class="flexc">
@@ -77,8 +77,8 @@
 
             <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column">
               <div class="flexc">
-                <span v-if="$store.state.app.accountInfo.account" @click="handleLoginOut">LoginOut</span>
-                <span v-else  @click="handleWalletLogin" >Login</span>
+                <span v-if="$store.state.app.accountInfo.account" @click="handleLoginOut">{{ $t('yield.yield59') }}</span>
+                <span v-else  @click="handleWalletLogin" >{{ $t('yield.yield10') }}</span>
               </div>
             </div>
 

@@ -153,6 +153,8 @@ const items = {
       yield148: "",
       yield149: "",
       yield150: "",
+      yield151: "",
+      yield152: "",
     },
     zhTW: {
       yield1: "首頁",
@@ -305,6 +307,8 @@ const items = {
       yield148: "為您在其平台上的質押/LP 支付獎勵的協議。",
       yield149: "Yield",
       yield150: "修改項目信息",
+      yield151: "正在提交",
+      yield152: "提交完成",
     },
     en: {
       yield1: "Home",
@@ -457,6 +461,8 @@ const items = {
       yield148: "Protocols that pay you a reward for your staking/LP on their platform.",
       yield149: "Yield",
       yield150: "Modify project Info",
+      yield151: "Submitting",
+      yield152: "Submit completed",
     },
     ko: {
       yield1: "집",
@@ -609,6 +615,8 @@ const items = {
       yield148: "플랫폼에서 스테이킹/LP에 대한 보상을 지급하는 프로토콜입니다.",
       yield149: "Yield",
       yield150: "프로젝트 정보 수정",
+      yield151: "제출 중",
+      yield152: "제출 완료",
     },
   },
 }

@@ -397,8 +397,8 @@ export default {
 
       tipsShow: false,
       categoryItem: this.$t("yield.yield46"),
-      categoryList: [this.$t("yield.yield46"), this.$t("yield.yield47"), this.$t("yield.yield48"), this.$t("yield.yield49"), this.$t("yield.yield50")],
-      categoryDesList: ["yield.yield144", "yield.yield145", "yield.yield146", "yield.yield147", "yield.yield148"],
+      categoryList: [this.$t("yield.yield46"), this.$t("yield.yield47"), this.$t("yield.yield48"), this.$t("yield.yield49")],
+      categoryDesList: ["yield.yield144", "yield.yield145", "yield.yield146", "yield.yield147"],
 
       btnLoading: false,
       uploadLoading: false,
