@@ -22,7 +22,7 @@ export default {
   watch: {
     "$store.state.app.language": {
       handler: function () {
-        document.title = 'Yield+'
+        document.title = "Yield+"
         this.setDocumentTitle()
       },
       immediate: true,
@@ -63,8 +63,6 @@ export default {
     } catch (error) {
       console.log(error) // eslint-disable-line
     }
-    
-    
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.checkMobile)
@@ -103,7 +101,7 @@ export default {
     // first handleGetLocaLanguage
     handleGetLocaLanguage() {
       if (this.urlQueryObj?.lang && ["zh-TW", "ko", "en"].includes(this.urlQueryObj.lang)) {
-        // this.urlQueryObj.lang 
+        // this.urlQueryObj.lang
         this.$store.dispatch("setLanguage", this.urlQueryObj.lang)
         this.$i18n.locale = this.urlQueryObj.lang
         return
@@ -112,7 +110,7 @@ export default {
       // if (this.language) {
       //   return
       // }
-      let lang = 'en'
+      let lang = "en"
       // if (navigator.language == "zh-CN") {
       //   lang = "zh-TW"
       // } else if (navigator.language == "zh-TW") {
@@ -180,7 +178,6 @@ export default {
 
         // setNode
         this.$store.dispatch("setNode", nodeList).then(() => {
-          
           const urlParams = getUrlParams(window.location.href) || {}
           // set channel
           let channel = urlParams.channel
@@ -190,7 +187,6 @@ export default {
           }
           localStorage.setItem("channel", channel || source)
           this.$store.dispatch("setChannel", channel || source)
-
         })
       }
     },
@@ -262,5 +258,4 @@ export default {
     overflow-x: hidden;
   }
 }
-
 </style>

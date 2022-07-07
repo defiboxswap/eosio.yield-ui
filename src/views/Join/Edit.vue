@@ -121,35 +121,35 @@
 
         <div class="Join-basicInfo">
           <!-- *Analytics -->
-          <div class="basicInfo-title">Analytics</div>
+          <div class="basicInfo-title">{{ $t('yield.yield130') }}</div>
 
           <div class="basicInfo-box">
             <!-- CoinMarketCap -->
             <div class="basicInfo-subtitle">CoinMarketCap</div>
-            <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" :placeholder="$t('yield.yield140')" />
+            <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" :placeholder="$t('yield.yield153')" />
           </div>
           <div class="basicInfo-box">
             <!--  CoinGecko -->
             <div class="basicInfo-subtitle">CoinGecko</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.coingecko" :placeholder="$t('yield.yield140')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.coingecko" :placeholder="$t('yield.yield154')" />
           </div>
 
           <div class="basicInfo-box">
             <!-- DefiLlama -->
             <div class="basicInfo-subtitle">DefiLlama</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.defillama" :placeholder="$t('yield.yield140')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.defillama" :placeholder="$t('yield.yield155')" />
           </div>
 
           <div class="basicInfo-box">
             <!--  DappRadar -->
             <div class="basicInfo-subtitle">DappRadar</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.dappradar" :placeholder="$t('yield.yield140')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.dappradar" :placeholder="$t('yield.yield156')" />
           </div>
         </div>
 
         <div class="Join-basicInfo">
           <!-- Socials -->
-          <div class="basicInfo-title">Socials</div>
+          <div class="basicInfo-title">{{ $t('yield.yield129') }}</div>
 
           <div class="basicInfo-box">
             <!-- Twitter -->
@@ -314,18 +314,18 @@
 
         <div class="JoinPC-basicInfo">
           <!-- *Analytics -->
-          <div class="basicInfo-title">Analytics</div>
+          <div class="basicInfo-title">{{ $t('yield.yield130') }}</div>
 
           <div class="flext marb-25">
             <div class="basicInfo-left">
               <!-- CoinMarketCap -->
               <div class="basicInfo-subtitle">CoinMarketCap</div>
-              <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" :placeholder="$t('yield.yield140')" />
+              <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" :placeholder="$t('yield.yield153')" />
             </div>
             <div>
               <!--  CoinGecko -->
               <div class="basicInfo-subtitle">CoinGecko</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.coingecko" :placeholder="$t('yield.yield140')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.coingecko" :placeholder="$t('yield.yield154')" />
             </div>
           </div>
 
@@ -333,19 +333,19 @@
             <div class="basicInfo-left">
               <!-- DefiLlama -->
               <div class="basicInfo-subtitle">DefiLlama</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.defillama" :placeholder="$t('yield.yield140')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.defillama" :placeholder="$t('yield.yield155')" />
             </div>
             <div>
               <!--  DappRadar -->
               <div class="basicInfo-subtitle">DappRadar</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.dappradar" :placeholder="$t('yield.yield140')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.dappradar" :placeholder="$t('yield.yield156')" />
             </div>
           </div>
         </div>
 
         <div class="JoinPC-basicInfo">
           <!-- Socials -->
-          <div class="basicInfo-title">Socials</div>
+          <div class="basicInfo-title">{{ $t('yield.yield129') }}</div>
 
           <div class="flext marb-25">
             <div class="basicInfo-left">

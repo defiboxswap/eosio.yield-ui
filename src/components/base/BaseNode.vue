@@ -18,10 +18,10 @@
           <!-- time out -->
           <div class="delay color-red" v-else-if="item.tip == 3">time out</div>
           <div v-if="node.httpEndpoint == item.url">
-            <img src="@/assets/img/BaseNode/selectYes.svg" alt="" style="width: 16px;">
+            <img src="@/assets/img/BaseNode/selectYes.svg" alt="" style="width: 16px" />
           </div>
           <div v-else>
-            <img src="@/assets/img/BaseNode/select.svg" alt="" style="width: 16px;">
+            <img src="@/assets/img/BaseNode/select.svg" alt="" style="width: 16px" />
           </div>
         </div>
       </div>
@@ -29,102 +29,102 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
-import { commons } from '@/service';
-import axios from 'axios';
+import { mapState } from "vuex"
+import { commons } from "@/service"
+import axios from "axios"
 export default {
-  name: 'BaseNode',
+  name: "BaseNode",
   data() {
     return {
-      list: []
-    };
+      list: [],
+    }
   },
   computed: {
     ...mapState({
-      node: (state) => state.sys.node
-    })
+      node: (state) => state.sys.node,
+    }),
   },
-  props: ['visible'],
+  props: ["visible"],
   watch: {
     visible(newVal) {
       if (newVal) {
-        this.handleGetNodeTime();
+        this.handleGetNodeTime()
       }
-    }
+    },
   },
   created() {
-    this.handleGetNodeInfo();
+    this.handleGetNodeInfo()
   },
   methods: {
     handleClose() {
-      this.$emit('update:visible', false);
+      this.$emit("update:visible", false)
     },
 
     handleChangeNode(index, item) {
       if (item.url == this.node.httpEndpoint) {
-        return;
+        return
       }
 
-      const deleteItem = this.list.splice(index, 1);
-      this.list = deleteItem.concat(this.list);
-      const node = { httpEndpoint: item.url, protocol: item.protocol, host: item.host, port: item.port, chainId: item.chainId, area: item.area };
-      this.$store.dispatch('setNode', node);
-      this.$emit('update:visible', false);
+      const deleteItem = this.list.splice(index, 1)
+      this.list = deleteItem.concat(this.list)
+      const node = { httpEndpoint: item.url, protocol: item.protocol, host: item.host, port: item.port, chainId: item.chainId, area: item.area }
+      this.$store.dispatch("setNode", node)
+      this.$emit("update:visible", false)
       setTimeout(() => {
-        location.reload();
-      }, 200);
-    }, 
+        location.reload()
+      }, 400)
+    },
     // handleGetNodeInfo
     async handleGetNodeInfo() {
-      this.loading = true;
-      const { status, result } = await commons.getNodeList();
+      this.loading = true
+      const { status, result } = await commons.getNodeList()
       if (!status) {
-        this.loading = false;
+        this.loading = false
       }
       if (status) {
-        this.loading = false;
+        this.loading = false
         let list = result.nodeList.map((item) => {
-          return { ...item, time: '', tip: 0 };
-        });
+          return { ...item, time: "", tip: 0 }
+        })
         const index = list.findIndex((item) => {
-          return item.url == this.node.httpEndpoint;
-        });
+          return item.url == this.node.httpEndpoint
+        })
 
         if (index != -1) {
-          const deleteItem = list.splice(index, 1);
-          list = deleteItem.concat(list);
+          const deleteItem = list.splice(index, 1)
+          list = deleteItem.concat(list)
         }
-        this.list = list;
-        this.handleGetNodeTime();
+        this.list = list
+        this.handleGetNodeTime()
       }
     }, // handleGetNodeTime
     async handleGetNodeTime() {
       for (let i = 0; i < this.list.length; i++) {
-        const time = new Date().getTime();
+        const time = new Date().getTime()
         axios
           .get(`${this.list[i].url}/v1/chain/get_info`)
           .then(() => {
-            const deletTime = new Date().getTime() - time;
-            let tip = 0;
+            const deletTime = new Date().getTime() - time
+            let tip = 0
             if (deletTime < 1000) {
-              tip = 0;
+              tip = 0
             }
             if (deletTime >= 1000 && deletTime <= 2000) {
-              tip = 1;
+              tip = 1
             }
             if (deletTime > 2000) {
-              tip = 2;
+              tip = 2
             }
-            this.list[i].time = deletTime;
-            this.list[i].tip = tip;
+            this.list[i].time = deletTime
+            this.list[i].tip = tip
           })
           .catch(() => {
-            this.list[i].tip = 3;
-          });
+            this.list[i].tip = 3
+          })
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 <style lang="scss" scoped>
 .BaseNode {

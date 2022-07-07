@@ -13,7 +13,7 @@
               <div class="audit-tips1 flex-1" :style="{ color: infoTab != 'TVLRankings' ? '#999999' : '#000' }" @click="infoTab = 'TVLRankings'">{{ $t("yield.yield50") }}</div>
               <div class="audit-line"></div>
               <!-- Audit -->
-              <div class="audit-tips2" :style="{ color: infoTab != 'Audit' ? '#999999' : '#000' }" @click="infoTab = 'Audit'">{{ $t("yield.yield51") }}</div>
+              <div class="audit-tips2 flex-1" :style="{ color: infoTab != 'Audit' ? '#999999' : '#000' }" @click="infoTab = 'Audit'">{{ $t("yield.yield51") }}</div>
             </div>
 
             <!-- <v-select class="select-all" :items="items" label="" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select> -->
@@ -427,13 +427,15 @@ export default {
         }
         .audit-tips1 {
           font-size: 14px;
-          text-align: center;
+          // text-align: center;
           font-weight: 500;
           color: #000000;
         }
         .audit-tips2 {
           width: 70px;
-          text-align: center;
+          // text-align: center;
+          text-align: right;
+          padding-right: 25px;
           font-size: 14px;
           font-weight: 500;
           color: #999999;

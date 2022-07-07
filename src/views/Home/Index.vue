@@ -6,29 +6,29 @@
           <div class="part1-text">
             <div class="text-1">
               <!-- Yield+  Plan is on -->
-              {{ $t('yield.yield6') }}
+              {{ $t("yield.yield6") }}
               <br />
               <span class="text-2">{{ agg_protocol_count }}</span>
               <!-- Projects -->
-              {{ $t('yield.yield7') }}
+              {{ $t("yield.yield7") }}
               <br />
               <span class="text-2">{{ claimed }}</span>
               <!-- Claimed -->
-              Eos {{ $t('yield.yield8') }}
+              Eos {{ $t("yield.yield8") }}
             </div>
-            <v-btn class="text-button"  @click="$router.push('/Join')">{{ $t('yield.yield4') }}</v-btn>
+            <v-btn class="text-button" @click="$router.push('/Join')">{{ $t("yield.yield4") }}</v-btn>
           </div>
         </div>
         <!-- <img src="@/assets/img/Home/par1BG.png" class="part1-bg" /> -->
-        <video src="@/assets/video/home/447.mp4" class="part1-bg" loop autoplay  muted />
+        <video src="@/assets/video/home/447.mp4" class="part1-bg" loop autoplay muted />
       </div>
 
       <div class="Home-part2">
         <div class="Home-Layout">
           <div class="part2-text">
             <!-- What is  Yield+ ? -->
-            <div class="text-2">{{ $t('yield.yield11') }}</div>
-            <div style="line-height: 25px;">{{ $t('yield.yield12') }}</div>
+            <div class="text-2">{{ $t("yield.yield11") }}</div>
+            <div style="line-height: 25px">{{ $t("yield.yield12") }}</div>
           </div>
         </div>
         <img src="@/assets/img/Home/part2BG.png" class="part2-bg" />
@@ -36,16 +36,15 @@
 
       <div class="Home-part3">
         <div class="Home-Layout">
-          <div class="part3-text" :key="infoTab">{{ $t('yield.yield14', { num: infoTab == 'Launch'?'625K':'2.5M'}) }}</div>
-
+          <div class="part3-text" :key="infoTab">{{ $t("yield.yield14", { num: infoTab == "Launch" ? "625K" : "2.5M" }) }}</div>
 
           <div class="part3-buttonList flex flex-jus-around">
             <!-- <v-btn class="buttonList-button1">Launch</v-btn>
             <v-btn class="buttonList-button2">Accelerate</v-btn> -->
             <!-- Launch -->
-            <v-btn class="buttonList-button1" :class="{'buttonList-button2': infoTab != 'Launch'}" @click="infoTab = 'Launch'">{{ $t('yield.yield15') }}</v-btn>
+            <v-btn class="buttonList-button1" :class="{ 'buttonList-button2': infoTab != 'Launch' }" @click="infoTab = 'Launch'">{{ $t("yield.yield15") }}</v-btn>
             <!-- Accelerate -->
-            <v-btn class="buttonList-button1" :class="{'buttonList-button2': infoTab != 'Accelerate'}" @click="infoTab = 'Accelerate'">{{ $t('yield.yield16') }}</v-btn>
+            <v-btn class="buttonList-button1" :class="{ 'buttonList-button2': infoTab != 'Accelerate' }" @click="infoTab = 'Accelerate'">{{ $t("yield.yield16") }}</v-btn>
           </div>
 
           <div class="part3-tableLayout">
@@ -114,73 +113,71 @@
               </div>
             </div> -->
             <div v-if="infoTab != 'Launch'">
-              <img src="@/assets/img/Home/LaunchZh.png" class="part3-img" v-if="$store.state.app.language == 'zh-TW'">
-              <img src="@/assets/img/Home/LaunchKo.png" class="part3-img" v-else-if="$store.state.app.language == 'ko'">
-              <img src="@/assets/img/Home/LaunchEn.png" class="part3-img" v-else>
+              <img src="@/assets/img/Home/LaunchZh.png" class="part3-img" v-if="$store.state.app.language == 'zh-TW'" />
+              <img src="@/assets/img/Home/LaunchKo.png" class="part3-img" v-else-if="$store.state.app.language == 'ko'" />
+              <img src="@/assets/img/Home/LaunchEn.png" class="part3-img" v-else />
             </div>
-            
+
             <div v-else>
-              <img src="@/assets/img/Home/AccelerateZh.png" class="part3-img" v-if="$store.state.app.language == 'zh-TW'">
-              <img src="@/assets/img/Home/AccelerateKo.png" class="part3-img" v-else-if="$store.state.app.language == 'ko'">
-              <img src="@/assets/img/Home/AccelerateEn.png" class="part3-img" v-else>
+              <img src="@/assets/img/Home/AccelerateZh.png" class="part3-img" v-if="$store.state.app.language == 'zh-TW'" />
+              <img src="@/assets/img/Home/AccelerateKo.png" class="part3-img" v-else-if="$store.state.app.language == 'ko'" />
+              <img src="@/assets/img/Home/AccelerateEn.png" class="part3-img" v-else />
             </div>
           </div>
 
-          <div class="part3-tips">{{ $t('yield.yield23') }}</div>
+          <div class="part3-tips">{{ $t("yield.yield23") }}</div>
         </div>
       </div>
 
       <div class="Home-part4">
         <div class="part4-p1">
-          <img src="@/assets/img/Home/part4Img1.png" class="p1-img">
+          <img src="@/assets/img/Home/part4Img1.png" class="p1-img" />
         </div>
         <div class="Home-Layout">
           <div class="part4-step">
             <!-- <div class="step-title">HOW TO <br/> JOIN YIELD+ ?</div> -->
-            <div class="step-title">{{ $t('yield.yield24') }}</div>
+            <div class="step-title">{{ $t("yield.yield24") }}</div>
             <!-- step1 -->
-            <div class="step-tips1">{{ $t('yield.yield25') }} /</div>
-            <div class="step-tips2">{{ $t('yield.yield27') }}</div>
+            <div class="step-tips1">{{ $t("yield.yield25") }} /</div>
+            <div class="step-tips2">{{ $t("yield.yield27") }}</div>
             <!-- step2 -->
-            <div class="step-tips1">{{ $t('yield.yield28') }} / </div>
-            <div class="step-tips2">{{ $t('yield.yield30') }}</div>
+            <div class="step-tips1">{{ $t("yield.yield28") }} /</div>
+            <div class="step-tips2">{{ $t("yield.yield30") }}</div>
             <!-- step3 -->
-            <div class="step-tips1">{{ $t('yield.yield31') }} / </div>
-            <div class="step-tips2">{{ $t('yield.yield33') }}</div>
+            <div class="step-tips1">{{ $t("yield.yield31") }} /</div>
+            <div class="step-tips2">{{ $t("yield.yield33") }}</div>
             <!-- step4 -->
-            <div class="step-tips1">{{ $t('yield.yield34') }} / </div>
-            <div class="step-tips2">{{ $t('yield.yield36') }}</div>
+            <div class="step-tips1">{{ $t("yield.yield34") }} /</div>
+            <div class="step-tips2">{{ $t("yield.yield36") }}</div>
           </div>
 
-          <v-btn class="part4-submission" @click="$router.push('/Join')">{{ $t('yield.yield37') }}</v-btn>
+          <v-btn class="part4-submission" @click="$router.push('/Join')">{{ $t("yield.yield37") }}</v-btn>
 
           <!-- <div class="part4-email">If you have any questions please contact xxxxxx@gmail.com</div> -->
-          <div class="part4-email"> </div>
+          <div class="part4-email"></div>
         </div>
-
       </div>
-
     </div>
     <div class="HomePC" v-else>
       <div class="HomePC-part1">
         <div class="HomePC-Layout">
           <!-- <img src="@/assets/img/Home/par1BG.png" class="part1-bg" /> -->
-          <video src="@/assets/video/home/447.mp4" class="part1-bg" style="top:-100px;width:800px;height:auto;object-fit: fill;"  loop autoplay  muted/>
+          <video src="@/assets/video/home/447.mp4" class="part1-bg" style="top: -100px; width: 800px; height: auto; object-fit: fill" loop autoplay muted />
           <div class="part1-text">
             <div class="text-1">
               <!-- Yield+  Plan is on -->
-              {{ $t('yield.yield6') }}
+              {{ $t("yield.yield6") }}
               <br />
               <span class="text-2">{{ agg_protocol_count }}</span>
               <!-- Projects -->
-              {{ $t('yield.yield7') }}
+              {{ $t("yield.yield7") }}
               <br />
               <span class="text-2">{{ claimed }}</span>
               <!-- Claimed -->
-              EOS {{ $t('yield.yield8') }}
+              EOS {{ $t("yield.yield8") }}
             </div>
             <!-- Join Yield + -->
-            <v-btn class="text-button" @click="$router.push('/Join')">{{ $t('yield.yield4') }}</v-btn>
+            <v-btn class="text-button" @click="$router.push('/Join')">{{ $t("yield.yield4") }}</v-btn>
           </div>
         </div>
       </div>
@@ -189,8 +186,8 @@
         <div class="HomePC-Layout flext">
           <div class="part2-text">
             <!-- What is  Yield+ ? -->
-            <div class="text-2">{{ $t('yield.yield11') }}</div>
-            <div style="line-height: 25px;">{{ $t('yield.yield12') }}</div>
+            <div class="text-2">{{ $t("yield.yield11") }}</div>
+            <div style="line-height: 25px">{{ $t("yield.yield12") }}</div>
           </div>
 
           <img src="@/assets/img/Home/part2BG.png" class="part2-bg" />
@@ -199,19 +196,18 @@
 
       <div class="HomePC-part3">
         <div class="HomePC-Layout">
-          <img src="@/assets/img/Home/part3Img1.png" class="part3-img1">
-          <img src="@/assets/img/Home/part3Img2.png" class="part3-img2">
-          <img src="@/assets/img/Home/part3Img3.png" class="part3-img3">
-          <div class="part3-title">{{ $t('yield.yield13') }}</div>
-
+          <img src="@/assets/img/Home/part3Img1.png" class="part3-img1" />
+          <img src="@/assets/img/Home/part3Img2.png" class="part3-img2" />
+          <img src="@/assets/img/Home/part3Img3.png" class="part3-img3" />
+          <div class="part3-title">{{ $t("yield.yield13") }}</div>
 
           <div class="part3-buttonList flex flex-jus-center">
             <!-- Launch -->
-            <v-btn class="buttonList-button1" :class="{'buttonList-button2': infoTab != 'Launch'}" @click="infoTab = 'Launch'">{{ $t('yield.yield15') }}</v-btn>
+            <v-btn class="buttonList-button1" :class="{ 'buttonList-button2': infoTab != 'Launch' }" @click="infoTab = 'Launch'">{{ $t("yield.yield15") }}</v-btn>
             <!-- Accelerate -->
-            <v-btn class="buttonList-button1" :class="{'buttonList-button2': infoTab != 'Accelerate'}" @click="infoTab = 'Accelerate'">{{ $t('yield.yield16') }}</v-btn>
+            <v-btn class="buttonList-button1" :class="{ 'buttonList-button2': infoTab != 'Accelerate' }" @click="infoTab = 'Accelerate'">{{ $t("yield.yield16") }}</v-btn>
           </div>
-          <div class="part3-text" :key="infoTab">{{ $t('yield.yield14', { num: infoTab == 'Launch'?'625K':'2.5M'}) }}</div>
+          <div class="part3-text" :key="infoTab">{{ $t("yield.yield14", { num: infoTab == "Launch" ? "625K" : "2.5M" }) }}</div>
 
           <div class="part3-table">
             <div class="table-border1"></div>
@@ -220,14 +216,14 @@
             <div class="table-border4"></div>
             <div class="table-height1 flex" style="border-bottom: 1px solid RGBA(73, 78, 86, 1)">
               <div class="table-width"></div>
-              <div class="table-width" v-if="infoTab == 'Launch'">{{ $t('yield.yield17') }}</div>
-              <div class="table-width">{{ $t('yield.yield18') }}</div>
-              <div class="table-width">{{ $t('yield.yield19') }}</div>
-              <div class="table-width">{{ $t('yield.yield20') }}</div>
-              <div class="table-width" v-if="infoTab != 'Launch'">{{ $t('yield.yield119') }}</div>
+              <div class="table-width" v-if="infoTab == 'Launch'">{{ $t("yield.yield17") }}</div>
+              <div class="table-width">{{ $t("yield.yield18") }}</div>
+              <div class="table-width">{{ $t("yield.yield19") }}</div>
+              <div class="table-width">{{ $t("yield.yield20") }}</div>
+              <div class="table-width" v-if="infoTab != 'Launch'">{{ $t("yield.yield119") }}</div>
             </div>
             <div class="table-height2 flext" style="border-bottom: 1px solid RGBA(73, 78, 86, 1)">
-              <div class="table-width">{{ $t('yield.yield21') }} {{ $t('yield.yield22') }}</div>
+              <div class="table-width">{{ $t("yield.yield21") }} {{ $t("yield.yield22") }}</div>
               <div class="table-width">
                 <div v-for="(item, index) in info[infoTab].rewards[0]" :key="index">{{ item }}</div>
               </div>
@@ -243,8 +239,8 @@
             </div>
             <div class="table-height2 flext" style="border-bottom: 1px solid RGBA(73, 78, 86, 1)">
               <div class="table-width">
-                <div>{{ $t('yield.yield112') }}</div>
-                <div :key="infoTab">{{ infoTab == 'Launch' ? $t('yield.yield113'): $t('yield.yield115') }}</div>
+                <div>{{ $t("yield.yield112") }}</div>
+                <div :key="infoTab">{{ infoTab == "Launch" ? $t("yield.yield113") : $t("yield.yield115") }}</div>
               </div>
               <div class="table-width">
                 <div v-for="(item, index) in info[infoTab].minTvl[0]" :key="index">{{ item }}</div>
@@ -261,8 +257,8 @@
             </div>
             <div class="table-height2 flext">
               <div class="table-width">
-                <div>{{ $t('yield.yield114') }}</div>
-                <div :key="infoTab">{{ infoTab == 'Launch' ? $t('yield.yield113'): $t('yield.yield115') }}</div>
+                <div>{{ $t("yield.yield114") }}</div>
+                <div :key="infoTab">{{ infoTab == "Launch" ? $t("yield.yield113") : $t("yield.yield115") }}</div>
               </div>
               <div class="table-width">
                 <div v-for="(item, index) in info[infoTab].maxTvl[0]" :key="index">{{ item }}</div>
@@ -279,81 +275,86 @@
             </div>
           </div>
 
-          <div class="part3-tips">{{ $t('yield.yield23') }}</div>
+          <div class="part3-tips">{{ $t("yield.yield23") }}</div>
         </div>
       </div>
 
       <div class="HomePC-part4">
         <div class="HomePC-Layout">
           <div class="part4-p1 flex">
-            <img src="@/assets/img/Home/part4Img1.png" class="p1-img">
-            <div class="p1-text">{{ $t('yield.yield24') }}</div>
+            <img src="@/assets/img/Home/part4Img1.png" class="p1-img" />
+            <div class="p1-text">{{ $t("yield.yield24") }}</div>
           </div>
 
           <div class="part4-step flext flex-jus-between">
             <div class="step-width">
-              <div class="step-title">{{ $t('yield.yield25') }} / </div>
-              <div class="step-tips1">{{ $t('yield.yield26') }}</div>
-              <div class="step-tips2">{{ $t('yield.yield27') }}</div>
+              <div class="step-title">{{ $t("yield.yield25") }} /</div>
+              <div class="step-tips1">{{ $t("yield.yield26") }}</div>
+              <div class="step-tips2">{{ $t("yield.yield27") }}</div>
             </div>
             <div class="step-width">
-              <div class="step-title">{{ $t('yield.yield28') }} / </div>
-              <div class="step-tips1">{{ $t('yield.yield29') }}</div>
-              <div class="step-tips2">{{ $t('yield.yield30') }}</div>
+              <div class="step-title">{{ $t("yield.yield28") }} /</div>
+              <div class="step-tips1">{{ $t("yield.yield29") }}</div>
+              <div class="step-tips2">{{ $t("yield.yield30") }}</div>
             </div>
             <div class="step-width">
-              <div class="step-title">{{ $t('yield.yield31') }} / </div>
-              <div class="step-tips1">{{ $t('yield.yield32') }}</div>
-              <div class="step-tips2">{{ $t('yield.yield33') }}</div>
+              <div class="step-title">{{ $t("yield.yield31") }} /</div>
+              <div class="step-tips1">{{ $t("yield.yield32") }}</div>
+              <div class="step-tips2">{{ $t("yield.yield33") }}</div>
             </div>
             <div class="step-width">
-              <div class="step-title">{{ $t('yield.yield34') }} / </div>
-              <div class="step-tips1">{{ $t('yield.yield35') }}</div>
-              <div class="step-tips2">{{ $t('yield.yield36') }}</div>
+              <div class="step-title">{{ $t("yield.yield34") }} /</div>
+              <div class="step-tips1">{{ $t("yield.yield35") }}</div>
+              <div class="step-tips2">{{ $t("yield.yield36") }}</div>
             </div>
           </div>
 
-          <v-btn class="part4-submission" @click="$router.push('/Join')">{{ $t('yield.yield37') }}</v-btn>
-
-
+          <v-btn class="part4-submission" @click="$router.push('/Join')">{{ $t("yield.yield37") }}</v-btn>
         </div>
-
-
-
       </div>
     </div>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
-import { protocols } from '@/service'
+import { mapState } from "vuex"
+import { protocols } from "@/service"
 export default {
-  name: 'Home', // Home
+  name: "Home", // Home
   data() {
     return {
-      agg_protocol_count: '',
-      claimed: '',
+      agg_protocol_count: "",
+      claimed: "",
 
-      infoTab: 'Launch',
+      infoTab: "Launch",
       info: {
         Launch: {
-          rewards: [['27.4 EOS'], ['102.5 EOS'], ['205 EOS'], ['410 EOS']],
-          minTvl: [['200K EOS', '($500K)'], ['750K EOS', '($1.875M)'], ['1.50M EOS', '($3.75M)'], ['3M EOS', '($7.5M)']],
-          maxTvl: [['N/A'], ['N/A'], ['N/A'], ['6M EOS', '($15M)']],
+          rewards: [["27.4 EOS"], ["102.5 EOS"], ["205 EOS"], ["410 EOS"]],
+          minTvl: [
+            ["200K EOS", "($500K)"],
+            ["750K EOS", "($1.875M)"],
+            ["1.50M EOS", "($3.75M)"],
+            ["3M EOS", "($7.5M)"],
+          ],
+          maxTvl: [["N/A"], ["N/A"], ["N/A"], ["6M EOS", "($15M)"]],
         },
         Accelerate: {
-          rewards: [['102.5 EOS'], ['205 EOS'], ['410 EOS'], ['820 EOS']],
-          minTvl: [['750K EOS', '($3.75M)'], ['1.50M EOS', '($7.5M)'], ['3M EOS', '($15M)'], ['6M EOS', '($30M)']],
-          maxTvl: [['N/A'], ['N/A'], ['N/A'], ['12M EOS', '($60M)']],
+          rewards: [["102.5 EOS"], ["205 EOS"], ["410 EOS"], ["820 EOS"]],
+          minTvl: [
+            ["750K EOS", "($3.75M)"],
+            ["1.50M EOS", "($7.5M)"],
+            ["3M EOS", "($15M)"],
+            ["6M EOS", "($30M)"],
+          ],
+          maxTvl: [["N/A"], ["N/A"], ["N/A"], ["12M EOS", "($60M)"]],
         },
-      }
+      },
     }
   },
   components: {},
   props: [],
   watch: {},
   computed: mapState({
-    isMobile: state => state.app.isMobile
+    isMobile: (state) => state.app.isMobile,
   }),
   created() {
     this.getStat()
@@ -362,15 +363,14 @@ export default {
   beforeDestroy() {},
   methods: {
     getStat() {
-      protocols.stat().then(res => {
-        // console.log('res is ', res);
+      protocols.stat().then((res) => {
         if (res.code === 0) {
           this.claimed = this.formatNumber(res.data.claimed)
-          this.agg_protocol_count =  res.data.agg_protocol_count
+          this.agg_protocol_count = res.data.agg_protocol_count
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -592,19 +592,19 @@ export default {
       .step-title {
         font-size: 49px;
         font-weight: bold;
-        color: #FFFFFF;
+        color: #ffffff;
       }
       .step-tips1 {
         margin-top: 70px;
         font-size: 37px;
         font-weight: 500;
-        color: #FFFFFF;
+        color: #ffffff;
       }
       .step-tips2 {
         margin-top: 18px;
         font-size: 16px;
         font-weight: 400;
-        color: #FFFFFF;
+        color: #ffffff;
       }
     }
     .part4-submission {
@@ -629,7 +629,7 @@ export default {
       height: 33px;
       font-size: 13px;
       font-weight: 300;
-      color: #FFFFFF;
+      color: #ffffff;
       text-align: center;
     }
   }
@@ -846,7 +846,6 @@ export default {
       font-size: 20px;
       font-weight: 400;
       color: #666666;
-
     }
   }
 
@@ -869,7 +868,7 @@ export default {
       .p1-text {
         font-size: 84px;
         font-weight: bold;
-        color: #FFFFFF;
+        color: #ffffff;
       }
     }
     .part4-step {
@@ -883,20 +882,20 @@ export default {
         height: 80px;
         font-size: 18px;
         font-weight: 500;
-        color: #FFFFFF;
+        color: #ffffff;
         padding: 0;
       }
       .step-tips2 {
         margin-top: 5px;
         font-size: 18px;
         font-weight: 500;
-        color: #FFFFFF;
+        color: #ffffff;
         padding: 0;
       }
       .step-title {
         font-size: 43px;
         font-weight: 500;
-        color: #FFFFFF;
+        color: #ffffff;
       }
     }
 

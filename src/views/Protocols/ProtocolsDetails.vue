@@ -14,13 +14,12 @@
             <div class="projectList-box">
               <div class="flex">
                 <div class="box-left flex">
-                  <img :src="projectInfo.logo" class="box-avatar"  :onerror="errImg" />
-                  
+                  <img :src="projectInfo.logo" class="box-avatar" :onerror="errImg" />
                 </div>
                 <div class="flex-1">
                   <div class="box-name">{{ projectInfo.name }}</div>
                   <div class="flex flex-wrap">
-                    <div class="box-label" style="text-align:center">{{ handleCategory(projectInfo.category) }}</div>
+                    <div class="box-label" style="text-align: center">{{ handleCategory(projectInfo.category) }}</div>
                     <!-- <div class="box-label">Corss-chain</div> -->
                   </div>
                 </div>
@@ -59,7 +58,6 @@
                       <span v-else>-</span>
                     </div>
                   </div> -->
-
                 </div>
               </div>
             </div>
@@ -67,28 +65,26 @@
 
           <div class="ProtocolsDetails-des">{{ projectInfo.description }}</div>
 
-          <div class="ProtocolsDetails-data" >
+          <div class="ProtocolsDetails-data">
             <div id="view1Data"></div>
             <div class="data-view">
               <div class="flex" style="margin-bottom: 10px">
                 <div class="flex-1">
-                  <div class="view-title">{{ $t('yield.yield41') }}</div>
+                  <div class="view-title">{{ $t("yield.yield41") }}</div>
                   <div class="view-text">${{ getKMBUnit(overViewData.tvl_usd, 2) }}</div>
                 </div>
                 <div class="flex-1">
-                  <div class="view-title">{{ $t('yield.yield42') }}</div>
+                  <div class="view-title">{{ $t("yield.yield42") }}</div>
                   <div class="view-text">{{ overViewData.tvl_usd_change }}</div>
                 </div>
               </div>
 
               <div class="flex">
                 <div class="flex-1">
-                  <div class="view-title">{{ $t('yield.yield54') }}</div>
+                  <div class="view-title">{{ $t("yield.yield54") }}</div>
                   <div class="view-text">{{ getKMBUnit(overViewData.agg_rewards) }}</div>
                 </div>
-                <div class="flex-1">
-                  
-                </div>
+                <div class="flex-1"></div>
               </div>
             </div>
           </div>
@@ -98,7 +94,7 @@
             <div class="overview-box">
               <div class="flex">
                 <div class="box-w">
-                  <div class="box3-title">{{ $t('yield.yield143') }}</div>
+                  <div class="box3-title">{{ $t("yield.yield143") }}</div>
                   <div class="box3-text">
                     <span v-if="projectInfo.otherInfo.name === null">-</span>
                     <template v-else>
@@ -183,7 +179,7 @@
                   <div class="box3-title">Auditing report</div>
                   <div class="box3-text">
                     <template v-if="projectInfo.otherInfo.audit_report.length > 0">
-                      <div class="curPoint" @click="openWindow(url)" v-for="(url,index) in projectInfo.otherInfo.audit_report" :key="index">report{{ index+1 }}</div>
+                      <div class="curPoint" @click="openWindow(url)" v-for="(url, index) in projectInfo.otherInfo.audit_report" :key="index">report{{ index + 1 }}</div>
                     </template>
                     <div v-else>-</div>
                   </div>
@@ -193,43 +189,44 @@
                   <div class="box3-text">YES</div>
                 </div> -->
               </div>
-
             </div>
 
-            <div class="overview-box" style="margin-top: 15px;">
+            <div class="overview-box" style="margin-top: 15px">
               <div class="flext">
                 <div class="box-w">
                   <!-- <div class="box3-title">token</div> -->
                   <div class="box3-text flex" @click="openWindow(projectInfo.cmc)">
-                    <img src="@/assets/img/ProtocolsDetails/CoinMarketCap.png" alt="">
-                    <span>CoinMarketCap</span>
+                    <img src="@/assets/img/ProtocolsDetails/CoinMarketCap.png" alt="" />
+                    <span v-if="projectInfo.cmc">{{ handleHttp(projectInfo.cmc) }}</span>
+                    <span v-else>-</span>
                   </div>
                 </div>
                 <div class="box-w">
-                  <!-- <div class="box3-title">ADDRESS</div>
-                  <div class="box3-text">TOKEN.DEFI</div> -->
                   <div class="box3-text flex" @click="openWindow(projectInfo.coinGecko)">
-                    <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" alt="">
-                    <span>CoinGecko</span>
+                    <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" alt="" />
+                    <span v-if="projectInfo.coinGecko">{{ handleHttp(projectInfo.coinGecko) }}</span>
+                    <span v-else>-</span>
                   </div>
                 </div>
               </div>
 
               <div class="flext">
                 <div class="box-w">
-                  <!-- <div class="box3-title">OPEN SURCE</div>
-                  <div class="box3-text">NO</div> -->
                   <div class="box3-text flex" @click="openWindow(projectInfo.defiLlama)">
-                    <img src="@/assets/img/ProtocolsDetails/DefiLlama.png">
-                    <span>DefiLlama</span>
+                    <img src="@/assets/img/ProtocolsDetails/DefiLlama.png" />
+                    <!-- <span>DefiLlama</span> -->
+                    <span v-if="projectInfo.coinGecko">{{ handleHttp(projectInfo.coinGecko) }}</span>
+                    <span v-else>-</span>
                   </div>
                 </div>
                 <div class="box-w">
                   <!-- <div class="box3-title">MULTI-SIG</div>
                   <div class="box3-text">YES</div> -->
                   <div class="box3-text flex" @click="openWindow(projectInfo.dappRadar)">
-                    <img src="@/assets/img/ProtocolsDetails/DappRadar.png">
-                    <span>DappRadar</span>
+                    <img src="@/assets/img/ProtocolsDetails/DappRadar.png" />
+                    <!-- <span>DappRadar</span> -->
+                    <span v-if="projectInfo.dappRadar">{{ handleHttp(projectInfo.dappRadar) }}</span>
+                    <span v-else>-</span>
                   </div>
                 </div>
               </div>
@@ -239,13 +236,13 @@
               <div class="flext">
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.twitter)">
-                    <img src="@/assets/img/ProtocolsDetails/Twitter.png">
+                    <img src="@/assets/img/ProtocolsDetails/Twitter.png" />
                     <span>{{ handleHttp(projectInfo.twitter) }}</span>
                   </div>
                 </div>
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.discord)">
-                    <img src="@/assets/img/ProtocolsDetails/Discord.png">
+                    <img src="@/assets/img/ProtocolsDetails/Discord.png" />
                     <span>{{ handleHttp(projectInfo.discord) }}</span>
                   </div>
                 </div>
@@ -254,7 +251,7 @@
               <div class="flext">
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.telegram)">
-                    <img src="@/assets/img/ProtocolsDetails/Telegram.png" >
+                    <img src="@/assets/img/ProtocolsDetails/Telegram.png" />
                     <span>{{ handleHttp(projectInfo.telegram) }}</span>
                   </div>
                 </div>
@@ -263,10 +260,7 @@
                   <div class="box3-text">YES</div>
                 </div> -->
               </div>
-
-
             </div>
-
           </div>
         </div>
 
@@ -277,7 +271,7 @@
 
       <div class="ProtocolsDetails-footer" v-if="role">
         <template v-if="role == 2">
-          <div class="footer-text1">{{ $t('yield.yield96') }}</div>
+          <div class="footer-text1">{{ $t("yield.yield96") }}</div>
           <div class="footer-text2">{{ rewards }}</div>
           <div class="flex flex-jus-center">
             <!-- CLAIM -->
@@ -289,16 +283,16 @@
         <template v-else-if="role == 1">
           <div class="flex flex-jus-center">
             <!-- Allow -->
-            <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t('yield.yield103') }}</v-btn>
+            <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
             <!-- Refuse -->
-            <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t('yield.yield104') }}</v-btn>
+            <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
           </div>
         </template>
       </div>
     </div>
     <div class="ProtocolsDetailsPC" v-else>
       <div class="ProtocolsDetailsPC-overLay"></div>
-      <div class="ProtocolsDetailsPC-overLayPatch  ProtocolsDetailsPC-layout" >
+      <div class="ProtocolsDetailsPC-overLayPatch ProtocolsDetailsPC-layout">
         <!-- Projects -->
         <div class="ProtocolsDetailsPC-title">
           {{ $t("yield.yield7") }}
@@ -369,7 +363,7 @@
               <div class="">
                 <div class="flex">
                   <div class="box2-circle"></div>
-                  <div class="">{{ $t('yield.yield41') }}</div>
+                  <div class="">{{ $t("yield.yield41") }}</div>
                 </div>
                 <div class="box2-number">${{ getKMBUnit(overViewData.tvl_usd, 2) }}</div>
               </div>
@@ -377,7 +371,7 @@
               <div class="">
                 <div class="flex">
                   <div class="box2-circle"></div>
-                  <div class="">{{ $t('yield.yield42') }}</div>
+                  <div class="">{{ $t("yield.yield42") }}</div>
                 </div>
                 <div class="box2-number">{{ overViewData.tvl_usd_change }}</div>
               </div>
@@ -385,7 +379,7 @@
               <div class="">
                 <div class="flex">
                   <div class="box2-circle"></div>
-                  <div class="">{{ $t('yield.yield54') }}</div>
+                  <div class="">{{ $t("yield.yield54") }}</div>
                 </div>
                 <div class="box2-number">{{ getKMBUnit(overViewData.agg_rewards) }}</div>
               </div>
@@ -402,7 +396,7 @@
                 <div class="flext">
                   <div class="box3-left">
                     <div>
-                      <div class="box3-title">{{ $t('yield.yield143') }}</div>
+                      <div class="box3-title">{{ $t("yield.yield143") }}</div>
                       <div class="box3-text">
                         <span v-if="projectInfo.otherInfo.name === null">-</span>
                         <template v-else>
@@ -498,9 +492,9 @@
                   <div class="box3-center">
                     <div>
                       <div class="box3-title">Auditing report</div>
-                      <div class="box3-text flex" style="gap:10px">
+                      <div class="box3-text flex" style="gap: 10px">
                         <template v-if="projectInfo.otherInfo.audit_report.length > 0">
-                          <span class="curPoint" @click="openWindow(url)" v-for="(url,index) in projectInfo.otherInfo.audit_report" :key="index">report{{ index+1 }}</span>
+                          <span class="curPoint" @click="openWindow(url)" v-for="(url, index) in projectInfo.otherInfo.audit_report" :key="index">report{{ index + 1 }}</span>
                         </template>
                         <span v-else>-</span>
                       </div>
@@ -522,21 +516,28 @@
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.cmc)">
                     <img src="@/assets/img/ProtocolsDetails/CoinMarketCap.png" class="box4-img" />
-                    <span>CoinMarketCap</span>
+                    <span v-if="projectInfo.cmc">{{ handleHttp(projectInfo.cmc) }}</span>
+                    <span v-else>-</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.coinGecko)">
                     <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" class="box4-img" />
-                    <span>CoinGecko</span>
+                    <!-- <span>CoinGecko</span> -->
+                    <span v-if="projectInfo.coinGecko">{{ handleHttp(projectInfo.coinGecko) }}</span>
+                    <span v-else>-</span>
                   </div>
                 </div>
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.defiLlama)">
                     <img src="@/assets/img/ProtocolsDetails/DefiLlama.png" class="box4-img" />
-                    <span>DefiLlama</span>
+                    <!-- <span>DefiLlama</span> -->
+                    <span v-if="projectInfo.defiLlama">{{ handleHttp(projectInfo.defiLlama) }}</span>
+                    <span v-else>-</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.dappRadar)">
                     <img src="@/assets/img/ProtocolsDetails/DappRadar.png" class="box4-img" />
-                    <span>DappRadar</span>
+                    <!-- <span>DappRadar</span> -->
+                    <span v-if="projectInfo.dappRadar">{{ handleHttp(projectInfo.dappRadar) }}</span>
+                    <span v-else>-</span>
                   </div>
                 </div>
               </div>
@@ -544,17 +545,17 @@
               <div class="box4-right flex-1 flext flex-column flex-jus-between" style="height: 103px">
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.twitter)">
-                    <img src="@/assets/img/ProtocolsDetails/Twitter.png" class="box4-img">
+                    <img src="@/assets/img/ProtocolsDetails/Twitter.png" class="box4-img" />
                     <span>{{ handleHttp(projectInfo.twitter) }}</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.discord)">
-                    <img src="@/assets/img/ProtocolsDetails/Discord.png" class="box4-img">
+                    <img src="@/assets/img/ProtocolsDetails/Discord.png" class="box4-img" />
                     <span>{{ handleHttp(projectInfo.discord) }}</span>
                   </div>
                 </div>
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.telegram)">
-                    <img src="@/assets/img/ProtocolsDetails/Telegram.png" class="box4-img">
+                    <img src="@/assets/img/ProtocolsDetails/Telegram.png" class="box4-img" />
                     <span>{{ handleHttp(projectInfo.telegram) }}</span>
                   </div>
                   <div class="flex-1 box4-w flex"></div>
@@ -566,7 +567,6 @@
           <div class="ProtocolsDetailsPC-footer" v-if="role">
             <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-between" v-if="role == 2">
               <div class="flext">
-                
                 <div>
                   <!-- Rewards Available -->
                   <div class="footer-text1">{{ $t("yield.yield96") }}</div>
@@ -575,14 +575,13 @@
                   </div>
                 </div>
 
-                <div style="margin-left:80px">
+                <div style="margin-left: 80px">
                   <!-- State -->
                   <div class="footer-text1">{{ $t("yield.yield88") }}</div>
                   <div class="footer-text2 flex">
                     <div>{{ projectInfo.status }}</div>
                   </div>
                 </div>
-                
               </div>
 
               <div class="flex">
@@ -596,9 +595,9 @@
             <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end" v-else-if="role == 1">
               <div class="flex">
                 <!-- Allow -->
-                <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t('yield.yield103') }}</v-btn>
+                <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
                 <!-- Refuse -->
-                <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t('yield.yield104') }}</v-btn>
+                <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
               </div>
             </div>
           </div>
@@ -631,7 +630,7 @@
 <script>
 import DApp from "@/utils/wallet/index"
 import axios from "axios"
-import chart1 from './echarts/chart1.js'
+import chart1 from "./echarts/chart1.js"
 import { mapState } from "vuex"
 import { protocols, lines } from "@/service"
 export default {
@@ -647,16 +646,15 @@ export default {
       projectInfo: null,
       claimLoading: false,
 
-
       adminAccountList: ["d.a.yield", "admin.yield"],
 
       overViewData: {
         tvl_eos: 0,
         agg_protocol_count: 0,
         tvl_usd: 0,
-        tvl_usd_change: '0.00'
+        tvl_usd_change: "0.00",
       },
-      rewards: '-'
+      rewards: "-",
     }
   },
   components: {},
@@ -679,7 +677,6 @@ export default {
     if (!this.$route.query?.name) this.$router.push("/")
     this.projectName = decodeURIComponent(this.$route.query.name)
 
-    
     this.getAdminAccount()
     this.getInfo()
     this.getRewards()
@@ -688,30 +685,29 @@ export default {
   beforeDestroy() {},
   methods: {
     gotoEdit() {
-      this.$router.push('/join/edit?name=' + encodeURIComponent(this.projectName))
+      this.$router.push("/join/edit?name=" + encodeURIComponent(this.projectName))
     },
     async getRewards() {
       if (this.role !== 2) return
       const params = {
-        code: 'd.e.yield',
-        scope: 'd.e.yield',
-        table: 'protocols',
+        code: "d.e.yield",
+        scope: "d.e.yield",
+        table: "protocols",
         json: true,
         limit: -1,
         lower_bound: this.projectName,
         upper_bound: this.projectName,
-        boundFormat: true
+        boundFormat: true,
       }
       let res = await DApp.getTableRows(params)
       if (res.length > 0) {
         this.rewards = res[0].balance.quantity
       }
-      
     },
     async initView1Data() {
       try {
         let res = await lines.protocolsDetails({
-          name: this.projectName
+          name: this.projectName,
         })
         if (res.data.length > 0) {
           let item = JSON.parse(JSON.stringify(res.data[res.data.length - 1]))
@@ -719,16 +715,15 @@ export default {
 
           item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
           item.tvl_eos = this.toFixed(item.tvl_eos, 2)
-          if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${ item.tvl_usd_change }%`
-          else item.tvl_usd_change = `${ item.tvl_usd_change }%`
+          if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
+          else item.tvl_usd_change = `${item.tvl_usd_change}%`
           this.overViewData = item
 
           chart1.init({
             self: this,
-            data: res.data
+            data: res.data,
           })
         }
-
       } catch (error) {
         console.log(error)
       }
@@ -752,7 +747,6 @@ export default {
             else if (i.key == "coingecko") item.coingecko = i.value
             else if (i.key == "dappradar") item.dappradar = i.value
             else if (i.key == "defillama") item.defillama = i.value
-
             else if (i.key == "discord") item.discord = i.value
             else if (i.key == "telegram") item.telegram = i.value
             else if (i.key == "twitter") item.twitter = i.value
@@ -761,12 +755,11 @@ export default {
             else if (i.key == "token.symcode") item.tokenSymcode = i.value
           })
           item.otherInfo = {}
-          item.otherInfo.name = ''
+          item.otherInfo.name = ""
           item.otherInfo.multi_sig = null
           item.otherInfo.open_source = null
-          item.otherInfo.main_contract = ''
+          item.otherInfo.main_contract = ""
           item.otherInfo.audit_report = []
-
 
           this.projectInfo = item
           if (item.recover) this.getRecoverInfo()
@@ -787,7 +780,7 @@ export default {
     },
     getSupplyInfo() {
       axios({
-        url: `https://www.api.bloks.io/tokens/${ this.projectInfo.tokenCode }-eos-${ this.projectInfo.tokenSymcode }`,
+        url: `https://www.api.bloks.io/tokens/${this.projectInfo.tokenCode}-eos-${this.projectInfo.tokenSymcode}`,
         // url: `https://www.api.bloks.io/tokens/${ 'box' }-eos-${ 'token.defi' }`,
         method: "get",
         headers: {
@@ -796,7 +789,6 @@ export default {
       }).then((res) => {
         if (!res?.data?.length) return
         let info = res?.data[0]
-
 
         this.projectInfo.marketcap = this.getKMBUnit(this.toFixed(info.price.marketcap_usd, 2))
         this.projectInfo.circulating = this.formatNumber(this.toFixed(info.supply.circulating, 2))
@@ -1110,7 +1102,7 @@ export default {
     .data-view {
       width: 100%;
       height: 143px;
-      background-color: #F9FAFB;
+      background-color: #f9fafb;
       padding: 20px 40px;
       border-radius: 10px;
       .view-title {
@@ -1126,8 +1118,6 @@ export default {
       }
     }
   }
-
-  
 
   .ProtocolsDetails-overview {
     .overview-title {
@@ -1357,7 +1347,7 @@ export default {
         width: 9px;
         height: 9px;
         border-radius: 50%;
-        background-color: #1C1DFF;
+        background-color: #1c1dff;
         margin-right: 10px;
       }
       .box2-number {
