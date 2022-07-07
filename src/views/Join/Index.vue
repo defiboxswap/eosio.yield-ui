@@ -444,8 +444,8 @@ export default {
       },
       formRules: {
         website: { required: true, gotoId: "basic" },
-        logo: { required: true, gotoId: "basic" },
-        description: { required: true, gotoId: "basic" },
+        // logo: { required: true, gotoId: "basic" },
+        // description: { required: true, gotoId: "basic" },
         name: { required: true, gotoId: "basic" },
       },
       formWrongTips: {

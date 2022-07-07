@@ -179,7 +179,7 @@ export default {
 
 <style scoped>
 .vuetifyToastSnackbar {
-  background: #000 !important;
-  color: #fff !important;
+  background: #fff !important;
+  color: #000 !important;
 }
 </style>
