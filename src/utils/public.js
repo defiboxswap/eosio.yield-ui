@@ -454,6 +454,6 @@ export function handleCategory(category) {
   if (category.toLowerCase() == "dexes") return this.$t("yield.yield47")
   if (category.toLowerCase() == "lending") return this.$t("yield.yield48")
   if (category.toLowerCase() == "liquid staking") return this.$t("yield.yield49")
-  // if(category.toLowerCase() == "tvl rankings") return this.$t('yield.yield50')
+  if(category.toLowerCase() == "yield") return this.$t('yield.yield149')
   return category
 }

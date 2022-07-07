@@ -122,7 +122,7 @@
 
         <div class="Join-basicInfo">
           <!-- *Analytics -->
-          <div class="basicInfo-title">{{ $t('yield.yield130') }}</div>
+          <div class="basicInfo-title">{{ $t("yield.yield130") }}</div>
 
           <div class="basicInfo-box">
             <!-- CoinMarketCap -->
@@ -150,27 +150,27 @@
 
         <div class="Join-basicInfo">
           <!-- Socials -->
-          <div class="basicInfo-title">{{ $t('yield.yield129') }}</div>
+          <div class="basicInfo-title">{{ $t("yield.yield129") }}</div>
 
           <div class="basicInfo-box">
             <!-- Twitter -->
             <div class="basicInfo-subtitle">Twitter</div>
-            <input type="text" class="basicInfo-input1" v-model="form.twitter" :placeholder="$t('yield.yield140')" />
+            <input type="text" class="basicInfo-input1" v-model="form.twitter" :placeholder="$t('yield.yield158')" />
           </div>
           <div class="basicInfo-box">
             <!-- Discord -->
             <div class="basicInfo-subtitle">Discord</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.discord" :placeholder="$t('yield.yield140')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.discord" :placeholder="$t('yield.yield159')" />
           </div>
           <div class="basicInfo-box">
             <!-- Telegram -->
             <div class="basicInfo-subtitle">Telegram</div>
-            <input type="text" class="basicInfo-input1" v-model="form.telegram" :placeholder="$t('yield.yield140')" />
+            <input type="text" class="basicInfo-input1" v-model="form.telegram" :placeholder="$t('yield.yield157')" />
           </div>
           <div class="basicInfo-box">
             <!-- Github -->
             <div class="basicInfo-subtitle">Github</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.github" :placeholder="$t('yield.yield140')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.github" :placeholder="$t('yield.yield160')" />
           </div>
         </div>
       </div>
@@ -314,7 +314,7 @@
 
         <div class="JoinPC-basicInfo">
           <!-- *Analytics -->
-          <div class="basicInfo-title">{{ $t('yield.yield130') }}</div>
+          <div class="basicInfo-title">{{ $t("yield.yield130") }}</div>
 
           <div class="flext marb-25">
             <div class="basicInfo-left">
@@ -345,18 +345,18 @@
 
         <div class="JoinPC-basicInfo">
           <!-- Socials -->
-          <div class="basicInfo-title">{{ $t('yield.yield129') }}</div>
+          <div class="basicInfo-title">{{ $t("yield.yield129") }}</div>
 
           <div class="flext marb-25">
             <div class="basicInfo-left">
               <!-- Twitter -->
               <div class="basicInfo-subtitle">Twitter</div>
-              <input type="text" class="basicInfo-input1" v-model="form.twitter" :placeholder="$t('yield.yield140')" />
+              <input type="text" class="basicInfo-input1" v-model="form.twitter" :placeholder="$t('yield.yield158')" />
             </div>
             <div>
               <!-- Discord -->
               <div class="basicInfo-subtitle">Discord</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.discord" :placeholder="$t('yield.yield140')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.discord" :placeholder="$t('yield.yield159')" />
             </div>
           </div>
 
@@ -364,12 +364,12 @@
             <div class="basicInfo-left">
               <!-- Telegram -->
               <div class="basicInfo-subtitle">Telegram</div>
-              <input type="text" class="basicInfo-input1" v-model="form.telegram" :placeholder="$t('yield.yield140')" />
+              <input type="text" class="basicInfo-input1" v-model="form.telegram" :placeholder="$t('yield.yield157')" />
             </div>
             <div>
               <!-- Github -->
               <div class="basicInfo-subtitle">Github</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.github" :placeholder="$t('yield.yield140')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.github" :placeholder="$t('yield.yield160')" />
             </div>
           </div>
         </div>
@@ -396,8 +396,8 @@ export default {
 
       tipsShow: false,
       categoryItem: this.$t("yield.yield46"),
-      categoryList: [this.$t("yield.yield46"), this.$t("yield.yield47"), this.$t("yield.yield48"), this.$t("yield.yield49")],
-      categoryDesList: ["yield.yield144", "yield.yield145", "yield.yield146", "yield.yield147"],
+      categoryList: [this.$t("yield.yield46"), this.$t("yield.yield47"), this.$t("yield.yield48"), this.$t("yield.yield49"), this.$t("yield.yield149")],
+      categoryDesList: ["yield.yield144", "yield.yield145", "yield.yield146", "yield.yield147", "yield.yield148"],
 
       btnLoading: false,
       uploadLoading: false,
