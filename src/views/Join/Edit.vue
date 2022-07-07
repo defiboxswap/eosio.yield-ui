@@ -625,7 +625,7 @@ export default {
           data: {
             protocol: formName,
             metadata,
-            category: this.categoryItem,
+            category: this.handleCategoryTransform(this.categoryItem),
           },
         })
       } else {

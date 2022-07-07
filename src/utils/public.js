@@ -454,6 +454,19 @@ export function handleCategory(category) {
   if (category.toLowerCase() == "dexes") return this.$t("yield.yield47")
   if (category.toLowerCase() == "lending") return this.$t("yield.yield48")
   if (category.toLowerCase() == "liquid staking") return this.$t("yield.yield49")
+  if (category.toLowerCase() == "staking") return this.$t("yield.yield49")
   if(category.toLowerCase() == "yield") return this.$t('yield.yield149')
+  return category
+}
+
+// handleCategoryTransform
+export function handleCategoryTransform(category) {
+  if (!category) return ""
+  if (category.toLowerCase() == "cdp") return 'cdp'
+  if (category.toLowerCase() == "dexes") return 'dexes'
+  if (category.toLowerCase() == "lending") return 'lending'
+  if (category.toLowerCase() == "liquid staking") return 'staking'
+  if (category.toLowerCase() == "staking") return 'staking'
+  if(category.toLowerCase() == "yield") return 'yield'
   return category
 }
