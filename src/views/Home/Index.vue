@@ -413,6 +413,7 @@ export default {
         color: #ffffff;
         border-radius: 24px;
         background-color: #1c1dff;
+        text-transform: none !important;
       }
     }
   }
@@ -679,6 +680,7 @@ export default {
         color: #ffffff;
         background-color: #1c1dff;
         border-radius: 10px;
+        text-transform: none !important;
       }
     }
   }
