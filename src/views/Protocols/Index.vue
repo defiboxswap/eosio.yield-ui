@@ -42,7 +42,7 @@
               <div class="flext">
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield53") }}</div>
-                  <div class="data-number">{{ getKMBUnit(item.tvl_usd)}}</div>
+                  <div class="data-number">${{ getKMBUnit(item.tvl_usd) }}</div>
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield42") }}</div>
@@ -112,7 +112,7 @@
           </div>
           <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">MORE</div>
         </template>
-        <div  v-else-if="!loading">
+        <div v-else-if="!loading">
           <BaseNoData></BaseNoData>
         </div>
       </div>
@@ -193,7 +193,7 @@
                   </div>
                 </div>
 
-                <div class="box-2">{{ getKMBUnit(item.tvl_usd) }}</div>
+                <div class="box-2">${{ getKMBUnit(item.tvl_usd) }}</div>
                 <div class="box-3">{{ item.tvl_usd_change }}</div>
                 <div class="box-4">{{ getKMBUnit(item.agg_rewards) }}</div>
                 <!-- <div class="box-5">$123.43M</div> -->
@@ -279,7 +279,7 @@ export default {
       isMore: true,
       protocolsList: [],
       searchTimer: null,
-      loading: false
+      loading: false,
     }
   },
   props: {},
@@ -340,8 +340,8 @@ export default {
             if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
 
             item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
-            if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${ item.tvl_usd_change }%`
-            else item.tvl_usd_change = `${ item.tvl_usd_change }%`
+            if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
+            else item.tvl_usd_change = `${item.tvl_usd_change}%`
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]
@@ -729,7 +729,7 @@ export default {
         padding: 21px 0;
         border-bottom: 1px solid #efefef;
         text-align: center;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 500;
         color: #000000;
         cursor: pointer;
@@ -777,6 +777,24 @@ export default {
       font-weight: bold;
       cursor: pointer;
     }
+  }
+}
+input {
+  ::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #999;
+  }
+  :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #999;
+  }
+  ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #999;
+  }
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #999;
   }
 }
 </style>

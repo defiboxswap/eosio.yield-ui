@@ -62,21 +62,21 @@ export default {
 }
 .BaseFooterPC {
   background-color: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   .BaseFooterPC-Layout {
     width: 1200px;
     margin: 0 auto;
     padding-top: 56px;
     padding-bottom: 64px;
-    height: 205px;
+    height: 160px;
   }
   .BaseFooterPC-logo {
-    width: 125px;
+    width: 110px;
     display: block;
   }
   .BaseFooterPC-tips {
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
     color: #FFFFFF;
   }

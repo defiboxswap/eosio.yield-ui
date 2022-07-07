@@ -117,7 +117,7 @@
 
               <div class="flex">
                 <div class="box-w">
-                  <div class="box3-title">Marketcap</div>
+                  <div class="box3-title">{{ $t('yield.yield55') }}</div>
                   <div class="box3-text">
                     <span v-if="projectInfo.marketcap">{{ projectInfo.marketcap }}</span>
                     <span v-else>-</span>
@@ -422,7 +422,7 @@
                   </div>
                   <div class="box3-right flext flex-jus-between">
                     <div>
-                      <div class="box3-title">Marketcap</div>
+                      <div class="box3-title">{{ $t('yield.yield55') }}</div>
                       <div class="box3-text">
                         <span v-if="projectInfo.marketcap">${{ projectInfo.marketcap }}</span>
                         <span v-else>-</span>

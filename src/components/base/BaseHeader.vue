@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="BaseHeader flex flex-align-center flex-jus-between" v-if="isMobile">
-      <img src="@/assets/img/BaseHeader/logo.png" class="BaseHeader-logo" />
+      <img src="@/assets/img/BaseHeader/logo.png" class="BaseHeader-logo" @click="$router.push('/')"/>
       <!-- <img src="@/assets/img/svg/caidan.svg" class="BaseHeader-listIcon" /> -->
       <v-menu nudge-width="0" nudge-top="-8" v-model="accountVisible" offset-y  rounded="lg" >
         <template v-slot:activator="{ on, attrs }">
