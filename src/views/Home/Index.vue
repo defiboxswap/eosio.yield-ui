@@ -643,7 +643,7 @@ export default {
   }
   .HomePC-part1 {
     width: 100%;
-    height: 606px;
+    height: 700px;
     padding-top: 119px;
     position: relative;
     .part1-bg {

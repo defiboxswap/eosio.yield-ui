@@ -1,8 +1,8 @@
 import axios from "axios"
 import store from "@/store"
 
-// const baseURL = process.env.NODE_ENV === "development" ? "" : "https://api.defibox.io/yield"
-const baseURL = "https://api.defibox.io/yield"
+const baseURL = process.env.NODE_ENV === "development" ? "" : "https://api.defibox.io/yield"
+// const baseURL = "https://api.defibox.io/yield"
 
 function getHeaders() {
   return {

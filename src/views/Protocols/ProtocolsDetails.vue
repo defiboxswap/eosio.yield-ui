@@ -20,7 +20,7 @@
                 <div class="flex-1">
                   <div class="box-name">{{ projectInfo.name }}</div>
                   <div class="flex flex-wrap">
-                    <div class="box-label" style="text-align:center">{{ projectInfo.category }}</div>
+                    <div class="box-label" style="text-align:center">{{ handleCategory(projectInfo.category) }}</div>
                     <!-- <div class="box-label">Corss-chain</div> -->
                   </div>
                 </div>
@@ -316,7 +316,7 @@
                   <div>
                     <div class="box1-text1">{{ projectInfo.name }}</div>
                     <div class="flex flex-wrap">
-                      <div class="box1-label">{{ projectInfo.category }}</div>
+                      <div class="box1-label">{{ handleCategory(projectInfo.category) }}</div>
                       <!-- <div class="box1-label">Corss-chain</div> -->
                     </div>
                   </div>

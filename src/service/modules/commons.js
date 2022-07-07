@@ -15,36 +15,8 @@ function getHeaders() {
   }
 }
 
-// getFreeCpuWallet
-export function getFreeCpuWallet(channel) {
-  return new Promise((resolve, reject) => {
-    axios({
-      baseURL,
-      method: "post",
-      url: `/defibox/commons/getFreeCpuWallet`,
-      headers: getHeaders(),
-    })
-      .then((res) => {
-        // setFreeCpuWhiteList
-        const arr = res.data.freeCpuWallet.split(",")
-        store.dispatch("setFreeCpuWhiteList", arr)
-        const channelData = channel ? channel : localStorage.getItem("channel")
-        store.dispatch("setIsFreeCpuWhite", channelData)
-
-        let result = Object.assign(res.data, {
-          isFreeCpuWhite: store.state.whiteConfig.isFreeCpuWhite,
-        })
-        resolve({ status: !result.code, result })
-      })
-      .catch((err) => {
-        reject(err)
-      })
-  })
-}
-
 // getNodeList
 export function getNodeList() {
-  // console.log('baseURL is ', baseURL, process.env);
   return new Promise((resolve, reject) => {
     axios({
       baseURL,
@@ -63,7 +35,7 @@ export function getNodeList() {
   })
 }
 
-// 获取通用参数
+// getCommonParam
 export function getCommonParam(params) {
   return new Promise((resolve, reject) => {
     axios({
