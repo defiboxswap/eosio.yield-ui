@@ -809,11 +809,14 @@ export default {
       }).then((res) => {
         if (!res?.data?.data) return
         let info = res?.data?.data
+        console.log('info is ', info);
+        
         this.projectInfo.otherInfo.name = info.name
         this.projectInfo.otherInfo.main_contract = info.main_contract
         this.projectInfo.otherInfo.multi_sig = info.multi_sig
         this.projectInfo.otherInfo.open_source = info.open_source
-        this.projectInfo.otherInfo.audit_report = info.audit_report
+        if (info.audit_report) this.projectInfo.otherInfo.audit_report = info.audit_report
+        else this.projectInfo.otherInfo.audit_report = []
         this.$forceUpdate()
       })
     },
