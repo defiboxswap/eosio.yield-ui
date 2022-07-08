@@ -275,7 +275,7 @@
           <div class="footer-text2">{{ rewards }}</div>
           <div class="flex flex-jus-center">
             <!-- CLAIM -->
-            <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim">{{ $t("yield.yield97") }}</v-btn>
+            <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active'">{{ $t("yield.yield97") }}</v-btn>
             <!-- EDIT -->
             <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield98") }}</v-btn>
           </div>
@@ -586,7 +586,7 @@
 
               <div class="flex">
                 <!-- CLAIM -->
-                <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim">{{ $t("yield.yield97") }}</v-btn>
+                <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active'">{{ $t("yield.yield97") }}</v-btn>
                 <!-- EDIT -->
                 <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield98") }}</v-btn>
               </div>
@@ -830,7 +830,7 @@ export default {
         name: "setcategory",
         authorization: [
           {
-            actor: "d.a.yield", // 转账者
+            actor: "d.a.yield", 
             permission: permission || "active",
           },
         ],
@@ -871,8 +871,12 @@ export default {
         name: "approve",
         authorization: [
           {
-            actor: "d.a.yield", // 转账者
+            actor: this.projectName, 
             permission: permission || "active",
+          },
+          {
+            actor: "d.a.yield", 
+            permission: "active",
           },
         ],
         data: {
@@ -912,8 +916,12 @@ export default {
         name: "deny",
         authorization: [
           {
-            actor: "d.a.yield", // 转账者
+            actor: this.projectName, 
             permission: permission || "active",
+          },
+          {
+            actor: "d.a.yield",
+            permission: "active",
           },
         ],
         data: {
@@ -950,7 +958,7 @@ export default {
         name: "claim",
         authorization: [
           {
-            actor: formName, // 转账者
+            actor: formName, 
             permission: permission || "active",
           },
         ],

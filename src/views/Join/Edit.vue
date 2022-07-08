@@ -618,7 +618,7 @@ export default {
           name: "regprotocol",
           authorization: [
             {
-              actor: formName, // 转账者
+              actor: formName, 
               permission: permission || "active",
             },
           ],
@@ -634,7 +634,7 @@ export default {
           name: "setmetadata",
           authorization: [
             {
-              actor: formName, // 转账者
+              actor: formName, 
               permission: permission || "active",
             },
           ],
