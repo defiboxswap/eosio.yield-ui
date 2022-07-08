@@ -831,6 +831,10 @@ export default {
         authorization: [
           {
             actor: "d.a.yield", 
+            permission: "active",
+          },
+          {
+            actor: formName, 
             permission: permission || "active",
           },
         ],
@@ -871,13 +875,13 @@ export default {
         name: "approve",
         authorization: [
           {
+            actor: "d.a.yield", 
+            permission: "active",
+          },
+          {
             actor: formName, 
             permission: permission || "active",
           },
-          // {
-          //   actor: "d.a.yield", 
-          //   permission: "active",
-          // },
         ],
         data: {
           // "protocol":"swap.defi",
@@ -918,6 +922,10 @@ export default {
         account: "d.e.yield",
         name: "deny",
         authorization: [
+          {
+            actor: "d.a.yield", 
+            permission: "active",
+          },
           {
             actor: formName, 
             permission: permission || "active",
