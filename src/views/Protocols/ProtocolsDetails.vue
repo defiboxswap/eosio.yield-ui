@@ -753,6 +753,7 @@ export default {
             else if (i.key == "github") item.github = i.value
             else if (i.key == "token.code") item.tokenCode = i.value
             else if (i.key == "token.symcode") item.tokenSymcode = i.value
+            else if (i.key == "name") item.name = i.value
           })
           item.otherInfo = {}
           item.otherInfo.name = ""

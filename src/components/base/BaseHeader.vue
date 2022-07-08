@@ -1,29 +1,28 @@
 <template>
   <div>
     <div class="BaseHeader flex flex-align-center flex-jus-between" v-if="isMobile">
-      <img src="@/assets/img/BaseHeader/logo.png" class="BaseHeader-logo" @click="$router.push('/')"/>
+      <img src="@/assets/img/BaseHeader/logo.png" class="BaseHeader-logo" @click="$router.push('/')" />
       <!-- <img src="@/assets/img/svg/caidan.svg" class="BaseHeader-listIcon" /> -->
-      <v-menu nudge-width="0" nudge-top="-8" v-model="accountVisible" offset-y  rounded="lg" >
+      <v-menu nudge-width="0" nudge-top="-8" v-model="accountVisible" offset-y rounded="lg">
         <template v-slot:activator="{ on, attrs }">
           <div v-bind="attrs" v-on="on">
-            <div class="flexc" style="width: 120px;margin-right: -50px;">
-              <img src="@/assets/img/svg/more-b.svg" style="width: 20px;" class="BaseHeader-listIcon">
+            <div class="flexc" style="width: 120px; margin-right: -50px">
+              <img src="@/assets/img/svg/more-b.svg" style="width: 20px" class="BaseHeader-listIcon" />
               <!-- <img src="@/assets/img/svg/more-b.svg" style="width: 25px;" v-if="!$route.meta.HeaderDark" class="BaseHeader-listIcon"> -->
               <!-- <img src="@/assets/img/svg/more-w.svg" style="width: 25px;" v-else class="BaseHeader-listIcon"> -->
             </div>
           </div>
         </template>
         <div class="accountMenu">
-
           <div class="accountMenu-item flext flex-align-center flex-jus-center" v-for="(item, index) in tabList" :key="index" @click.prevent="gotoRouter(item)">{{ $t(item.name) }}</div>
 
           <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column" @click="languageVisible = true">
             <div class="flexc">
-              <span>{{ $t('yield.yield9') }}</span>
+              <span>{{ $t("yield.yield9") }}</span>
             </div>
           </div>
           <!-- Node -->
-          <div class="accountMenu-item flext flex-align-center flex-jus-center" @click="nodeVisible = true">{{ $t('yield.yield133') }}</div>
+          <div class="accountMenu-item flext flex-align-center flex-jus-center" @click="nodeVisible = true">{{ $t("yield.yield133") }}</div>
 
           <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column" v-if="$store.state.app.accountInfo.account">
             <div class="flexc">
@@ -33,14 +32,12 @@
 
           <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column">
             <div class="flexc">
-              <span v-if="$store.state.app.accountInfo.account" @click="handleLoginOut">{{ $t('yield.yield59') }}</span>
-              <span v-else  @click="handleWalletLogin" >{{ $t('yield.yield10') }}</span>
+              <span v-if="$store.state.app.accountInfo.account" @click="handleLoginOut">{{ $t("yield.yield59") }}</span>
+              <span v-else @click="handleWalletLogin">{{ $t("yield.yield10") }}</span>
             </div>
           </div>
-
         </div>
       </v-menu>
-
     </div>
     <div class="BaseHeaderPCFixed BaseHeaderPC flex flex-align-center" :class="{ BaseHeaderPCDark: $route.meta.HeaderDark }" v-else-if="!isMobile">
       <div class="BaseHeaderPC-Layout flex flex-align-center flex-jus-between">
@@ -51,26 +48,25 @@
           <a class="BaseHeaderPC-tab" :href="item.url" :class="{ 'BaseHeaderPC-tabActive': item.routerName == $route.name }" v-for="(item, index) in tabList" :key="index" @click.prevent="gotoRouter(item)">{{ $t(item.name) }}</a>
         </div>
 
-        <v-menu nudge-width="0" nudge-top="-8" v-model="accountVisible" offset-y  rounded="lg" >
+        <v-menu nudge-width="0" nudge-top="-8" v-model="accountVisible" offset-y rounded="lg">
           <template v-slot:activator="{ on, attrs }">
             <div v-bind="attrs" v-on="on">
-              <div style="width:120px;margin-right:-40px;" class="flex flex-jus-end">
-                <div class="flexc" style="padding-left: 20px;">
-                  <img src="@/assets/img/svg/more-b.svg" style="width: 20px;" v-if="!$route.meta.HeaderDark">
-                  <img src="@/assets/img/svg/more-w.svg" style="width: 20px;" v-else>
+              <div style="width: 120px; margin-right: -40px" class="flex flex-jus-end">
+                <div class="flexc" style="padding-left: 20px">
+                  <img src="@/assets/img/svg/more-b.svg" style="width: 20px" v-if="!$route.meta.HeaderDark" />
+                  <img src="@/assets/img/svg/more-w.svg" style="width: 20px" v-else />
                 </div>
               </div>
-              
             </div>
           </template>
           <div class="accountMenu">
             <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column" @click="languageVisible = true">
               <div class="flexc">
-                <span>{{ $t('yield.yield9') }}</span>
+                <span>{{ $t("yield.yield9") }}</span>
               </div>
             </div>
             <!-- Node -->
-            <div class="accountMenu-item flext flex-align-center flex-jus-center" @click="nodeVisible = true">{{ $t('yield.yield133') }}</div>
+            <div class="accountMenu-item flext flex-align-center flex-jus-center" @click="nodeVisible = true">{{ $t("yield.yield133") }}</div>
 
             <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column" v-if="$store.state.app.accountInfo.account">
               <div class="flexc">
@@ -80,14 +76,12 @@
 
             <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column">
               <div class="flexc">
-                <span v-if="$store.state.app.accountInfo.account" @click="handleLoginOut">{{ $t('yield.yield59') }}</span>
-                <span v-else  @click="handleWalletLogin" >{{ $t('yield.yield10') }}</span>
+                <span v-if="$store.state.app.accountInfo.account" @click="handleLoginOut">{{ $t("yield.yield59") }}</span>
+                <span v-else @click="handleWalletLogin">{{ $t("yield.yield10") }}</span>
               </div>
             </div>
-
           </div>
         </v-menu>
-
       </div>
     </div>
     <div class="BaseHeaderPC" v-if="!isMobile"></div>
@@ -99,10 +93,10 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex"
 import DApp from "@/utils/wallet/index"
 export default {
-  name: 'BaseHeader',
+  name: "BaseHeader",
   data() {
     return {
       accountVisible: false,
@@ -111,51 +105,51 @@ export default {
       tabList: [
         {
           // name: 'HOME',
-          name: 'yield.yield1',
-          routerName: 'Home',
-          url: '/'
+          name: "yield.yield1",
+          routerName: "Home",
+          url: "/",
         },
         {
           // name: 'OVERVIEW',
-          name: 'yield.yield2',
-          routerName: 'Overview',
-          url: '/Overview'
+          name: "yield.yield2",
+          routerName: "Overview",
+          url: "/Overview",
         },
         {
           // name: 'PROTOCOLS',
-          name: 'yield.yield3',
-          routerName: 'Protocols',
-          url: '/Protocols'
+          name: "yield.yield3",
+          routerName: "Protocols",
+          url: "/Protocols",
         },
         {
           // name: 'JOIN YIELD',
-          name: 'yield.yield4',
-          routerName: 'Join',
-          url: '/Join'
+          name: "yield.yield4",
+          routerName: "Join",
+          url: "/Join",
         },
         {
           // name: 'YIELD+ BLUEPAPER',
-          name: 'yield.yield5',
-          routerName: 'Bluepaper',
-          url: '/Bluepaper'
-        }
-      ]
+          name: "yield.yield5",
+          routerName: "Bluepaper",
+          url: "/Bluepaper",
+        },
+      ],
     }
   },
   components: {},
   props: {},
   watch: {},
   computed: mapState({
-    isMobile: state => state.app.isMobile
+    isMobile: (state) => state.app.isMobile,
   }),
   created() {},
   mounted() {},
   beforeDestroy() {},
   methods: {
     gotoRouter(item) {
-      if (item.routerName == 'Bluepaper') {
-        if (this.$store.state.app.language == 'zh-TW') window.open('https://eosnetwork.com/zh/blog/eos-yield-blue-paper/')
-        else window.open('https://eosnetwork.com/blog/eos-yield-blue-paper/')
+      if (item.routerName == "Bluepaper") {
+        if (this.$store.state.app.language == "zh-TW") window.open("https://eosnetwork.com/zh/blog/eos-yield-blue-paper/")
+        else window.open("https://eosnetwork.com/blog/eos-yield-blue-paper/")
         return
       }
       this.$router.push(item.url)
@@ -163,18 +157,18 @@ export default {
     // 退出账号
     async handleLoginOut() {
       await DApp.forgetIdentity()
-      this.$store.dispatch('setAccountInfo', {})
+      this.$store.dispatch("setAccountInfo", {})
       const route = this.$route
       if (route && route.meta && route.meta.isUser) {
-        this.$router.push('/')
+        this.$router.push("/")
         return
       }
       window.location.reload()
     },
     handleWalletLogin() {
-      this.$store.dispatch('setWalletLoginVisible', true)
-    }
-  }
+      this.$store.dispatch("setWalletLoginVisible", true)
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -236,7 +230,7 @@ export default {
     font-weight: 600;
     color: #1c1dff;
     &::after {
-      content: ' ';
+      content: " ";
       position: absolute;
       width: calc(100% + 10px);
       height: 2px;
@@ -259,7 +253,6 @@ export default {
   }
 }
 
-
 .accountMenu {
   width: 150px;
   background-color: #fff;
@@ -280,7 +273,7 @@ export default {
       border-bottom: none;
     }
   }
-  .h_accountMenu_item{
+  .h_accountMenu_item {
     height: 66px;
   }
 }

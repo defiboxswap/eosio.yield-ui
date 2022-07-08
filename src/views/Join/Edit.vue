@@ -98,7 +98,7 @@
             <!-- Project logo (300*300) -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
             <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
-              <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" style="width:100%;height:100%" />
+              <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" style="width: 100%; height: 100%" />
               <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
               <input type="file" accept="image/*" @change="fileImage" title="" />
             </div>
@@ -123,7 +123,7 @@
           <div class="basicInfo-box">
             <div class="basicInfo-subtitle">{{ $t("yield.yield75") }}</div>
             <div class="flex">
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.audits" :placeholder="$t('yield.yield140')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.audits" />
               <!-- <img src="@/assets/img/svg/add_circled.svg" class="basicInfo-addSvg" /> -->
             </div>
           </div>
@@ -276,7 +276,7 @@
               <!-- 	Token contract code -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield141") }}</div>
               <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenCode" @change="formWrongTips.tokenCode = false" />
-              
+
               <!-- <div class="basicInfo-wrongTips" v-if="formWrongTips.tokenSymcode">{{ $t('yield.yield120') }}</div> -->
             </div>
             <div>
@@ -292,8 +292,8 @@
               <!-- Project logo (300*300) -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
               <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
-                <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" style="width:100%;height:100%" />
-              <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
+                <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" style="width: 100%; height: 100%" />
+                <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
                 <input type="file" accept="image/*" @change="fileImage" title="" />
               </div>
               <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -326,7 +326,7 @@
               <!-- Security Audits of smart contracts  (URL) -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield75") }}</div>
               <div class="flex">
-                <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.audits" :placeholder="$t('yield.yield140')" />
+                <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.audits" />
                 <!-- <img src="@/assets/img/svg/add_circled.svg" class="basicInfo-addSvg" /> -->
               </div>
             </div>
@@ -471,7 +471,7 @@ export default {
       projectName: "",
       projectInfo: null,
       projectStatus: "active",
-      adminAccountList: []
+      adminAccountList: [],
     }
   },
   watch: {
@@ -621,7 +621,7 @@ export default {
           name: "regprotocol",
           authorization: [
             {
-              actor: formName, 
+              actor: formName,
               permission: permission || "active",
             },
           ],
@@ -637,7 +637,7 @@ export default {
           name: "setmetadata",
           authorization: [
             {
-              actor: formName, 
+              actor: formName,
               permission: permission || "active",
             },
           ],

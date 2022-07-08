@@ -8,11 +8,11 @@
               <!-- Yield+  Plan is on -->
               {{ $t("yield.yield6") }}
               <br />
-              <span class="text-2">{{ agg_protocol_count }}</span>
+              <span class="text-2" style="color:#1c1dff">{{ agg_protocol_count }}</span>
               <!-- Projects -->
               {{ $t("yield.yield7") }}
               <br />
-              <span class="text-2">{{ claimed }}</span>
+              <span class="text-2" style="color:#1c1dff">{{ claimed }}</span>
               <!-- Claimed -->
               EOS {{ $t("yield.yield8") }}
             </div>
@@ -36,6 +36,7 @@
 
       <div class="Home-part3">
         <div class="Home-Layout">
+          <div class="part3-title">{{ $t("yield.yield13") }}</div>
           <div class="part3-text" :key="infoTab">{{ $t("yield.yield14", { num: infoTab == "Launch" ? "625K" : "2.5M" }) }}</div>
 
           <div class="part3-buttonList flex flex-jus-around">
@@ -450,6 +451,14 @@ export default {
   .Home-part3 {
     .Home-Layout {
       padding: 76px 20px 90px 20px;
+    }
+    .part3-title {
+      text-align: center;
+      width: 100%;
+      font-size: 24px;
+      color: #000000;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
     .part3-text {
       width: 341px;

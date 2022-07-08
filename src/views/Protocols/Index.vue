@@ -335,6 +335,7 @@ export default {
 
             item.metadataInfo.forEach((i) => {
               if (i.key == "logo") item.logo = `https://ipfs.pink.gg/ipfs/${i.value}`
+              else if (i.key == "name") item.name = i.value
             })
             // item.tvl_usd_change = item.tvl_usd_change/(tvl_usd-tvl_usd_change)*100
             if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
@@ -591,6 +592,7 @@ export default {
           background-color: rgba(153, 153, 153, 0.15);
         }
         .audit-tips1 {
+          text-align: center;
           font-size: 14px;
           font-weight: 500;
           color: #000000;

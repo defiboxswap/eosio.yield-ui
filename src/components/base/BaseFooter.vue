@@ -3,14 +3,15 @@
 
     <div class="BaseFooter flex flex-align-center flex-jus-center" v-if="isMobile">
       <div class="flex flex-column flex-align-center">
-        <img class="BaseFooter-logo" src="@/assets/img/BaseFooter/logo.png" />
+        <!-- <img class="BaseFooter-logo" src="@/assets/img/BaseFooter/logo.png" /> -->
+        <img class="BaseFooter-logo" src="@/assets/img/BaseHeader/logoDark.png" />
         <div class="BaseFooter-tips">Copyright © 2020 Yield+ All rights reserved.</div>
       </div>
 
     </div>
     <div class="BaseFooterPC" v-else>
 
-      <div class="BaseFooterPC-Layout flex flex-align-end flex-jus-between">
+      <div class="BaseFooterPC-Layout flex flex-align-center flex-jus-between">
         <div>
           <!-- <img class="BaseFooterPC-logo" src="@/assets/img/BaseFooter/logo.png" /> -->
           <img class="BaseFooterPC-logo" src="@/assets/img/BaseHeader/logoDark.png" />
@@ -66,8 +67,8 @@ export default {
   .BaseFooterPC-Layout {
     width: 1200px;
     margin: 0 auto;
-    padding-top: 56px;
-    padding-bottom: 64px;
+    // padding-top: 56px;
+    // padding-bottom: 64px;
     height: 160px;
   }
   .BaseFooterPC-logo {
