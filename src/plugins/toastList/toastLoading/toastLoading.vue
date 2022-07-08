@@ -1,7 +1,9 @@
 <template>
   <v-dialog v-model="active" width="90%" max-width="400" :persistent="true">
     <div class="OperationStatus">
-      <div class="close" @click="close"><svg-icon icon="icon-huaban82" :size="10" /></div>
+      <div class="close" @click="close">
+        <v-icon small>mdi-window-close</v-icon>
+      </div>
       <div class="flexc loadingIcon"><v-progress-circular :size="65" :width="2" indeterminate /></div>
       <div class="des">{{ title }}</div>
     </div>

@@ -1,18 +1,20 @@
 <template>
   <v-dialog v-model="active" width="90%" max-width="400">
     <div class="SwapSuccess">
-      <div class="close" @click="close"><svg-icon icon="icon-huaban82" :size="10" /></div>
-
-      <div class="flexc successIcon"><svg-icon icon="icon-a-iconhuaban3" :size="65" /></div>
-      <!-- 兑换完成 -->
-      <!-- <div class="title" v-if="title">{{ $t('defiBox.db1269') }}</div> -->
-      <div class="title" v-if="title">{{ title }}</div>
-
-      <div class="trxBox flex pointer" @click="$openTxid(txId)" v-if="txId">
-        TrxID:
-        <div class="trxId">{{ txId }}</div>
+      <div class="close" @click="close">
+        <v-icon small>mdi-window-close</v-icon>
       </div>
 
+      <div class="flexc successIcon">
+        <img src="@/assets/img/svg/finsh.png" style="width:65px;height:65px">
+      </div>
+      
+      <div class="title" v-if="title">{{ title }}</div>
+
+      <!-- <div class="trxBox flex pointer" @click="$openTxid(txId)" v-if="txId">
+        TrxID:
+        <div class="trxId">{{ txId }}</div>
+      </div> -->
       <div class="SwapSuccess-text1" v-if="text1" style="margin-top: 10px;" v-html="text1"></div>
       <div class="SwapSuccess-text1" v-if="text2" v-html="text2"></div>
       <div class="SwapSuccess-text1" v-if="text3" v-html="text3"></div>

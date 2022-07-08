@@ -1,12 +1,15 @@
 <template>
   <v-dialog v-model="active" width="90%" max-width="400">
     <div class="OperationFailed">
-      <div class="close" @click="close"><svg-icon icon="icon-huaban82" :size="10" /></div>
-      <div class="flexc failIcon"><svg-icon icon="icon-a-iconhuaban2" :size="65" /></div>
+      <div class="close" @click="close">
+        <v-icon small>mdi-window-close</v-icon>
+      </div>
+      <div class="flexc failIcon">
+        <img src="@/assets/img/svg/finsh.png" style="width:65px;height:65px">
+      </div>
       <div class="title" v-if="title">{{ title }}</div>
       <div class="des" v-if="text">{{ text }}</div>
-      <!-- 返回 -->
-      <!-- <v-btn class="btn" color="primary" @click="handleClose">{{ $t('defiBox.db85') }}</v-btn> -->
+
     </div>
   </v-dialog>
 </template>

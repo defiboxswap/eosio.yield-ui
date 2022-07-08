@@ -138,7 +138,7 @@ export default {
           result.data.map((item) => {
             item.chainId = item.chain_id
             const url = new URL(item.url)
-            item.host = url.host
+            item.host = url.hostname
             item.port = url.port ? url.port : url.protocol === "https:" ? 443 : 80
             item.protocol = url.protocol.substr(0, url.protocol.length - 1)
             if (item.is_default == 1) eosNode = item
