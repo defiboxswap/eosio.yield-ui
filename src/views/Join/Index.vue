@@ -594,7 +594,6 @@ export default {
       let formData = new FormData()
       let files = event.target.files[0]
       formData.append("image", files, files.name)
-      console.log(files)
       this.uploadLoading = true
       axios({
         url: "https://ipfs-gateway.pink.gg/v1/upload",
@@ -603,7 +602,6 @@ export default {
         headers: { "Content-Type": "multipart/form-data" },
       })
         .then((res) => {
-          console.log(res, "---res---")
           this.uploadLoading = false
           if (res.data?.success) {
             this.form.logo = res.data.data
@@ -621,7 +619,6 @@ export default {
 
     gotoId(name) {
       if (!name) return
-      // console.log(this.$el.querySelector(name).offsetTop, "this.$el.querySelector")
       document.documentElement.scrollTop = this.$el.querySelector("#" + name).offsetTop - 60
     },
     handleWalletLogin() {
