@@ -45,12 +45,13 @@ export default {
   methods: {
     gotoDetails() {
       this.$router.push("/ProtocolsDetails?name=" + encodeURIComponent(this.projectName))
-      this.close()
+      this.active = false
     },
     show() {
       this.active = true
     },
     close() {
+      this.$router.push("/Protocols")
       this.active = false
     }
   }
