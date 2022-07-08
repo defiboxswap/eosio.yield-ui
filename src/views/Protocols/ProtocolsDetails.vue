@@ -609,7 +609,7 @@
       </div>
     </div>
 
-    <!-- BaseNode -->
+    <!-- Set Project Category -->
     <v-dialog width="90%" max-width="420px" v-model="categoryDialogVisible" :persistent="true">
       <div class="dialogC">
         <div class="dialogC-close" @click="categoryDialogVisible = false">
@@ -637,8 +637,10 @@ export default {
   name: "ProtocolsDetails",
   data() {
     return {
-      categoryItem: "cdp",
-      categoryList: ["cdp", "dexes", "lending", "staking", "yield"],
+      // categoryItem: "cdp",
+      // categoryList: ["cdp", "dexes", "lending", "staking", "yield"],
+      categoryItem: this.$t("yield.yield46"),
+      categoryList: [this.$t("yield.yield46"), this.$t("yield.yield47"), this.$t("yield.yield48"), this.$t("yield.yield49"), this.$t("yield.yield149")],
       categoryDialogVisible: false,
 
       loading: false,
@@ -808,9 +810,7 @@ export default {
         },
       }).then((res) => {
         if (!res?.data?.data) return
-        let info = res?.data?.data
-        console.log('info is ', info);
-        
+        let info = res?.data?.data        
         this.projectInfo.otherInfo.name = info.name
         this.projectInfo.otherInfo.main_contract = info.main_contract
         this.projectInfo.otherInfo.multi_sig = info.multi_sig
@@ -844,7 +844,7 @@ export default {
         ],
         data: {
           protocol: this.projectName,
-          category: this.categoryItem,
+          category: this.handleCategoryTransform(this.categoryItem)
         },
       })
 
