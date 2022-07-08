@@ -52,14 +52,14 @@
           <div class="basicInfo-box">
             <!-- Token contract -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield141") }}</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenSymcode" @change="formWrongTips.tokenSymcode = false" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenCode" @change="formWrongTips.tokenCode = false" />
             <!-- <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t('yield.yield121') }}</div> -->
           </div>
 
           <div class="basicInfo-box">
             <!-- Token name -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield142") }}</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenCode" @change="formWrongTips.tokenCode = false" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenSymcode" @change="formWrongTips.tokenSymcode = false" />
             <!-- <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t('yield.yield121') }}</div> -->
           </div>
 
@@ -98,8 +98,8 @@
             <!-- Project logo (300*300) -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
             <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
-              <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" />
-              <img src="@/assets/img/add.png" v-else style="width: 15px; height: 15px; vertical-align: middle" />
+              <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" style="width:100%;height:100%" />
+              <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
               <input type="file" accept="image/*" @change="fileImage" title="" />
             </div>
             <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -136,7 +136,7 @@
           <div class="basicInfo-box">
             <!-- CoinMarketCap -->
             <div class="basicInfo-subtitle">CoinMarketCap</div>
-            <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" :placeholder="$t('yield.yield153')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" :placeholder="$t('yield.yield153')" />
           </div>
           <div class="basicInfo-box">
             <!--  CoinGecko -->
@@ -275,13 +275,14 @@
             <div class="basicInfo-left">
               <!-- 	Token contract code -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield141") }}</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenSymcode" @change="formWrongTips.tokenSymcode = false" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenCode" @change="formWrongTips.tokenCode = false" />
+              
               <!-- <div class="basicInfo-wrongTips" v-if="formWrongTips.tokenSymcode">{{ $t('yield.yield120') }}</div> -->
             </div>
             <div>
               <!-- 	Token symbol code -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield142") }}</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenCode" @change="formWrongTips.tokenCode = false" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenSymcode" @change="formWrongTips.tokenSymcode = false" />
               <!-- <div class="basicInfo-wrongTips" v-if="formWrongTips.tokenCode">{{ $t('yield.yield121') }}</div> -->
             </div>
           </div>
@@ -291,8 +292,8 @@
               <!-- Project logo (300*300) -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
               <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
-                <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" />
-                <img src="@/assets/img/add.png" v-else style="width: 15px; height: 15px; vertical-align: middle" />
+                <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" style="width:100%;height:100%" />
+              <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
                 <input type="file" accept="image/*" @change="fileImage" title="" />
               </div>
               <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -340,7 +341,7 @@
             <div class="basicInfo-left">
               <!-- CoinMarketCap -->
               <div class="basicInfo-subtitle">CoinMarketCap</div>
-              <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" :placeholder="$t('yield.yield153')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" :placeholder="$t('yield.yield153')" />
             </div>
             <div>
               <!--  CoinGecko -->

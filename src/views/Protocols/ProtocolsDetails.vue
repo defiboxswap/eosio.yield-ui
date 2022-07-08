@@ -104,7 +104,7 @@
                   </div>
                 </div>
                 <div class="box-w">
-                  <div class="box3-title">{{ $t('yield.yield142') }}</div>
+                  <div class="box3-title">{{ $t("yield.yield142") }}</div>
                   <div class="box3-text">
                     <span v-if="projectInfo.otherInfo.main_contract === null">-</span>
                     <template v-else>
@@ -117,14 +117,14 @@
 
               <div class="flex">
                 <div class="box-w">
-                  <div class="box3-title">{{ $t('yield.yield55') }}</div>
+                  <div class="box3-title">{{ $t("yield.yield55") }}</div>
                   <div class="box3-text">
                     <span v-if="projectInfo.marketcap">{{ projectInfo.marketcap }}</span>
                     <span v-else>-</span>
                   </div>
                 </div>
                 <div class="box-w">
-                  <div class="box3-title">{{ $t('yield.yield73') }}</div>
+                  <div class="box3-title">{{ $t("yield.yield73") }}</div>
                   <div class="box3-text">
                     <span v-if="!projectInfo.recover">-</span>
                     <span v-else>{{ projectInfo.recover }}</span>
@@ -134,7 +134,7 @@
 
               <div class="flex">
                 <div class="box-w">
-                  <div class="box3-title">{{ $t('yield.yield73') }}</div>
+                  <div class="box3-title">{{ $t("yield.yield73") }}</div>
                   <div class="box3-text">
                     <span v-if="projectInfo.otherInfo.open_source === null">-</span>
                     <template v-else>
@@ -144,7 +144,7 @@
                   </div>
                 </div>
                 <div class="box-w">
-                  <div class="box3-title">{{ $t('yield.yield69') }}</div>
+                  <div class="box3-title">{{ $t("yield.yield69") }}</div>
                   <div class="box3-text">
                     <span v-if="projectInfo.otherInfo.multi_sig === null">-</span>
                     <template v-else>
@@ -159,14 +159,14 @@
 
               <div class="flex">
                 <div class="box-w">
-                  <div class="box3-title">{{ $t('yield.yield135') }}</div>
+                  <div class="box3-title">{{ $t("yield.yield135") }}</div>
                   <div class="box3-text">
                     <span v-if="projectInfo.circulating">{{ projectInfo.circulating }}</span>
                     <span v-else>-</span>
                   </div>
                 </div>
                 <div class="box-w">
-                  <div class="box3-title">{{ $t('yield.yield136') }}</div>
+                  <div class="box3-title">{{ $t("yield.yield136") }}</div>
                   <div class="box3-text">
                     <span v-if="projectInfo.maxSupply">{{ projectInfo.maxSupply }}</span>
                     <span v-else>-</span>
@@ -408,7 +408,7 @@
                   </div>
                   <div class="box3-center flext flex-jus-between">
                     <div>
-                      <div class="box3-title">{{ $t('yield.yield142') }}</div>
+                      <div class="box3-title">{{ $t("yield.yield142") }}</div>
                       <div class="box3-text">
                         <!-- <span v-if="projectInfo.otherInfo.main_contract === null">-</span>
                         <span v-else>{{ projectInfo.otherInfo.main_contract }}</span> -->
@@ -422,7 +422,7 @@
                   </div>
                   <div class="box3-right flext flex-jus-between">
                     <div>
-                      <div class="box3-title">{{ $t('yield.yield55') }}</div>
+                      <div class="box3-title">{{ $t("yield.yield55") }}</div>
                       <div class="box3-text">
                         <span v-if="projectInfo.marketcap">${{ projectInfo.marketcap }}</span>
                         <span v-else>-</span>
@@ -433,7 +433,7 @@
                 <div class="flext">
                   <div class="box3-left">
                     <div>
-                      <div class="box3-title">{{ $t('yield.yield135') }}</div>
+                      <div class="box3-title">{{ $t("yield.yield135") }}</div>
                       <div class="box3-text">
                         <span v-if="projectInfo.circulating">{{ projectInfo.circulating }}</span>
                         <span v-else>-</span>
@@ -442,7 +442,7 @@
                   </div>
                   <div class="box3-center flext flex-jus-between">
                     <div>
-                      <div class="box3-title">{{ $t('yield.yield136') }}</div>
+                      <div class="box3-title">{{ $t("yield.yield136") }}</div>
                       <div class="box3-text">
                         <span v-if="projectInfo.maxSupply">{{ projectInfo.maxSupply }}</span>
                         <span v-else>-</span>
@@ -456,7 +456,7 @@
                 <div class="flext">
                   <div class="box3-left">
                     <div>
-                      <div class="box3-title">{{ $t('yield.yield73') }}</div>
+                      <div class="box3-title">{{ $t("yield.yield73") }}</div>
                       <div class="box3-text">
                         <span v-if="!projectInfo.recover">-</span>
                         <span v-else>{{ projectInfo.recover }}</span>
@@ -465,7 +465,7 @@
                   </div>
                   <div class="box3-center flext flex-jus-between">
                     <div>
-                      <div class="box3-title">{{ $t('yield.yield72') }}</div>
+                      <div class="box3-title">{{ $t("yield.yield72") }}</div>
                       <div class="box3-text">
                         <span v-if="projectInfo.otherInfo.open_source === null">-</span>
                         <template v-else>
@@ -477,7 +477,7 @@
                   </div>
                   <div class="box3-right flext flex-jus-between">
                     <div>
-                      <div class="box3-title">{{ $t('yield.yield69') }}</div>
+                      <div class="box3-title">{{ $t("yield.yield69") }}</div>
                       <div class="box3-text">
                         <span v-if="projectInfo.otherInfo.multi_sig === null">-</span>
                         <template v-else>
@@ -830,11 +830,11 @@ export default {
         name: "setcategory",
         authorization: [
           {
-            actor: "d.a.yield", 
+            actor: "d.a.yield",
             permission: "active",
           },
           {
-            actor: formName, 
+            actor: formName,
             permission: permission || "active",
           },
         ],
@@ -875,11 +875,11 @@ export default {
         name: "approve",
         authorization: [
           {
-            actor: "d.a.yield", 
+            actor: "d.a.yield",
             permission: "active",
           },
           {
-            actor: formName, 
+            actor: formName,
             permission: permission || "active",
           },
         ],
@@ -890,7 +890,6 @@ export default {
       })
 
       // console.log('params is ', params);
-      
 
       let result = await DApp.transactionApi({
         params,
@@ -923,11 +922,11 @@ export default {
         name: "deny",
         authorization: [
           {
-            actor: "d.a.yield", 
+            actor: "d.a.yield",
             permission: "active",
           },
           {
-            actor: formName, 
+            actor: formName,
             permission: permission || "active",
           },
           // {
@@ -969,7 +968,7 @@ export default {
         name: "claim",
         authorization: [
           {
-            actor: formName, 
+            actor: formName,
             permission: permission || "active",
           },
         ],

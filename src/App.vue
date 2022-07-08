@@ -125,68 +125,81 @@ export default {
     },
     // handleGetCommonParam
     async handleGetCommonParam() {
-      // const localNode = localStorage.getItem("nodeChecked")
-      // console.log(this.node, 'node');
-      const localNode = this.node
-      let params = null
-      if (localNode.httpEndpoint) {
-        // console.log(localNode, 'localNode'); // eslint-disable-line
-        params = {
-          params: JSON.stringify({
-            eosNode: localNode.httpEndpoint || null,
-            bosNode: null,
-            meetoneNode: null,
-            enuNode: null,
-            fibosNode: null,
-            telosNode: null,
-            lynxNode: null,
-          }),
-        }
-      }
-      // let oldNodeList = this.$store.state.sys.nodeList
       let oldNodeList = this.$store.state.sys.node
-      // oldNodeList = JSON.parse(JSON.stringify(oldNodeList))
 
-      let chainParams = {
-        embed: this.$embed || false,
-        chain: "eos",
-        needScatterInit: false,
-        channel: this.accountInfo.wallet || "scatter",
-        node: oldNodeList,
-      }
-      if (oldNodeList) {
-        chainParams.node = oldNodeList
-      }
-      // if(!this.accountInfo.account){
-      DApp.init(chainParams, () => {
-        if (this.isMobile || this.accountInfo.wallet === "cloudWallet") {
-          this.handleGetAccount()
-        }
-      })
-      const { status, result } = await commons.getCommonParam(params)
-      // console.log(result,'result'); // eslint-disable-line
-      if (status) {
-        const eosNode = result.eosNode || {}
-        const nodeList = {
-          httpEndpoint: eosNode.url,
-          protocol: eosNode.protocol,
-          host: eosNode.host,
-          port: Number(eosNode.port),
-          chainId: eosNode.chainId,
-          area: eosNode.area,
-        }
+      // if not node list set new node
+      if (!oldNodeList) {
+        const { status, result } = await commons.getNodeList()
 
-        // setNode
-        this.$store.dispatch("setNode", nodeList).then(() => {
-          const urlParams = getUrlParams(window.location.href) || {}
-          // set channel
-          let channel = urlParams.channel
-          let source = urlParams.utm_source
-          if (!channel) {
-            channel = localStorage.getItem("channel") || "scatter"
+        if (status) {
+          console.log("result is ", result)
+
+          let eosNode = null
+          result.data.map((item) => {
+            item.chainId = item.chain_id
+            const url = new URL(item.url)
+            item.host = url.host
+            item.port = url.port ? url.port : url.protocol === "https:" ? 443 : 80
+            item.protocol = url.protocol.substr(0, url.protocol.length - 1)
+            if (item.is_default == 1) eosNode = item
+            return item
+          })
+
+          const nodeList = {
+            httpEndpoint: eosNode.url,
+            protocol: eosNode.protocol,
+            host: eosNode.host,
+            port: Number(eosNode.port),
+            chainId: eosNode.chainId,
+            area: eosNode.area,
           }
-          localStorage.setItem("channel", channel || source)
-          this.$store.dispatch("setChannel", channel || source)
+
+          // setNode
+          this.$store.dispatch("setNode", nodeList).then(() => {
+            let oldNodeList = this.$store.state.sys.node
+
+            let chainParams = {
+              embed: this.$embed || false,
+              chain: "eos",
+              needScatterInit: false,
+              channel: this.accountInfo.wallet || "scatter",
+              node: oldNodeList,
+            }
+
+            chainParams.node = oldNodeList
+
+            DApp.init(chainParams, () => {
+              if (this.isMobile || this.accountInfo.wallet === "cloudWallet") {
+                this.handleGetAccount()
+              }
+            })
+
+            const urlParams = getUrlParams(window.location.href) || {}
+            // set channel
+            let channel = urlParams.channel
+            let source = urlParams.utm_source
+            if (!channel) {
+              channel = localStorage.getItem("channel") || "scatter"
+            }
+            localStorage.setItem("channel", channel || source)
+            this.$store.dispatch("setChannel", channel || source)
+          })
+        }
+      } else {
+        let chainParams = {
+          embed: this.$embed || false,
+          chain: "eos",
+          needScatterInit: false,
+          channel: this.accountInfo.wallet || "scatter",
+          node: oldNodeList,
+        }
+
+        chainParams.node = oldNodeList
+
+        DApp.init(chainParams, () => {
+          if (this.isMobile || this.accountInfo.wallet === "cloudWallet") {
+            this.handleGetAccount()
+          }
         })
       }
     },

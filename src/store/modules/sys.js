@@ -1,38 +1,13 @@
-// 系统性状态存储
+
 const sys = {
   state: {
-    channel: localStorage.getItem('channel') ? localStorage.getItem('channel') : '', // app名称
-    node: {
-      httpEndpoint: 'https://eos.defibox.xyz',
-      protocol: 'https',
-      host: 'eos.defibox.xyz',
-      port: 443,
-      chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
-      area: 'Japan',
-    },
+    channel: localStorage.getItem('channel') ? localStorage.getItem('channel') : '', 
+    node: null,
     // APP's webView - android | ios
     isAppView: sessionStorage.getItem('isAppView') ? sessionStorage.getItem('isAppView') : '',
     urlChain: 'eos',
     // urlChain: 'wax',
     baseConfig: {
-      // // 服务器状态设置 - 1:开通 | 0: 暂停
-      // issue: 1, // 生成USN
-      // repay: 1, // 偿还USN
-      // auction: 1, // 爆单抢拍
-      // deposit: 1, // 增加抵押量
-      // withdraw: 1, // 减少抵押量
-      // maintain: 1, // 整服
-      // marginRate: 1.25, // 爆仓比率
-      // marginWarnRate: 1.35, // 未爆仓比率
-      // initialDiscount: 0.98, // 爆仓拍卖初始折扣
-      // lastDiscount: 0.9, // 爆仓拍卖最低折扣
-      // declining: 0.1, // 爆仓拍卖每轮递减折扣
-      // auctionTime: 0, // 爆仓后开卖时间
-      // durationTime: 60, // 爆仓拍卖持续时间
-      // intervalTime: 1, // 爆仓拍卖轮次间隔时间
-      // forfeit: 0.15, // 爆仓罚金
-      // gratis: 10, // 免CPU次数
-      // interestFree: 1, // 开仓偿还免息时间
     },
     // Blockchain browser configuration
     blockBrowser: {

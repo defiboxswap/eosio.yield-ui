@@ -54,10 +54,13 @@
         <v-menu nudge-width="0" nudge-top="-8" v-model="accountVisible" offset-y  rounded="lg" >
           <template v-slot:activator="{ on, attrs }">
             <div v-bind="attrs" v-on="on">
-              <div class="flexc" style="padding-left: 20px;">
-                <img src="@/assets/img/svg/more-b.svg" style="width: 20px;" v-if="!$route.meta.HeaderDark">
-                <img src="@/assets/img/svg/more-w.svg" style="width: 20px;" v-else>
+              <div style="width:120px;margin-right:-40px;" class="flex flex-jus-end">
+                <div class="flexc" style="padding-left: 20px;">
+                  <img src="@/assets/img/svg/more-b.svg" style="width: 20px;" v-if="!$route.meta.HeaderDark">
+                  <img src="@/assets/img/svg/more-w.svg" style="width: 20px;" v-else>
+                </div>
               </div>
+              
             </div>
           </template>
           <div class="accountMenu">

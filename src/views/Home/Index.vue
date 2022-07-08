@@ -14,7 +14,7 @@
               <br />
               <span class="text-2">{{ claimed }}</span>
               <!-- Claimed -->
-              Eos {{ $t("yield.yield8") }}
+              EOS {{ $t("yield.yield8") }}
             </div>
             <v-btn class="text-button" @click="$router.push('/Join')">{{ $t("yield.yield4") }}</v-btn>
           </div>

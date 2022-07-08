@@ -83,7 +83,12 @@ export default {
       }
       if (status) {
         this.loading = false
-        let list = result.nodeList.map((item) => {
+        let list = result.data.map((item) => {
+          item.chainId = item.chain_id
+          const url = new URL(item.url)
+          item.host = url.host
+          item.port = url.port ? url.port : url.protocol === "https:" ? 443 : 80
+          item.protocol = url.protocol.substr(0, url.protocol.length - 1)
           return { ...item, time: "", tip: 0 }
         })
         const index = list.findIndex((item) => {
