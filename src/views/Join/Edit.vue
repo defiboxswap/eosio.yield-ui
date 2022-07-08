@@ -470,6 +470,7 @@ export default {
       projectName: "",
       projectInfo: null,
       projectStatus: "active",
+      adminAccountList: []
     }
   },
   watch: {
@@ -502,6 +503,7 @@ export default {
   },
   created() {
     if (!this.$route.query?.name) this.$router.go(-1)
+    this.getAdminAccount()
     this.projectName = decodeURIComponent(this.$route.query.name)
 
     if (!this.$store.state.app.accountInfo?.account) {
@@ -705,6 +707,26 @@ export default {
     },
     handleWalletLogin() {
       this.$store.dispatch("setWalletLoginVisible", true)
+    },
+    // getAdminAccount
+    getAdminAccount() {
+      axios({
+        url: "https://eos.greymass.com/v1/chain/get_account",
+        method: "post",
+        headers: {
+          "content-type": "text/plain;charset=UTF-8",
+        },
+        data: {
+          account_name: "yield",
+        },
+      }).then((res) => {
+        let adminList = res.data?.permissions[0]?.required_auth?.accounts
+        if (Array.isArray(adminList)) {
+          adminList.forEach((i) => {
+            this.adminAccountList.push(i.permission.actor)
+          })
+        }
+      })
     },
   },
 }

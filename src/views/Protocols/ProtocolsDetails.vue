@@ -874,16 +874,19 @@ export default {
             actor: formName, 
             permission: permission || "active",
           },
-          {
-            actor: "d.a.yield", 
-            permission: "active",
-          },
+          // {
+          //   actor: "d.a.yield", 
+          //   permission: "active",
+          // },
         ],
         data: {
           // "protocol":"swap.defi",
           protocol: this.projectName,
         },
       })
+
+      // console.log('params is ', params);
+      
 
       let result = await DApp.transactionApi({
         params,
@@ -919,10 +922,10 @@ export default {
             actor: formName, 
             permission: permission || "active",
           },
-          {
-            actor: "d.a.yield",
-            permission: "active",
-          },
+          // {
+          //   actor: "d.a.yield",
+          //   permission: "active",
+          // },
         ],
         data: {
           protocol: this.projectName,
