@@ -871,7 +871,7 @@ export default {
         name: "approve",
         authorization: [
           {
-            actor: this.projectName, 
+            actor: formName, 
             permission: permission || "active",
           },
           {
@@ -916,7 +916,7 @@ export default {
         name: "deny",
         authorization: [
           {
-            actor: this.projectName, 
+            actor: formName, 
             permission: permission || "active",
           },
           {
