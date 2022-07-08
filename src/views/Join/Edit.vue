@@ -596,6 +596,7 @@ export default {
         this.gotoId(gotoId)
         return
       }
+      this.$toastLoading(this.$t('yield.yield151'))
 
       let metadata = []
       for (let key in this.form) {
@@ -653,6 +654,7 @@ export default {
       })
 
       this.btnLoading = false
+      this.$toastLoading.hide()
       if (result && result.code !== 0) {
         console.log("result error is ", result)
         if (result?.error?.code == 3050003) {
@@ -666,7 +668,8 @@ export default {
         return
       }
 
-      this.$toast("submit success!")
+      // this.$toast("submit success!")
+      this.$toastSuccess(this.$t('yield.yield152'))
     },
     fileImage(event) {
       // if(files.size/1024 > 200){
