@@ -16,26 +16,6 @@ function getHeaders() {
 }
 
 // getNodeList
-// export function getNodeList() {
-//   return new Promise((resolve, reject) => {
-//     axios({
-//       baseURL,
-//       method: "post",
-//       url: `/api/common/getNodeList`,
-//       headers: getHeaders(),
-//     }).then(
-//       (res) => {
-//         let result = Object.assign(res, {})
-//         resolve({ status: !result.code, result: result.data })
-//       },
-//       (err) => {
-//         reject(err)
-//       }
-//     )
-//   })
-// }
-
-// getNodeList
 export function getNodeList() {
   return new Promise((resolve, reject) => {
     axios({
@@ -43,27 +23,6 @@ export function getNodeList() {
       method: "get",
       url: `/api/v1/nodes`,
       headers: getHeaders(),
-    }).then(
-      (res) => {
-        let result = Object.assign(res, {})
-        resolve({ status: !result.code, result: result.data })
-      },
-      (err) => {
-        reject(err)
-      }
-    )
-  })
-}
-
-// getCommonParam
-export function getCommonParam(params) {
-  return new Promise((resolve, reject) => {
-    axios({
-      baseURL,
-      method: "post",
-      url: "/api/common/getCommonParam",
-      headers: getHeaders(),
-      data: qs.stringify(params),
     }).then(
       (res) => {
         let result = Object.assign(res, {})

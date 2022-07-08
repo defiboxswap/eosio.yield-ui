@@ -579,7 +579,10 @@ export default {
         return
       }
       
-      this.$toastSuccess(this.$t('yield.yield152'))
+      this.$toastSuccess(this.$t('yield.yield152'), {
+        projectName: formName,
+        $router: this.$router
+      })
 
       // this.$toast("submit success!")
     },

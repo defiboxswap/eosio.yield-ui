@@ -132,8 +132,6 @@ export default {
         const { status, result } = await commons.getNodeList()
 
         if (status) {
-          console.log("result is ", result)
-
           let eosNode = null
           result.data.map((item) => {
             item.chainId = item.chain_id

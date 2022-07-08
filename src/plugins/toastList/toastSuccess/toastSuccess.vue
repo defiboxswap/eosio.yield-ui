@@ -20,7 +20,7 @@
       <div class="SwapSuccess-text1" v-if="text3" v-html="text3"></div>
       <div class="SwapSuccess-text1" v-if="text4" v-html="text4"></div>
 
-      <v-btn class="btn" color="primary" @click="close" style="background:#1C1DFF;color:#fff">details</v-btn>
+      <v-btn class="btn" color="primary" @click="gotoDetails" style="background:#1C1DFF;color:#fff">details</v-btn>
 
     </div>
   </v-dialog>
@@ -33,7 +33,7 @@ export default {
       active: false
     }
   },
-  props: ['text', 'title', 'text1', 'text2', 'text3', 'text4', 'txId'],
+  props: ['text', 'title', 'text1', 'text2', 'text3', 'text4', 'txId', 'projectName', '$router'],
   mounted() {
     this.$nextTick(() => this.show())
   },
@@ -43,6 +43,10 @@ export default {
     }
   },
   methods: {
+    gotoDetails() {
+      this.$router.push("/ProtocolsDetails?name=" + encodeURIComponent(this.projectName))
+      this.close()
+    },
     show() {
       this.active = true
     },

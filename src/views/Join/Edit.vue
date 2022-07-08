@@ -669,7 +669,11 @@ export default {
       }
 
       // this.$toast("submit success!")
-      this.$toastSuccess(this.$t('yield.yield152'))
+      // this.$toastSuccess(this.$t('yield.yield152'))
+      this.$toastSuccess(this.$t('yield.yield152'), {
+        projectName: this.projectName,
+        $router: this.$router
+      })
     },
     fileImage(event) {
       // if(files.size/1024 > 200){
