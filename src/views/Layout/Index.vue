@@ -8,7 +8,7 @@
     <BaseFooter v-if="!$route.meta.noFooter"></BaseFooter>
 
 
-    <!-- 用户登录 钱包选择 -->
+    <!-- walletLoginDiaog -->
     <v-dialog class="walletLoginDiaog" :persistent="true" @click:outside="handleOutside" v-model="walletLoginVisible" width="350"><BaseWalletLogin @listenWalletLoginClose="listenWalletLoginClose" :walletLoginShow="walletLoginVisible" /></v-dialog>
 
   </div>
@@ -21,13 +21,8 @@ export default {
   data() {
     return {
       screenWidth: document.body.clientWidth,
-      showHeader: null, // 路由设置是否显示头部
-      isScrolls: false, //屏幕是否滚动
-      activityModel: false, // 活动窗口
-      activityImg: '', // 活动图片链接
-      go_activity: '', // 活动链接
-      activityData: [], // 活动数据
-      // loading: true,
+      showHeader: null, 
+      
     };
   },
   components: {},
@@ -56,8 +51,7 @@ export default {
     this.$store.dispatch("setScreenWidth", this.screenWidth);
     window.addEventListener("resize", this.checkScreenWidth);
     this.handlerInitHeader();
-    // window.addEventListener("scroll", throttle(this.btn_poss, 100))
-    // window.addEventListener("scroll",this.btn_poss)
+    
   },
   mounted() {
 
@@ -66,30 +60,19 @@ export default {
     window.removeEventListener("resize", this.checkScreenWidth);
   },
   methods: {
-    btn_poss() {
-      //滚动条的高度
-      const scrollTops = document.body.scrollTop || document.documentElement.scrollTop;
-      // console.log(scrollTops, 'scrollTop666');
-      if (scrollTops > 0) {
-        this.isScrolls = true;
-      } else {
-        this.isScrolls = false;
-      }
-    },
     handleOutside() {
       this.$store.dispatch("setWalletLoginVisible", false);
     },
-    // 钱包登录
+    // handleWalletLogin
     handleWalletLogin() {
       this.$store.dispatch("setWalletLoginVisible", true);
     },
-    // 初始化头部
+    // handlerInitHeader
     handlerInitHeader() {
       if (this.$route.meta.hasHeader) {
         this.showHeader = true;
       } else {
         // this.showHeader = this.$store.state.app.isMobile ? false : true;
-        // 判断是否屏幕小于501
         this.showHeader = document.body.clientWidth > 501 ? true : false;
       }
     },
@@ -97,7 +80,7 @@ export default {
       window.screenWidth = document.body.clientWidth;
       this.screenWidth = window.screenWidth;
     },
-    // 监听钱包回调
+    // listenWalletLoginClose
     listenWalletLoginClose(val){
       this.$store.dispatch("setWalletLoginVisible", val);
     }
