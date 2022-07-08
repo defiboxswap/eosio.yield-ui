@@ -96,9 +96,9 @@
                 <div class="box-w">
                   <div class="box3-title">{{ $t("yield.yield143") }}</div>
                   <div class="box3-text">
-                    <span v-if="projectInfo.otherInfo.name === null">-</span>
+                    <span v-if="projectInfo.tokenCode === null">-</span>
                     <template v-else>
-                      <span v-if="projectInfo.otherInfo.name">{{ projectInfo.otherInfo.name }}</span>
+                      <span v-if="projectInfo.tokenCode">{{ projectInfo.tokenCode }}</span>
                       <span v-else>-</span>
                     </template>
                   </div>
@@ -106,9 +106,9 @@
                 <div class="box-w">
                   <div class="box3-title">{{ $t("yield.yield142") }}</div>
                   <div class="box3-text">
-                    <span v-if="projectInfo.otherInfo.main_contract === null">-</span>
+                    <span v-if="projectInfo.tokenSymcode === null">-</span>
                     <template v-else>
-                      <span v-if="projectInfo.otherInfo.main_contract">{{ projectInfo.otherInfo.main_contract }}</span>
+                      <span v-if="projectInfo.tokenSymcode">{{ projectInfo.tokenSymcode }}</span>
                       <span v-else>-</span>
                     </template>
                   </div>
@@ -398,9 +398,9 @@
                     <div>
                       <div class="box3-title">{{ $t("yield.yield143") }}</div>
                       <div class="box3-text">
-                        <span v-if="projectInfo.otherInfo.name === null">-</span>
+                        <span v-if="projectInfo.tokenCode === null">-</span>
                         <template v-else>
-                          <span v-if="projectInfo.otherInfo.name">{{ projectInfo.otherInfo.name }}</span>
+                          <span v-if="projectInfo.tokenCode">{{ projectInfo.tokenCode }}</span>
                           <span v-else>-</span>
                         </template>
                       </div>
@@ -412,9 +412,9 @@
                       <div class="box3-text">
                         <!-- <span v-if="projectInfo.otherInfo.main_contract === null">-</span>
                         <span v-else>{{ projectInfo.otherInfo.main_contract }}</span> -->
-                        <span v-if="projectInfo.otherInfo.main_contract === null">-</span>
+                        <span v-if="projectInfo.tokenSymcode === null">-</span>
                         <template v-else>
-                          <span v-if="projectInfo.otherInfo.main_contract">{{ projectInfo.otherInfo.main_contract }}</span>
+                          <span v-if="projectInfo.tokenSymcode">{{ projectInfo.tokenSymcode }}</span>
                           <span v-else>-</span>
                         </template>
                       </div>
