@@ -579,7 +579,7 @@
             </div>
           </div>
 
-          <div class="ProtocolsDetailsPC-footer" v-if="role">
+          <div class="ProtocolsDetailsPC-footer" v-if="role && projectInfo">
             <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-between" v-if="role == 2">
               <div class="flext">
                 <div v-if="projectInfo.status == 'active'">
@@ -612,14 +612,21 @@
               </div>
             </div>
 
-            <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end" v-else-if="role == 1">
-              <div class="flex">
-                <!-- Allow -->
-                <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
-                <!-- Refuse -->
-                <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+            <template v-else-if="role == 1">
+              <!-- <template v-if="projectInfo.status == 'active'">
+                <div>
+                  
+                </div>
+              </template> -->
+              <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end">
+                <div class="flex">
+                  <!-- Allow -->
+                  <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
+                  <!-- Refuse -->
+                  <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+                </div>
               </div>
-            </div>
+            </template>
           </div>
         </div>
 
@@ -883,7 +890,13 @@ export default {
       }
       // yes
       this.$toast("set success!")
+      
       this.categoryDialogVisible = false
+      setTimeout(() => {
+        this.getAdminAccount()
+        this.getInfo()
+        this.getRewards()
+      }, 1000)
     },
     // Allow
     async handleAllow() {
@@ -992,6 +1005,10 @@ export default {
         name: "claim",
         authorization: [
           {
+            actor: this.projectName,
+            permission: "active",
+          },
+          {
             actor: formName,
             permission: permission || "active",
           },
@@ -1014,6 +1031,7 @@ export default {
         })
         return
       }
+      this.getRewards()
       // yes
       this.$toast("claim success!")
     },
