@@ -80,7 +80,7 @@ export default {
           axisLabel: {
             fontSize: 12,
             formatter: (value) => {
-              return this.vueThis.getKMBUnit(value, 0)
+              return '$' + this.vueThis.getKMBUnit(value, 0)
             },
           },
         },

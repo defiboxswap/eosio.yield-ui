@@ -582,7 +582,7 @@ export default {
         return
       }
       let gotoId = ""
-      if (this.form.cmc) this.form.cmc = parseFloat(this.form.cmc)
+      // if (this.form.cmc) this.form.cmc = parseFloat(this.form.cmc)
       if (this.form.recover) this.form.recover = parseFloat(this.form.recover)
       for (let key in this.formRules) {
         if (this.formRules[key].required) {

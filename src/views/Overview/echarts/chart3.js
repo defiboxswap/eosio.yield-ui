@@ -51,13 +51,13 @@ export default {
           axisLabel: {
             fontSize: 12,
             formatter: (value) => {
-              return this.vueThis.getKMBUnit(value, 0);
+              return '$' + this.vueThis.getKMBUnit(value, 0);
             },
           }
         },
         grid: [
           {
-            top: "55%",
+            top: "60%",
             // left: document.body.clientWidth < 1200 ? "18%" : "10%",
             bottom: "20%",
           },
@@ -101,8 +101,8 @@ export default {
               // formatter: `{b}:  ({d}%)`,
               formatter: (value) => {
                 let dimension = this.chartsData[0].length - 1
-                let yValue = this.vueThis.getKMBUnit(value.value[dimension], 0);
-                if (document.body.clientWidth > 1200) yValue = this.vueThis.getKMBUnit(value.value[dimension], 4)
+                let yValue = '$' + this.vueThis.getKMBUnit(value.value[dimension], 0);
+                if (document.body.clientWidth > 1200) yValue = '$' + this.vueThis.getKMBUnit(value.value[dimension], 4)
                 return `${ value.name }:${ yValue }(${ value.percent }%)`
               },
               width: document.body.clientWidth > 1200? 500:100,
@@ -130,8 +130,8 @@ export default {
                 // formatter: "{b}: {@[" + dimension + "]} ({d}%)",
                 formatter: (value) => {
                   // console.log('updateAxisPointer',value, dimension);
-                  let yValue = this.vueThis.getKMBUnit(value.value[dimension], 2);
-                  if (document.body.clientWidth > 1200) yValue = this.vueThis.getKMBUnit(value.value[dimension], 4)
+                  let yValue = '$' + this.vueThis.getKMBUnit(value.value[dimension], 2);
+                  if (document.body.clientWidth > 1200) yValue = '$' + this.vueThis.getKMBUnit(value.value[dimension], 4)
                   return `${ value.name }: ${ yValue }(${ value.percent }%)`
                 },
                 width: document.body.clientWidth > 1200? 600:100,

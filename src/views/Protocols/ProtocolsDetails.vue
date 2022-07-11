@@ -613,19 +613,39 @@
             </div>
 
             <template v-else-if="role == 1">
-              <!-- <template v-if="projectInfo.status == 'active'">
-                <div>
-                  
+              <template v-if="projectInfo.status == 'active'">
+                <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end">
+                  <div class="flex">
+                    <div class="footer-Category">
+                      <div class="footer-text1">{{ $t("yield.yield86") }}</div>
+                      <div class="footer-text2 flex" style="margin-right: 50px">
+                        <div>{{ handleCategory(projectInfo.category) }}</div>
+                      </div>
+                    </div>
+                    <!-- Modify -->
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow" style="background:#1C1DFF;">{{ $t("yield.yield168") }}</v-btn>
+                    <!-- Refuse -->
+                    <!-- <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}2222</v-btn> -->
+
+                    <div class="footer-line"></div>
+                  </div>
+
+                  <div class="flex">
+                    <!-- Allow -->
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
+                    <!-- Refuse -->
+                    <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+                  </div>
                 </div>
-              </template> -->
-              <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end">
-                <div class="flex">
+              </template>
+              <!-- <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end"> -->
+                <!-- <div class="flex"> -->
                   <!-- Allow -->
-                  <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
+                  <!-- <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn> -->
                   <!-- Refuse -->
-                  <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
-                </div>
-              </div>
+                  <!-- <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn> -->
+                <!-- </div> -->
+              <!-- </div> -->
             </template>
           </div>
         </div>
@@ -1514,6 +1534,14 @@ export default {
     height: 130px;
     background-color: #fff;
     border: 1px solid #e8e8e8;
+
+    .footer-line {
+      width: 1px;
+      height: 53px;
+      background: #e0e0e0;
+      margin: 0 45px;
+    }
+
     .ProtocolsDetailsPC-layout {
       padding: 0 26px 0 58px;
       height: 100%;
