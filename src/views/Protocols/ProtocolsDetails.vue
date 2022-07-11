@@ -623,7 +623,7 @@
                       </div>
                     </div>
                     <!-- Modify -->
-                    <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow" style="background:#1C1DFF;">{{ $t("yield.yield168") }}</v-btn>
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="handSetCategory" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
                     <!-- Refuse -->
                     <!-- <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}2222</v-btn> -->
 
@@ -638,14 +638,29 @@
                   </div>
                 </div>
               </template>
-              <!-- <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end"> -->
-                <!-- <div class="flex"> -->
-                  <!-- Allow -->
-                  <!-- <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn> -->
+              <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end" v-else>
+                <div class="flex">
+                  <div class="footer-Category">
+                    <div class="footer-text1">{{ $t("yield.yield86") }}</div>
+                    <div class="footer-text2 flex" style="margin-right: 50px">
+                      <div>{{ handleCategory(projectInfo.category) }}</div>
+                    </div>
+                  </div>
+                  <!-- Modify -->
+                  <v-btn class="footer-button1" :loading="claimLoading" @click="handSetCategory" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
                   <!-- Refuse -->
-                  <!-- <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn> -->
-                <!-- </div> -->
-              <!-- </div> -->
+                  <!-- <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}2222</v-btn> -->
+
+                  <div class="footer-line"></div>
+                </div>
+
+                <div class="flex">
+                  <!-- Allow -->
+                  <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
+                  <!-- Refuse -->
+                  <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+                </div>
+              </div>
             </template>
           </div>
         </div>
@@ -706,10 +721,10 @@ export default {
       rewards: "-",
 
       statusToLanguage: {
-        active: 'yield.yield163',
-        pending: 'yield.yield162',
-        denied: 'yield.yield164',
-      }
+        active: "yield.yield163",
+        pending: "yield.yield162",
+        denied: "yield.yield164",
+      },
     }
   },
   components: {},
@@ -916,7 +931,7 @@ export default {
       }
       // yes
       this.$toast("set success!")
-      
+
       this.categoryDialogVisible = false
       setTimeout(() => {
         this.getAdminAccount()
