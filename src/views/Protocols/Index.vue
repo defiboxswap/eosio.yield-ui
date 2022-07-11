@@ -101,7 +101,7 @@
               <div class="flex">
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield88") }}</div>
-                  <div class="data-number">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
+                  <div class="data-number">{{ $t(statusToLanguage[item.status]) }}</div>
                 </div>
                 <div class="data-box flex-1">
                   <!-- <div class="data-name">{{ $t("yield.yield89") }}</div>
