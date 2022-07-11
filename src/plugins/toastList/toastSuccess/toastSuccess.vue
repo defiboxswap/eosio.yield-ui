@@ -44,14 +44,19 @@ export default {
   },
   methods: {
     gotoDetails() {
-      this.$router.push("/ProtocolsDetails?name=" + encodeURIComponent(this.projectName))
+      setTimeout(() => {
+        this.$router.push("/ProtocolsDetails?name=" + encodeURIComponent(this.projectName))
+      }, 1000)
+      
       this.active = false
     },
     show() {
       this.active = true
     },
     close() {
-      this.$router.push("/Protocols")
+      setTimeout(() => {
+        this.$router.push("/Protocols")
+      }, 1000)
       this.active = false
     }
   }

@@ -32,7 +32,8 @@
         <!-- TVL Distribution -->
         <div class="Overview-tvl">
           <div class="tvl-title">{{ $t("yield.yield43") }}</div>
-          <div class="tvl-box" id="view2Data"></div>
+          <!-- <div class="tvl-box" id="view2Data" :style="{'height': 650 + (this.chart2Data[0].length / 4 * 400) + 'px'}"></div> -->
+          <div class="tvl-box" id="view2Data" :style="{'height': 850 + 'px'}"></div>
           <div class="tvl-box" id="view3Data"></div>
         </div>
 
@@ -134,6 +135,7 @@ export default {
         tvl_usd: 0,
         tvl_usd_change: "0.00",
       },
+      chart2Data: [[]]
     }
   },
   components: {},
@@ -177,11 +179,13 @@ export default {
     async initView2Data() {
       try {
         let res = await lines.lines2()
+        this.chart2Data = res.data
         chart2.init({
           self: this,
           data: res.data,
         })
       } catch (error) {
+        this.chart2Data = [[]]
         console.log(error)
       }
     },
