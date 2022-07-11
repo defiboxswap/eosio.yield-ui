@@ -1,6 +1,7 @@
 /* eslint-disable */
 const items = {
   key: "yield",
+
   list: {
     zhCN: {
       yield1: "",
@@ -171,6 +172,7 @@ const items = {
       yield166: "",
       yield167: "",
       yield168: "",
+      yield169: "",
     },
     zhTW: {
       yield1: "首頁",
@@ -341,6 +343,7 @@ const items = {
       yield166: "審核中",
       yield167: "暫無數據",
       yield168: "調整",
+      yield169: "確認",
     },
     en: {
       yield1: "Home",
@@ -511,6 +514,7 @@ const items = {
       yield166: "Pending",
       yield167: "No data",
       yield168: "Modify",
+      yield169: "Confirm",
     },
     ko: {
       yield1: "집",
@@ -681,6 +685,7 @@ const items = {
       yield166: "보류 중",
       yield167: "데이터 없음",
       yield168: "수정하다",
+      yield169: "확인하다",
     },
   },
 }
