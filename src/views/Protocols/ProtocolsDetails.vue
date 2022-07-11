@@ -658,11 +658,11 @@
           <v-icon small>mdi-window-close</v-icon>
         </div>
         <div class="categoryDialog">
-          <div class="categoryDialog-title">Set Project Category</div>
+          <div class="categoryDialog-title">{{ $t('yield.yield62') }}</div>
           <!-- <div class="categoryDialog-des">Project category</div> -->
-          <v-select v-model="categoryItem" :items="categoryList" label="Project category"></v-select>
+          <v-select v-model="categoryItem" :items="categoryList" :label="$t('yield.yield61')"></v-select>
           <div class="flex flex-jus-center" style="margin-top: 30px">
-            <v-btn color="primary" elevation="2" @click="handSetCategory">confirm</v-btn>
+            <v-btn class="setCategoryBtn"  @click="handSetCategory">{{ $t('yield.yield169') }}</v-btn>
           </div>
         </div>
       </div>
@@ -1622,5 +1622,21 @@ export default {
     color: #222222;
     margin-top: 20px;
   }
+}
+
+.setCategoryBtn {
+  display: block !important;
+  min-width: 80% !important;
+  height: 50px !important;
+  line-height: 50px !important;
+  text-align: center;
+  padding: 0 10px !important;
+  background-color: #1c1dff !important;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  // border-radius: 24px;
+  cursor: pointer;
+  // margin-: 24px;
 }
 </style>
