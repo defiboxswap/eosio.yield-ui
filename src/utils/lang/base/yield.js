@@ -170,6 +170,7 @@ const items = {
       yield165: "",
       yield166: "",
       yield167: "",
+      yield168: "",
     },
     zhTW: {
       yield1: "首頁",
@@ -339,6 +340,7 @@ const items = {
       yield165: "該代幣名稱/代幣合約錯誤",
       yield166: "審核中",
       yield167: "暫無數據",
+      yield168: "調整",
     },
     en: {
       yield1: "Home",
@@ -508,6 +510,7 @@ const items = {
       yield165: "The token name/token contract is wrong.",
       yield166: "Pending",
       yield167: "No data",
+      yield168: "Modify",
     },
     ko: {
       yield1: "집",
@@ -677,6 +680,7 @@ const items = {
       yield165: "토큰 이름/토큰 계약이 잘못되었습니다.",
       yield166: "보류 중",
       yield167: "데이터 없음",
+      yield168: "수정하다",
     },
   },
 }

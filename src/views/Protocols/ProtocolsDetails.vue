@@ -271,8 +271,23 @@
 
       <div class="ProtocolsDetails-footer" v-if="role">
         <template v-if="role == 2">
-          <div class="footer-text1">{{ $t("yield.yield96") }}</div>
-          <div class="footer-text2">{{ rewards }}</div>
+          <template v-if="projectInfo.status == 'active'">
+            <div class="footer-text1">{{ $t("yield.yield96") }}</div>
+            <div class="footer-text2">{{ rewards }}</div>
+          </template>
+          <template v-if="projectInfo.status == 'denied'">
+            <div style="align-self: center; color: #333">
+              <!-- denied -->
+              {{ $t("yield.yield139") }}
+            </div>
+          </template>
+          <div>
+            <div style="margin: 10px 0">
+              {{ $t("yield.yield88") }}:
+              <span style="font-weight: bold">{{ projectInfo.status }}</span>
+            </div>
+          </div>
+
           <div class="flex flex-jus-center">
             <!-- CLAIM -->
             <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active'">{{ $t("yield.yield97") }}</v-btn>
@@ -567,12 +582,17 @@
           <div class="ProtocolsDetailsPC-footer" v-if="role">
             <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-between" v-if="role == 2">
               <div class="flext">
-                <div>
+                <div v-if="projectInfo.status == 'active'">
                   <!-- Rewards Available -->
                   <div class="footer-text1">{{ $t("yield.yield96") }}</div>
                   <div class="footer-text2 flex">
                     <div>{{ rewards }}</div>
                   </div>
+                </div>
+
+                <div v-if="projectInfo.status == 'denied'" style="align-self: center; color: #333; margin-right: 140px">
+                  <!-- denied -->
+                  {{ $t("yield.yield139") }}
                 </div>
 
                 <div style="margin-left: 80px">
@@ -810,7 +830,7 @@ export default {
         },
       }).then((res) => {
         if (!res?.data?.data) return
-        let info = res?.data?.data        
+        let info = res?.data?.data
         this.projectInfo.otherInfo.name = info.name
         this.projectInfo.otherInfo.main_contract = info.main_contract
         this.projectInfo.otherInfo.multi_sig = info.multi_sig
@@ -844,7 +864,7 @@ export default {
         ],
         data: {
           protocol: this.projectName,
-          category: this.handleCategoryTransform(this.categoryItem)
+          category: this.handleCategoryTransform(this.categoryItem),
         },
       })
 
