@@ -623,7 +623,7 @@
                       </div>
                     </div>
                     <!-- Modify -->
-                    <v-btn class="footer-button1" :loading="claimLoading" @click="handSetCategory" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogVisible = true" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
                     <!-- Refuse -->
                     <!-- <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}2222</v-btn> -->
 
@@ -647,7 +647,7 @@
                     </div>
                   </div>
                   <!-- Modify -->
-                  <v-btn class="footer-button1" :loading="claimLoading" @click="handSetCategory" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+                  <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogVisible = true" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
                   <!-- Refuse -->
                   <!-- <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}2222</v-btn> -->
 
@@ -982,7 +982,7 @@ export default {
         })
         return
       }
-      this.categoryDialogVisible = true
+      // this.categoryDialogVisible = true
       // yes
       this.$toast("allow success!")
     },
