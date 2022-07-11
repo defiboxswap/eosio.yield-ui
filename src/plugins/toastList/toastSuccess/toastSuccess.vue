@@ -20,7 +20,7 @@
       <div class="SwapSuccess-text1" v-if="text3" v-html="text3"></div>
       <div class="SwapSuccess-text1" v-if="text4" v-html="text4"></div>
 
-      <v-btn class="btn" color="primary" @click="gotoDetails" style="background:#1C1DFF;color:#fff">details</v-btn>
+      <v-btn class="btn" color="primary" @click="gotoDetails" style="background:#1C1DFF;color:#fff">{{ $t('yield.yield132') }}</v-btn>
 
     </div>
   </v-dialog>

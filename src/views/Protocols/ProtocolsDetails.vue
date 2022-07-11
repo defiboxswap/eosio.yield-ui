@@ -204,7 +204,7 @@
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.coinGecko)">
                     <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" alt="" />
-                    <span v-if="projectInfo.coinGecko">{{ handleHttp(projectInfo.coinGecko) }}</span>
+                    <span v-if="projectInfo.coinGecko">{{ handleHttp(projectInfo.coingecko) }}</span>
                     <span v-else>-</span>
                   </div>
                 </div>
@@ -215,17 +215,17 @@
                   <div class="box3-text flex" @click="openWindow(projectInfo.defiLlama)">
                     <img src="@/assets/img/ProtocolsDetails/DefiLlama.png" />
                     <!-- <span>DefiLlama</span> -->
-                    <span v-if="projectInfo.coinGecko">{{ handleHttp(projectInfo.coinGecko) }}</span>
+                    <span v-if="projectInfo.defillama">{{ handleHttp(projectInfo.defillama) }}</span>
                     <span v-else>-</span>
                   </div>
                 </div>
                 <div class="box-w">
                   <!-- <div class="box3-title">MULTI-SIG</div>
                   <div class="box3-text">YES</div> -->
-                  <div class="box3-text flex" @click="openWindow(projectInfo.dappRadar)">
+                  <div class="box3-text flex" @click="openWindow(projectInfo.dappradar)">
                     <img src="@/assets/img/ProtocolsDetails/DappRadar.png" />
                     <!-- <span>DappRadar</span> -->
-                    <span v-if="projectInfo.dappRadar">{{ handleHttp(projectInfo.dappRadar) }}</span>
+                    <span v-if="projectInfo.dappradar">{{ handleHttp(projectInfo.dappradar) }}</span>
                     <span v-else>-</span>
                   </div>
                 </div>
@@ -534,24 +534,24 @@
                     <span v-if="projectInfo.cmc">{{ handleHttp(projectInfo.cmc) }}</span>
                     <span v-else>-</span>
                   </div>
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.coinGecko)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.coingecko)">
                     <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" class="box4-img" />
                     <!-- <span>CoinGecko</span> -->
-                    <span v-if="projectInfo.coinGecko">{{ handleHttp(projectInfo.coinGecko) }}</span>
+                    <span v-if="projectInfo.coingecko">{{ handleHttp(projectInfo.coingecko) }}</span>
                     <span v-else>-</span>
                   </div>
                 </div>
                 <div class="flex flex-jus-between" style="width: 100%">
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.defiLlama)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.defillama)">
                     <img src="@/assets/img/ProtocolsDetails/DefiLlama.png" class="box4-img" />
                     <!-- <span>DefiLlama</span> -->
-                    <span v-if="projectInfo.defiLlama">{{ handleHttp(projectInfo.defiLlama) }}</span>
+                    <span v-if="projectInfo.defillama">{{ handleHttp(projectInfo.defillama) }}</span>
                     <span v-else>-</span>
                   </div>
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.dappRadar)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.dappradar)">
                     <img src="@/assets/img/ProtocolsDetails/DappRadar.png" class="box4-img" />
                     <!-- <span>DappRadar</span> -->
-                    <span v-if="projectInfo.dappRadar">{{ handleHttp(projectInfo.dappRadar) }}</span>
+                    <span v-if="projectInfo.dappradar">{{ handleHttp(projectInfo.dappradar) }}</span>
                     <span v-else>-</span>
                   </div>
                 </div>
@@ -1243,6 +1243,12 @@ export default {
           font-size: 15px;
           font-weight: 600;
         }
+        span {
+          display: block;
+          width: 120px;
+          word-break: break-all;
+          font-size: 10px;
+        }
       }
       .box-w {
         width: 50%;
@@ -1510,6 +1516,11 @@ export default {
     .box4-w {
       padding-right: 10px;
       cursor: pointer;
+      span {
+        display: block;
+        width: 200px;
+        word-break: break-all;
+      }
     }
     .box4-right {
       .box4-w {
