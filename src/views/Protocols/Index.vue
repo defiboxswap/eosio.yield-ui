@@ -101,7 +101,7 @@
               <div class="flex">
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield88") }}</div>
-                  <div class="data-number">{{ item.status }}</div>
+                  <div class="data-number">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
                 </div>
                 <div class="data-box flex-1">
                   <!-- <div class="data-name">{{ $t("yield.yield89") }}</div>
@@ -246,9 +246,9 @@
 
                 <div class="box-2">{{ handleCategory(item.category) }}</div>
                 <div class="box-3">{{ item.create_at | dateFormatNYRSF }}</div>
-                <div class="box-4">{{ item.status }}</div>
+                <div class="box-4">{{ $t(statusToLanguage[item.status]) }}</div>
                 <div class="box-5 flex flex-align-center flex-jus-center">
-                  <v-btn>details</v-btn>
+                  <v-btn>{{ $t('yield.yield132') }}</v-btn>
                 </div>
               </a>
 
@@ -280,13 +280,17 @@ export default {
       protocolsList: [],
       searchTimer: null,
       loading: false,
+
+      statusToLanguage: {
+        active: 'yield.yield163',
+        pending: 'yield.yield162',
+        denied: 'yield.yield164',
+      }
     }
   },
   props: {},
   watch: {
-    infoTab: function () {
-      this.pagesBoxShow()
-    },
+    
     search: function () {
       clearTimeout(this.searchTimer)
       this.searchTimer = setTimeout(() => {
@@ -346,6 +350,7 @@ export default {
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]
+          
           this.loading = false
         } else {
           this.loading = false
@@ -355,16 +360,6 @@ export default {
         this.loading = false
         this.isMore = false
       }
-    },
-    pagesBoxShow() {
-      // this.$nextTick(() => {
-      //   if (document.getElementById('pagesBox')) {
-      //     new CustomPagination('#pagesBox', {
-      //       total: Math.ceil(120 / 10), // 总页数
-      //       changePage: () => {}
-      //     })
-      //   }
-      // })
     },
   },
 }
