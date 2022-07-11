@@ -284,7 +284,7 @@
           <div>
             <div style="margin: 10px 0">
               {{ $t("yield.yield88") }}:
-              <span style="font-weight: bold">{{ projectInfo.status }}</span>
+              <span style="font-weight: bold">{{ $t(statusToLanguage(projectInfo.status)) }}</span>
             </div>
           </div>
 
@@ -599,7 +599,7 @@
                   <!-- State -->
                   <div class="footer-text1">{{ $t("yield.yield88") }}</div>
                   <div class="footer-text2 flex">
-                    <div>{{ projectInfo.status }}</div>
+                    <div>{{ $t(statusToLanguage(projectInfo.status)) }}</div>
                   </div>
                 </div>
               </div>
@@ -704,6 +704,12 @@ export default {
         tvl_usd_change: "0.00",
       },
       rewards: "-",
+
+      statusToLanguage: {
+        active: 'yield.yield163',
+        pending: 'yield.yield162',
+        denied: 'yield.yield164',
+      }
     }
   },
   components: {},
