@@ -6,7 +6,7 @@
       <img src="@/assets/img/BaseNoData/noCoin.png" class="BaseNoData-img" v-else-if="noDataType == 2" />
     </div>
     <!-- NoData -->
-    <div class="BaseNoData-text">{{ noDataText == "" ? "No Data" : noDataText }}</div>
+    <div class="BaseNoData-text">{{ noDataText == "" ? $t('yield.yield167') : noDataText }}</div>
   </div>
 </template>
 <script>

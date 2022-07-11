@@ -292,7 +292,7 @@
             <!-- CLAIM -->
             <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active'">{{ $t("yield.yield97") }}</v-btn>
             <!-- EDIT -->
-            <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield98") }}</v-btn>
+            <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
           </div>
         </template>
         <template v-else-if="role == 1">
@@ -608,7 +608,7 @@
                 <!-- CLAIM -->
                 <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active'">{{ $t("yield.yield97") }}</v-btn>
                 <!-- EDIT -->
-                <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield98") }}</v-btn>
+                <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
               </div>
             </div>
 
