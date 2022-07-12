@@ -52,8 +52,8 @@ export default {
     },
     timeout: {
       type: Number,
-      // default: 3000,
-      default: 9000000,
+      default: 3000,
+      // default: 9000000,
     },
     dismissable: {
       type: Boolean,
