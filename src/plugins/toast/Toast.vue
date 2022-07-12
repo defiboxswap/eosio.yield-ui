@@ -52,8 +52,8 @@ export default {
     },
     timeout: {
       type: Number,
-      default: 3000,
-      // default: 9000000,
+      // default: 3000,
+      default: 9000000,
     },
     dismissable: {
       type: Boolean,
@@ -181,5 +181,9 @@ export default {
 .vuetifyToastSnackbar {
   background: #fff !important;
   color: #000 !important;
+}
+
+::v-deep .v-snack__wrapper {
+  background: transparent !important;
 }
 </style>
