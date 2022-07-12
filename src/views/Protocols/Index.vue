@@ -344,12 +344,15 @@ export default {
               if (i.key == "logo") item.logo = `https://ipfs.pink.gg/ipfs/${i.value}`
               else if (i.key == "name") item.name = i.value
             })
+            item.tvl_usd_changeOld = item.tvl_usd_change
             // item.tvl_usd_change = item.tvl_usd_change/(tvl_usd-tvl_usd_change)*100
             if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
 
             item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
             if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
             else item.tvl_usd_change = `${item.tvl_usd_change}%`
+
+            if (item.tvl_usd_changeOld == item.tvl_usd) item.tvl_usd_change = '0.00%'
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]
