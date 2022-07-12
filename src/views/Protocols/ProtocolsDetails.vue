@@ -274,39 +274,105 @@
         </div>
       </div>
 
-      <div class="ProtocolsDetails-footer" v-if="role">
+      <div class="ProtocolsDetails-footer" v-if="role && projectInfo">
         <template v-if="role == 2">
-          <template v-if="projectInfo.status == 'active'">
-            <div class="footer-text1">{{ $t("yield.yield96") }}</div>
-            <div class="footer-text2">{{ rewards }}</div>
-          </template>
-          <template v-if="projectInfo.status == 'denied'">
-            <div style="align-self: center; color: #333">
-              <!-- denied -->
-              {{ $t("yield.yield139") }}
+          <div class="flext flex-jus-center" v-if="projectInfo.status == 'pending'">
+            <div class="flex flex-column flex-jus-center footer-height">
+              <div>
+                <div class="footer-text1">{{ $t("yield.yield88") }}</div>
+                <div class="footer-text2">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
+              </div>
             </div>
-          </template>
-          <div>
-            <div style="margin: 10px 0">
-              {{ $t("yield.yield88") }}:
-              <span style="font-weight: bold">{{ $t(statusToLanguage[projectInfo.status]) }}</span>
+            <div class="footer-line"></div>
+            <div class="flex flex-column flex-jus-center footer-height">
+              <v-btn color="footer-button2" :loading="claimLoading" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
             </div>
           </div>
 
-          <div class="flex flex-jus-center">
-            <!-- CLAIM -->
-            <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active' && rewards && rewards != '-'">{{ $t("yield.yield97") }}</v-btn>
-            <v-btn class="footer-button1" style="background: #f5f5f5; color: #000" :loading="claimLoading" v-else-if="projectInfo.status == 'active' && (rewards == '-' || !rewards)">{{ $t("yield.yield170") }}</v-btn>
-            <!-- EDIT -->
-            <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
+          <div class="flext flex-jus-center" v-else-if="projectInfo.status == 'active'">
+            <div class="flex flex-column flex-jus-between footer-height">
+              <div>
+                <div class="footer-text1">{{ $t("yield.yield96") }}</div>
+                <div class="footer-text2">{{ rewards }}</div>
+              </div>
+              <v-btn color="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="rewards && rewards != '-'">{{ $t("yield.yield97") }}</v-btn>
+              <v-btn class="footer-button1" style="background: #f5f5f5; color: #000" :loading="claimLoading" v-else-if="rewards == '-' || !rewards">{{ $t("yield.yield170") }}</v-btn>
+            </div>
+            <div class="footer-line"></div>
+            <div class="flex flex-column flex-jus-between footer-height">
+              <div>
+                <div class="footer-text1">{{ $t("yield.yield88") }}</div>
+                <div class="footer-text2">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
+              </div>
+              <v-btn color="footer-button2" :loading="claimLoading" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
+            </div>
+          </div>
+
+          <div class="flext flex-jus-center" v-else-if="projectInfo.status == 'denied'">
+            <div class="flex flex-column flex-jus-center footer-height">
+              <div class="footer-text3">{{ $t("yield.yield139") }}</div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="flex flex-column flex-jus-between footer-height">
+              <div>
+                <div class="footer-text1">{{ $t("yield.yield88") }}</div>
+                <div class="footer-text2">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
+              </div>
+              <v-btn color="footer-button1" :loading="claimLoading" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
+            </div>
           </div>
         </template>
         <template v-else-if="role == 1">
-          <div class="flex flex-jus-center">
-            <!-- Allow -->
-            <v-btn class="footer-button1" v-if="projectInfo.status !== 'denied' && projectInfo.status !== 'active'" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
-            <!-- Refuse -->
-            <v-btn class="footer-button2" v-if="projectInfo.status !== 'denied'" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+          <div class="flext flex-jus-center" v-if="projectInfo.status == 'pending'">
+            <div class="flex flex-column flex-jus-between footer-height">
+              <div>
+                <div class="footer-text1">{{ $t("yield.yield86") }}</div>
+                <div class="footer-text2">{{ handleCategory(projectInfo.category) }}</div>
+              </div>
+              <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogVisible = true">{{ $t("yield.yield168") }}</v-btn>
+            </div>
+            <div class="footer-line"></div>
+            <div class="flex flex-column flex-jus-between footer-height">
+              <v-btn color="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
+              <v-btn color="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+            </div>
+          </div>
+
+          <div class="flext flex-jus-center" v-else-if="projectInfo.status == 'active'">
+            <div class="flex flex-column flex-jus-between footer-height">
+              <div>
+                <div class="footer-text1">{{ $t("yield.yield86") }}</div>
+                <div class="footer-text2">{{ handleCategory(projectInfo.category) }}</div>
+              </div>
+              <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogVisible = true">{{ $t("yield.yield168") }}</v-btn>
+            </div>
+            <div class="footer-line"></div>
+            <div class="flex flex-column flex-jus-between footer-height">
+              <div>
+                <div class="footer-text1">{{ $t("yield.yield88") }}</div>
+                <div class="footer-text2">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
+              </div>
+              <v-btn color="footer-button1" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+            </div>
+          </div>
+
+          <div class="flext flex-jus-center" v-else-if="projectInfo.status == 'denied'">
+            <div class="flex flex-column flex-jus-between footer-height">
+              <div>
+                <div class="footer-text1">{{ $t("yield.yield86") }}</div>
+                <div class="footer-text2">{{ handleCategory(projectInfo.category) }}</div>
+              </div>
+              <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogVisible = true">{{ $t("yield.yield168") }}</v-btn>
+            </div>
+            <div class="footer-line"></div>
+            <div class="flex flex-column flex-jus-center footer-height">
+              <!-- <v-btn color="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
+              <v-btn color="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn> -->
+              <div>
+                <div class="footer-text1">{{ $t("yield.yield88") }}</div>
+                <div class="footer-text2">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
+              </div>
+            </div>
           </div>
         </template>
       </div>
@@ -1333,53 +1399,61 @@ export default {
     left: 0;
     width: 100%;
     // height: 200px;
-    background-color: #fff;
-    border-top: 1px solid #e8e8e8;
+    // border-top: 1px solid #e8e8e8;
     text-align: center;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    box-shadow: -1px -1px 5px rgba(136, 136, 136, 0.5);
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background: #ffffff;
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+    .footer-height {
+      height: 100px;
+    }
     .footer-text1 {
-      font-size: 13px;
-      font-weight: 400;
-      color: #666666;
-      margin-bottom: 10px;
+      font-size: 12px;
+      color: #525252;
     }
     .footer-text2 {
-      font-size: 22px;
       font-weight: 600;
+      font-size: 16px;
       color: #000000;
-      margin-bottom: 20px;
+      margin-top: 5px;
+    }
+    .footer-text3 {
+      width: 120px;
+      font-weight: 400;
+      font-size: 14px;
+      color: #000000;
     }
     .footer-button1 {
-      display: block;
-      min-width: 160px;
-      height: 50px;
-      line-height: 50px;
+      min-width: 120px;
+      padding: 0 5px;
+      height: 41px;
+      line-height: 41px;
       text-align: center;
-      padding: 0 10px;
-      background-color: #1c1dff;
-      font-size: 16px;
-      font-weight: 500;
-      color: #ffffff;
-      border-radius: 24px;
-      cursor: pointer;
-      margin-right: 24px;
+      background: #1c1dff;
+      border: 1px solid #d1d1d1;
+      border-radius: 5px;
+      font-size: 14px;
+      color: #fff;
     }
     .footer-button2 {
-      display: block;
-      min-width: 160px;
-      height: 50px;
-      line-height: 50px;
+      min-width: 120px;
+      padding: 0 5px;
+      height: 41px;
+      line-height: 41px;
       text-align: center;
-      padding: 0 10px;
-      background-color: #fff;
-      font-size: 16px;
-      font-weight: 500;
-      color: #666;
-      border-radius: 24px;
-      cursor: pointer;
+      background: #ffffff;
       border: 1px solid #e8e8e8;
+      border-radius: 5px;
+      font-size: 14px;
+      color: #000000;
+    }
+    .footer-line {
+      width: 1px;
+      height: 100px;
+      background: #e0e0e0;
+      margin-left: 35px;
+      margin-right: 35px;
     }
   }
 }
