@@ -1111,6 +1111,11 @@ export default {
       // this.categoryDialogVisible = true
       // yes
       this.$toast("allow success!")
+      setTimeout(() => {
+        this.getAdminAccount()
+        this.getInfo()
+        this.getRewards()
+      }, 1000)
     },
     // Refuse
     async handleRefuse() {
@@ -1157,6 +1162,11 @@ export default {
       }
       // yes
       this.$toast("refuse success!")
+      setTimeout(() => {
+        this.getAdminAccount()
+        this.getInfo()
+        this.getRewards()
+      }, 1000)
     },
     // Claim
     async handleClaim() {
@@ -1199,7 +1209,11 @@ export default {
         })
         return
       }
-      this.getRewards()
+      setTimeout(() => {
+        this.getAdminAccount()
+        this.getInfo()
+        this.getRewards()
+      }, 1000)
       // yes
       this.$toast("claim success!")
     },
