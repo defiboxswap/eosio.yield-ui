@@ -15,16 +15,13 @@ function getHeaders() {
 }
 
 // Overview first lines
-export function lines1(time_frame) {
-  time_frame = time_frame || 'day'
+export function lines1(duration) {
+  duration = duration || 'day'
   return new Promise((resolve, reject) => {
     axios({
       baseURL,
       method: "get",
-      url: `/api/v1/line/{time_frame}/stats`,
-      params: {
-        time_frame
-      },
+      url: `/api/v1/line/${duration}/stats`,
       headers: getHeaders(),
     })
       .then((res) => {
@@ -37,16 +34,13 @@ export function lines1(time_frame) {
 }
 
 // Overview second lines
-export function lines2(time_frame) {
-  time_frame = time_frame || 'day'
+export function lines2(duration) {
+  duration = duration || 'day'
   return new Promise((resolve, reject) => {
     axios({
       baseURL,
       method: "get",
-      url: `/api/v1/echart/lines/{time_frame}`,
-      params: {
-        time_frame
-      },
+      url: `/api/v1/echart/lines/${duration}`,
       headers: getHeaders(),
     })
       .then((res) => {
@@ -60,16 +54,13 @@ export function lines2(time_frame) {
 
 
 // Overview third lines
-export function lines3(time_frame) {
-  time_frame = time_frame || 'day'
+export function lines3(duration) {
+  duration = duration || 'day'
   return new Promise((resolve, reject) => {
     axios({
       baseURL,
       method: "get",
-      params: {
-        time_frame
-      },
-      url: `/api/v1/echart/line/{time_frame}/categorystats`,
+      url: `/api/v1/echart/line/${duration}/categorystats`,
       headers: getHeaders(),
     })
       .then((res) => {
@@ -83,13 +74,13 @@ export function lines3(time_frame) {
 
 // ProtocolsDetails lines
 export function protocolsDetails(params) {
-  params.time_frame = params.time_frame || 'day'
+  params.duration = params.duration || 'day'
   return new Promise((resolve, reject) => {
     axios({
       baseURL,
       method: "get",
       params,
-      url: `/api/v1/lines/{time_frame}`,
+      url: `/api/v1/lines/${params.duration}`,
       headers: getHeaders(),
     })
       .then((res) => {
