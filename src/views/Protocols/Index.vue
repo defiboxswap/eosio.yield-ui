@@ -74,7 +74,7 @@
             <div class="flex">
               <div class="box-left flex">
                 <div class="box-index">{{ index + 1 }}</div>
-                <img :src="item.logo" class="box-avatar" />
+                <img :src="item.logo" class="box-avatar" :onerror="errImg" />
               </div>
               <div class="flex-1">
                 <div class="box-name">{{ item.name }}</div>
@@ -86,14 +86,14 @@
             </div>
 
             <div class="box-data">
-              <div class="flex">
+              <div class="flext">
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield86") }}</div>
                   <div class="data-number">{{ handleCategory(item.category) }}</div>
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield87") }}</div>
-                  <div class="data-number">{{ item.create_at | dateFormatNYRSF }}</div>
+                  <div class="data-number" style="font-size:14px">{{ item.create_at | dateFormatNYRSF }}</div>
                 </div>
               </div>
 
@@ -426,14 +426,14 @@ export default {
         }
         .audit-tips1 {
           font-size: 14px;
-          // text-align: center;
+          text-align: center;
           font-weight: 500;
           color: #000000;
         }
         .audit-tips2 {
           width: 70px;
-          // text-align: center;
-          text-align: right;
+          text-align: center;
+          // text-align: right;
           padding-right: 25px;
           font-size: 14px;
           font-weight: 500;

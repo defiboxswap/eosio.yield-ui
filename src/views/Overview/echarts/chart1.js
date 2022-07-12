@@ -36,7 +36,7 @@ export default {
       },
       grid: [
         {
-          // left: document.body.clientWidth < 1200 ?'18%': '10%',
+          left: document.body.clientWidth < 1200 ?'18%': '10%',
           bottom: "20%",
         },
       ],

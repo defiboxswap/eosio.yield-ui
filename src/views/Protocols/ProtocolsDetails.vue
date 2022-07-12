@@ -95,7 +95,7 @@
           </div>
 
           <div class="ProtocolsDetails-overview">
-            <div class="overview-title">Overview</div>
+            <div class="overview-title">{{ $t('yield.yield118') }}</div>
             <div class="overview-box">
               <div class="flex">
                 <div class="box-w">
@@ -207,9 +207,9 @@
                   </div>
                 </div>
                 <div class="box-w">
-                  <div class="box3-text flex" @click="openWindow(projectInfo.coinGecko)">
+                  <div class="box3-text flex" @click="openWindow(projectInfo.coingecko)">
                     <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" alt="" />
-                    <span v-if="projectInfo.coinGecko">{{ handleHttp(projectInfo.coingecko) }}</span>
+                    <span v-if="projectInfo.coingecko">{{ handleHttp(projectInfo.coingecko) }}</span>
                     <span v-else>-</span>
                   </div>
                 </div>
@@ -907,6 +907,12 @@ export default {
           item.tvl_eos = this.toFixed(item.tvl_eos, 2)
           if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
           else item.tvl_usd_change = `${item.tvl_usd_change}%`
+
+          if (res.data.length > 1) {
+            let lastItem = JSON.parse(JSON.stringify(res.data[res.data.length - 2]))
+            if (lastItem.tvl_usd == 0) item.tvl_usd_change = '0.00%'
+          }
+
           this.overViewData = item
 
           chart1.init({
@@ -1304,6 +1310,7 @@ export default {
     font-size: 15px;
     font-weight: 400;
     color: #000000;
+    word-break: break-all;
   }
 
   .ProtocolsDetails-data {

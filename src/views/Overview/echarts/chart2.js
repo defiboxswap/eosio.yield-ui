@@ -61,8 +61,8 @@ export default {
       //   // },
       // },
       grid: {
-        // left: document.body.clientWidth < 1200 ?'3%': '3%',
-        top: document.body.clientWidth < 1200 ? ((this.chartsData[0].length / 3 * 7) + '%') : ((Math.floor(this.chartsData[0].length / 10 + 1) * 13) + '%'),
+        left: document.body.clientWidth < 1200 ?'3%': '3%',
+        top: document.body.clientWidth < 1200 ? ((this.chartsData[0].length / 3 * 12) + '%') : ((Math.floor(this.chartsData[0].length / 10 + 1) * 13) + '%'),
         right: "4%",
         bottom: "3%",
         containLabel: true,

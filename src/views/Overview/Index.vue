@@ -33,7 +33,7 @@
         <div class="Overview-tvl">
           <div class="tvl-title">{{ $t("yield.yield43") }}</div>
           <!-- <div class="tvl-box" id="view2Data" :style="{'height': 650 + (this.chart2Data[0].length / 4 * 400) + 'px'}"></div> -->
-          <div class="tvl-box" id="view2Data" :style="{'height': 850 + 'px'}"></div>
+          <div class="tvl-box" id="view2Data"></div>
           <div class="tvl-box" id="view3Data"></div>
         </div>
 
@@ -279,7 +279,8 @@ export default {
     }
     #view2Data {
       width: 100%;
-      height: 650px;
+      // height: 650px;
+      height: 67vh;
       margin-bottom: 10px;
       padding: 15px;
       overflow: hidden;

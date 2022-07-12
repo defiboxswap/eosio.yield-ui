@@ -20,7 +20,7 @@
       <div class="SwapSuccess-text1" v-if="text3" v-html="text3"></div>
       <div class="SwapSuccess-text1" v-if="text4" v-html="text4"></div>
 
-      <v-btn class="btn" color="primary" @click="gotoDetails" style="background: #1c1dff; color: #fff" v-if="successText">{{ successText }}</v-btn>
+      <v-btn class="btn" color="primary" @click="gotoDetails" style="background: #1C1DFF; color: #fff" v-if="successText">{{ successText }}</v-btn>
     </div>
   </v-dialog>
 </template>

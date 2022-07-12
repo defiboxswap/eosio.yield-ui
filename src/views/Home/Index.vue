@@ -140,15 +140,19 @@
             <div class="step-title">{{ $t("yield.yield24") }}</div>
             <!-- step1 -->
             <div class="step-tips1">{{ $t("yield.yield25") }} /</div>
+            <div class="step-tips2">{{ $t("yield.yield26") }}</div>
             <div class="step-tips2">{{ $t("yield.yield27") }}</div>
             <!-- step2 -->
             <div class="step-tips1">{{ $t("yield.yield28") }} /</div>
+            <div class="step-tips2">{{ $t("yield.yield29") }}</div>
             <div class="step-tips2">{{ $t("yield.yield30") }}</div>
             <!-- step3 -->
             <div class="step-tips1">{{ $t("yield.yield31") }} /</div>
+            <div class="step-tips2">{{ $t("yield.yield32") }}</div>
             <div class="step-tips2">{{ $t("yield.yield33") }}</div>
             <!-- step4 -->
             <div class="step-tips1">{{ $t("yield.yield34") }} /</div>
+            <div class="step-tips2">{{ $t("yield.yield35") }}</div>
             <div class="step-tips2">{{ $t("yield.yield36") }}</div>
           </div>
 
