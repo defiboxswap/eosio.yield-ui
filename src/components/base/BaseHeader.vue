@@ -48,7 +48,7 @@
           <a class="BaseHeaderPC-tab" :href="item.url" :class="{ 'BaseHeaderPC-tabActive': item.routerName == $route.name }" v-for="(item, index) in tabList" :key="index" @click.prevent="gotoRouter(item)">{{ $t(item.name) }}</a>
         </div>
 
-        <v-menu nudge-width="0" nudge-top="-8" v-model="accountVisible" offset-y rounded="lg">
+        <v-menu nudge-width="0" nudge-top="-10" nudge-left="70" v-model="accountVisible" offset-y rounded="lg">
           <template v-slot:activator="{ on, attrs }">
             <div v-bind="attrs" v-on="on">
               <div style="width: 120px; margin-right: -40px" class="flex flex-jus-end">

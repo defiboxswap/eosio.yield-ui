@@ -10,10 +10,9 @@
 
           <div class="title-select flex">
             <div class="select-audit flex">
-              <div class="audit-tips1 flex-1" :style="{ color: infoTab != 'TVLRankings' ? '#999999' : '#000' }" @click="infoTab = 'TVLRankings'">{{ $t("yield.yield50") }}</div>
+              <div class="audit-tips1 flex-1" :style="{ color: infoTab != 'TVLRankings' ? '#999999' : '#000' }" @click="clickInfoTab('TVLRankings')">{{ $t("yield.yield50") }}</div>
               <div class="audit-line"></div>
-              <!-- Audit -->
-              <div class="audit-tips2 flex-1" :style="{ color: infoTab != 'Audit' ? '#999999' : '#000' }" @click="infoTab = 'Audit'">{{ $t("yield.yield51") }}</div>
+              <div class="audit-tips2 flex-1" :style="{ color: infoTab != 'Audit' ? '#999999' : '#000' }" @click="clickInfoTab('Audit')">{{ $t("yield.yield51") }}</div>
             </div>
 
             <!-- <v-select class="select-all" :items="items" label="" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select> -->
@@ -62,7 +61,7 @@
               </div>
             </div>
           </div>
-          <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">MORE</div>
+          <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">{{ $t("yield.yield57") }}</div>
         </template>
         <div v-else-if="!loading">
           <BaseNoData></BaseNoData>
@@ -110,7 +109,7 @@
               </div>
             </div>
           </div>
-          <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">MORE</div>
+          <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">{{ $t("yield.yield57") }}</div>
         </template>
         <div v-else-if="!loading">
           <BaseNoData></BaseNoData>
@@ -126,10 +125,10 @@
           <div class="overLay-select flex">
             <div class="select-audit flex flex-align-center">
               <!-- TVL Rankings -->
-              <div class="audit-tips1 flex-1" :style="{ color: infoTab != 'TVLRankings' ? '#999999' : '#000' }" @click="infoTab = 'TVLRankings'">{{ $t("yield.yield50") }}</div>
+              <div class="audit-tips1 flex-1" :style="{ color: infoTab != 'TVLRankings' ? '#999999' : '#000' }" @click="clickInfoTab('TVLRankings')">{{ $t("yield.yield50") }}</div>
               <div class="audit-line"></div>
               <!-- Audit -->
-              <div class="audit-tips2" :style="{ color: infoTab != 'Audit' ? '#999999' : '#000' }" @click="infoTab = 'Audit'">{{ $t("yield.yield51") }}</div>
+              <div class="audit-tips2 flex-1" :style="{ color: infoTab != 'Audit' ? '#999999' : '#000' }" @click="clickInfoTab('Audit')">{{ $t("yield.yield51") }}</div>
             </div>
 
             <!-- <v-select class="select-all" :items="items" label="" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select> -->
@@ -199,7 +198,7 @@
                 <!-- <div class="box-5">$123.43M</div> -->
               </a>
 
-              <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">MORE</div>
+              <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">{{ $t("yield.yield57") }}</div>
             </template>
             <div v-else-if="!loading">
               <BaseNoData></BaseNoData>
@@ -248,11 +247,11 @@
                 <div class="box-3">{{ item.create_at | dateFormatNYRSF }}</div>
                 <div class="box-4">{{ $t(statusToLanguage[item.status]) }}</div>
                 <div class="box-5 flex flex-align-center flex-jus-center">
-                  <v-btn>{{ $t('yield.yield132') }}</v-btn>
+                  <v-btn>{{ $t("yield.yield132") }}</v-btn>
                 </div>
               </a>
 
-              <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">MORE</div>
+              <div id="pagesBox" class="pagesbox" v-if="isMore" @click="nextList">{{ $t("yield.yield57") }}</div>
             </template>
             <div v-else-if="!loading">
               <BaseNoData></BaseNoData>
@@ -282,15 +281,14 @@ export default {
       loading: false,
 
       statusToLanguage: {
-        active: 'yield.yield163',
-        pending: 'yield.yield162',
-        denied: 'yield.yield164',
-      }
+        active: "yield.yield163",
+        pending: "yield.yield162",
+        denied: "yield.yield164",
+      },
     }
   },
   props: {},
   watch: {
-    
     search: function () {
       clearTimeout(this.searchTimer)
       this.searchTimer = setTimeout(() => {
@@ -310,6 +308,11 @@ export default {
   mounted() {},
   beforeDestroy() {},
   methods: {
+    clickInfoTab(infoTab) {
+      if (this.infoTab == infoTab) return
+      this.infoTab = infoTab
+      this.initList()
+    },
     initList() {
       this.isMore = true
       this.pageNo = 1
@@ -328,7 +331,7 @@ export default {
           pageNo: this.pageNo,
           pageSize: this.pageSize,
           search: this.search,
-          order: this.order,
+          order: this.infoTab == 'Audit' ? 'create_at': this.order,
         })
         if (result?.code === 0 && result.data) {
           result.data.forEach((item) => {
@@ -350,7 +353,7 @@ export default {
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]
-          
+
           this.loading = false
         } else {
           this.loading = false
@@ -654,7 +657,7 @@ export default {
 
       .select-search {
         padding: 11px 15px;
-        width: 114px;
+        width: 228px;
         height: 38px;
         font-size: 14px;
         font-weight: 500;

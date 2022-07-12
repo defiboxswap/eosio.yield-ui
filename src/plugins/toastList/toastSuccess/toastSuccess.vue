@@ -6,48 +6,47 @@
       </div>
 
       <div class="flexc successIcon">
-        <img src="@/assets/img/svg/finsh.png" style="width:65px;height:65px">
+        <img src="@/assets/img/svg/finsh.png" style="width: 65px; height: 65px" />
       </div>
-      
+
       <div class="title" v-if="title">{{ title }}</div>
 
       <!-- <div class="trxBox flex pointer" @click="$openTxid(txId)" v-if="txId">
         TrxID:
         <div class="trxId">{{ txId }}</div>
       </div> -->
-      <div class="SwapSuccess-text1" v-if="text1" style="margin-top: 10px;" v-html="text1"></div>
+      <div class="SwapSuccess-text1" v-if="text1" style="margin-top: 10px" v-html="text1"></div>
       <div class="SwapSuccess-text1" v-if="text2" v-html="text2"></div>
       <div class="SwapSuccess-text1" v-if="text3" v-html="text3"></div>
       <div class="SwapSuccess-text1" v-if="text4" v-html="text4"></div>
 
-      <v-btn class="btn" color="primary" @click="gotoDetails" style="background:#1C1DFF;color:#fff">{{ $t('yield.yield132') }}</v-btn>
-
+      <v-btn class="btn" color="primary" @click="gotoDetails" style="background: #1c1dff; color: #fff" v-if="successText">{{ successText }}</v-btn>
     </div>
   </v-dialog>
 </template>
 <script>
 export default {
-  name: 'toastSuccess',
+  name: "toastSuccess",
   data() {
     return {
-      active: false
+      active: false,
     }
   },
-  props: ['text', 'title', 'text1', 'text2', 'text3', 'text4', 'txId', 'projectName', '$router'],
+  props: ["text", "title", "text1", "text2", "text3", "text4", "txId", "projectName", "$router", "successText"],
   mounted() {
     this.$nextTick(() => this.show())
   },
   watch: {
-    active: function(isActive, wasActive) {
-      this.$emit('toastSuccessStatusChange', isActive, wasActive)
-    }
+    active: function (isActive, wasActive) {
+      this.$emit("toastSuccessStatusChange", isActive, wasActive)
+    },
   },
   methods: {
     gotoDetails() {
       setTimeout(() => {
         this.$router.push("/ProtocolsDetails?name=" + encodeURIComponent(this.projectName))
       }, 1000)
-      
+
       this.active = false
     },
     show() {
@@ -58,8 +57,8 @@ export default {
         this.$router.push("/Protocols")
       }, 1000)
       this.active = false
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>

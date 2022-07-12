@@ -295,7 +295,8 @@
 
           <div class="flex flex-jus-center">
             <!-- CLAIM -->
-            <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active'">{{ $t("yield.yield97") }}</v-btn>
+            <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active' && rewards && rewards != '-'">{{ $t("yield.yield97") }}</v-btn>
+            <v-btn class="footer-button1" style="background:#F5F5F5;color:#000" :loading="claimLoading" v-else-if="projectInfo.status == 'active' && (rewards == '-' || !rewards)">{{ $t("yield.yield170") }}</v-btn>
             <!-- EDIT -->
             <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
           </div>
@@ -615,7 +616,8 @@
 
               <div class="flex">
                 <!-- CLAIM -->
-                <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active'">{{ $t("yield.yield97") }}</v-btn>
+                <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active' && rewards && rewards != '-'">{{ $t("yield.yield97") }}</v-btn>
+                <v-btn class="footer-button1" style="background:#F5F5F5;color:#000" :loading="claimLoading" v-else-if="projectInfo.status == 'active' && (rewards == '-' || !rewards)">{{ $t("yield.yield170") }}</v-btn>
                 <!-- EDIT -->
                 <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
               </div>
@@ -1024,6 +1026,7 @@ export default {
     },
     // Claim
     async handleClaim() {
+      if (this.rewards == "-" || !this.rewards) return
       const permission = Array.isArray(this.$store.state.app.accountInfo.permissions) ? this.$store.state.app.accountInfo.permissions[0] : this.$store.state.app.accountInfo.permissions
       const formName = this.$store.state.app.accountInfo.account
       if (!formName) return

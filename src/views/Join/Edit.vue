@@ -596,7 +596,7 @@ export default {
         this.gotoId(gotoId)
         return
       }
-      this.$toastLoading(this.$t('yield.yield151'))
+      this.$toastLoading(this.$t("yield.yield151"))
 
       let metadata = []
       for (let key in this.form) {
@@ -670,9 +670,10 @@ export default {
 
       // this.$toast("submit success!")
       // this.$toastSuccess(this.$t('yield.yield152'))
-      this.$toastSuccess(this.$t('yield.yield152'), {
+      this.$toastSuccess(this.$t("yield.yield152"), {
         projectName: this.projectName,
-        $router: this.$router
+        $router: this.$router,
+        successText: this.$t("yield.yield132"),
       })
     },
     fileImage(event) {
@@ -1197,18 +1198,22 @@ textarea {
   &::-webkit-input-placeholder {
     /* WebKit, Blink, Edge */
     color: #c1c2c4 !important;
+    font-size: 12px !important;
   }
   &:-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
     color: #c1c2c4 !important;
+    font-size: 12px !important;
   }
   &::-moz-placeholder {
     /* Mozilla Firefox 19+ */
     color: #c1c2c4 !important;
+    font-size: 12px !important;
   }
   &:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: #c1c2c4 !important;
+    font-size: 12px !important;
   }
 }
 input[disabled] {

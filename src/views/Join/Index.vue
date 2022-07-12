@@ -506,7 +506,7 @@ export default {
         this.handleWalletLogin()
         return
       }
-      
+
       let gotoId = ""
       // if (this.form.cmc) this.form.cmc = parseFloat(this.form.cmc)
       if (this.form.recover) this.form.recover = parseFloat(this.form.recover)
@@ -522,7 +522,7 @@ export default {
         this.gotoId(gotoId)
         return
       }
-      this.$toastLoading(this.$t('yield.yield151'))
+      this.$toastLoading(this.$t("yield.yield151"))
 
       let metadata = []
       for (let key in this.form) {
@@ -564,7 +564,7 @@ export default {
       })
 
       this.btnLoading = false
-      
+
       this.$toastLoading.hide()
       if (result && result.code !== 0) {
         console.log("result error is ", result)
@@ -578,10 +578,11 @@ export default {
         })
         return
       }
-      
-      this.$toastSuccess(this.$t('yield.yield152'), {
+
+      this.$toastSuccess(this.$t("yield.yield152"), {
         projectName: formName,
-        $router: this.$router
+        $router: this.$router,
+        successText: this.$t("yield.yield132"),
       })
 
       // this.$toast("submit success!")
@@ -1085,18 +1086,22 @@ textarea {
   &::-webkit-input-placeholder {
     /* WebKit, Blink, Edge */
     color: #c1c2c4 !important;
+    font-size: 12px !important;
   }
   &:-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
     color: #c1c2c4 !important;
+    font-size: 12px !important;
   }
   &::-moz-placeholder {
     /* Mozilla Firefox 19+ */
     color: #c1c2c4 !important;
+    font-size: 12px !important;
   }
   &:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: #c1c2c4 !important;
+    font-size: 12px !important;
   }
 }
 input[disabled] {
