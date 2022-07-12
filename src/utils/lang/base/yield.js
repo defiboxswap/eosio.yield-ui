@@ -1,7 +1,6 @@
 /* eslint-disable */
 const items = {
   key: "yield",
-
   list: {
     zhCN: {
       yield1: "",

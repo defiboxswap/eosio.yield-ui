@@ -69,7 +69,7 @@
             <!-- <div id="view1Data"></div> -->
             <div id="view1Data" v-if="hasData"></div>
             <div v-else class="flex flexc review">
-              <img src="@/assets/img/BaseNoData/review.png" alt="">
+              <img src="@/assets/img/BaseNoData/review.png" alt="" />
               <span>{{ $t("yield.yield167") }}</span>
             </div>
             <div class="data-view">
@@ -406,7 +406,7 @@
             </div>
             <div id="view1Data" v-if="hasData"></div>
             <div v-else class="flex flexc review">
-              <img src="@/assets/img/BaseNoData/review.png" alt="">
+              <img src="@/assets/img/BaseNoData/review.png" alt="" />
               <span>{{ $t("yield.yield167") }}</span>
             </div>
           </div>
@@ -622,8 +622,7 @@
             </div>
 
             <template v-else-if="role == 1">
-              
-              <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end" >
+              <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end">
                 <div class="flex">
                   <div class="footer-Category">
                     <div class="footer-text1">{{ $t("yield.yield86") }}</div>
@@ -667,11 +666,11 @@
           <v-icon small>mdi-window-close</v-icon>
         </div>
         <div class="categoryDialog">
-          <div class="categoryDialog-title">{{ $t('yield.yield62') }}</div>
+          <div class="categoryDialog-title">{{ $t("yield.yield62") }}</div>
           <!-- <div class="categoryDialog-des">Project category</div> -->
           <v-select v-model="categoryItem" :items="categoryList" :label="$t('yield.yield61')"></v-select>
           <div class="flex flex-jus-center" style="margin-top: 30px">
-            <v-btn class="setCategoryBtn"  @click="handSetCategory">{{ $t('yield.yield169') }}</v-btn>
+            <v-btn class="setCategoryBtn" @click="handSetCategory">{{ $t("yield.yield169") }}</v-btn>
           </div>
         </div>
       </div>
@@ -770,7 +769,7 @@ export default {
           name: this.projectName,
         })
         if (res.data.length > 0) {
-          this.hasData = 1;
+          this.hasData = 1
           let item = JSON.parse(JSON.stringify(res.data[res.data.length - 1]))
           if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
 
@@ -1650,15 +1649,15 @@ export default {
   cursor: pointer;
   // margin-: 24px;
 }
-.review{
+.review {
   // border: 1px solid red;
   flex-direction: column;
   margin: 0 auto;
   min-height: 300px;
-  img{
+  img {
     width: 80px;
   }
-  span{
+  span {
     font-size: 14px;
     margin: 20px 0;
   }
