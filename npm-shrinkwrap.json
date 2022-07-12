@@ -2457,11 +2457,6 @@
         }
       }
     },
-    "animate.css": {
-      "version": "4.1.1",
-      "resolved": "https://registry.npmjs.org/animate.css/-/animate.css-4.1.1.tgz",
-      "integrity": "sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ=="
-    },
     "ansi-colors": {
       "version": "3.2.4",
       "resolved": "https://registry.npmjs.org/ansi-colors/-/ansi-colors-3.2.4.tgz",
@@ -12352,7 +12347,6 @@
           "resolved": "https://registry.npmjs.org/extend-shallow/-/extend-shallow-2.0.1.tgz",
           "integrity": "sha1-Ua99YUrZqfYQ6huvu5idaxxWiQ8=",
           "dev": true,
-          "optional": true,
           "requires": {
             "is-extendable": "^0.1.0"
           }
@@ -12418,8 +12412,7 @@
           "version": "0.1.1",
           "resolved": "https://registry.npmjs.org/is-extendable/-/is-extendable-0.1.1.tgz",
           "integrity": "sha1-YrEQ4omkcUGOPsNqYX1HLjAd/Ik=",
-          "dev": true,
-          "optional": true
+          "dev": true
         },
         "readdirp": {
           "version": "2.2.1",

@@ -66,7 +66,12 @@
           <div class="ProtocolsDetails-des">{{ projectInfo.description }}</div>
 
           <div class="ProtocolsDetails-data">
-            <div id="view1Data"></div>
+            <!-- <div id="view1Data"></div> -->
+            <div id="view1Data" v-if="hasData"></div>
+            <div v-else class="flex flexc review">
+              <img src="@/assets/img/BaseNoData/review.png" alt="">
+              <span>{{ $t("yield.yield167") }}</span>
+            </div>
             <div class="data-view">
               <div class="flex" style="margin-bottom: 10px">
                 <div class="flex-1">
@@ -298,9 +303,9 @@
         <template v-else-if="role == 1">
           <div class="flex flex-jus-center">
             <!-- Allow -->
-            <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
+            <v-btn class="footer-button1" v-if="projectInfo.status !== 'denied' && projectInfo.status !== 'active'" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
             <!-- Refuse -->
-            <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+            <v-btn class="footer-button2" v-if="projectInfo.status !== 'denied'" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
           </div>
         </template>
       </div>
@@ -399,7 +404,11 @@
                 <div class="box2-number">{{ getKMBUnit(overViewData.agg_rewards) }}</div>
               </div>
             </div>
-            <div id="view1Data"></div>
+            <div id="view1Data" v-if="hasData"></div>
+            <div v-else class="flex flexc review">
+              <img src="@/assets/img/BaseNoData/review.png" alt="">
+              <span>{{ $t("yield.yield167") }}</span>
+            </div>
           </div>
 
           <div>
@@ -636,9 +645,9 @@
                     </div>
                   </div>
                   <!-- Allow -->
-                  <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
+                  <v-btn class="footer-button1" v-if="projectInfo.status !== 'denied' && projectInfo.status !== 'active'" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
                   <!-- Refuse -->
-                  <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+                  <v-btn class="footer-button2" v-if="projectInfo.status !== 'denied'" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
                 </div>
               </div>
             </template>
@@ -679,6 +688,7 @@ export default {
   name: "ProtocolsDetails",
   data() {
     return {
+      hasData: 0,
       // categoryItem: "cdp",
       // categoryList: ["cdp", "dexes", "lending", "staking", "yield"],
       categoryItem: this.$t("yield.yield46"),
@@ -760,6 +770,7 @@ export default {
           name: this.projectName,
         })
         if (res.data.length > 0) {
+          this.hasData = 1;
           let item = JSON.parse(JSON.stringify(res.data[res.data.length - 1]))
           if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
 
@@ -1638,5 +1649,18 @@ export default {
   // border-radius: 24px;
   cursor: pointer;
   // margin-: 24px;
+}
+.review{
+  // border: 1px solid red;
+  flex-direction: column;
+  margin: 0 auto;
+  min-height: 300px;
+  img{
+    width: 80px;
+  }
+  span{
+    font-size: 14px;
+    margin: 20px 0;
+  }
 }
 </style>
