@@ -296,7 +296,7 @@
           <div class="flex flex-jus-center">
             <!-- CLAIM -->
             <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active' && rewards && rewards != '-'">{{ $t("yield.yield97") }}</v-btn>
-            <v-btn class="footer-button1" style="background:#F5F5F5;color:#000" :loading="claimLoading" v-else-if="projectInfo.status == 'active' && (rewards == '-' || !rewards)">{{ $t("yield.yield170") }}</v-btn>
+            <v-btn class="footer-button1" style="background: #f5f5f5; color: #000" :loading="claimLoading" v-else-if="projectInfo.status == 'active' && (rewards == '-' || !rewards)">{{ $t("yield.yield170") }}</v-btn>
             <!-- EDIT -->
             <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
           </div>
@@ -617,40 +617,102 @@
               <div class="flex">
                 <!-- CLAIM -->
                 <v-btn class="footer-button1" :loading="claimLoading" @click="handleClaim" v-if="projectInfo.status == 'active' && rewards && rewards != '-'">{{ $t("yield.yield97") }}</v-btn>
-                <v-btn class="footer-button1" style="background:#F5F5F5;color:#000" :loading="claimLoading" v-else-if="projectInfo.status == 'active' && (rewards == '-' || !rewards)">{{ $t("yield.yield170") }}</v-btn>
+                <v-btn class="footer-button1" style="background: #f5f5f5; color: #000" :loading="claimLoading" v-else-if="projectInfo.status == 'active' && (rewards == '-' || !rewards)">{{ $t("yield.yield170") }}</v-btn>
                 <!-- EDIT -->
                 <v-btn class="footer-button2" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
               </div>
             </div>
 
             <template v-else-if="role == 1">
-              <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end">
-                <div class="flex">
-                  <div class="footer-Category">
-                    <div class="footer-text1">{{ $t("yield.yield86") }}</div>
-                    <div class="footer-text2 flex" style="margin-right: 50px">
-                      <div>{{ handleCategory(projectInfo.category) }}</div>
+              <template v-if="projectInfo.status == 'pending'">
+                <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end">
+                  <div class="flex">
+                    <div class="footer-Category">
+                      <div class="footer-text1">{{ $t("yield.yield86") }}</div>
+                      <div class="footer-text2 flex" style="margin-right: 50px">
+                        <div>{{ handleCategory(projectInfo.category) }}</div>
+                      </div>
                     </div>
+                    <!-- Modify -->
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogVisible = true" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+
+                    <div class="footer-line"></div>
                   </div>
-                  <!-- Modify -->
-                  <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogVisible = true" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
 
-                  <div class="footer-line"></div>
+                  <div class="flex">
+                    <!-- <div class="footer-Category">
+                      <div class="footer-text1">{{ $t("yield.yield88") }}</div>
+                      <div class="footer-text2 flex" style="margin-right: 50px">
+                        <div>{{ $t(statusToLanguage[projectInfo.status]) }}</div>
+                      </div>
+                    </div> -->
+                    <!-- Allow -->
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
+                    <!-- Refuse -->
+                    <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+                  </div>
                 </div>
+              </template>
 
-                <div class="flex">
-                  <div class="footer-Category">
-                    <div class="footer-text1">{{ $t("yield.yield88") }}</div>
-                    <div class="footer-text2 flex" style="margin-right: 50px">
-                      <div>{{ $t(statusToLanguage[projectInfo.status]) }}</div>
+              <template v-else-if="projectInfo.status == 'active'">
+                <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end">
+                  <div class="flex">
+                    <div class="footer-Category">
+                      <div class="footer-text1">{{ $t("yield.yield86") }}</div>
+                      <div class="footer-text2 flex" style="margin-right: 50px">
+                        <div>{{ handleCategory(projectInfo.category) }}</div>
+                      </div>
                     </div>
+                    <!-- Modify -->
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogVisible = true" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+
+                    <div class="footer-line"></div>
                   </div>
-                  <!-- Allow -->
-                  <v-btn class="footer-button1" v-if="projectInfo.status !== 'denied' && projectInfo.status !== 'active'" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
-                  <!-- Refuse -->
-                  <v-btn class="footer-button2" v-if="projectInfo.status !== 'denied'" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+
+                  <div class="flex">
+                    <div class="footer-Category">
+                      <div class="footer-text1">{{ $t("yield.yield88") }}</div>
+                      <div class="footer-text2 flex" style="margin-right: 50px">
+                        <div>{{ $t(statusToLanguage[projectInfo.status]) }}</div>
+                      </div>
+                    </div>
+                    <!-- Allow -->
+                    <!-- <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn> -->
+                    <!-- Refuse -->
+                    <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
+                  </div>
                 </div>
-              </div>
+              </template>
+
+              <template v-else-if="projectInfo.status == 'denied'">
+                <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-end">
+                  <div class="flex">
+                    <div class="footer-Category">
+                      <div class="footer-text1">{{ $t("yield.yield86") }}</div>
+                      <div class="footer-text2 flex" style="margin-right: 50px">
+                        <div>{{ handleCategory(projectInfo.category) }}</div>
+                      </div>
+                    </div>
+                    <!-- Modify -->
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogVisible = true" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+
+                    <div class="footer-line"></div>
+                  </div>
+
+                  <div class="flex">
+                    <div class="footer-Category">
+                      <div class="footer-text1">{{ $t("yield.yield88") }}</div>
+                      <div class="footer-text2 flex" style="margin-right: 50px">
+                        <div>{{ $t(statusToLanguage[projectInfo.status]) }}</div>
+                      </div>
+                    </div>
+                    <!-- Allow -->
+                    <!-- <v-btn class="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn> -->
+                    <!-- Refuse -->
+                    <!-- <v-btn class="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn> -->
+                  </div>
+                </div>
+              </template>
             </template>
           </div>
         </div>
