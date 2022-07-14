@@ -80,7 +80,7 @@
                 </div>
                 <div class="flex-1">
                   <div class="view-title">{{ $t("yield.yield42") }}</div>
-                  <div class="view-text">{{ overViewData.tvl_usd_change }}</div>
+                  <div class="view-text" :class="getColor(overViewData.tvl_usd_change)">{{ overViewData.tvl_usd_change }}</div>
                 </div>
               </div>
 
@@ -132,7 +132,7 @@
                   <div class="box3-title">{{ $t("yield.yield73") }}</div>
                   <div class="box3-text">
                     <span v-if="!projectInfo.recover">-</span>
-                    <span v-else>{{ projectInfo.recover }}</span>
+                    <span v-else @click="openWindow('https://eosrecover.com/project/' + projectInfo.recover)">{{ projectInfo.recover }}</span>
                   </div>
                 </div>
               </div>
@@ -329,7 +329,7 @@
                 <div class="footer-text1">{{ $t("yield.yield86") }}</div>
                 <div class="footer-text2">{{ handleCategory(projectInfo.category) }}</div>
               </div>
-              <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogVisible = true">{{ $t("yield.yield168") }}</v-btn>
+              <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogShow">{{ $t("yield.yield168") }}</v-btn>
             </div>
             <div class="footer-line"></div>
             <div class="flex flex-column flex-jus-between footer-height">
@@ -344,7 +344,7 @@
                 <div class="footer-text1">{{ $t("yield.yield86") }}</div>
                 <div class="footer-text2">{{ handleCategory(projectInfo.category) }}</div>
               </div>
-              <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogVisible = true">{{ $t("yield.yield168") }}</v-btn>
+              <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogShow">{{ $t("yield.yield168") }}</v-btn>
             </div>
             <div class="footer-line"></div>
             <div class="flex flex-column flex-jus-between footer-height">
@@ -362,7 +362,7 @@
                 <div class="footer-text1">{{ $t("yield.yield86") }}</div>
                 <div class="footer-text2">{{ handleCategory(projectInfo.category) }}</div>
               </div>
-              <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogVisible = true">{{ $t("yield.yield168") }}</v-btn>
+              <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogShow">{{ $t("yield.yield168") }}</v-btn>
             </div>
             <div class="footer-line"></div>
             <div class="flex flex-column flex-jus-center footer-height">
@@ -418,7 +418,7 @@
                     <!-- website -->
                     <div class="info-title">{{ $t("yield.yield117") }}</div>
                     <a class="info-text" :href="projectInfo.website" target="_blank">
-                      <span v-if="projectInfo.website">{{ handleHttp(projectInfo.website) }}</span>
+                      <span v-if="projectInfo.website" class="hover-blue">{{ handleHttp(projectInfo.website) }}</span>
                       <span v-else>-</span>
                     </a>
                   </div>
@@ -426,7 +426,7 @@
                     <!-- Protocols address -->
                     <div class="info-title">{{ $t("yield.yield92") }}</div>
                     <div class="info-text curPoint">
-                      <span v-if="projectInfo.contracts" @click="openWindow('https://bloks.io/account/' + projectInfo.contracts)">{{ projectInfo.contracts }}</span>
+                      <span v-if="projectInfo.contracts" class="hover-blue" @click="openWindow('https://bloks.io/account/' + projectInfo.contracts)">{{ projectInfo.contracts }}</span>
                       <span v-else>-</span>
                     </div>
                   </div>
@@ -460,7 +460,7 @@
                   <div class="box2-circle"></div>
                   <div class="">{{ $t("yield.yield42") }}</div>
                 </div>
-                <div class="box2-number">{{ overViewData.tvl_usd_change }}</div>
+                <div class="box2-number" :class="getColor(overViewData.tvl_usd_change)">{{ overViewData.tvl_usd_change }}</div>
               </div>
 
               <div class="">
@@ -550,7 +550,7 @@
                       <div class="box3-title">{{ $t("yield.yield73") }}</div>
                       <div class="box3-text">
                         <span v-if="!projectInfo.recover">-</span>
-                        <span v-else>{{ projectInfo.recover }}</span>
+                        <span v-else class="hover-blue" @click="openWindow('https://eosrecover.com/project/' + projectInfo.recover)">{{ projectInfo.recover }}</span>
                       </div>
                     </div>
                   </div>
@@ -700,7 +700,7 @@
                       </div>
                     </div>
                     <!-- Modify -->
-                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogVisible = true" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogShow" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
 
                     <div class="footer-line"></div>
                   </div>
@@ -730,7 +730,7 @@
                       </div>
                     </div>
                     <!-- Modify -->
-                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogVisible = true" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogShow" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
 
                     <div class="footer-line"></div>
                   </div>
@@ -760,7 +760,7 @@
                       </div>
                     </div>
                     <!-- Modify -->
-                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogVisible = true" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogShow" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
 
                     <div class="footer-line"></div>
                   </div>
@@ -905,12 +905,12 @@ export default {
 
           item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
           item.tvl_eos = this.toFixed(item.tvl_eos, 2)
-          if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
-          else item.tvl_usd_change = `${item.tvl_usd_change}%`
+          if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}`
+          else item.tvl_usd_change = `${item.tvl_usd_change}`
 
           if (res.data.length > 1) {
             let lastItem = JSON.parse(JSON.stringify(res.data[res.data.length - 2]))
-            if (lastItem.tvl_usd == 0) item.tvl_usd_change = '0.00%'
+            if (lastItem.tvl_usd == 0) item.tvl_usd_change = '0.00'
           }
 
           this.overViewData = item
@@ -1063,7 +1063,7 @@ export default {
         this.getAdminAccount()
         this.getInfo()
         this.getRewards()
-      }, 1000)
+      }, 2000)
     },
     // Allow
     async handleAllow() {
@@ -1115,7 +1115,7 @@ export default {
         this.getAdminAccount()
         this.getInfo()
         this.getRewards()
-      }, 1000)
+      }, 2000)
     },
     // Refuse
     async handleRefuse() {
@@ -1166,7 +1166,7 @@ export default {
         this.getAdminAccount()
         this.getInfo()
         this.getRewards()
-      }, 1000)
+      }, 2000)
     },
     // Claim
     async handleClaim() {
@@ -1213,7 +1213,7 @@ export default {
         this.getAdminAccount()
         this.getInfo()
         this.getRewards()
-      }, 1000)
+      }, 2000)
       // yes
       this.$toast("claim success!")
     },
@@ -1237,6 +1237,19 @@ export default {
         }
       })
     },
+    categoryDialogShow() {
+      this.categoryItem = this.handleCategory(this.projectInfo.category)
+      this.categoryDialogVisible = true
+    },
+    getColor(item) {
+      if (item > 0) {
+        return 'color-green'
+      } else if (item < 0) {
+        return 'color-red'
+      } else {
+        return ''
+      }
+    }
   },
 }
 </script>

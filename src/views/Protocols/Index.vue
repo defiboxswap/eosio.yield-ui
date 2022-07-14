@@ -33,6 +33,7 @@
                 <div class="flex flex-wrap">
                   <div class="box-label">{{ handleCategory(item.category) }}</div>
                   <!-- <div class="box-label">Corss-chain</div> -->
+                  <div class="box-label"  v-if="handleGrade(item.tvl_usd)">{{ handleGrade(item.tvl_usd) }}</div>
                 </div>
               </div>
             </div>
@@ -45,7 +46,7 @@
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield42") }}</div>
-                  <div class="data-number">{{ item.tvl_usd_change }}</div>
+                  <div class="data-number" :class="getColor(item.tvl_usd_change)">{{ item.tvl_usd_change }}</div>
                 </div>
               </div>
 
@@ -93,7 +94,7 @@
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield87") }}</div>
-                  <div class="data-number" style="font-size:14px">{{ item.create_at | dateFormatNYRSF }}</div>
+                  <div class="data-number" style="font-size:14px">{{ item.create_at | dateFormatYMDF }}</div>
                 </div>
               </div>
 
@@ -187,13 +188,13 @@
                     <div class="item-name">{{ item.name }}</div>
                     <div class="flex flex-wrap">
                       <div class="item-label">{{ handleCategory(item.category) }}</div>
-                      <!-- <div class="item-label">Corss-chain</div> -->
+                      <div class="item-label" v-if="handleGrade(item.tvl_usd)">{{ handleGrade(item.tvl_usd) }}</div>
                     </div>
                   </div>
                 </div>
 
                 <div class="box-2">${{ getKMBUnit(item.tvl_usd) }}</div>
-                <div class="box-3">{{ item.tvl_usd_change }}</div>
+                <div class="box-3" :class="getColor(item.tvl_usd_change)">{{ item.tvl_usd_change }}</div>
                 <div class="box-4">{{ getKMBUnit(item.agg_rewards) }}</div>
                 <!-- <div class="box-5">$123.43M</div> -->
               </a>
@@ -244,7 +245,7 @@
                 </div>
 
                 <div class="box-2">{{ handleCategory(item.category) }}</div>
-                <div class="box-3">{{ item.create_at | dateFormatNYRSF }}</div>
+                <div class="box-3">{{ item.create_at | dateFormatYMDF }}</div>
                 <div class="box-4">{{ $t(statusToLanguage[item.status]) }}</div>
                 <div class="box-5 flex flex-align-center flex-jus-center">
                   <v-btn>{{ $t("yield.yield132") }}</v-btn>
@@ -330,7 +331,7 @@ export default {
         let result = await protocols.list({
           pageNo: this.pageNo,
           pageSize: this.pageSize,
-          search: this.search,
+          search: this.search.replace(/(^\s*)|(\s*$)/g, ""),
           order: this.infoTab == 'Audit' ? 'create_at': this.order,
         })
         if (result?.code === 0 && result.data) {
@@ -349,10 +350,10 @@ export default {
             if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
 
             item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
-            if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
-            else item.tvl_usd_change = `${item.tvl_usd_change}%`
+            if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}`
+            else item.tvl_usd_change = `${item.tvl_usd_change}`
 
-            if (item.tvl_usd_changeOld == item.tvl_usd) item.tvl_usd_change = '0.00%'
+            if (item.tvl_usd_changeOld == item.tvl_usd) item.tvl_usd_change = '0.00'
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]
@@ -367,6 +368,30 @@ export default {
         this.isMore = false
       }
     },
+    getColor(item) {
+      if (item > 0) {
+        return 'color-green'
+      } else if (item < 0) {
+        return 'color-red'
+      } else {
+        return ''
+      }
+    },
+    handleGrade(item) {
+      if (item < 500000) {
+        return ''
+      } else if (item >= 500000 && item < 1875000) {
+        return 'Bronze'
+      } else if (item >= 1875000 && item < 3750000) {
+        return 'Siver'
+      } else if (item >= 3750000 && item < 7500000) {
+        return 'Gold'
+      } else if (item >= 7500000 && item < 3750000) {
+        return 'Dimond'
+      } else {
+        return 'Platinum'
+      }
+    }
   },
 }
 </script>
@@ -377,6 +402,7 @@ export default {
     max-width: 420px;
     margin: 0 auto;
   }
+
   .Protocols-title {
     width: 100%;
     height: 140px;

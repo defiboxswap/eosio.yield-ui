@@ -4,21 +4,20 @@
       <div class="Join-layout">
         <!-- Projects -->
         <div class="Join-title">{{ $t("yield.yield4") }}</div>
-
         <div class="Join-basicInfo" id="basic">
           <!-- *Basic Information -->
           <div class="basicInfo-title">{{ $t("yield.yield60") }}</div>
           <div class="basicInfo-box">
             <!-- project name -->
-            <div class="basicInfo-subtitle">{{ $t("yield.yield116") }}</div>
+            <div class="basicInfo-subtitle"><span class="color-red">*</span>{{ $t("yield.yield116") }}</div>
             <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.name" @change="formWrongTips.name = false" />
             <div class="basicInfo-wrongTips" v-if="formWrongTips.name">{{ $t("yield.yield120") }}</div>
           </div>
 
           <div class="basicInfo-box">
             <!-- Protocols contract -->
-            <div class="basicInfo-subtitle flex">
-              {{ $t("yield.yield78") }}
+            <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow" v-click-outside="hideTipsShow">
+              <span class="color-red">*</span>{{ $t("yield.yield78") }}
               <v-tooltip bottom v-model="tipsShow" :openOnHover="false" :openOnFocus="false" :attach="true">
                 <template v-slot:activator="{ on, attrs }">
                   <div class="flex curPoint" v-bind="attrs" v-on="on">
@@ -44,7 +43,7 @@
 
           <div class="basicInfo-box">
             <!-- Project website -->
-            <div class="basicInfo-subtitle">{{ $t("yield.yield64") }}</div>
+            <div class="basicInfo-subtitle"><span class="color-red">*</span>{{ $t("yield.yield64") }}</div>
             <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.website" @change="formWrongTips.website = false" :placeholder="$t('yield.yield140')" />
             <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t("yield.yield121") }}</div>
           </div>
@@ -207,13 +206,13 @@
           <div class="flext marb-25">
             <div class="basicInfo-left">
               <!-- project name -->
-              <div class="basicInfo-subtitle">{{ $t("yield.yield116") }}</div>
+              <div class="basicInfo-subtitle"><span class="color-red">*</span>{{ $t("yield.yield116") }}</div>
               <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.name" @change="formWrongTips.name = false" />
               <div class="basicInfo-wrongTips" v-if="formWrongTips.name">{{ $t("yield.yield120") }}</div>
             </div>
             <div>
               <!-- Project website -->
-              <div class="basicInfo-subtitle">{{ $t("yield.yield64") }}</div>
+              <div class="basicInfo-subtitle"><span class="color-red">*</span>{{ $t("yield.yield64") }}</div>
               <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.website" @change="formWrongTips.website = false" :placeholder="$t('yield.yield140')" />
               <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t("yield.yield121") }}</div>
             </div>
@@ -222,8 +221,8 @@
           <div class="flext marb-25">
             <div class="basicInfo-left">
               <!-- Protocols contract -->
-              <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow">
-                {{ $t("yield.yield78") }}
+              <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow" v-click-outside="hideTipsShow">
+                <span class="color-red">*</span>{{ $t("yield.yield78") }}
 
                 <v-tooltip bottom v-model="tipsShow" :openOnHover="false" :openOnFocus="false" :attach="true">
                   <template v-slot:activator="{ on, attrs }">
@@ -506,7 +505,12 @@ export default {
         this.handleWalletLogin()
         return
       }
-
+      const autoAccount = await this.getAdminAccount()
+      // 判断是否合约账号
+      if (!autoAccount) {
+        this.$toast(this.$t("yield.yield171"))
+        return
+      }
       let gotoId = ""
       // if (this.form.cmc) this.form.cmc = parseFloat(this.form.cmc)
       if (this.form.recover) this.form.recover = parseFloat(this.form.recover)
@@ -578,7 +582,6 @@ export default {
         })
         return
       }
-
       this.$toastSuccess(this.$t("yield.yield152"), {
         projectName: formName,
         $router: this.$router,
@@ -625,6 +628,34 @@ export default {
     handleWalletLogin() {
       this.$store.dispatch("setWalletLoginVisible", true)
     },
+    hideTipsShow() {
+      this.tipsShow = false
+    },
+    // getAdminAccount
+    getAdminAccount() {
+      return new Promise(async (resolve, reject) => {
+        axios({
+          url: "https://eos.greymass.com/v1/chain/get_account",
+          method: "post",
+          headers: {
+            "content-type": "text/plain;charset=UTF-8",
+          },
+          data: {
+            account_name: this.eosAccount,
+          },
+        }).then((res) => {
+          let adminList = res.data?.permissions[0]?.required_auth?.accounts
+          if (adminList.length > 0) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+        }).catch((error) => {
+          reject(error)
+          console.log(error);
+        })
+      })
+    }
   },
 }
 </script>

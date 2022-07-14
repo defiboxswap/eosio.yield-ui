@@ -20,7 +20,7 @@
           </div>
         </div>
         <!-- <img src="@/assets/img/Home/par1BG.png" class="part1-bg" /> -->
-        <video src="@/assets/video/home/447.mp4" class="part1-bg" loop autoplay muted />
+        <video src="@/assets/video/home/447.mp4" class="part1-bg" loop autoplay muted controls="controls" type="video/mp4" />
       </div>
 
       <div class="Home-part2">
@@ -113,7 +113,7 @@
                 </div>
               </div>
             </div> -->
-            <div v-if="infoTab != 'Launch'">
+            <div v-if="infoTab === 'Launch'">
               <img src="@/assets/img/Home/LaunchZh.png" class="part3-img" v-if="$store.state.app.language == 'zh-TW'" />
               <img src="@/assets/img/Home/LaunchKo.png" class="part3-img" v-else-if="$store.state.app.language == 'ko'" />
               <img src="@/assets/img/Home/LaunchEn.png" class="part3-img" v-else />

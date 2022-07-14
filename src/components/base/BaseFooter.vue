@@ -15,7 +15,7 @@
         <div>
           <!-- <img class="BaseFooterPC-logo" src="@/assets/img/BaseFooter/logo.png" /> -->
           <img class="BaseFooterPC-logo" src="@/assets/img/BaseHeader/logoDark.png" />
-          <div class="BaseFooterPC-tips">Copyright © 2020 Yield+ All rights reserved.</div>
+          <div class="BaseFooterPC-tips">Copyright © 2022 Yield+ All rights reserved.</div>
         </div>
         <!-- <div class="BaseFooterPC-tips">If you have any questions please contact xxxxxx@gmail.com</div> -->
         <div class="BaseFooterPC-tips"> </div>
