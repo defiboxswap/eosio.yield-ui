@@ -5,7 +5,7 @@
       <div class="flex flex-column flex-align-center">
         <!-- <img class="BaseFooter-logo" src="@/assets/img/BaseFooter/logo.png" /> -->
         <img class="BaseFooter-logo" src="@/assets/img/BaseHeader/logoDark.png" />
-        <div class="BaseFooter-tips">Copyright © 2020 Yield+ All rights reserved.</div>
+        <div class="BaseFooter-tips">Copyright © 2022 Yield+ All rights reserved.</div>
       </div>
 
     </div>

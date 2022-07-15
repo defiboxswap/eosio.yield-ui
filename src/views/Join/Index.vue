@@ -505,12 +505,7 @@ export default {
         this.handleWalletLogin()
         return
       }
-      const autoAccount = await this.getAdminAccount()
-      // 判断是否合约账号
-      if (!autoAccount) {
-        this.$toast(this.$t("yield.yield171"))
-        return
-      }
+
       let gotoId = ""
       // if (this.form.cmc) this.form.cmc = parseFloat(this.form.cmc)
       if (this.form.recover) this.form.recover = parseFloat(this.form.recover)
@@ -524,6 +519,12 @@ export default {
       }
       if (gotoId) {
         this.gotoId(gotoId)
+        return
+      }
+      const autoAccount = await this.getAdminAccount()
+      // 判断是否合约账号
+      if (!autoAccount) {
+        this.$toast(this.$t("yield.yield171"))
         return
       }
       this.$toastLoading(this.$t("yield.yield151"))

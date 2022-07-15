@@ -46,10 +46,10 @@
                 <div class="flex">
                   <div class="data-box flex-1">
                     <div class="data-name">{{ $t("yield.yield92") }}</div>
-                    <div class="data-number">
+                    <a class="data-number color-blue">
                       <span v-if="projectInfo.contracts" @click="openWindow('https://bloks.io/account/' + projectInfo.contracts)">{{ projectInfo.contracts }}</span>
                       <span v-else>-</span>
-                    </div>
+                    </a>
                   </div>
                   <!-- <div class="data-box flex-1">
                     <div class="data-name">{{ $t("yield.yield55") }}</div>
@@ -905,12 +905,12 @@ export default {
 
           item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
           item.tvl_eos = this.toFixed(item.tvl_eos, 2)
-          if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}`
-          else item.tvl_usd_change = `${item.tvl_usd_change}`
+          if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
+          else item.tvl_usd_change = `${item.tvl_usd_change}%`
 
           if (res.data.length > 1) {
             let lastItem = JSON.parse(JSON.stringify(res.data[res.data.length - 2]))
-            if (lastItem.tvl_usd == 0) item.tvl_usd_change = '0.00'
+            if (lastItem.tvl_usd == 0) item.tvl_usd_change = '0.00%'
           }
 
           this.overViewData = item
@@ -1242,9 +1242,10 @@ export default {
       this.categoryDialogVisible = true
     },
     getColor(item) {
-      if (item > 0) {
+      const val = item.slice(0, item.length - 1)
+      if (val > 0) {
         return 'color-green'
-      } else if (item < 0) {
+      } else if (val < 0) {
         return 'color-red'
       } else {
         return ''

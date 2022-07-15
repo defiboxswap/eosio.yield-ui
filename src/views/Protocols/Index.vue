@@ -1,21 +1,22 @@
 <template>
   <div>
+    <!-- mobile -->
     <div class="Protocols" v-if="isMobile">
       <div class="Protocols-title">
         <div class="Protocols-layout">
-          <div class="title-search flex">
-            <img src="@/assets/img/svg/sousuo.svg" />
-            <input type="text" class="flex-1" :placeholder="$t('yield.yield56')" v-model="search" />
+          <div class="flex">
+            <div class="title-search">
+              <img src="@/assets/img/svg/sousuo.svg" />
+              <input type="text" class="flex-1" :placeholder="$t('yield.yield56')" v-model="search" />
+              <v-select class="select-all select-all-mobile flex-1" :items="items" v-model="selectVal" label="All" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select>
+            </div>
           </div>
-
           <div class="title-select flex">
             <div class="select-audit flex">
               <div class="audit-tips1 flex-1" :style="{ color: infoTab != 'TVLRankings' ? '#999999' : '#000' }" @click="clickInfoTab('TVLRankings')">{{ $t("yield.yield50") }}</div>
               <div class="audit-line"></div>
               <div class="audit-tips2 flex-1" :style="{ color: infoTab != 'Audit' ? '#999999' : '#000' }" @click="clickInfoTab('Audit')">{{ $t("yield.yield51") }}</div>
             </div>
-
-            <!-- <v-select class="select-all" :items="items" label="" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select> -->
           </div>
         </div>
       </div>
@@ -117,6 +118,7 @@
         </div>
       </div>
     </div>
+    <!-- pc -->
     <div class="ProtocolsPC" v-else>
       <div class="ProtocolsPC-overLay">
         <div class="ProtocolsPC-layout flex flex-jus-between">
@@ -132,7 +134,7 @@
               <div class="audit-tips2 flex-1" :style="{ color: infoTab != 'Audit' ? '#999999' : '#000' }" @click="clickInfoTab('Audit')">{{ $t("yield.yield51") }}</div>
             </div>
 
-            <!-- <v-select class="select-all" :items="items" label="" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select> -->
+            <v-select class="select-all" :items="items" v-model="selectVal" label="All" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select>
 
             <div class="select-search flex" style="margin-left: 10px">
               <!-- <div class="flex-1">{{ $t("yield.yield56") }}</div> -->
@@ -286,6 +288,8 @@ export default {
         pending: "yield.yield162",
         denied: "yield.yield164",
       },
+      items: ['All', 'CDP', 'Lending', 'Dexes', 'Yield', 'Liquid Staking'],
+      selectVal: 'All'
     }
   },
   props: {},
@@ -297,6 +301,9 @@ export default {
       }, 500)
     },
     order: function () {
+      this.initList()
+    },
+    selectVal: function () {
       this.initList()
     },
   },
@@ -311,6 +318,12 @@ export default {
   methods: {
     clickInfoTab(infoTab) {
       if (this.infoTab == infoTab) return
+      this.selectVal = 'All'
+      if (infoTab === 'TVLRankings') {
+        this.items = ['All', 'CDP', 'Lending', 'Dexes', 'Yield', 'Liquid Staking']
+      } else {
+        this.items = ['All', 'pending', 'active', 'denied']
+      }
       this.infoTab = infoTab
       this.initList()
     },
@@ -332,7 +345,9 @@ export default {
           pageNo: this.pageNo,
           pageSize: this.pageSize,
           search: this.search.replace(/(^\s*)|(\s*$)/g, ""),
-          order: this.infoTab == 'Audit' ? 'create_at': this.order,
+          order: this.infoTab == 'Audit' ? 'create_at' : this.order,
+          status: this.infoTab === 'TVLRankings' ? '' : this.selectVal === 'All' ? '' : this.selectVal,
+          category: this.infoTab === 'Audit' ? '' : this.selectVal === 'All' ? '' : this.selectVal
         })
         if (result?.code === 0 && result.data) {
           result.data.forEach((item) => {
@@ -350,10 +365,10 @@ export default {
             if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
 
             item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
-            if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}`
-            else item.tvl_usd_change = `${item.tvl_usd_change}`
+            if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
+            else item.tvl_usd_change = `${item.tvl_usd_change}%`
 
-            if (item.tvl_usd_changeOld == item.tvl_usd) item.tvl_usd_change = '0.00'
+            if (item.tvl_usd_changeOld == item.tvl_usd) item.tvl_usd_change = '0.00%'
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]
@@ -369,9 +384,10 @@ export default {
       }
     },
     getColor(item) {
-      if (item > 0) {
+      const val = item.slice(0, item.length - 1)
+      if (val > 0) {
         return 'color-green'
-      } else if (item < 0) {
+      } else if (val < 0) {
         return 'color-red'
       } else {
         return ''
@@ -386,10 +402,8 @@ export default {
         return 'Siver'
       } else if (item >= 3750000 && item < 7500000) {
         return 'Gold'
-      } else if (item >= 7500000 && item < 3750000) {
-        return 'Dimond'
       } else {
-        return 'Platinum'
+        return 'Dimond'
       }
     }
   },
@@ -409,11 +423,12 @@ export default {
     background-color: #f9fafb;
     padding: 17px 20px;
     .title-search {
+      position: relative;
       width: 100%;
       height: 45px;
       line-height: 45px;
       border: 1px solid #000;
-      padding: 0 17px;
+      padding: 0 100px 0 17px;
       margin-bottom: 16px;
       border-radius: 25px;
       img,
@@ -436,6 +451,23 @@ export default {
       :-ms-input-placeholder {
         /* Internet Explorer 10-11 */
         color: #999;
+      }
+      .select-all-mobile {
+        position: absolute;
+        right: 0;
+        top: 0;
+        border: none;
+        background: transparent;
+        ::v-deep .v-input__slot {
+          background: transparent !important;
+          padding-left: 0 !important;
+        }
+
+        ::v-deep .v-select__selections {
+          width: 70px;
+          padding-left: 16px;
+          border-left: 1px solid rgba(153, 153, 153, 0.15);
+        }
       }
     }
 
@@ -469,53 +501,53 @@ export default {
           color: #999999;
         }
       }
-      .select-all {
-        flex: 1;
+    }
+    .select-all {
+      flex: 1;
+      height: 45px;
+      line-height: 45px;
+      border-radius: 25px;
+      border: 1px solid #000;
+      ::v-deep .v-input__control {
+        min-width: 80px;
         height: 45px;
-        line-height: 45px;
-        border-radius: 25px;
-        border: 1px solid #000;
-        ::v-deep .v-input__control {
-          min-width: 80px;
-          height: 45px;
-          min-height: 45px;
-          margin-bottom: 0;
-        }
-        ::v-deep .v-input__slot {
-          margin-bottom: 0;
-          box-shadow: none;
-          min-height: 43px;
-        }
-        ::v-deep .v-select__selections input {
-          display: none;
-        }
-        ::v-deep .v-select__slot label {
-          min-width: 80px;
-          width: fit-content;
-          display: block;
-          color: #000;
-        }
-        ::v-deep .v-select__selections {
-          min-width: 80px;
-          width: fit-content;
-          display: block;
-          min-height: auto;
-          color: #000;
-        }
-        ::v-deep .v-select__selection {
-          min-width: 40px;
-          width: fit-content;
-          color: #000;
-        }
-        ::v-deep .v-input__icon--append .primary--text {
-          // background-image: url(~@/assets/img/svg/xiala.svg);
-          // background-size: 100% 100%;
-          color: #000 !important;
-          caret-color: #000 !important;
-        }
-        ::v-deep .v-text-field__details {
-          display: none;
-        }
+        min-height: 45px;
+        margin-bottom: 0;
+      }
+      ::v-deep .v-input__slot {
+        margin-bottom: 0;
+        box-shadow: none;
+        min-height: 43px;
+      }
+      ::v-deep .v-select__selections input {
+        display: none;
+      }
+      ::v-deep .v-select__slot label {
+        min-width: 80px;
+        width: fit-content;
+        display: block;
+        color: #000;
+      }
+      ::v-deep .v-select__selections {
+        min-width: 80px;
+        width: fit-content;
+        display: block;
+        min-height: auto;
+        color: #000;
+      }
+      ::v-deep .v-select__selection {
+        min-width: 40px;
+        width: fit-content;
+        color: #000;
+      }
+      ::v-deep .v-input__icon--append .primary--text {
+        // background-image: url(~@/assets/img/svg/xiala.svg);
+        // background-size: 100% 100%;
+        color: #000 !important;
+        caret-color: #000 !important;
+      }
+      ::v-deep .v-text-field__details {
+        display: none;
       }
     }
   }
