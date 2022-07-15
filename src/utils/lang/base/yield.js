@@ -173,7 +173,11 @@ const items = {
         "yield168": "",
         "yield169": "",
         "yield170": "",
-        "yield171": ""
+        "yield171": "",
+        "yield172": "",
+        "yield173": "",
+        "yield174": "",
+        "yield175": ""
     },
     "zhTW": {
         "yield1": "首頁",
@@ -346,7 +350,11 @@ const items = {
         "yield168": "調整",
         "yield169": "確認",
         "yield170": "暫無可領取",
-        "yield171": "提交賬號必須是合約賬號"
+        "yield171": "提交賬號必須是合約賬號",
+        "yield172": "展開",
+        "yield173": "收起",
+        "yield174": "全部",
+        "yield175": ""
     },
     "en": {
         "yield1": "Home",
@@ -519,7 +527,11 @@ const items = {
         "yield168": "Modify",
         "yield169": "Confirm",
         "yield170": "No rewards available",
-        "yield171": "The submitted account must be a contract account."
+        "yield171": "The submitted account must be a contract account.",
+        "yield172": "Expand",
+        "yield173": "Put away",
+        "yield174": "All",
+        "yield175": ""
     },
     "ko": {
         "yield1": "집",
@@ -692,7 +704,11 @@ const items = {
         "yield168": "수정하다",
         "yield169": "확인하다",
         "yield170": "현재 사용할 수없는",
-        "yield171": "제출된 계정은 계약 계정이어야 합니다."
+        "yield171": "제출된 계정은 계약 계정이어야 합니다.",
+        "yield172": "확장하다",
+        "yield173": "치워",
+        "yield174": "모두",
+        "yield175": ""
     }
   }
 }

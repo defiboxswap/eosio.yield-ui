@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="BaseHeader flex flex-align-center flex-jus-between" v-if="isMobile">
+    <div class="BaseHeader BaseHeaderPCFixed flex flex-align-center flex-jus-between" v-if="isMobile">
       <img src="@/assets/img/BaseHeader/logo.png" class="BaseHeader-logo" @click="$router.push('/')" />
       <!-- <img src="@/assets/img/svg/caidan.svg" class="BaseHeader-listIcon" /> -->
       <v-menu nudge-width="0" nudge-top="-8" v-model="accountVisible" offset-y rounded="lg">
@@ -179,8 +179,8 @@ export default {
   background-color: #fff;
   border-bottom: 1px solid #e8e8e8;
   .BaseHeader-logo {
-    width: 117px;
-    height: 33px;
+    width: 100px;
+    // height: 33px;
     cursor: pointer;
   }
   .BaseHeader-listIcon {

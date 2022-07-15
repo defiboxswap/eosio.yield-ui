@@ -48,12 +48,12 @@ export default {
 <style lang="scss" scoped>
 .BaseFooter {
   background-color: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  height: 168px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  height: 150px;
   .BaseFooter-logo {
-    width: 126px;
+    width: 100px;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
   }
   .BaseFooter-tips {
     font-size: 11px;

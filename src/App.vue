@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
     <div ref="main">
-      <router-view class="routerView"></router-view>
+      <router-view class="routerView" :class="{'pt70': isMobile1}"></router-view>
     </div>
   </v-app>
 </template>
@@ -41,6 +41,7 @@ export default {
       node: (state) => state.sys.node,
       accountInfo: (state) => state.app.accountInfo,
       language: (state) => state.app.language,
+      isMobile1: (state) => state.app.isMobile,
     }),
   },
   components: {},
@@ -268,5 +269,8 @@ export default {
   #app {
     overflow-x: hidden;
   }
+}
+.pt70 {
+  padding-top: 70px;
 }
 </style>

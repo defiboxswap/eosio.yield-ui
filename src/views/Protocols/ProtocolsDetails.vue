@@ -30,13 +30,13 @@
                   <div class="data-box flex-1">
                     <!-- Ranking -->
                     <div class="data-name">{{ $t("yield.yield91") }}</div>
-                    <div class="data-number">{{ projectInfo.rank }}</div>
+                    <div class="data-number">#{{ projectInfo.rank }}</div>
                   </div>
                   <div class="data-box flex-1">
                     <div class="data-name">{{ $t("yield.yield117") }}</div>
                     <div class="data-number">
                       <a class="info-text" :href="projectInfo.website" target="_blank">
-                        <span v-if="projectInfo.website">{{ handleHttp(projectInfo.website) }}</span>
+                        <span v-if="projectInfo.website" style="color: #000;">{{ handleHttp(projectInfo.website) }}</span>
                         <span v-else>-</span>
                       </a>
                     </div>
@@ -46,7 +46,7 @@
                 <div class="flex">
                   <div class="data-box flex-1">
                     <div class="data-name">{{ $t("yield.yield92") }}</div>
-                    <a class="data-number color-blue">
+                    <a class="data-number">
                       <span v-if="projectInfo.contracts" @click="openWindow('https://bloks.io/account/' + projectInfo.contracts)">{{ projectInfo.contracts }}</span>
                       <span v-else>-</span>
                     </a>
@@ -63,8 +63,16 @@
             </div>
           </div>
 
-          <div class="ProtocolsDetails-des">{{ projectInfo.description }}</div>
-
+          <div class="ProtocolsDetails-des"  v-if="projectInfo.description">
+            <div v-if="descriptionHidden">
+              {{ `${projectInfo.description.slice(0, 180)}...`}}
+              <span @click="descriptionHidden = !descriptionHidden" class="pointer fontb">{{ $t("yield.yield172") }}</span>
+            </div>
+            <div v-else>
+              {{projectInfo.description}}
+              <span @click="descriptionHidden = !descriptionHidden" class="pointer fontb">{{ $t("yield.yield173") }}</span>
+            </div>
+          </div>
           <div class="ProtocolsDetails-data">
             <!-- <div id="view1Data"></div> -->
             <div id="view1Data" v-if="hasData"></div>
@@ -129,17 +137,35 @@
                   </div>
                 </div>
                 <div class="box-w">
-                  <div class="box3-title">{{ $t("yield.yield73") }}</div>
+                  <div class="box3-title">{{ $t("yield.yield135") }}</div>
                   <div class="box3-text">
-                    <span v-if="!projectInfo.recover">-</span>
-                    <span v-else @click="openWindow('https://eosrecover.com/project/' + projectInfo.recover)">{{ projectInfo.recover }}</span>
+                    <span v-if="projectInfo.circulating">{{ projectInfo.circulating }}</span>
+                    <span v-else>-</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="box-w">
+                  <div class="box3-title">{{ $t("yield.yield136") }}</div>
+                  <div class="box3-text">
+                    <span v-if="projectInfo.maxSupply">{{ projectInfo.maxSupply }}</span>
+                    <span v-else>-</span>
                   </div>
                 </div>
               </div>
 
+              <div class="box-line"></div>
+
               <div class="flex">
                 <div class="box-w">
                   <div class="box3-title">{{ $t("yield.yield73") }}</div>
+                  <div class="box3-text">
+                    <span v-if="!projectInfo.recover">-</span>
+                    <span v-else @click="openWindow('https://eosrecover.com/project/' + projectInfo.recover)">{{ projectInfo.recover }} {{$t("yield.yield132")}}</span>
+                  </div>
+                </div>
+                <div class="box-w">
+                  <div class="box3-title">{{ $t("yield.yield72") }}</div>
                   <div class="box3-text">
                     <span v-if="projectInfo.otherInfo.open_source === null">-</span>
                     <template v-else>
@@ -148,6 +174,8 @@
                     </template>
                   </div>
                 </div>
+              </div>
+              <div class="flex">
                 <div class="box-w">
                   <div class="box3-title">{{ $t("yield.yield69") }}</div>
                   <div class="box3-text">
@@ -158,28 +186,6 @@
                     </template>
                   </div>
                 </div>
-              </div>
-
-              <div class="box-line"></div>
-
-              <div class="flex">
-                <div class="box-w">
-                  <div class="box3-title">{{ $t("yield.yield135") }}</div>
-                  <div class="box3-text">
-                    <span v-if="projectInfo.circulating">{{ projectInfo.circulating }}</span>
-                    <span v-else>-</span>
-                  </div>
-                </div>
-                <div class="box-w">
-                  <div class="box3-title">{{ $t("yield.yield136") }}</div>
-                  <div class="box3-text">
-                    <span v-if="projectInfo.maxSupply">{{ projectInfo.maxSupply }}</span>
-                    <span v-else>-</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="flex">
                 <div class="box-w">
                   <div class="box3-title">Auditing report</div>
                   <div class="box3-text">
@@ -202,15 +208,15 @@
                   <!-- <div class="box3-title">token</div> -->
                   <div class="box3-text flex" @click="openWindow(projectInfo.cmc)">
                     <img src="@/assets/img/ProtocolsDetails/CoinMarketCap.png" alt="" />
-                    <span v-if="projectInfo.cmc">{{ handleHttp(projectInfo.cmc) }}</span>
-                    <span v-else>-</span>
+                    <span v-if="projectInfo.cmc">CoinMarketCap <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle" /></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.coingecko)">
                     <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" alt="" />
-                    <span v-if="projectInfo.coingecko">{{ handleHttp(projectInfo.coingecko) }}</span>
-                    <span v-else>-</span>
+                    <span v-if="projectInfo.coingecko">CoinGecko <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle" /></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
               </div>
@@ -220,8 +226,8 @@
                   <div class="box3-text flex" @click="openWindow(projectInfo.defiLlama)">
                     <img src="@/assets/img/ProtocolsDetails/DefiLlama.png" />
                     <!-- <span>DefiLlama</span> -->
-                    <span v-if="projectInfo.defillama">{{ handleHttp(projectInfo.defillama) }}</span>
-                    <span v-else>-</span>
+                    <span v-if="projectInfo.defillama">DefiLlama <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
                 <div class="box-w">
@@ -230,8 +236,8 @@
                   <div class="box3-text flex" @click="openWindow(projectInfo.dappradar)">
                     <img src="@/assets/img/ProtocolsDetails/DappRadar.png" />
                     <!-- <span>DappRadar</span> -->
-                    <span v-if="projectInfo.dappradar">{{ handleHttp(projectInfo.dappradar) }}</span>
-                    <span v-else>-</span>
+                    <span v-if="projectInfo.dappradar">DappRadar <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
               </div>
@@ -242,13 +248,17 @@
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.twitter)">
                     <img src="@/assets/img/ProtocolsDetails/Twitter.png" />
-                    <span>{{ handleHttp(projectInfo.twitter) }}</span>
+                    <!-- Twitter -->
+                    <span v-if="projectInfo.twitter">Twitter <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.discord)">
                     <img src="@/assets/img/ProtocolsDetails/Discord.png" />
-                    <span>{{ handleHttp(projectInfo.discord) }}</span>
+                    <!-- Discord -->
+                    <span v-if="projectInfo.discord">Discord <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
               </div>
@@ -257,7 +267,17 @@
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.telegram)">
                     <img src="@/assets/img/ProtocolsDetails/Telegram.png" />
-                    <span>{{ handleHttp(projectInfo.telegram) }}</span>
+                    <!-- Telegram -->
+                    <span v-if="projectInfo.telegram">Telegram <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
+                  </div>
+                </div>
+                <div class="box-w">
+                  <div class="box3-text flex" @click="openWindow(projectInfo.github)">
+                    <img src="@/assets/img/ProtocolsDetails/git.png" />
+                    <!-- github -->
+                    <span v-if="projectInfo.telegram" class="flex">github <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
                 <!-- <div class="box-w">
@@ -411,7 +431,7 @@
                   <div>
                     <!-- Ranking -->
                     <div class="info-title">{{ $t("yield.yield91") }}</div>
-                    <div class="info-text">{{ projectInfo.rank }}</div>
+                    <div class="info-text">#{{ projectInfo.rank }}</div>
                   </div>
                   <div>
                     <!-- <div v-if="projectInfo.website"> -->
@@ -442,7 +462,16 @@
               </div>
             </div>
 
-            <div class="box-des" v-if="projectInfo.description">{{ projectInfo.description }}</div>
+            <div class="box-des" v-if="projectInfo.description">
+              <div  v-if="descriptionHidden">
+                {{ `${projectInfo.description.slice(0, 400)}...`}}
+                <span @click="descriptionHidden = !descriptionHidden" class="pointer fontb">{{ $t("yield.yield172") }}</span>
+              </div>
+              <div v-else>
+                {{projectInfo.description}}
+                <span @click="descriptionHidden = !descriptionHidden" class="pointer fontb">{{ $t("yield.yield173") }}</span>
+              </div>
+            </div>
           </div>
 
           <div class="ProtocolsDetailsPC-box2 flex">
@@ -550,7 +579,7 @@
                       <div class="box3-title">{{ $t("yield.yield73") }}</div>
                       <div class="box3-text">
                         <span v-if="!projectInfo.recover">-</span>
-                        <span v-else class="hover-blue" @click="openWindow('https://eosrecover.com/project/' + projectInfo.recover)">{{ projectInfo.recover }}</span>
+                        <span v-else @click="openWindow('https://eosrecover.com/project/' + projectInfo.recover)">{{ projectInfo.recover }} <span class="hover-blue font14">{{$t("yield.yield132")}}</span></span>
                       </div>
                     </div>
                   </div>
@@ -607,28 +636,29 @@
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.cmc)">
                     <img src="@/assets/img/ProtocolsDetails/CoinMarketCap.png" class="box4-img" />
-                    <span v-if="projectInfo.cmc">{{ handleHttp(projectInfo.cmc) }}</span>
-                    <span v-else>-</span>
+                    <!-- CoinMarketCap -->
+                    <span v-if="projectInfo.cmc">CoinMarketCap <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.coingecko)">
                     <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" class="box4-img" />
                     <!-- <span>CoinGecko</span> -->
-                    <span v-if="projectInfo.coingecko">{{ handleHttp(projectInfo.coingecko) }}</span>
-                    <span v-else>-</span>
+                    <span v-if="projectInfo.coingecko">CoinGecko <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.defillama)">
                     <img src="@/assets/img/ProtocolsDetails/DefiLlama.png" class="box4-img" />
                     <!-- <span>DefiLlama</span> -->
-                    <span v-if="projectInfo.defillama">{{ handleHttp(projectInfo.defillama) }}</span>
-                    <span v-else>-</span>
+                    <span v-if="projectInfo.defillama">DefiLlama <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.dappradar)">
                     <img src="@/assets/img/ProtocolsDetails/DappRadar.png" class="box4-img" />
                     <!-- <span>DappRadar</span> -->
-                    <span v-if="projectInfo.dappradar">{{ handleHttp(projectInfo.dappradar) }}</span>
-                    <span v-else>-</span>
+                    <span v-if="projectInfo.dappradar">DappRadar <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
               </div>
@@ -637,19 +667,30 @@
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.twitter)">
                     <img src="@/assets/img/ProtocolsDetails/Twitter.png" class="box4-img" />
-                    <span>{{ handleHttp(projectInfo.twitter) }}</span>
+                    <!-- Twitter -->
+                    <span v-if="projectInfo.twitter">Twitter <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.discord)">
                     <img src="@/assets/img/ProtocolsDetails/Discord.png" class="box4-img" />
-                    <span>{{ handleHttp(projectInfo.discord) }}</span>
+                    <!-- Discord -->
+                    <span v-if="projectInfo.discord">Discord <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
                 <div class="flex flex-jus-between" style="width: 100%">
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.telegram)">
                     <img src="@/assets/img/ProtocolsDetails/Telegram.png" class="box4-img" />
-                    <span>{{ handleHttp(projectInfo.telegram) }}</span>
+                    <!-- Telegram -->
+                    <span v-if="projectInfo.telegram">Telegram <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
-                  <div class="flex-1 box4-w flex"></div>
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.github)">
+                    <img src="@/assets/img/ProtocolsDetails/git.png" class="box4-img" />
+                    <!-- github -->
+                    <span v-if="projectInfo.telegram" class="flex">github <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -844,6 +885,7 @@ export default {
         pending: "yield.yield162",
         denied: "yield.yield164",
       },
+      descriptionHidden: true
     }
   },
   components: {},
@@ -1268,7 +1310,7 @@ export default {
     margin: 0 auto;
   }
   .ProtocolsDetails-title {
-    font-size: 21px;
+    font-size: 14px;
     font-family: PingFang SC;
     font-weight: 600;
     color: #000000;
@@ -1418,7 +1460,7 @@ export default {
           display: block;
           width: 120px;
           word-break: break-all;
-          font-size: 10px;
+          font-size: 14px;
         }
       }
       .box-w {
@@ -1586,7 +1628,7 @@ export default {
         line-height: 28px;
       }
       .info-text {
-        font-size: 26px;
+        font-size: 22px;
         font-weight: 600;
         color: #000000;
       }
@@ -1677,7 +1719,7 @@ export default {
       color: #999999;
     }
     .box3-text {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
       color: #000000;
     }
@@ -1835,5 +1877,9 @@ export default {
     font-size: 14px;
     margin: 20px 0;
   }
+}
+.imgStyle {
+  width: 8px !important;
+  height: 8px !important;
 }
 </style>

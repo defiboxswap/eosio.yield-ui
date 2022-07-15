@@ -572,12 +572,12 @@ const desktopWallets = {
 // You can log in to the wallet plug-in
 export const walletsPlug = {
   EOS: [
-    desktopWallets.Metahub,
-    desktopWallets.Scatter,
-    desktopWallets.TokenPocket,
-    // desktopWallets.MathWallet,
-    desktopWallets.womba,
     desktopWallets.Anchor,
+    desktopWallets.womba,
+    desktopWallets.Metahub,
+    desktopWallets.TokenPocket,
+    desktopWallets.Scatter,
+    // desktopWallets.MathWallet,
     // desktopWallets.LeafWallet,
   ],
   BOS: [desktopWallets.LeafWallet, desktopWallets.Scatter, desktopWallets.TokenPocket, desktopWallets.MathWallet],

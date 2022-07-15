@@ -37,8 +37,8 @@ Vue.prototype.openWindow = (url) => {
   if (!url) return
   window.open(url)
 }
-Vue.prototype.errorImg = 'this.src="/static/img/yield.png"'
-Vue.prototype.errImg = 'this.src="/static/img/yield.png"'
+Vue.prototype.errorImg = 'this.src="/static/img/moren.png"'
+Vue.prototype.errImg = 'this.src="/static/img/moren.png"'
 
 
 import VuetifyToast from '@/plugins/toast/index.js';

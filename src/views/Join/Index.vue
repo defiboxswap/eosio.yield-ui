@@ -9,7 +9,7 @@
           <div class="basicInfo-title">{{ $t("yield.yield60") }}</div>
           <div class="basicInfo-box">
             <!-- project name -->
-            <div class="basicInfo-subtitle"><span class="color-red">*</span>{{ $t("yield.yield116") }}</div>
+            <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield116") }}</div>
             <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.name" @change="formWrongTips.name = false" />
             <div class="basicInfo-wrongTips" v-if="formWrongTips.name">{{ $t("yield.yield120") }}</div>
           </div>
@@ -17,7 +17,7 @@
           <div class="basicInfo-box">
             <!-- Protocols contract -->
             <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow" v-click-outside="hideTipsShow">
-              <span class="color-red">*</span>{{ $t("yield.yield78") }}
+              <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
               <v-tooltip bottom v-model="tipsShow" :openOnHover="false" :openOnFocus="false" :attach="true">
                 <template v-slot:activator="{ on, attrs }">
                   <div class="flex curPoint" v-bind="attrs" v-on="on">
@@ -43,7 +43,7 @@
 
           <div class="basicInfo-box">
             <!-- Project website -->
-            <div class="basicInfo-subtitle"><span class="color-red">*</span>{{ $t("yield.yield64") }}</div>
+            <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield64") }}</div>
             <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.website" @change="formWrongTips.website = false" :placeholder="$t('yield.yield140')" />
             <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t("yield.yield121") }}</div>
           </div>
@@ -115,7 +115,7 @@
             <!-- ( What is Recover + ? ) -->
             <div class="basicInfo-subtitle">
               {{ $t("yield.yield73") }}
-              <span @click="openWindow('https://eosrecover.com/')" class="curPoint">{{ $t("yield.yield74") }}</span>
+              <span @click="openWindow('https://eosrecover.com/')" class="curPoint color-999">{{ $t("yield.yield74") }}</span>
             </div>
             <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.recover" />
           </div>
@@ -206,13 +206,13 @@
           <div class="flext marb-25">
             <div class="basicInfo-left">
               <!-- project name -->
-              <div class="basicInfo-subtitle"><span class="color-red">*</span>{{ $t("yield.yield116") }}</div>
+              <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield116") }}</div>
               <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.name" @change="formWrongTips.name = false" />
               <div class="basicInfo-wrongTips" v-if="formWrongTips.name">{{ $t("yield.yield120") }}</div>
             </div>
             <div>
               <!-- Project website -->
-              <div class="basicInfo-subtitle"><span class="color-red">*</span>{{ $t("yield.yield64") }}</div>
+              <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield64") }}</div>
               <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.website" @change="formWrongTips.website = false" :placeholder="$t('yield.yield140')" />
               <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t("yield.yield121") }}</div>
             </div>
@@ -222,7 +222,7 @@
             <div class="basicInfo-left">
               <!-- Protocols contract -->
               <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow" v-click-outside="hideTipsShow">
-                <span class="color-red">*</span>{{ $t("yield.yield78") }}
+                <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
 
                 <v-tooltip bottom v-model="tipsShow" :openOnHover="false" :openOnFocus="false" :attach="true">
                   <template v-slot:activator="{ on, attrs }">
@@ -317,11 +317,11 @@
               <!-- ( What is Recover + ? ) -->
               <div class="basicInfo-subtitle">
                 {{ $t("yield.yield73") }}
-                <span @click="openWindow('https://eosrecover.com/')" class="curPoint">{{ $t("yield.yield74") }}</span>
+                <span @click="openWindow('https://eosrecover.com/')" class="curPoint color-999">{{ $t("yield.yield74") }}</span>
               </div>
               <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.recover" />
             </div>
-            <div>
+            <div v-if="false">
               <!-- Security Audits of smart contracts  (URL) -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield75") }}</div>
               <div class="flex">
@@ -527,20 +527,34 @@ export default {
         this.$toast(this.$t("yield.yield171"))
         return
       }
-      this.$toastLoading(this.$t("yield.yield151"))
-
       let metadata = []
       for (let key in this.form) {
         if (this.form[key] !== null && this.form[key] !== "") {
           let keyName = key
-          if (keyName == "tokenCode") keyName = "token.code"
-          if (keyName == "tokenSymcode") keyName = "token.symcode"
+          if (keyName == "tokenCode") {
+            this.form['tokenCode'] = this.form['tokenCode'].toUpperCase()
+            keyName = "token.code"
+          }
+          if (keyName == "tokenSymcode") {
+            this.form['tokenSymcode'] = this.form['tokenSymcode'].toLowerCase()
+            keyName = "token.symcode"
+          }
           metadata.push({
             key: keyName,
             value: this.form[key],
           })
         }
       }
+      // 使用Token name+Token contract判断该填入的币种是否存在
+      if (this.form['tokenSymcode'] || this.form['tokenCode']) {
+        const resultVeri = await this.verifiStat()
+        if (!resultVeri) {
+          this.$toast(this.$t("yield.yield165"))
+          return
+        }
+      }
+
+      this.$toastLoading(this.$t("yield.yield151"))
 
       const permission = Array.isArray(this.$store.state.app.accountInfo.permissions) ? this.$store.state.app.accountInfo.permissions[0] : this.$store.state.app.accountInfo.permissions
       const params = {
@@ -656,6 +670,26 @@ export default {
           console.log(error);
         })
       })
+    },
+    verifiStat() {
+      return new Promise(async (resolve) => {
+        axios({
+          url: "https://eos.greymass.com/v1/chain/get_currency_stats",
+          method: "post",
+          headers: {
+            "content-type": "text/plain;charset=UTF-8",
+          },
+          data: {
+            symbol: this.form['tokenCode'],
+            code: this.form['tokenSymcode']
+          },
+        }).then(() => {
+          resolve(true)
+        }).catch((error) => {
+          resolve(false)
+          console.log(error);
+        })
+      })
     }
   },
 }
@@ -744,7 +778,7 @@ export default {
       .basicInfo-subtitle {
         font-size: 15px;
         font-weight: 400;
-        color: #666666;
+        color: #000;
         margin-bottom: 10px;
       }
       .box-input,

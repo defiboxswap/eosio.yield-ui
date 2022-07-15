@@ -49,16 +49,9 @@
                   <div class="data-name">{{ $t("yield.yield42") }}</div>
                   <div class="data-number" :class="getColor(item.tvl_usd_change)">{{ item.tvl_usd_change }}</div>
                 </div>
-              </div>
-
-              <div class="flext">
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield54") }}</div>
-                  <div class="data-number">{{ getKMBUnit(item.agg_rewards) }}</div>
-                </div>
-                <div class="data-box flex-1">
-                  <!-- <div class="data-name">{{ $t("yield.yield55") }}</div> -->
-                  <!-- <div class="data-number">{{ item.agg_rewards }}</div> -->
+                  <div class="data-number">{{ item.agg_rewards_change }}</div>
                 </div>
               </div>
             </div>
@@ -87,7 +80,7 @@
               </div>
             </div>
 
-            <div class="box-data">
+            <div class="box-data audit-font">
               <div class="flext">
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield86") }}</div>
@@ -95,18 +88,11 @@
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield87") }}</div>
-                  <div class="data-number" style="font-size:14px">{{ item.create_at | dateFormatYMDF }}</div>
+                  <div class="data-number" style="font-size:14px">{{ item.create_at * 1000 | dateFormatYMDF }}</div>
                 </div>
-              </div>
-
-              <div class="flex">
-                <div class="data-box flex-1">
+                <div class="data-box flex-1 plcl">
                   <div class="data-name">{{ $t("yield.yield88") }}</div>
                   <div class="data-number">{{ $t(statusToLanguage[item.status]) }}</div>
-                </div>
-                <div class="data-box flex-1">
-                  <!-- <div class="data-name">{{ $t("yield.yield89") }}</div>
-                <div class="data-number">$123.43M</div> -->
                 </div>
               </div>
             </div>
@@ -136,7 +122,7 @@
 
             <v-select class="select-all" :items="items" v-model="selectVal" label="All" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select>
 
-            <div class="select-search flex" style="margin-left: 10px">
+            <div class="select-search flex">
               <!-- <div class="flex-1">{{ $t("yield.yield56") }}</div> -->
               <input type="text" class="flex-1" :placeholder="$t('yield.yield56')" v-model="search" />
               <img src="@/assets/img/svg/sousuo.svg" class="svg" />
@@ -197,7 +183,7 @@
 
                 <div class="box-2">${{ getKMBUnit(item.tvl_usd) }}</div>
                 <div class="box-3" :class="getColor(item.tvl_usd_change)">{{ item.tvl_usd_change }}</div>
-                <div class="box-4">{{ getKMBUnit(item.agg_rewards) }}</div>
+                <div class="box-4">{{ item.agg_rewards_change }}</div>
                 <!-- <div class="box-5">$123.43M</div> -->
               </a>
 
@@ -247,7 +233,7 @@
                 </div>
 
                 <div class="box-2">{{ handleCategory(item.category) }}</div>
-                <div class="box-3">{{ item.create_at | dateFormatYMDF }}</div>
+                <div class="box-3">{{ item.create_at * 1000 | dateFormatYMDF }}</div>
                 <div class="box-4">{{ $t(statusToLanguage[item.status]) }}</div>
                 <div class="box-5 flex flex-align-center flex-jus-center">
                   <v-btn>{{ $t("yield.yield132") }}</v-btn>
@@ -318,13 +304,16 @@ export default {
   methods: {
     clickInfoTab(infoTab) {
       if (this.infoTab == infoTab) return
-      this.selectVal = 'All'
       if (infoTab === 'TVLRankings') {
         this.items = ['All', 'CDP', 'Lending', 'Dexes', 'Yield', 'Liquid Staking']
       } else {
-        this.items = ['All', 'pending', 'active', 'denied']
+        this.items = ['All', this.$t("yield.yield162"), this.$t("yield.yield163"), this.$t("yield.yield164")]
       }
       this.infoTab = infoTab
+      if (this.selectVal !== 'All') {
+        this.selectVal = 'All'
+        return
+      }
       this.initList()
     },
     initList() {
@@ -428,29 +417,36 @@ export default {
       height: 45px;
       line-height: 45px;
       border: 1px solid #000;
-      padding: 0 100px 0 17px;
+      padding: 0 60px 0 17px;
       margin-bottom: 16px;
       border-radius: 25px;
       img,
       svg {
-        margin-right: 19px;
-        width: 23px;
+        margin-right: 12px;
+        width: 20px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -5px;
       }
       ::-webkit-input-placeholder {
         /* WebKit, Blink, Edge */
         color: #999;
+        font-size: 14px;
       }
       :-moz-placeholder {
         /* Mozilla Firefox 4 to 18 */
         color: #999;
+        font-size: 14px;
       }
       ::-moz-placeholder {
         /* Mozilla Firefox 19+ */
         color: #999;
+        font-size: 14px;
       }
       :-ms-input-placeholder {
         /* Internet Explorer 10-11 */
         color: #999;
+        font-size: 14px;
       }
       .select-all-mobile {
         position: absolute;
@@ -464,6 +460,7 @@ export default {
         }
 
         ::v-deep .v-select__selections {
+          font-size: 14px;
           width: 70px;
           padding-left: 16px;
           border-left: 1px solid rgba(153, 153, 153, 0.15);
@@ -600,7 +597,7 @@ export default {
       }
 
       .box-data {
-        padding-left: 92px;
+        // padding-left: 92px;
         .data-box {
           margin-top: 25px;
         }
@@ -615,9 +612,25 @@ export default {
           font-weight: 500;
           color: #000000;
         }
+        &.audit-font {
+          .data-number {
+            font-size: 14px !important;
+          }
+          .plcl {
+            text-align: right;
+          }
+        }
       }
     }
   }
+
+}
+::v-deep .v-list-item__title {
+  font-size: 14px !important;
+}
+
+::v-deep .v-select__selection {
+  font-size: 14px !important;
 }
 
 .ProtocolsPC {
@@ -769,19 +782,20 @@ export default {
         }
       }
       .box-1 {
-        width: 310px;
+        width: 340px;
+        padding-left: 40px;
       }
       .box-2 {
-        width: 200px;
+        width: 250px;
       }
       .box-3 {
-        width: 200px;
+        width: 250px;
       }
       .box-4 {
-        width: 225px;
+        width: 275px;
       }
       .box-5 {
-        width: 215px;
+        width: 265px;
       }
 
       .box-item {
@@ -791,7 +805,7 @@ export default {
         border-bottom: 1px solid #efefef;
         text-align: center;
         font-size: 16px;
-        font-weight: 500;
+        // font-weight: 500;
         color: #000000;
         cursor: pointer;
         .item-index {

@@ -10,7 +10,7 @@
           <div class="basicInfo-title">{{ $t("yield.yield60") }}</div>
           <div class="basicInfo-box">
             <!-- project name -->
-            <div class="basicInfo-subtitle">{{ $t("yield.yield116") }}</div>
+            <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield116") }}</div>
             <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.name" @change="formWrongTips.name = false" />
             <div class="basicInfo-wrongTips" v-if="formWrongTips.name">{{ $t("yield.yield120") }}</div>
           </div>
@@ -18,7 +18,7 @@
           <div class="basicInfo-box">
             <!-- Protocols contract -->
             <div class="basicInfo-subtitle flex">
-              {{ $t("yield.yield78") }}
+              <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
               <v-tooltip bottom v-model="tipsShow" :openOnHover="false" :openOnFocus="false" :attach="true">
                 <template v-slot:activator="{ on, attrs }">
                   <div class="flex curPoint" v-bind="attrs" v-on="on">
@@ -44,7 +44,7 @@
 
           <div class="basicInfo-box">
             <!-- Project website -->
-            <div class="basicInfo-subtitle">{{ $t("yield.yield64") }}</div>
+            <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield64") }}</div>
             <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.website" @change="formWrongTips.website = false" :placeholder="$t('yield.yield140')" />
             <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t("yield.yield121") }}</div>
           </div>
@@ -115,7 +115,7 @@
             <!-- ( What is Recover + ? ) -->
             <div class="basicInfo-subtitle">
               {{ $t("yield.yield73") }}
-              <span @click="openWindow('https://eosrecover.com/')" class="curPoint">{{ $t("yield.yield74") }}</span>
+              <span @click="openWindow('https://eosrecover.com/')" class="curPoint color-999">{{ $t("yield.yield74") }}</span>
             </div>
             <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.recover" />
           </div>
@@ -206,13 +206,13 @@
           <div class="flext marb-25">
             <div class="basicInfo-left">
               <!-- project name -->
-              <div class="basicInfo-subtitle">{{ $t("yield.yield116") }}</div>
+              <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield116") }}</div>
               <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.name" @change="formWrongTips.name = false" />
               <div class="basicInfo-wrongTips" v-if="formWrongTips.name">{{ $t("yield.yield120") }}</div>
             </div>
             <div>
               <!-- Project website -->
-              <div class="basicInfo-subtitle">{{ $t("yield.yield64") }}</div>
+              <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield64") }}</div>
               <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.website" @change="formWrongTips.website = false" :placeholder="$t('yield.yield140')" />
               <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t("yield.yield121") }}</div>
             </div>
@@ -222,7 +222,7 @@
             <div class="basicInfo-left">
               <!-- Protocols contract -->
               <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow">
-                {{ $t("yield.yield78") }}
+                <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
 
                 <v-tooltip bottom v-model="tipsShow" :openOnHover="false" :openOnFocus="false" :attach="true">
                   <template v-slot:activator="{ on, attrs }">
@@ -318,11 +318,11 @@
               <!-- ( What is Recover + ? ) -->
               <div class="basicInfo-subtitle">
                 {{ $t("yield.yield73") }}
-                <span @click="openWindow('https://eosrecover.com/')" class="curPoint">{{ $t("yield.yield74") }}</span>
+                <span @click="openWindow('https://eosrecover.com/')" class="curPoint color-999">{{ $t("yield.yield74") }}</span>
               </div>
               <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.recover" />
             </div>
-            <div>
+            <div v-if="false">
               <!-- Security Audits of smart contracts  (URL) -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield75") }}</div>
               <div class="flex">
@@ -526,8 +526,19 @@ export default {
           // item.contracts = JSON.parse(item.contracts)[0]
           item.metadataInfo = JSON.parse(item.metadata)
           this.projectStatus = item.status
-
-          this.categoryItem = item.category
+          let category = ''
+          if (item.category === 'cdp') {
+            category = 'CDP'
+          } else if (item.category === 'dexes') {
+            category = 'Dexes'
+          } else if (item.category === 'lending') {
+            category = 'Lending'
+          } else if (item.category === 'liquid staking') {
+            category = 'Liquid Staking'
+          } else {
+            category = 'Yield'
+          }
+          this.categoryItem = category
           item.metadataInfo.forEach((i) => {
             if (i.key == "logo") this.form.logo = i.value
             else if (i.key == "name") this.form.name = i.value
@@ -824,7 +835,7 @@ export default {
       .basicInfo-subtitle {
         font-size: 15px;
         font-weight: 400;
-        color: #666666;
+        color: #000;
         margin-bottom: 10px;
       }
       .box-input,
