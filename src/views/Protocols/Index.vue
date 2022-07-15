@@ -120,7 +120,7 @@
               <div class="audit-tips2 flex-1" :style="{ color: infoTab != 'Audit' ? '#999999' : '#000' }" @click="clickInfoTab('Audit')">{{ $t("yield.yield51") }}</div>
             </div>
 
-            <v-select class="select-all" :items="items" v-model="selectVal" label="All" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select>
+            <v-select class="select-all" :items="items" v-model="selectVal" item-text="text" item-value="value" label="All" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select>
 
             <div class="select-search flex">
               <!-- <div class="flex-1">{{ $t("yield.yield56") }}</div> -->
@@ -274,8 +274,36 @@ export default {
         pending: "yield.yield162",
         denied: "yield.yield164",
       },
-      items: ['All', 'CDP', 'Lending', 'Dexes', 'Yield', 'Liquid Staking'],
-      selectVal: 'All'
+      items: [
+        {
+          text: this.$t('yield.yield174'),
+          value: ''
+        },
+        {
+          text: 'CDP',
+          value: 'CDP'
+        },
+        {
+          text: 'Lending',
+          value: 'Lending'
+        },
+        {
+          text: 'Dexes',
+          value: 'Dexes'
+        },
+        {
+          text: 'Yield',
+          value: 'Yield'
+        },
+        {
+          text: 'Liquid Staking',
+          value: 'Liquid Staking'
+        }
+      ],
+      selectVal: {
+        text: this.$t('yield.yield174'),
+        value: ''
+      }
     }
   },
   props: {},
@@ -305,13 +333,58 @@ export default {
     clickInfoTab(infoTab) {
       if (this.infoTab == infoTab) return
       if (infoTab === 'TVLRankings') {
-        this.items = ['All', 'CDP', 'Lending', 'Dexes', 'Yield', 'Liquid Staking']
+        this.items = [
+          {
+            text: this.$t('yield.yield174'),
+            value: ''
+          },
+          {
+            text: 'CDP',
+            value: 'CDP'
+          },
+          {
+            text: 'Lending',
+            value: 'Lending'
+          },
+          {
+            text: 'Dexes',
+            value: 'Dexes'
+          },
+          {
+            text: 'Yield',
+            value: 'Yield'
+          },
+          {
+            text: 'Liquid Staking',
+            value: 'Liquid Staking'
+          }
+        ]
       } else {
-        this.items = ['All', this.$t("yield.yield162"), this.$t("yield.yield163"), this.$t("yield.yield164")]
+        this.items = [
+          {
+            text: this.$t('yield.yield174'),
+            value: ''
+          },
+          {
+            text: this.$t('yield.yield162'),
+            value: 'peding'
+          },
+          {
+            text: this.$t('yield.yield163'),
+            value: 'active'
+          },
+          {
+            text: this.$t('yield.yield164'),
+            value: 'denied'
+          }
+        ]
       }
       this.infoTab = infoTab
-      if (this.selectVal !== 'All') {
-        this.selectVal = 'All'
+      if (this.selectVal.value !== 'All') {
+        this.selectVal = {
+          text: this.$t('yield.yield174'),
+          value: ''
+        }
         return
       }
       this.initList()
@@ -335,8 +408,8 @@ export default {
           pageSize: this.pageSize,
           search: this.search.replace(/(^\s*)|(\s*$)/g, ""),
           order: this.infoTab == 'Audit' ? 'create_at' : this.order,
-          status: this.infoTab === 'TVLRankings' ? '' : this.selectVal === 'All' ? '' : this.selectVal,
-          category: this.infoTab === 'Audit' ? '' : this.selectVal === 'All' ? '' : this.selectVal
+          status: this.infoTab === 'TVLRankings' ? '' : this.selectVal.value === 'All' ? '' : this.selectVal.value,
+          category: this.infoTab === 'Audit' ? '' : this.selectVal.value === 'All' ? '' : this.selectVal.value
         })
         if (result?.code === 0 && result.data) {
           result.data.forEach((item) => {

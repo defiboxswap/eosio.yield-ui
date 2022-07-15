@@ -528,8 +528,8 @@ const items = {
         "yield169": "Confirm",
         "yield170": "No rewards available",
         "yield171": "The submitted account must be a contract account.",
-        "yield172": "Expand",
-        "yield173": "Put away",
+        "yield172": "More",
+        "yield173": "Less",
         "yield174": "All",
         "yield175": ""
     },
@@ -705,8 +705,8 @@ const items = {
         "yield169": "확인하다",
         "yield170": "현재 사용할 수없는",
         "yield171": "제출된 계정은 계약 계정이어야 합니다.",
-        "yield172": "확장하다",
-        "yield173": "치워",
+        "yield172": "더",
+        "yield173": "더 적은",
         "yield174": "모두",
         "yield175": ""
     }
