@@ -20,7 +20,10 @@ export default {
   },
   poolChartAction() {
     let myChart = echarts.init(document.getElementById("view2Data"))
-
+    if (myChart != null) {
+      myChart.dispose()
+    }
+    myChart = echarts.init(document.getElementById("view2Data"))
     let series = []
     let legendName = []
     this.chartsData.splice(1).forEach((item) => {
@@ -53,7 +56,7 @@ export default {
         },
       },
       legend: {
-        data: legendName,
+        data: [],
       },
       // toolbox: {
       //   // feature: {

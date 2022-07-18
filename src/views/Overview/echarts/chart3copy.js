@@ -46,7 +46,7 @@ export default {
           source: this.chartsData,
         },
         xAxis: { type: "category" },
-        yAxis: {
+        yAxis: { 
           gridIndex: 0,
           axisLabel: {
             fontSize: 12,

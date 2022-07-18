@@ -470,3 +470,15 @@ export function handleCategoryTransform(category) {
   if(category.toLowerCase() == "yield") return 'yield'
   return category
 }
+
+export function deepClone(obj) {
+  let newObj = Array.isArray(obj) ? [] : {}
+  if (obj && typeof obj === "object") {
+    for (let key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        newObj[key] = (obj && typeof obj[key] === 'object') ? deepClone(obj[key]) : obj[key];
+      }
+    }
+  }
+  return newObj
+}

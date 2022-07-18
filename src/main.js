@@ -22,7 +22,7 @@ Vue.prototype.$openTxid = (Txid) => {
   else window.open(`https://bloks.io/transaction/${Txid}`)
 };
 
-import { accAdd, toFixed, formatNumber, accDiv, accMul, accSub, getKMBUnit, handleHttp, handleCategory, handleCategoryTransform } from '@/utils/public'
+import { accAdd, toFixed, formatNumber, accDiv, accMul, accSub, getKMBUnit, handleHttp, handleCategory, handleCategoryTransform, deepClone } from '@/utils/public'
 Vue.prototype.accAdd = accAdd
 Vue.prototype.toFixed = toFixed
 Vue.prototype.formatNumber = formatNumber
@@ -33,6 +33,8 @@ Vue.prototype.getKMBUnit = getKMBUnit
 Vue.prototype.handleHttp = handleHttp
 Vue.prototype.handleCategory = handleCategory
 Vue.prototype.handleCategoryTransform = handleCategoryTransform
+Vue.prototype.deepClone = deepClone
+
 Vue.prototype.openWindow = (url) => {
   if (!url) return
   window.open(url)

@@ -533,7 +533,7 @@ export default {
             category = 'Dexes'
           } else if (item.category === 'lending') {
             category = 'Lending'
-          } else if (item.category === 'liquid staking') {
+          } else if (item.category === 'staking') {
             category = 'Liquid Staking'
           } else {
             category = 'Yield'

@@ -15,7 +15,7 @@
                 <!-- Change (24h) -->
                 <div class="des-w flex">
                   <div class="des-1">{{ $t("yield.yield42") }}</div>
-                  <div class="des-2">{{ overViewData.tvl_usd_change }}</div>
+                  <div class="des-2" :class="getColor(overViewData.tvl_usd_change)">{{ overViewData.tvl_usd_change }}</div>
                 </div>
                 <!-- Projects -->
                 <div class="des-w flex">
@@ -31,7 +31,48 @@
 
         <!-- TVL Distribution -->
         <div class="Overview-tvl">
-          <div class="tvl-title">{{ $t("yield.yield43") }}</div>
+          <div class="tvl-title">
+            <div>{{ $t("yield.yield43") }}</div>
+            <div class="mt">
+              <v-select
+                v-model="charts2Value"
+                :items="charts2Items"
+                label="Select Item"
+                multiple
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip v-if="index === 0">
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span
+                    v-if="index === 1"
+                    class="grey--text text-caption"
+                  >
+                    (+{{ charts2Value.length - 1 }} others)
+                  </span>
+                </template>
+                <template v-slot:prepend-item>
+                  <v-list-item
+                    ripple
+                    @mousedown.prevent
+                    @click="toggle"
+                  >
+                    <v-list-item-action>
+                      <v-icon :color="charts2Value.length > 0 ? 'indigo darken-4' : ''">
+                        {{ icon }}
+                      </v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        Select All
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-divider class="mt-2"></v-divider>
+                </template>
+              </v-select>
+            </div>
+          </div>
           <!-- <div class="tvl-box" id="view2Data" :style="{'height': 650 + (this.chart2Data[0].length / 4 * 400) + 'px'}"></div> -->
           <div class="tvl-box" id="view2Data"></div>
           <div class="tvl-box" id="view3Data"></div>
@@ -68,7 +109,7 @@
             <div class="dataList-data flex flex-align-end">
               <!-- Change (24h) -->
               <div class="data-text1">{{ $t("yield.yield42") }}</div>
-              <div class="data-text2">{{ overViewData.tvl_usd_change }}</div>
+              <div class="data-text2" :class="getColor(overViewData.tvl_usd_change)">{{ overViewData.tvl_usd_change }}</div>
             </div>
 
             <div class="dataList-data flex flex-align-end">
@@ -87,8 +128,49 @@
       </div>
 
       <div class="OverviewPC-view2">
-        <div class="view2-title">{{ $t("yield.yield43") }}</div>
-        <div class="OverviewPC-layout" style="margin-bottom: 28px">
+        <div class="view2-title flexb">
+          <span>{{ $t("yield.yield43") }}</span>
+          <div style="width: 300px">
+            <v-select
+              v-model="charts2Value"
+              :items="charts2Items"
+              label="Select Item"
+              multiple
+            >
+              <template v-slot:selection="{ item, index }">
+                <v-chip v-if="index === 0">
+                  <span>{{ item }}</span>
+                </v-chip>
+                <span
+                  v-if="index === 1"
+                  class="grey--text text-caption"
+                >
+                  (+{{ charts2Value.length - 1 }} others)
+                </span>
+              </template>
+              <template v-slot:prepend-item>
+                <v-list-item
+                  ripple
+                  @mousedown.prevent
+                  @click="toggle"
+                >
+                  <v-list-item-action>
+                    <v-icon :color="charts2Value.length > 0 ? 'indigo darken-4' : ''">
+                      {{ icon }}
+                    </v-icon>
+                  </v-list-item-action>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      Select All
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-divider class="mt-2"></v-divider>
+              </template>
+            </v-select>
+          </div>
+        </div>
+        <div class="OverviewPC-layout" style="margin-bottom: 28px; height: 500px">
           <div id="view2Data"></div>
         </div>
 
@@ -135,14 +217,46 @@ export default {
         tvl_usd: 0,
         tvl_usd_change: "0.00",
       },
-      chart2Data: [[]]
+      chart2Data: [[]],
+      charts2Items: [],
+      charts2Value: [],
     }
   },
   components: {},
   props: {},
-  watch: {},
+  watch: {
+    "charts2Value": {
+      handler: function (val) {
+        let res = []
+        const chartData = JSON.parse(JSON.stringify(this.chart2Data))
+        chartData.forEach(v => {
+          if (val.find(vv => vv === v[0])) {
+            res.push(v)
+          }
+        });
+        res.unshift(chartData[0])
+        chart2.init({
+          self: this,
+          data: res
+        })
+        console.log(res.toString(), 'resres');
+      },
+      deep: true
+    },
+  },
   computed: mapState({
     isMobile: (state) => state.app.isMobile,
+    likesAllFruit () {
+      return this.charts2Value.length === this.charts2Items.length
+    },
+    likesSomeFruit () {
+      return this.charts2Value.length > 0 && !this.likesAllFruit
+    },
+    icon () {
+      if (this.likesAllFruit) return 'mdi-close-box'
+      if (this.likesSomeFruit) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
   }),
   created() {},
   mounted() {
@@ -163,13 +277,15 @@ export default {
         })
         if (res.data.length > 0) {
           let item = JSON.parse(JSON.stringify(res.data[res.data.length - 1]))
+          item.tvl_usd_changeOld = item.tvl_usd_change
+          // item.tvl_usd_change = item.tvl_usd_change/(tvl_usd-tvl_usd_change)*100
           if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
 
           item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
           if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
           else item.tvl_usd_change = `${item.tvl_usd_change}%`
           // console.log('tvl_usd_change', item.tvl_usd_change);
-
+          if (item.tvl_usd_changeOld == item.tvl_usd) item.tvl_usd_change = '0.00%'
           this.overViewData = item
         }
       } catch (error) {
@@ -180,10 +296,12 @@ export default {
       try {
         let res = await lines.lines2()
         this.chart2Data = res.data
-        chart2.init({
-          self: this,
-          data: res.data,
-        })
+        this.charts2Items = this.chart2Data.map(v => v[0]).slice(1)
+        this.charts2Value = this.chart2Data.map(v => v[0]).slice(1)
+        // chart2.init({
+        //   self: this,
+        //   data: res.data,
+        // })
       } catch (error) {
         this.chart2Data = [[]]
         console.log(error)
@@ -206,10 +324,30 @@ export default {
           self: this,
           data: list,
         })
+        console.log(list.toString(), 'listlist');
       } catch (error) {
         console.log(error)
       }
     },
+    toggle () {
+      this.$nextTick(() => {
+        if (this.likesAllFruit) {
+          this.charts2Value = []
+        } else {
+          this.charts2Value = this.charts2Items.slice()
+        }
+      })
+    },
+    getColor(item) {
+      const val = item.slice(0, item.length - 1)
+      if (val > 0) {
+        return 'color-green'
+      } else if (val < 0) {
+        return 'color-red'
+      } else {
+        return ''
+      }
+    }
   },
 }
 </script>
@@ -412,18 +550,20 @@ export default {
       margin-bottom: 23px;
     }
     .OverviewPC-layout {
-      height: 452px;
+      height: 700px;
       border: 1px solid #efefef;
       border-radius: 24px;
       background-color: #fff;
       #view2Data {
         width: 100%;
-        height: 100%;
+        // height: 100%;
         padding: 40px;
+        height: 500px;
       }
       #view3Data {
         width: 100%;
-        height: 100%;
+        // height: 100%;
+        height: 700px;
         padding: 40px;
         padding-bottom: 15px;
       }

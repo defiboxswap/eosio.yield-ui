@@ -51,7 +51,7 @@
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield54") }}</div>
-                  <div class="data-number">{{ item.agg_rewards_change }}</div>
+                  <div class="data-number">{{ item.agg_rewards_change.toFixed(4) }}</div>
                 </div>
               </div>
             </div>
@@ -183,7 +183,7 @@
 
                 <div class="box-2">${{ getKMBUnit(item.tvl_usd) }}</div>
                 <div class="box-3" :class="getColor(item.tvl_usd_change)">{{ item.tvl_usd_change }}</div>
-                <div class="box-4">{{ item.agg_rewards_change }}</div>
+                <div class="box-4">{{ item.agg_rewards_change.toFixed(4) }}</div>
                 <!-- <div class="box-5">$123.43M</div> -->
               </a>
 
@@ -364,7 +364,7 @@ export default {
           },
           {
             text: this.$t('yield.yield162'),
-            value: 'peding'
+            value: 'pending'
           },
           {
             text: this.$t('yield.yield163'),

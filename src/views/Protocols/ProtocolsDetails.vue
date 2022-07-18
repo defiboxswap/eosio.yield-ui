@@ -95,7 +95,7 @@
               <div class="flex">
                 <div class="flex-1">
                   <div class="view-title">{{ $t("yield.yield54") }}</div>
-                  <div class="view-text">{{ getKMBUnit(overViewData.agg_rewards) }}</div>
+                  <div class="view-text">{{ toFixed(getKMBUnit(overViewData.agg_rewards), 4) }}</div>
                 </div>
                 <div class="flex-1"></div>
               </div>
@@ -497,7 +497,7 @@
                   <div class="box2-circle"></div>
                   <div class="">{{ $t("yield.yield54") }}</div>
                 </div>
-                <div class="box2-number">{{ getKMBUnit(overViewData.agg_rewards) }}</div>
+                <div class="box2-number">{{ toFixed(getKMBUnit(overViewData.agg_rewards), 4) }}</div>
               </div>
             </div>
             <div id="view1Data" v-if="hasData"></div>
@@ -943,12 +943,16 @@ export default {
         if (res.data.length > 0) {
           this.hasData = 1
           let item = JSON.parse(JSON.stringify(res.data[res.data.length - 1]))
+          item.tvl_usd_changeOld = item.tvl_usd_change
+          // item.tvl_usd_change = item.tvl_usd_change/(tvl_usd-tvl_usd_change)*100
           if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
 
           item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
           item.tvl_eos = this.toFixed(item.tvl_eos, 2)
           if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
           else item.tvl_usd_change = `${item.tvl_usd_change}%`
+
+          if (item.tvl_usd_changeOld == item.tvl_usd) item.tvl_usd_change = '0.00%'
 
           if (res.data.length > 1) {
             let lastItem = JSON.parse(JSON.stringify(res.data[res.data.length - 2]))
