@@ -300,10 +300,7 @@ export default {
           value: 'Liquid Staking'
         }
       ],
-      selectVal: {
-        text: this.$t('yield.yield174'),
-        value: ''
-      }
+      selectVal: ''
     }
   },
   props: {},
@@ -381,10 +378,7 @@ export default {
       }
       this.infoTab = infoTab
       if (this.selectVal.value !== 'All') {
-        this.selectVal = {
-          text: this.$t('yield.yield174'),
-          value: ''
-        }
+        this.selectVal = ''
         return
       }
       this.initList()
@@ -408,8 +402,8 @@ export default {
           pageSize: this.pageSize,
           search: this.search.replace(/(^\s*)|(\s*$)/g, ""),
           order: this.infoTab == 'Audit' ? 'create_at' : this.order,
-          status: this.infoTab === 'TVLRankings' ? '' : this.selectVal.value === 'All' ? '' : this.selectVal.value,
-          category: this.infoTab === 'Audit' ? '' : this.selectVal.value === 'All' ? '' : this.selectVal.value
+          status: this.infoTab === 'TVLRankings' ? '' : this.selectVal.value === 'All' ? '' : this.selectVal,
+          category: this.infoTab === 'Audit' ? '' : this.selectVal.value === 'All' ? '' : this.selectVal
         })
         if (result?.code === 0 && result.data) {
           result.data.forEach((item) => {
