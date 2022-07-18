@@ -297,7 +297,7 @@ export default {
         },
         {
           text: 'Liquid Staking',
-          value: 'Liquid Staking'
+          value: 'Staking'
         }
       ],
       selectVal: ''
