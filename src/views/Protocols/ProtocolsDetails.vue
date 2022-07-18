@@ -95,7 +95,7 @@
               <div class="flex">
                 <div class="flex-1">
                   <div class="view-title">{{ $t("yield.yield54") }}</div>
-                  <div class="view-text">{{ toFixed(getKMBUnit(overViewData.agg_rewards), 4) }}</div>
+                  <div class="view-text">{{ toFixed(projectInfo.agg_rewards_change, 4) }}</div>
                 </div>
                 <div class="flex-1"></div>
               </div>
@@ -497,7 +497,7 @@
                   <div class="box2-circle"></div>
                   <div class="">{{ $t("yield.yield54") }}</div>
                 </div>
-                <div class="box2-number">{{ toFixed(getKMBUnit(overViewData.agg_rewards), 4) }}</div>
+                <div class="box2-number">{{ toFixed(projectInfo.agg_rewards_change, 4) }}</div>
               </div>
             </div>
             <div id="view1Data" v-if="hasData"></div>
