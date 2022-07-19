@@ -1,4 +1,3 @@
-/* eslint-disable */
 <template>
   <div id="appLayout" >
     <BaseHeader></BaseHeader>
@@ -23,7 +22,6 @@ export default {
     return {
       screenWidth: document.body.clientWidth,
       showHeader: null,
-
     };
   },
   components: {},
