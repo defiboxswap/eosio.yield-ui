@@ -1,4 +1,3 @@
-import { swap } from "@/service";
 const app = {
   state: {
     // Multilingual

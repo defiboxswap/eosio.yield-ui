@@ -50,9 +50,7 @@
             </div>
           </div>
           <div v-if="wlstatus === -1 && chainValue !== 'ENU' && chainValue !== 'FIBOS'" class="no_wallet">
-            
             <p>Please open your desktop wallet program first, then refresh the page</p>
-            
           </div>
         </div>
       </template>
@@ -109,8 +107,8 @@ export default {
         en: 'https://support.newdex.net/hc/en-us/articles/360031458931-Desktop-Wallet-Tutorial-tron-',
         ko: 'https://support.newdex.net/hc/ko/articles/360031458931-Desktop-Wallet-Tutorial-tron-'
       },
-      chainValue: 'WAX', // 主链选中
-      chainIcon: '', // 主链选的icon
+      chainValue: 'WAX',
+      chainIcon: '',
       chainOptions: [],
 
       foWallet: {
@@ -168,7 +166,7 @@ export default {
   methods: {
     handlePushdata() {
       this.chainOptions = [
-        // EOS 主链列表
+        // EOS chain
         {
           value: 'EOS',
           label: 'EOS',
@@ -261,7 +259,6 @@ export default {
       }
       this.$refs.noScatter.click();
     },
-    // 云钱包登录
     handleCloudWallet() {
       this.wlstatus = 0;
       let waxParams = {
@@ -294,7 +291,7 @@ export default {
       // Wax.init(params);
       // this.handleGetAccount();
     },
-    // scatter 登录
+    // scatter login
     async handleScatterPower(item) {
       this.scatterLoginLoading = true;
       let chainParams = {
@@ -305,19 +302,15 @@ export default {
       };
       // console.log(chainParams,'chainParams');
       if (item.name === 'Anchor') {
-        // 获取免CPU白名单接口（那些钱包是可以使用免CPU的） 都是白名单
         this.$store.dispatch('setIsFreeCpuWhite', chainParams.channel);
-        // 实例 Dapp
         DApp.init(chainParams, () => {
           this.handleGetAccount();
         });
         return;
       }
-      // 是否打开scatter
       const scatterInstall = sessionStorage.getItem('scatterInstall');
       if (scatterInstall === 'Scatter connected') {
         try {
-          // 如果有账号先退出
           const result = await this.handleScatterOut();
           if (result === 'anchor') return;
           this.handleGetAccount();
@@ -331,7 +324,6 @@ export default {
       this.wlstatus = -1;
       this.handleScatterOut();
     },
-    // 获取用户信息
     async handleGetAccount() {
       const account = await DApp.getAccount();
       if (account && account.account) {
@@ -343,7 +335,6 @@ export default {
       // this.handleCloseLoginWallet();
     },
 
-    // 登录错误回调
     handleGetIdentityErrorBack() {
       this.handleCloseLoginWallet(); // 关闭登录弹出窗
       const route = this.$route;
@@ -352,9 +343,7 @@ export default {
       }
     },
 
-    // 先退出scatter
     async handleScatterOut() {
-      // 非云钱包登录操作
       if (DApp.chain !== 'eos') {
         const result = await DApp.forgetIdentity();
         console.log(result, '先退出scatter'); // eslint-disable-line
@@ -370,17 +359,14 @@ export default {
         this.$router.push('/');
       }
     },
-    // 关闭登录弹窗
     handleCloseLoginWallet() {
       this.$emit('listenWalletLoginClose', false);
     },
 
-    // 刷新页面
     handleResh() {
       window.location.reload();
     },
 
-    // 主链选择
     handleCheckChain(val) {
       this.chainValue = val;
       this.resetHelpCenter = this.chainOptions.find((v) => v.value === val).helpCenter;
@@ -390,7 +376,6 @@ export default {
       this.walletsPlugList = walletsPlug[val] || [];
     }
 
-    // 链的logo
     // chainLogo(val) {
     //   return chainLogo(val);
     // }
