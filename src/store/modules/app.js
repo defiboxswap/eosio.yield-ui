@@ -1,46 +1,41 @@
 import { swap } from "@/service";
 const app = {
   state: {
-    // 多语言
+    // Multilingual
     language: '',
-    // 默认黑夜模式
+    // Default night mode
     themeDark: false,
-    // 屏幕宽度
+    // Screen width
     screenWidth: null,
-    // // 是否为移动端
     isMobile: true,
-    // 账户信息
     accountInfo: {
       timer: null,
     },
-    // 多路径兑换
     openMultipath: true,
-    // 滑点容差
     slipPoint: 3,
-    // 默认交易币种
     defaultSwapPair: {
       from: {
-        symbol: 'EOS', // 币名
-        contract: 'eosio.token', // 合约地址
-        decimal: 4, // 精度
+        symbol: 'EOS', // Coin name
+        contract: 'eosio.token', // Contract address
+        decimal: 4, // accuracy
         key: 'eosio.token-eos',
       },
       to: {
-        symbol: '', // 币名
-        contract: '', // 合约地址
-        decimal: 0, // 精度
+        symbol: '', // Coin name
+        contract: '', // Contract address
+        decimal: 0, // accuracy
         key: '',
       },
     },
-    // k线配置
+    // k
     klineConfig: {
-      interval: '240', // 分辨率，时间
+      interval: '240', // Resolution, time
     },
     uint: 'EOS',
 
-    walletLoginVisible: false, //登录弹窗
-    customCurrencyList: [], //自定义添加币种
-    exchangeItem: '1D', // 交易量当前数值
+    walletLoginVisible: false, // Login Popup
+    customCurrencyList: [], // Custom add currency
+    exchangeItem: '1D', // Current value of trading volume
   },
   mutations: {
     SET_LANGUAGE: (state, language) => {
@@ -57,11 +52,10 @@ const app = {
     SET_ISMOBILE: (state, isMobile) => {
       state.isMobile = isMobile;
     },
-    // 账户信息
     SET_ACCOUNTINFO: (state, accountInfo) => {
       state.accountInfo = accountInfo;
     },
-    // 当前选中的交易对
+    // Currently selected transaction pair
     SET_EXCHANGECOIN: (state, exchangeCoin) => {
       const { currency, direction } = exchangeCoin;
       if (direction == '') {
@@ -73,27 +67,24 @@ const app = {
       }
       // localStorage.setItem('exchangeCoin', JSON.stringify(exchangeCoin));
     },
-    // k线配置
+    // k config
     SET_KLINECONFIG: (state, klineConfig) => {
       state.klineConfig = klineConfig;
     },
-    // pairs表
+    // pairs
     // SET_PAIRSTABLEDATA: (state, pairsTableData) => {
     //   state.pairsTableData = pairsTableData || [];
     // },
-    // 改变当前多路径兑换
+    // Change the current multi-path redemption
     SET_OPENMULTIPATH: (state, openMultipath) => {
       state.openMultipath = openMultipath;
     },
-    // 改变滑点容差
     SET_SLIPPOINT: (state, slipPoint) => {
       state.slipPoint = slipPoint;
     },
-    // 改变货币单位
     SET_UINT: (state, uint) => {
       state.uint = uint;
     },
-    // 登录弹窗
     SET_WALLETLOGINVISIBLE: (state, walletLoginVisible) => {
       state.walletLoginVisible = walletLoginVisible;
     },
@@ -117,11 +108,9 @@ const app = {
     setIsMobile({ commit }, isMobile) {
       commit('SET_ISMOBILE', isMobile);
     },
-    // 账户信息
     setAccountInfo({ commit }, accountInfo) {
       commit('SET_ACCOUNTINFO', accountInfo);
     },
-    // 当前选中的交易对
     setExchangeCoin({ commit }, exchangeCoin) {
       commit('SET_EXCHANGECOIN', exchangeCoin);
     },
@@ -131,19 +120,15 @@ const app = {
     // setPairsTableData({ commit }, pairsTableData) {
     //   commit('SET_PAIRSTABLEDATA', pairsTableData);
     // },
-    // 改变当前多路径兑换
     setOpenMultipath({ commit }, openMultipath) {
       commit('SET_OPENMULTIPATH', openMultipath);
     },
-    // 改变滑点容差
     setSlipPoint({ commit }, slipPoint) {
       commit('SET_SLIPPOINT', slipPoint);
     },
-    // 改变货币单位
     setUint({ commit }, uint) {
       commit('SET_UINT', uint);
     },
-    // 登录弹窗
     setWalletLoginVisible({ commit }, walletLoginVisible) {
       commit('SET_WALLETLOGINVISIBLE', walletLoginVisible);
     },

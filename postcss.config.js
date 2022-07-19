@@ -7,7 +7,7 @@ module.exports = {
     //   rootValue: 75,
     //   propList: ["*"],
     //   // selectorBlackList: ["#app"],
-    //   minPixelValue: 1.0001 //忽略 1px转rem
+    //   minPixelValue: 1.0001 // 1px -> rem
     // }
   }
 };

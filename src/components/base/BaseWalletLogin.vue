@@ -77,11 +77,11 @@ export default {
 
     return {
       loadingCode: false,
-      walletChecked: null, // 当前选中的钱包配置
-      checkLoginPost: false, // 开启轮询请求后台
+      walletChecked: null,
+      checkLoginPost: false,
       // wallets,
       walletsPlugList: [],
-      wlstatus: 0, // 中间按钮操作显示
+      wlstatus: 0,
       walletName: '',
       uuID: '',
       dappLogo,
@@ -90,13 +90,13 @@ export default {
         one: null,
         two: null
       },
-      scatterLoginLoading: false, // scatter 登录中
-      overdueTimestamp: '', // 二维码过期时间
-      overdueCode: false, // 是否过期
-      loginCodeThis: null, // 当前钱包项(二维码过期时可使用)
+      scatterLoginLoading: false, // scatter logining
+      overdueTimestamp: '',
+      overdueCode: false,
+      loginCodeThis: null,
       resetHelpCenter: '',
-      clickTrue: false, // 是否点击安装Scatter
-      whatUserAgent: 87, // 87是谷歌，其他
+      clickTrue: false,
+      whatUserAgent: 87, // 87 is google
       hrefDesktopWallet: {
         'zh-CN': 'https://support.newdex.net/hc/zh-cn/articles/360028370252-%E6%A1%8C%E9%9D%A2%E9%92%B1%E5%8C%85%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B',
         'zh-TW': 'https://support.newdex.net/hc/zh-tw/articles/360028370252-%E6%A1%8C%E9%9D%A2%E9%8C%A2%E5%8C%85%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B',

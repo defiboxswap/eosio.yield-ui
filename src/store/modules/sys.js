@@ -32,7 +32,7 @@ const sys = {
     SET_NODE: (state, node) => {
       state.node = node
     },
-    // 是否APP的webView打开 - android | ios
+    // webView - android | ios
     SET_ISAPPVIEW: (state, isAppView) => {
       state.isAppView = isAppView
       sessionStorage.setItem("isAppView", isAppView)
@@ -43,7 +43,6 @@ const sys = {
     SET_BASECONFIG: (state, baseConfig) => {
       state.baseConfig = baseConfig
     },
-    // 接收账户
     SET_TOACCOUNT: (state, toAccount) => {
       state.toAccount = toAccount
     },
@@ -59,7 +58,7 @@ const sys = {
     setNode({ commit }, node) {
       commit("SET_NODE", node)
     },
-    // 是否APP的webView打开 - android | ios
+    // webView - android | ios
     setIsAppView({ commit }, isAppView) {
       commit("SET_ISAPPVIEW", isAppView)
     },
@@ -69,7 +68,6 @@ const sys = {
     setBaseConfig({ commit }, baseConfig) {
       commit("SET_BASECONFIG", baseConfig)
     },
-    // 接收账户
     setToAccount({ commit }, toAccount) {
       commit("SET_TOACCOUNT", toAccount)
     },

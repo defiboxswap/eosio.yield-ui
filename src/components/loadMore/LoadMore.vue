@@ -41,17 +41,14 @@ export default {
     },
     topPullText: {
       type: String,
-      // default: '下拉刷新'
       default: "Pull down refresh",
     },
     topDropText: {
       type: String,
-      // default: '释放更新'
       default: "Release update",
     },
     topLoadingText: {
       type: String,
-      // default: '加载中...'
       // default: "loading...",
       default: "",
     },

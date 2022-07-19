@@ -8,7 +8,7 @@
 
 const whiteConfig = {
   state: {
-    freeCpuWhiteList: [ // 免CPU功能白名单
+    freeCpuWhiteList: [
       'tokenpocket',
       'meetone',
       'starteos',
@@ -16,10 +16,9 @@ const whiteConfig = {
       'eostokenpark',
       'defind'
     ],
-    isFreeCpuWhite: false, // 免CPU功能开发状态
+    isFreeCpuWhite: false,
   },
   mutations: {
-    // 免CPU功能开发状态
     SET_ISFREECPUWHIT: (state, channel) => {
       const index = state.freeCpuWhiteList.findIndex(item => item === channel)
       if (index > -1) {
@@ -29,17 +28,14 @@ const whiteConfig = {
 
       state.isFreeCpuWhite = false;
     },
-    // 免CPU功能白名单
     SET_FREECPUWHITELIST: (state, list) => {
       state.freeCpuWhiteList = list;
     },
   },
   actions: {
-    // 当前时间戳
     setIsFreeCpuWhite: ({ commit }, channel) => {
       commit('SET_ISFREECPUWHIT', channel);
     },
-    // 免CPU功能白名单
     setFreeCpuWhiteList: ({ commit }, list) => {
       commit('SET_FREECPUWHITELIST', list);
     },
