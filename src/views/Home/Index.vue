@@ -20,7 +20,7 @@
           </div>
         </div>
         <!-- <img src="@/assets/img/Home/par1BG.png" class="part1-bg" /> -->
-        <video src="@/assets/video/home/447.mp4" class="part1-bg" loop autoplay muted controls="controls" type="video/mp4" />
+        <img src="@/assets/video/home/420.gif" class="part1-bg" />
       </div>
 
       <div class="Home-part2">
@@ -167,7 +167,7 @@
       <div class="HomePC-part1">
         <div class="HomePC-Layout">
           <!-- <img src="@/assets/img/Home/par1BG.png" class="part1-bg" /> -->
-          <video src="@/assets/video/home/447.mp4" class="part1-bg" style="top: -100px; width: 800px; height: auto; object-fit: fill" loop autoplay muted />
+          <img src="@/assets/video/home/420.gif" class="part1-bg" style="top: -200px; width: 800px; height: auto;" />
           <div class="part1-text">
             <div class="text-1">
               <!-- Yield+  Plan is on -->
@@ -386,7 +386,6 @@ export default {
   }
   .Home-part1 {
     width: 100%;
-    padding-bottom: 60px;
     .Home-Layout {
       padding: 70px 45px 0 45px;
     }

@@ -20,7 +20,7 @@ export function list(params) {
     axios({
       baseURL,
       method: "get",
-      url: `/api/v1/protocols`,
+      url: `/v1/protocols`,
       headers: getHeaders(),
       params
     })
@@ -39,7 +39,7 @@ export function name(name) {
     axios({
       baseURL,
       method: "get",
-      url: `/api/v1/protocols/${ name }`,
+      url: `/v1/protocols/${ name }`,
       headers: getHeaders(),
     })
       .then((result) => {
@@ -58,7 +58,7 @@ export function stat() {
     axios({
       baseURL,
       method: "get",
-      url: `/api/v1/protocol/stat`,
+      url: `/v1/protocol/stat`,
       headers: getHeaders(),
     })
       .then((result) => {

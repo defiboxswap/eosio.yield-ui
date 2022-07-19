@@ -21,7 +21,7 @@ export function getNodeList() {
     axios({
       baseURL,
       method: "get",
-      url: `/api/v1/nodes`,
+      url: `/v1/nodes`,
       headers: getHeaders(),
     }).then(
       (res) => {

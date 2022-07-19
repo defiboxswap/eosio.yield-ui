@@ -21,7 +21,7 @@ export function lines1(duration) {
     axios({
       baseURL,
       method: "get",
-      url: `/api/v1/line/${duration}/stats`,
+      url: `/v1/line/${duration}/stats`,
       headers: getHeaders(),
     })
       .then((res) => {
@@ -40,7 +40,7 @@ export function lines2(duration) {
     axios({
       baseURL,
       method: "get",
-      url: `/api/v1/echart/lines/${duration}`,
+      url: `/v1/echart/lines/${duration}`,
       headers: getHeaders(),
     })
       .then((res) => {
@@ -60,7 +60,7 @@ export function lines3(duration) {
     axios({
       baseURL,
       method: "get",
-      url: `/api/v1/echart/line/${duration}/categorystats`,
+      url: `/v1/echart/line/${duration}/categorystats`,
       headers: getHeaders(),
     })
       .then((res) => {
@@ -80,7 +80,7 @@ export function protocolsDetails(params) {
       baseURL,
       method: "get",
       params,
-      url: `/api/v1/lines/${params.duration}`,
+      url: `/v1/lines/${params.duration}`,
       headers: getHeaders(),
     })
       .then((res) => {
