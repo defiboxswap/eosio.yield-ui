@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <div id="appLayout" >
     <BaseHeader></BaseHeader>
@@ -21,8 +22,8 @@ export default {
   data() {
     return {
       screenWidth: document.body.clientWidth,
-      showHeader: null, 
-      
+      showHeader: null,
+
     };
   },
   components: {},
@@ -51,7 +52,7 @@ export default {
     this.$store.dispatch("setScreenWidth", this.screenWidth);
     window.addEventListener("resize", this.checkScreenWidth);
     this.handlerInitHeader();
-    
+
   },
   mounted() {
 

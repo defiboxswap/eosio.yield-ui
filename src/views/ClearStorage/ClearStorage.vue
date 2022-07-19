@@ -6,7 +6,6 @@
 export default {
   name: "ClearStorage",
   created() {
-    
     sessionStorage.clear()
     localStorage.clear()
     var keys = document.cookie.match(/[^ =;]+(?==)/g)

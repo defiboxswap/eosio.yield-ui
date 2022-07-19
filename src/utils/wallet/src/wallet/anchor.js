@@ -155,7 +155,7 @@ class AnchorModel {
     try {
       let anchorJs = this.session || this.anchorJs;
       const result = await anchorJs.transact(params, {
-        broadcast: !1, 
+        broadcast: !1,
         blocksBehind: 3,
         expireSeconds: 1200
       });

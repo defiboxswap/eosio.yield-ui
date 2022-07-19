@@ -15,7 +15,6 @@ const https = axios.create({
 
 https.defaults.transformRequest = [
   (data, header) => {
-    
     const headerThis = header
     if (localStorage.getItem("token")) {
       headerThis.token = localStorage.getItem("token")
@@ -25,7 +24,7 @@ https.defaults.transformRequest = [
     headerThis.language = store.state.app.language || "en"
     headerThis.ref = store.state.app.accountInfo.wallet
     const token = localStorage.getItem('token');
-    if (token) { 
+    if (token) {
       headerThis.token = token; // eslint-disable-line
     }
     if (store.state.app.scatter && store.state.app.accountInfo.account) {
@@ -52,7 +51,6 @@ https.interceptors.request.use(
 
 https.interceptors.response.use(
   (response) => {
-    
     const res = response.data
     return res // eslint-disable-line
   },
