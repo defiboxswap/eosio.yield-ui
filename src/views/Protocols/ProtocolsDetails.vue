@@ -208,14 +208,14 @@
                   <!-- <div class="box3-title">token</div> -->
                   <div class="box3-text flex" @click="openWindow(projectInfo.cmc)">
                     <img src="@/assets/img/ProtocolsDetails/CoinMarketCap.png" alt="" />
-                    <span v-if="projectInfo.cmc">CoinMarketCap <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle" /></span>
+                    <span v-if="projectInfo.cmc">CoinMarketCap <img src="@/assets/img/ProtocolsDetails/out1.png" class="imgStyle" /></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.coingecko)">
                     <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" alt="" />
-                    <span v-if="projectInfo.coingecko">CoinGecko <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle" /></span>
+                    <span v-if="projectInfo.coingecko">CoinGecko <img src="@/assets/img/ProtocolsDetails/out1.png" class="imgStyle" /></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
@@ -226,7 +226,7 @@
                   <div class="box3-text flex" @click="openWindow(projectInfo.defiLlama)">
                     <img src="@/assets/img/ProtocolsDetails/DefiLlama.png" />
                     <!-- <span>DefiLlama</span> -->
-                    <span v-if="projectInfo.defillama">DefiLlama <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-if="projectInfo.defillama">DefiLlama <img src="@/assets/img/ProtocolsDetails/out1.png" class="imgStyle"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
@@ -236,7 +236,7 @@
                   <div class="box3-text flex" @click="openWindow(projectInfo.dappradar)">
                     <img src="@/assets/img/ProtocolsDetails/DappRadar.png" />
                     <!-- <span>DappRadar</span> -->
-                    <span v-if="projectInfo.dappradar">DappRadar <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-if="projectInfo.dappradar">DappRadar <img src="@/assets/img/ProtocolsDetails/out1.png" class="imgStyle"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
@@ -249,7 +249,7 @@
                   <div class="box3-text flex" @click="openWindow(projectInfo.twitter)">
                     <img src="@/assets/img/ProtocolsDetails/Twitter.png" />
                     <!-- Twitter -->
-                    <span v-if="projectInfo.twitter">Twitter <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-if="projectInfo.twitter">Twitter <img src="@/assets/img/ProtocolsDetails/out1.png" class="imgStyle"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
@@ -257,7 +257,7 @@
                   <div class="box3-text flex" @click="openWindow(projectInfo.discord)">
                     <img src="@/assets/img/ProtocolsDetails/Discord.png" />
                     <!-- Discord -->
-                    <span v-if="projectInfo.discord">Discord <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-if="projectInfo.discord">Discord <img src="@/assets/img/ProtocolsDetails/out1.png" class="imgStyle"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
@@ -268,15 +268,15 @@
                   <div class="box3-text flex" @click="openWindow(projectInfo.telegram)">
                     <img src="@/assets/img/ProtocolsDetails/Telegram.png" />
                     <!-- Telegram -->
-                    <span v-if="projectInfo.telegram">Telegram <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-if="projectInfo.telegram">Telegram <img src="@/assets/img/ProtocolsDetails/out1.png" class="imgStyle"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
                 <div class="box-w">
                   <div class="box3-text flex" @click="openWindow(projectInfo.github)">
-                    <img src="@/assets/img/ProtocolsDetails/git.png" />
+                    <img src="@/assets/img/ProtocolsDetails/git1.png?v=1.0" />
                     <!-- github -->
-                    <span v-if="projectInfo.telegram" class="flex">github <img src="@/assets/img/ProtocolsDetails/out.png" class="imgStyle"/></span>
+                    <span v-if="projectInfo.telegram" class="flex">github <img src="@/assets/img/ProtocolsDetails/out1.png" class="imgStyle"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
@@ -637,13 +637,13 @@
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.cmc)">
                     <img src="@/assets/img/ProtocolsDetails/CoinMarketCap.png" class="box4-img" />
                     <!-- CoinMarketCap -->
-                    <span v-if="projectInfo.cmc">CoinMarketCap <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-if="projectInfo.cmc">CoinMarketCap <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.coingecko)">
                     <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" class="box4-img" />
                     <!-- <span>CoinGecko</span> -->
-                    <span v-if="projectInfo.coingecko">CoinGecko <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-if="projectInfo.coingecko">CoinGecko <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
@@ -651,13 +651,13 @@
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.defillama)">
                     <img src="@/assets/img/ProtocolsDetails/DefiLlama.png" class="box4-img" />
                     <!-- <span>DefiLlama</span> -->
-                    <span v-if="projectInfo.defillama">DefiLlama <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-if="projectInfo.defillama">DefiLlama <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.dappradar)">
                     <img src="@/assets/img/ProtocolsDetails/DappRadar.png" class="box4-img" />
                     <!-- <span>DappRadar</span> -->
-                    <span v-if="projectInfo.dappradar">DappRadar <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-if="projectInfo.dappradar">DappRadar <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
@@ -668,13 +668,13 @@
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.twitter)">
                     <img src="@/assets/img/ProtocolsDetails/Twitter.png" class="box4-img" />
                     <!-- Twitter -->
-                    <span v-if="projectInfo.twitter">Twitter <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-if="projectInfo.twitter">Twitter <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.discord)">
                     <img src="@/assets/img/ProtocolsDetails/Discord.png" class="box4-img" />
                     <!-- Discord -->
-                    <span v-if="projectInfo.discord">Discord <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-if="projectInfo.discord">Discord <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
@@ -682,20 +682,19 @@
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.telegram)">
                     <img src="@/assets/img/ProtocolsDetails/Telegram.png" class="box4-img" />
                     <!-- Telegram -->
-                    <span v-if="projectInfo.telegram">Telegram <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-if="projectInfo.telegram">Telegram <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                   <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.github)">
-                    <img src="@/assets/img/ProtocolsDetails/git.png" class="box4-img" />
+                    <img src="@/assets/img/ProtocolsDetails/git1.png?v=1.0" class="box4-img" />
                     <!-- github -->
-                    <span v-if="projectInfo.telegram" class="flex">github <img src="@/assets/img/ProtocolsDetails/out.png" width="10"/></span>
+                    <span v-if="projectInfo.telegram" class="flex">github <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="ProtocolsDetailsPC-footer" v-if="role && projectInfo">
             <div class="ProtocolsDetailsPC-layout flex flex-align-center flex-jus-between" v-if="role == 2">
               <div class="flext">

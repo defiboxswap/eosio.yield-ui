@@ -10,6 +10,7 @@ let proxyEnv = {
   },
 };
 
+
 module.exports = {
   // config
   devServer: {
@@ -52,8 +53,8 @@ module.exports = {
 
   },
   configureWebpack: (config) => {
-    
-    
+
+
     if (isProduction) {
       // config.plugins.push(new VuetifyLoaderPlugin())
       config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/, /en/));

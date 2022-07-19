@@ -3,7 +3,6 @@ import store from "@/store"
 
 const baseURL = process.env.NODE_ENV === "development" ? "" : "https://api.defibox.io/yield"
 
-
 function getHeaders() {
   return {
     chain: "eos",

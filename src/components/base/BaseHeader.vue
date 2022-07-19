@@ -39,6 +39,7 @@
         </div>
       </v-menu>
     </div>
+
     <div class="BaseHeaderPCFixed BaseHeaderPC flex flex-align-center" :class="{ BaseHeaderPCDark: $route.meta.HeaderDark }" v-else-if="!isMobile">
       <div class="BaseHeaderPC-Layout flex flex-align-center flex-jus-between">
         <div class="flex flex-align-center">

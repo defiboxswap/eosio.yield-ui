@@ -42,4 +42,5 @@ const whiteConfig = {
   }
 };
 
+
 export default whiteConfig;

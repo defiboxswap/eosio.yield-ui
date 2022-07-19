@@ -15,6 +15,7 @@
             <div class="basicInfo-wrongTips" v-if="formWrongTips.name">{{ $t("yield.yield120") }}</div>
           </div>
 
+
           <div class="basicInfo-box">
             <!-- Protocols contract -->
             <div class="basicInfo-subtitle flex">

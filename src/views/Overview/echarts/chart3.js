@@ -148,6 +148,7 @@ export default {
       myChart.setOption(option)
     })
 
+
     option && myChart.setOption(option)
 
     window.addEventListener("resize", () => {

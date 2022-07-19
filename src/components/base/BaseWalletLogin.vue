@@ -21,6 +21,7 @@
           </div>
         </div>
       </div>
+
       <template>
         <div class="wlright">
           <!-- Select Scatter installation mode -->

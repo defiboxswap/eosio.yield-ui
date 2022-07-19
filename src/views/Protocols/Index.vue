@@ -20,7 +20,6 @@
           </div>
         </div>
       </div>
-
       <div class="Protocols-projectList" v-if="infoTab == 'TVLRankings'">
         <template v-if="protocolsList && protocolsList.length > 0">
           <div class="projectList-box" v-for="(item, index) in protocolsList" :key="index" @click.prevent="$router.push(item.nameUrlencode)">

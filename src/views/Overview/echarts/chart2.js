@@ -18,6 +18,7 @@ export default {
       this.poolChartAction()
     })
   },
+
   poolChartAction() {
     let myChart = echarts.init(document.getElementById("view2Data"))
     if (myChart != null) {

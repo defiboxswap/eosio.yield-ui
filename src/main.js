@@ -35,12 +35,13 @@ Vue.prototype.handleCategory = handleCategory
 Vue.prototype.handleCategoryTransform = handleCategoryTransform
 Vue.prototype.deepClone = deepClone
 
+
 Vue.prototype.openWindow = (url) => {
   if (!url) return
   window.open(url)
 }
-Vue.prototype.errorImg = 'this.src="/static/img/moren.png"'
-Vue.prototype.errImg = 'this.src="/static/img/moren.png"'
+Vue.prototype.errorImg = 'this.src="/static/img/moren1.png"'
+Vue.prototype.errImg = 'this.src="/static/img/moren1.png"'
 
 
 import VuetifyToast from '@/plugins/toast/index.js';

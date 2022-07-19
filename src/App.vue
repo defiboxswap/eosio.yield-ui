@@ -6,6 +6,7 @@
   </v-app>
 </template>
 <script>
+
 import DApp from "@/utils/wallet/index"
 import { AppInit } from "@/utils/publicApi"
 import { commons } from "@/service"

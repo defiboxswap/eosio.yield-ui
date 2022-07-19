@@ -53,7 +53,6 @@ export default {
     this.handlerInitHeader();
   },
   mounted() {
-
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.checkScreenWidth);

@@ -48,7 +48,6 @@ https.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 )
-
 https.interceptors.response.use(
   (response) => {
     const res = response.data

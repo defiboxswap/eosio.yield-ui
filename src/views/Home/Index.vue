@@ -20,7 +20,7 @@
           </div>
         </div>
         <!-- <img src="@/assets/img/Home/par1BG.png" class="part1-bg" /> -->
-        <img src="@/assets/video/home/420.gif" class="part1-bg" />
+        <img src="@/assets/video/home/421.gif" class="part1-bg" />
       </div>
 
       <div class="Home-part2">
@@ -163,11 +163,12 @@
         </div>
       </div>
     </div>
+
     <div class="HomePC" v-else>
       <div class="HomePC-part1">
         <div class="HomePC-Layout">
           <!-- <img src="@/assets/img/Home/par1BG.png" class="part1-bg" /> -->
-          <img src="@/assets/video/home/420.gif" class="part1-bg" style="top: -200px; width: 800px; height: auto;" />
+          <img src="@/assets/video/home/421.gif" class="part1-bg" style="top: -200px; width: 800px; height: auto;" />
           <div class="part1-text">
             <div class="text-1">
               <!-- Yield+  Plan is on -->

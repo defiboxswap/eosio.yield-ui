@@ -150,6 +150,7 @@ class AnchorModel {
     return null;
   }
 
+
   // newArbitrarySignature
   async newArbitrarySignature(params) {
     try {

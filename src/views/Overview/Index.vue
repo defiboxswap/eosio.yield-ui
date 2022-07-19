@@ -40,15 +40,13 @@
                 label="Select Item"
                 multiple
               >
-                <template v-slot:selection="{ item, index }">
-                  <v-chip v-if="index === 0">
-                    <span>{{ item }}</span>
-                  </v-chip>
+                <template v-slot:selection="{ index }">
                   <span
-                    v-if="index === 1"
-                    class="grey--text text-caption"
+                    v-if="index === 0"
+                    class="grey--text text-caption flex"
                   >
-                    (+{{ charts2Value.length - 1 }} others)
+                    <span class="back-cls">{{ charts2Value.length }}</span>
+                    <span>Items</span>
                   </span>
                 </template>
                 <template v-slot:prepend-item>
@@ -130,22 +128,20 @@
       <div class="OverviewPC-view2">
         <div class="view2-title flexb">
           <span>{{ $t("yield.yield43") }}</span>
-          <div style="width: 300px">
+          <div style="width: 200px">
             <v-select
               v-model="charts2Value"
               :items="charts2Items"
               label="Select Item"
               multiple
             >
-              <template v-slot:selection="{ item, index }">
-                <v-chip v-if="index === 0">
-                  <span>{{ item }}</span>
-                </v-chip>
+              <template v-slot:selection="{ index }">
                 <span
-                  v-if="index === 1"
-                  class="grey--text text-caption"
+                  v-if="index === 0"
+                  class="grey--text text-caption flex"
                 >
-                  (+{{ charts2Value.length - 1 }} others)
+                  <span class="back-cls">{{ charts2Value.length }}</span>
+                  <span>Items</span>
                 </span>
               </template>
               <template v-slot:prepend-item>
@@ -409,6 +405,16 @@ export default {
       color: #000000;
       margin-bottom: 13px;
       margin-top: 30px;
+      .back-cls {
+        background: rgb(86, 90, 105);
+        padding: 4px;
+        border-radius: 50%;
+        width: 28px;
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
+        margin-right: 10px;
+      }
     }
     .tvl-box {
       border: 1px solid #efefef;
@@ -537,7 +543,6 @@ export default {
       }
     }
   }
-
   .OverviewPC-view2 {
     margin-top: 54px;
     .view2-title {
@@ -548,6 +553,16 @@ export default {
       font-weight: 600;
       color: #000000;
       margin-bottom: 23px;
+      .back-cls {
+        background: rgb(86, 90, 105);
+        padding: 4px;
+        border-radius: 50%;
+        width: 28px;
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
+        margin-right: 10px;
+      }
     }
     .OverviewPC-layout {
       height: 700px;
