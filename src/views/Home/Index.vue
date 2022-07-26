@@ -183,7 +183,7 @@
               EOS {{ $t("yield.yield8") }}
             </div>
             <!-- Join Yield + -->
-            <v-btn class="text-button" @click="$router.push('/Join')">{{ $t("yield.yield4") }}</v-btn>
+            <v-btn class="text-button" @click="$router.push('/Join')">{{ $t("yield.yield4") }}1</v-btn>
           </div>
         </div>
       </div>
