@@ -651,7 +651,7 @@ export default {
     getAdminAccount() {
       return new Promise(async (resolve, reject) => {
         axios({
-          url: "https://eos.greymass.com/v1/chain/get_account",
+          url: `${this.$store.state.sys.node.httpEndpoint}/v1/chain/get_account`,
           method: "post",
           headers: {
             "content-type": "text/plain;charset=UTF-8",
@@ -675,7 +675,7 @@ export default {
     verifiStat() {
       return new Promise(async (resolve) => {
         axios({
-          url: "https://eos.greymass.com/v1/chain/get_currency_stats",
+          url: `${this.$store.state.sys.node.httpEndpoint}/v1/chain/get_currency_stats`,
           method: "post",
           headers: {
             "content-type": "text/plain;charset=UTF-8",

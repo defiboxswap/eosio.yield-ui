@@ -13,16 +13,16 @@ export default {
   init(options) {
     this.vueThis = options.self
     this.chartsData = options.data
+    this.type = options.type
     // this.poolChartAction();
     this.vueThis.$nextTick(() => {
       this.poolChartAction()
     })
   },
-
   poolChartAction() {
     let myChart = echarts.init(document.getElementById("view2Data"))
     if (myChart != null) {
-      myChart.dispose()
+      myChart.clear()
     }
     myChart = echarts.init(document.getElementById("view2Data"))
     let series = []
@@ -66,8 +66,9 @@ export default {
       // },
       grid: {
         left: document.body.clientWidth < 1200 ?'3%': '3%',
-        top: document.body.clientWidth < 1200 ? ((this.chartsData[0].length / 3 * 12) + '%') : ((Math.floor(this.chartsData[0].length / 10 + 1) * 13) + '%'),
-        right: "4%",
+        top: document.body.clientWidth < 1200 ? '15%' : ((Math.floor(this.chartsData[0].length / 10 + 1) * 13) + '%'),
+        // ((this.chartsData[0].length / 3 * 12) + '%')
+        right: "6%",
         bottom: "3%",
         containLabel: true,
       },
@@ -75,7 +76,7 @@ export default {
         {
           type: "category",
           boundaryGap: false,
-          data: this.chartsData[0].splice(1).map((i) => moment(i * 1000).format("YYYY-MM-DD")),
+          data: this.chartsData[0].splice(1).map((i) => moment(i * 1000).format("MM-DD")),
         },
       ],
       yAxis: [
@@ -84,7 +85,8 @@ export default {
           axisLabel: {
             fontSize: 12,
             formatter: (value) => {
-              return '$' + this.vueThis.getKMBUnit(value, 0)
+              const val = this.type === 'USD' ? `$${this.vueThis.getKMBUnit(value, 0)}` : this.vueThis.getKMBUnit(value, 0)
+              return val
             },
           },
         },

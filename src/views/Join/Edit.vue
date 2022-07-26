@@ -521,11 +521,11 @@ export default {
       this.btnLoading = true
       try {
         let result = await protocols.name(this.projectName)
-        if (result.code === 0 && result.data) {
+        if (result.code === 200 && result.data) {
           let item = result.data
           // item.logo = ""
           // item.contracts = JSON.parse(item.contracts)[0]
-          item.metadataInfo = JSON.parse(item.metadata)
+          // item.metadataInfo = item.metadata
           this.projectStatus = item.status
           let category = ''
           if (item.category === 'cdp') {
@@ -540,24 +540,40 @@ export default {
             category = 'Yield'
           }
           this.categoryItem = category
-          item.metadataInfo.forEach((i) => {
-            if (i.key == "logo") this.form.logo = i.value
-            else if (i.key == "name") this.form.name = i.value
-            else if (i.key == "audits") this.form.audits = i.value
-            else if (i.key == "description") this.form.description = i.value
-            else if (i.key == "website") this.form.website = i.value
-            else if (i.key == "cmc") this.form.cmc = i.value
-            else if (i.key == "recover") this.form.recover = i.value
-            else if (i.key == "coingecko") this.form.coingecko = i.value
-            else if (i.key == "dappradar") this.form.dappradar = i.value
-            else if (i.key == "defillama") this.form.defillama = i.value
-            else if (i.key == "discord") this.form.discord = i.value
-            else if (i.key == "telegram") this.form.telegram = i.value
-            else if (i.key == "twitter") this.form.twitter = i.value
-            else if (i.key == "github") this.form.github = i.value
-            else if (i.key == "token.code") this.form.tokenCode = i.value
-            else if (i.key == "token.symcode") this.form.tokenSymcode = i.value
-          })
+          this.form.logo = `https://ipfs.pink.gg/ipfs/${item.metadata.logo}`
+          this.form.name = item.metadata.name
+          this.form.audits = item.metadata.audits
+          this.form.description = item.metadata.description
+          this.form.website = item.metadata.website
+          this.form.cmc = item.metadata.cmc
+          this.form.recover = item.metadata.recover
+          this.form.coingecko = item.metadata.coingecko
+          this.form.dappradar = item.metadata.dappradar
+          this.form.defillama = item.metadata.defillama
+          this.form.discord = item.metadata.discord
+          this.form.telegram = item.metadata.telegram
+          this.form.twitter = item.metadata.twitter
+          this.form.github = item.metadata.github
+          this.form.tokenCode = item.metadata['token.code']
+          this.form.tokenSymcode = item.metadata['token.symcode']
+          // item.metadataInfo.forEach((i) => {
+          //   if (i.key == "logo") this.form.logo = i.value
+          //   else if (i.key == "name") this.form.name = i.value
+          //   else if (i.key == "audits") this.form.audits = i.value
+          //   else if (i.key == "description") this.form.description = i.value
+          //   else if (i.key == "website") this.form.website = i.value
+          //   else if (i.key == "cmc") this.form.cmc = i.value
+          //   else if (i.key == "recover") this.form.recover = i.value
+          //   else if (i.key == "coingecko") this.form.coingecko = i.value
+          //   else if (i.key == "dappradar") this.form.dappradar = i.value
+          //   else if (i.key == "defillama") this.form.defillama = i.value
+          //   else if (i.key == "discord") this.form.discord = i.value
+          //   else if (i.key == "telegram") this.form.telegram = i.value
+          //   else if (i.key == "twitter") this.form.twitter = i.value
+          //   else if (i.key == "github") this.form.github = i.value
+          //   else if (i.key == "token.code") this.form.tokenCode = i.value
+          //   else if (i.key == "token.symcode") this.form.tokenSymcode = i.value
+          // })
 
           // item.otherInfo = {}
           // item.otherInfo.name = ''
@@ -732,7 +748,7 @@ export default {
     // getAdminAccount
     getAdminAccount() {
       axios({
-        url: "https://eos.greymass.com/v1/chain/get_account",
+        url: `${this.$store.state.sys.node.httpEndpoint}/v1/chain/get_account`,
         method: "post",
         headers: {
           "content-type": "text/plain;charset=UTF-8",

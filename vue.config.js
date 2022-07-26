@@ -4,7 +4,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 let proxyEnv = {
   "/v1/": {
     target: `http://${process.env.VUE_APP_BASEURL}:${process.env.VUE_APP_PORT29}`,
-    // target: 'https://defibox.io',
+    // target: 'https://api.tokenyield.io',
     ws: false,
     changeOrigin: true,
   },

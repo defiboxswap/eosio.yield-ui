@@ -1,9 +1,8 @@
 import axios from "axios"
 import store from "@/store"
 
-const baseURL = process.env.NODE_ENV === "development" ? "" : "https://api.tokenyield.io"
 // const baseURL = "https://api.tokenyield.io"
-
+const baseURL = process.env.NODE_ENV === "development" ? "" : "https://api.tokenyield.io"
 function getHeaders() {
   return {
     chain: "eos",
@@ -58,7 +57,7 @@ export function stat() {
     axios({
       baseURL,
       method: "get",
-      url: `/v1/protocol/stat`,
+      url: `/v1/protocols/stat`,
       headers: getHeaders(),
     })
       .then((result) => {

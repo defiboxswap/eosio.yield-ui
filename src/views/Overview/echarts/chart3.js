@@ -24,13 +24,15 @@ export default {
     var option
 
     this.chartsData[0] = this.chartsData[0].map((item, index) => {
-      if (index > 0) return moment(item * 1000).format("YYYY-MM-DD")
+      if (index > 0) return moment(item * 1000).format("MM-DD")
       return item
     })
 
     setTimeout(() => {
       option = {
-        legend: {},
+        legend: {
+          show: false
+        },
         tooltip: {
           trigger: "axis",
           showContent: false,
@@ -58,7 +60,7 @@ export default {
         grid: [
           {
             top: "60%",
-            // left: document.body.clientWidth < 1200 ? "18%" : "10%",
+            left: document.body.clientWidth < 1200 ? "18%" : "10%",
             bottom: "20%",
           },
         ],
@@ -102,8 +104,8 @@ export default {
               formatter: (value) => {
                 let dimension = this.chartsData[0].length - 1
                 let yValue = '$' + this.vueThis.getKMBUnit(value.value[dimension], 0);
-                if (document.body.clientWidth > 1200) yValue = '$' + this.vueThis.getKMBUnit(value.value[dimension], 4)
-                return `${ value.name }:${ yValue }(${ value.percent }%)`
+                if (document.body.clientWidth > 1200) yValue = '$' + this.vueThis.getKMBUnit(value.value[dimension], 2)
+                return `${value.name}: ${ value.percent }%(${ yValue })`
               },
               width: document.body.clientWidth > 1200? 500:100,
               overflow: 'break'
@@ -131,8 +133,8 @@ export default {
                 formatter: (value) => {
                   // console.log('updateAxisPointer',value, dimension);
                   let yValue = '$' + this.vueThis.getKMBUnit(value.value[dimension], 2);
-                  if (document.body.clientWidth > 1200) yValue = '$' + this.vueThis.getKMBUnit(value.value[dimension], 4)
-                  return `${ value.name }: ${ yValue }(${ value.percent }%)`
+                  if (document.body.clientWidth > 1200) yValue = '$' + this.vueThis.getKMBUnit(value.value[dimension], 2)
+                  return `${value.name}: ${ value.percent }%(${ yValue })`
                 },
                 width: document.body.clientWidth > 1200? 600:100,
                 overflow: 'break'

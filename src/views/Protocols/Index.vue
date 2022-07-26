@@ -33,7 +33,7 @@
                 <div class="flex flex-wrap">
                   <div class="box-label">{{ handleCategory(item.category) }}</div>
                   <!-- <div class="box-label">Corss-chain</div> -->
-                  <div class="box-label"  v-if="handleGrade(item.tvl_usd)">{{ handleGrade(item.tvl_usd) }}</div>
+                  <div class="box-label"  v-if="handleGrade(item.tvl_eos)">{{ handleGrade(item.tvl_eos) }}</div>
                 </div>
               </div>
             </div>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield42") }}</div>
-                  <div class="data-number" :class="getColor(item.tvl_usd_change)">{{ item.tvl_usd_change }}</div>
+                  <div class="data-number" :class="getColor(item.tvl_eos_change)">{{ item.tvl_eos_change }}</div>
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield54") }}</div>
@@ -138,7 +138,7 @@
               <div class="box-1" style="text-align: left; padding-left: 80px">{{ $t("yield.yield52") }}</div>
               <div class="box-2 flex flex-jus-center" @click="order = 'tvl_usd'">
                 <!-- TVL -->
-                <span>{{ $t("yield.yield53") }}</span>
+                <span :style="{'color': order === 'tvl_usd' ? '#000' : ''}">{{ $t("yield.yield53") }}</span>
                 <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_usd'" />
                 <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
               </div>
@@ -153,7 +153,7 @@
               </div>
               <div class="box-4 flex flex-jus-center" @click="order = 'agg_rewards'">
                 <!-- REWARD(EOS) -->
-                <span>{{ $t("yield.yield54") }}</span>
+                <span :style="{'color': order === 'agg_rewards' ? '#000' : ''}">{{ $t("yield.yield54") }}</span>
                 <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'agg_rewards'" />
                 <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
               </div>
@@ -175,13 +175,13 @@
                     <div class="item-name">{{ item.name }}</div>
                     <div class="flex flex-wrap">
                       <div class="item-label">{{ handleCategory(item.category) }}</div>
-                      <div class="item-label" v-if="handleGrade(item.tvl_usd)">{{ handleGrade(item.tvl_usd) }}</div>
+                      <div class="item-label" v-if="handleGrade(item.tvl_eos)">{{ handleGrade(item.tvl_eos) }}</div>
                     </div>
                   </div>
                 </div>
 
                 <div class="box-2">${{ getKMBUnit(item.tvl_usd) }}</div>
-                <div class="box-3" :class="getColor(item.tvl_usd_change)">{{ item.tvl_usd_change }}</div>
+                <div class="box-3" :class="getColor(item.tvl_eos_change)">{{ item.tvl_eos_change }}</div>
                 <div class="box-4">{{ item.agg_rewards_change.toFixed(4) }}</div>
                 <!-- <div class="box-5">$123.43M</div> -->
               </a>
@@ -404,26 +404,27 @@ export default {
           status: this.infoTab === 'TVLRankings' ? '' : this.selectVal.value === 'All' ? '' : this.selectVal,
           category: this.infoTab === 'Audit' ? '' : this.selectVal.value === 'All' ? '' : this.selectVal
         })
-        if (result?.code === 0 && result.data) {
+        if (result?.code === 200 && result.data) {
           result.data.forEach((item) => {
-            item.logo = ""
+            // item.logo = ""
             item.nameUrlencode = "/ProtocolsDetails?name=" + encodeURIComponent(item.name)
-            if (!item.metadata) return
-            item.metadataInfo = JSON.parse(item.metadata)
+            // if (!item.metadata) return
+            // item.metadataInfo = item.metadata
 
-            item.metadataInfo.forEach((i) => {
-              if (i.key == "logo") item.logo = `https://ipfs.pink.gg/ipfs/${i.value}`
-              else if (i.key == "name") item.name = i.value
-            })
-            item.tvl_usd_changeOld = item.tvl_usd_change
-            // item.tvl_usd_change = item.tvl_usd_change/(tvl_usd-tvl_usd_change)*100
-            if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
+            // item.metadataInfo.forEach((i) => {
+            //   if (i.key == "logo") item.logo = `https://ipfs.pink.gg/ipfs/${i.value}`
+            //   else if (i.key == "name") item.name = i.value
+            // })
+            item.logo = `https://ipfs.pink.gg/ipfs/${item.metadata.logo}`
+            item.name = item.metadata.name
+            item.tvl_eos_changeOld = item.tvl_eos_change
+            if (this.accSub(item.tvl_eos, item.tvl_eos_change) != 0 && this.accSub(item.tvl_eos, item.tvl_eos_change)) item.tvl_eos_change = this.accDiv(item.tvl_eos_change, this.accDiv(this.accSub(item.tvl_eos, item.tvl_eos_change), 100))
 
-            item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
-            if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
-            else item.tvl_usd_change = `${item.tvl_usd_change}%`
+            item.tvl_eos_change = this.toFixed(item.tvl_eos_change, 2)
+            if (item.tvl_eos_change > 0) item.tvl_eos_change = `+${item.tvl_eos_change}%`
+            else item.tvl_eos_change = `${item.tvl_eos_change}%`
 
-            if (item.tvl_usd_changeOld == item.tvl_usd) item.tvl_usd_change = '0.00%'
+            if (item.tvl_eos_changeOld == item.tvl_eos) item.tvl_eos_change = '0.00%'
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]
@@ -449,13 +450,13 @@ export default {
       }
     },
     handleGrade(item) {
-      if (item < 500000) {
+      if (item < 200000) {
         return ''
-      } else if (item >= 500000 && item < 1875000) {
+      } else if (item >= 200000 && item < 750000) {
         return 'Bronze'
-      } else if (item >= 1875000 && item < 3750000) {
+      } else if (item >= 750000 && item < 1500000) {
         return 'Siver'
-      } else if (item >= 3750000 && item < 7500000) {
+      } else if (item >= 1500000 && item < 3000000) {
         return 'Gold'
       } else {
         return 'Dimond'
@@ -523,6 +524,7 @@ export default {
         ::v-deep .v-input__slot {
           background: transparent !important;
           padding-left: 0 !important;
+          box-shadow: none !important;
         }
 
         ::v-deep .v-select__selections {

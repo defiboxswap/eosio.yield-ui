@@ -3,7 +3,6 @@ import store from "@/store"
 
 const baseURL = process.env.NODE_ENV === "development" ? "" : "https://api.tokenyield.io"
 // const baseURL = "https://api.tokenyield.io"
-
 function getHeaders() {
   return {
     chain: "eos",
@@ -21,7 +20,7 @@ export function lines1(duration) {
     axios({
       baseURL,
       method: "get",
-      url: `/v1/line/${duration}/stats`,
+      url: `/v1/lines/${duration}/stats`,
       headers: getHeaders(),
     })
       .then((res) => {
@@ -34,14 +33,18 @@ export function lines1(duration) {
 }
 
 // Overview second lines
-export function lines2(duration) {
+export function lines2(duration, tvl_type) {
   duration = duration || 'day'
+  const params = {
+    tvl_type
+  }
   return new Promise((resolve, reject) => {
     axios({
       baseURL,
       method: "get",
       url: `/v1/echart/lines/${duration}`,
       headers: getHeaders(),
+      params
     })
       .then((res) => {
         resolve(res.data)
@@ -56,12 +59,16 @@ export function lines2(duration) {
 // Overview third lines
 export function lines3(duration) {
   duration = duration || 'day'
+  const params = {
+    tvl_type: 'tvl_usd'
+  }
   return new Promise((resolve, reject) => {
     axios({
       baseURL,
       method: "get",
-      url: `/v1/echart/line/${duration}/categorystats`,
+      url: `/v1/echart/lines/${duration}/categorystats`,
       headers: getHeaders(),
+      params
     })
       .then((res) => {
         resolve(res.data)

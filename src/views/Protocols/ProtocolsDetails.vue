@@ -3,9 +3,9 @@
     <div class="ProtocolsDetails" v-if="isMobile" :class="{ noRole: !role }">
       <div class="ProtocolsDetails-layout">
         <div class="ProtocolsDetails-title">
-          {{ $t("yield.yield7") }}
+          <span style="margin-right: 6px;" @click="$router.push({name: 'Protocols'})">{{ $t("yield.yield3") }}</span>
           <span>
-            <span v-if="projectName">> {{ projectName }}</span>
+            <span v-if="projectInfo">> {{ projectInfo.name }}</span>
           </span>
         </div>
 
@@ -21,6 +21,7 @@
                   <div class="flex flex-wrap">
                     <div class="box-label" style="text-align: center">{{ handleCategory(projectInfo.category) }}</div>
                     <!-- <div class="box-label">Corss-chain</div> -->
+                    <div class="box-label"  v-if="handleGrade(projectInfo.tvl_eos)">{{ handleGrade(projectInfo.tvl_eos) }}</div>
                   </div>
                 </div>
               </div>
@@ -75,6 +76,9 @@
           </div>
           <div class="ProtocolsDetails-data">
             <!-- <div id="view1Data"></div> -->
+            <div class="tabCls">
+              <BaseTab v-model="checkedVal1"/>
+            </div>
             <div id="view1Data" v-if="hasData"></div>
             <div v-else class="flex flexc review">
               <img src="@/assets/img/BaseNoData/review.png" alt="" />
@@ -85,10 +89,11 @@
                 <div class="flex-1">
                   <div class="view-title">{{ $t("yield.yield41") }}</div>
                   <div class="view-text">${{ getKMBUnit(overViewData.tvl_usd, 2) }}</div>
+                  <div class="view-title">≈ {{ getKMBUnit(overViewData.tvl_eos, 2) }} EOS</div>
                 </div>
                 <div class="flex-1">
                   <div class="view-title">{{ $t("yield.yield42") }}</div>
-                  <div class="view-text" :class="getColor(overViewData.tvl_usd_change)">{{ overViewData.tvl_usd_change }}</div>
+                  <div class="view-text" :class="getColor(overViewData.tvl_eos_change)">{{ overViewData.tvl_eos_change }}</div>
                 </div>
               </div>
 
@@ -297,20 +302,20 @@
       <div class="ProtocolsDetails-footer" v-if="role && projectInfo">
         <template v-if="role == 2">
           <div class="flext flex-jus-center" v-if="projectInfo.status == 'pending'">
-            <div class="flex flex-column flex-jus-center footer-height">
+            <div class="flex-1 flex-column flex-jus-center footer-height">
               <div>
                 <div class="footer-text1">{{ $t("yield.yield88") }}</div>
                 <div class="footer-text2">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
               </div>
             </div>
             <div class="footer-line"></div>
-            <div class="flex flex-column flex-jus-center footer-height">
+            <div class="flex-1 flex-column flex-jus-center footer-height">
               <v-btn color="footer-button2" :loading="claimLoading" @click="gotoEdit">{{ $t("yield.yield101") }}</v-btn>
             </div>
           </div>
 
           <div class="flext flex-jus-center" v-else-if="projectInfo.status == 'active'">
-            <div class="flex flex-column flex-jus-between footer-height">
+            <div class="flex-1 flex-column flex-jus-between footer-height">
               <div>
                 <div class="footer-text1">{{ $t("yield.yield96") }}</div>
                 <div class="footer-text2">{{ rewards }}</div>
@@ -319,7 +324,7 @@
               <v-btn class="footer-button1" style="background: #f5f5f5; color: #000" :loading="claimLoading" v-else-if="rewards == '-' || !rewards">{{ $t("yield.yield170") }}</v-btn>
             </div>
             <div class="footer-line"></div>
-            <div class="flex flex-column flex-jus-between footer-height">
+            <div class="flex-1 flex-column flex-jus-between footer-height">
               <div>
                 <div class="footer-text1">{{ $t("yield.yield88") }}</div>
                 <div class="footer-text2">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
@@ -329,11 +334,11 @@
           </div>
 
           <div class="flext flex-jus-center" v-else-if="projectInfo.status == 'denied'">
-            <div class="flex flex-column flex-jus-center footer-height">
+            <div class="flex-1 flex-column flex-jus-center footer-height">
               <div class="footer-text3">{{ $t("yield.yield139") }}</div>
             </div>
             <div class="footer-line"></div>
-            <div class="flex flex-column flex-jus-between footer-height">
+            <div class="flex-1 flex-column flex-jus-between footer-height">
               <div>
                 <div class="footer-text1">{{ $t("yield.yield88") }}</div>
                 <div class="footer-text2">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
@@ -344,7 +349,7 @@
         </template>
         <template v-else-if="role == 1">
           <div class="flext flex-jus-center" v-if="projectInfo.status == 'pending'">
-            <div class="flex flex-column flex-jus-between footer-height">
+            <div class="flex-1 flex-column flex-jus-between footer-height">
               <div>
                 <div class="footer-text1">{{ $t("yield.yield86") }}</div>
                 <div class="footer-text2">{{ handleCategory(projectInfo.category) }}</div>
@@ -352,14 +357,14 @@
               <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogShow">{{ $t("yield.yield168") }}</v-btn>
             </div>
             <div class="footer-line"></div>
-            <div class="flex flex-column flex-jus-between footer-height">
+            <div class="flex-1 flex-column flex-jus-between footer-height">
               <v-btn color="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
               <v-btn color="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn>
             </div>
           </div>
 
           <div class="flext flex-jus-center" v-else-if="projectInfo.status == 'active'">
-            <div class="flex flex-column flex-jus-between footer-height">
+            <div class="flex-1 flex-column flex-jus-between footer-height">
               <div>
                 <div class="footer-text1">{{ $t("yield.yield86") }}</div>
                 <div class="footer-text2">{{ handleCategory(projectInfo.category) }}</div>
@@ -367,7 +372,7 @@
               <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogShow">{{ $t("yield.yield168") }}</v-btn>
             </div>
             <div class="footer-line"></div>
-            <div class="flex flex-column flex-jus-between footer-height">
+            <div class="flex-1 flex-column flex-jus-between footer-height">
               <div>
                 <div class="footer-text1">{{ $t("yield.yield88") }}</div>
                 <div class="footer-text2">{{ $t(statusToLanguage[projectInfo.status]) }}</div>
@@ -377,7 +382,7 @@
           </div>
 
           <div class="flext flex-jus-center" v-else-if="projectInfo.status == 'denied'">
-            <div class="flex flex-column flex-jus-between footer-height">
+            <div class="flex-1 flex-column flex-jus-between footer-height">
               <div>
                 <div class="footer-text1">{{ $t("yield.yield86") }}</div>
                 <div class="footer-text2">{{ handleCategory(projectInfo.category) }}</div>
@@ -385,7 +390,7 @@
               <v-btn color="footer-button2" :loading="claimLoading" @click="categoryDialogShow">{{ $t("yield.yield168") }}</v-btn>
             </div>
             <div class="footer-line"></div>
-            <div class="flex flex-column flex-jus-center footer-height">
+            <div class="flex-1 flex-column flex-jus-center footer-height">
               <!-- <v-btn color="footer-button1" :loading="claimLoading" @click="handleAllow">{{ $t("yield.yield103") }}</v-btn>
               <v-btn color="footer-button2" :loading="claimLoading" @click="handleRefuse">{{ $t("yield.yield104") }}</v-btn> -->
               <div>
@@ -402,9 +407,9 @@
       <div class="ProtocolsDetailsPC-overLayPatch ProtocolsDetailsPC-layout">
         <!-- Projects -->
         <div class="ProtocolsDetailsPC-title">
-          {{ $t("yield.yield7") }}
+          <span class="pointer" style="margin-right: 6px;" @click="$router.push({name: 'Protocols'})">{{ $t("yield.yield3") }}</span>
           <span>
-            <span v-if="projectName">> {{ projectName }}</span>
+            <span v-if="projectInfo">> {{ projectInfo.name }}</span>
           </span>
         </div>
 
@@ -419,6 +424,7 @@
                     <div class="flex flex-wrap">
                       <div class="box1-label">{{ handleCategory(projectInfo.category) }}</div>
                       <!-- <div class="box1-label">Corss-chain</div> -->
+                      <div class="box1-label" v-if="handleGrade(projectInfo.tvl_eos)">{{ handleGrade(projectInfo.tvl_eos) }}</div>
                     </div>
                   </div>
                 </div>
@@ -481,7 +487,10 @@
                   <div class="box2-circle"></div>
                   <div class="">{{ $t("yield.yield41") }}</div>
                 </div>
-                <div class="box2-number">${{ getKMBUnit(overViewData.tvl_usd, 2) }}</div>
+                <div class="box2-number">
+                  ${{ getKMBUnit(overViewData.tvl_usd, 2) }}
+                  <div>≈ {{ getKMBUnit(overViewData.tvl_eos, 2) }} EOS</div>
+                </div>
               </div>
 
               <div class="">
@@ -489,7 +498,7 @@
                   <div class="box2-circle"></div>
                   <div class="">{{ $t("yield.yield42") }}</div>
                 </div>
-                <div class="box2-number" :class="getColor(overViewData.tvl_usd_change)">{{ overViewData.tvl_usd_change }}</div>
+                <div class="box2-number" :class="getColor(overViewData.tvl_eos_change)">{{ overViewData.tvl_eos_change }}</div>
               </div>
 
               <div class="">
@@ -500,7 +509,12 @@
                 <div class="box2-number">{{ toFixed(projectInfo.agg_rewards_change, 4) }}</div>
               </div>
             </div>
-            <div id="view1Data" v-if="hasData"></div>
+            <div v-if="hasData" class="box2-right">
+              <div class="tabCls">
+                <BaseTab v-model="checkedVal1"/>
+              </div>
+              <div id="view1Data"></div>
+            </div>
             <div v-else class="flex flexc review">
               <img src="@/assets/img/BaseNoData/review.png" alt="" />
               <span>{{ $t("yield.yield167") }}</span>
@@ -740,7 +754,7 @@
                       </div>
                     </div>
                     <!-- Modify -->
-                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogShow" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+                    <v-btn class="footer-button2" :loading="claimLoading" @click="categoryDialogShow">{{ $t("yield.yield168") }}</v-btn>
 
                     <div class="footer-line"></div>
                   </div>
@@ -770,7 +784,7 @@
                       </div>
                     </div>
                     <!-- Modify -->
-                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogShow" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+                    <v-btn class="footer-button2" :loading="claimLoading" @click="categoryDialogShow">{{ $t("yield.yield168") }}</v-btn>
 
                     <div class="footer-line"></div>
                   </div>
@@ -800,7 +814,7 @@
                       </div>
                     </div>
                     <!-- Modify -->
-                    <v-btn class="footer-button1" :loading="claimLoading" @click="categoryDialogShow" style="background: #1c1dff">{{ $t("yield.yield168") }}</v-btn>
+                    <v-btn class="footer-button2" :loading="claimLoading" @click="categoryDialogShow">{{ $t("yield.yield168") }}</v-btn>
 
                     <div class="footer-line"></div>
                   </div>
@@ -838,7 +852,7 @@
         <div class="categoryDialog">
           <div class="categoryDialog-title">{{ $t("yield.yield62") }}</div>
           <!-- <div class="categoryDialog-des">Project category</div> -->
-          <v-select v-model="categoryItem" :items="categoryList" :label="$t('yield.yield61')"></v-select>
+          <v-select v-model="categoryItem" :items="categoryList" :label="$t('yield.yield61')" outlined :menu-props="{ bottom: true, offsetY: true }"></v-select>
           <div class="flex flex-jus-center" style="margin-top: 30px">
             <v-btn class="setCategoryBtn" @click="handSetCategory">{{ $t("yield.yield169") }}</v-btn>
           </div>
@@ -871,11 +885,12 @@ export default {
 
       adminAccountList: ["d.a.yield", "admin.yield"],
 
+
       overViewData: {
-        tvl_eos: 0,
-        agg_protocol_count: 0,
         tvl_usd: 0,
-        tvl_usd_change: "0.00",
+        agg_protocol_count: 0,
+        tvl_eos: 0,
+        tvl_eos_change: "0.00",
       },
       rewards: "-",
 
@@ -884,12 +899,35 @@ export default {
         pending: "yield.yield162",
         denied: "yield.yield164",
       },
-      descriptionHidden: true
+      descriptionHidden: true,
+      checkedVal1: 'USD',
+      overViewData1: []
     }
   },
   components: {},
   props: {},
-  watch: {},
+  watch: {
+    'checkedVal1': {
+      handler: async function (val) {
+        try {
+          chart1.init({
+            self: this,
+            data: this.overViewData1,
+            type: val
+          })
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    },
+    'isMobile': {
+      handler: async function () {
+        this.$nextTick(() => {
+          this.getInfo()
+        })
+      }
+    },
+  },
   computed: {
     ...mapState({
       isMobile: (state) => state.app.isMobile,
@@ -942,20 +980,20 @@ export default {
         if (res.data.length > 0) {
           this.hasData = 1
           let item = JSON.parse(JSON.stringify(res.data[res.data.length - 1]))
-          item.tvl_usd_changeOld = item.tvl_usd_change
-          // item.tvl_usd_change = item.tvl_usd_change/(tvl_usd-tvl_usd_change)*100
-          if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
+          item.tvl_eos_changeOld = item.tvl_eos_change
+          // item.tvl_eos_change = item.tvl_eos_change/(tvl_eos-tvl_eos_change)*100
+          if (this.accSub(item.tvl_eos, item.tvl_eos_change) != 0 && this.accSub(item.tvl_eos, item.tvl_eos_change)) item.tvl_eos_change = this.accDiv(item.tvl_eos_change, this.accDiv(this.accSub(item.tvl_eos, item.tvl_eos_change), 100))
 
-          item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
+          item.tvl_eos_change = this.toFixed(item.tvl_eos_change, 2)
           item.tvl_eos = this.toFixed(item.tvl_eos, 2)
-          if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
-          else item.tvl_usd_change = `${item.tvl_usd_change}%`
+          if (item.tvl_eos_change > 0) item.tvl_eos_change = `+${item.tvl_eos_change}%`
+          else item.tvl_eos_change = `${item.tvl_eos_change}%`
 
-          if (item.tvl_usd_changeOld == item.tvl_usd) item.tvl_usd_change = '0.00%'
+          if (item.tvl_eos_changeOld == item.tvl_eos) item.tvl_eos_change = '0.00%'
 
           if (res.data.length > 1) {
             let lastItem = JSON.parse(JSON.stringify(res.data[res.data.length - 2]))
-            if (lastItem.tvl_usd == 0) item.tvl_usd_change = '0.00%'
+            if (lastItem.tvl_eos == 0) item.tvl_eos_change = '0.00%'
           }
 
           this.overViewData = item
@@ -963,7 +1001,9 @@ export default {
           chart1.init({
             self: this,
             data: res.data,
+            type: this.checkedVal1
           })
+          this.overViewData1 = res.data
         }
       } catch (error) {
         console.log(error)
@@ -973,29 +1013,46 @@ export default {
       this.loading = true
       try {
         let result = await protocols.name(this.projectName)
-        if (result.code === 0 && result.data) {
+        if (result.code === 200 && result.data) {
           let item = result.data
-          item.logo = ""
-          item.contracts = JSON.parse(item.contracts)[0]
-          item.metadataInfo = JSON.parse(item.metadata)
+          // item.logo = ""
+          item.contracts = item.contracts[0]
+          item.metadataInfo = item.metadata
 
-          item.metadataInfo.forEach((i) => {
-            if (i.key == "logo") item.logo = `https://ipfs.pink.gg/ipfs/${i.value}`
-            else if (i.key == "description") item.description = i.value
-            else if (i.key == "website") item.website = i.value
-            else if (i.key == "cmc") item.cmc = i.value
-            else if (i.key == "recover") item.recover = i.value
-            else if (i.key == "coingecko") item.coingecko = i.value
-            else if (i.key == "dappradar") item.dappradar = i.value
-            else if (i.key == "defillama") item.defillama = i.value
-            else if (i.key == "discord") item.discord = i.value
-            else if (i.key == "telegram") item.telegram = i.value
-            else if (i.key == "twitter") item.twitter = i.value
-            else if (i.key == "github") item.github = i.value
-            else if (i.key == "token.code") item.tokenCode = i.value
-            else if (i.key == "token.symcode") item.tokenSymcode = i.value
-            else if (i.key == "name") item.name = i.value
-          })
+          item.logo = `https://ipfs.pink.gg/ipfs/${item.metadata.logo}`
+          item.name = item.metadata.name
+          item.audits = item.metadata.audits
+          item.description = item.metadata.description
+          item.website = item.metadata.website
+          item.cmc = item.metadata.cmc
+          item.recover = item.metadata.recover
+          item.coingecko = item.metadata.coingecko
+          item.dappradar = item.metadata.dappradar
+          item.defillama = item.metadata.defillama
+          item.discord = item.metadata.discord
+          item.telegram = item.metadata.telegram
+          item.twitter = item.metadata.twitter
+          item.github = item.metadata.github
+          item.tokenCode = item.metadata['token.code']
+          item.tokenSymcode = item.metadata['token.symcode']
+
+          // item.metadataInfo.forEach((i) => {
+          //   if (i.key == "logo") item.logo = `https://ipfs.pink.gg/ipfs/${i.value}`
+          //   else if (i.key == "description") item.description = i.value
+          //   else if (i.key == "website") item.website = i.value
+          //   else if (i.key == "cmc") item.cmc = i.value
+          //   else if (i.key == "recover") item.recover = i.value
+          //   else if (i.key == "coingecko") item.coingecko = i.value
+          //   else if (i.key == "dappradar") item.dappradar = i.value
+          //   else if (i.key == "defillama") item.defillama = i.value
+          //   else if (i.key == "discord") item.discord = i.value
+          //   else if (i.key == "telegram") item.telegram = i.value
+          //   else if (i.key == "twitter") item.twitter = i.value
+          //   else if (i.key == "github") item.github = i.value
+          //   else if (i.key == "token.code") item.tokenCode = i.value
+          //   else if (i.key == "token.symcode") item.tokenSymcode = i.value
+          //   else if (i.key == "name") item.name = i.value
+          // })
           item.otherInfo = {}
           item.otherInfo.name = ""
           item.otherInfo.multi_sig = null
@@ -1010,7 +1067,7 @@ export default {
           this.$nextTick(() => {
             this.initView1Data()
           })
-          // console.log("this.projectInfo is ", this.projectInfo)
+          console.log("this.projectInfo is ", this.projectInfo)
         } else {
           this.projectInfo = null
         }
@@ -1265,7 +1322,7 @@ export default {
     // getAdminAccount
     getAdminAccount() {
       axios({
-        url: "https://eos.greymass.com/v1/chain/get_account",
+        url: `${this.$store.state.sys.node.httpEndpoint}/v1/chain/get_account`,
         method: "post",
         headers: {
           "content-type": "text/plain;charset=UTF-8",
@@ -1294,6 +1351,19 @@ export default {
         return 'color-red'
       } else {
         return ''
+      }
+    },
+    handleGrade(item) {
+      if (item < 200000) {
+        return ''
+      } else if (item >= 200000 && item < 750000) {
+        return 'Bronze'
+      } else if (item >= 750000 && item < 1500000) {
+        return 'Siver'
+      } else if (item >= 1500000 && item < 3000000) {
+        return 'Gold'
+      } else {
+        return 'Dimond'
       }
     }
   },
@@ -1393,13 +1463,24 @@ export default {
     border: 1px solid #e8e8e8;
     border-radius: 12px;
     padding: 15px;
+    .tabCls {
+      display: flex;
+      flex-direction: row-reverse;
+      ::v-deep .change-tab_cont {
+        padding: 3px;
+        a {
+          padding: 2px 4px;
+          font-size: 10px;
+        }
+      }
+    }
     #view1Data {
       width: 100%;
       height: 400px;
     }
     .data-view {
       width: 100%;
-      height: 143px;
+      height: 180px;
       background-color: #f9fafb;
       padding: 20px 40px;
       border-radius: 10px;
@@ -1413,6 +1494,9 @@ export default {
         font-size: 17px;
         font-weight: 500;
         color: #000000;
+      }
+      .flex-1 {
+        align-self: baseline;
       }
     }
   }
@@ -1532,8 +1616,8 @@ export default {
       width: 1px;
       height: 100px;
       background: #e0e0e0;
-      margin-left: 35px;
-      margin-right: 35px;
+      // margin-left: 35px;
+      // margin-right: 35px;
     }
   }
 }
@@ -1543,7 +1627,7 @@ export default {
 }
 
 .ProtocolsDetailsPC {
-  padding: 40px 0 180px;
+  padding: 40px 0 70px;
   padding-top: 0;
   .ProtocolsDetailsPC-layout {
     width: 1200px;
@@ -1644,7 +1728,7 @@ export default {
 
   .ProtocolsDetailsPC-box2 {
     width: 100%;
-    height: 452px;
+    height: 500px;
     border-radius: 15px;
     border: 1px solid #e8e8e8;
     background-color: #fff;
@@ -1667,6 +1751,21 @@ export default {
         font-weight: 600;
         color: #000000;
         padding: 5px 2px 22px 20px;
+        div {
+          font-size: 14px;
+          font-weight: 500;
+          color: #999999;
+        }
+      }
+    }
+    .box2-right {
+      width: 100%;
+      height: 100%;
+      .tabCls {
+        padding-right: 95px;
+        display: flex;
+        flex-direction: row-reverse;
+        margin: 15px 0 -15px 0;
       }
     }
     #view1Data {
@@ -1791,7 +1890,7 @@ export default {
       font-size: 16px;
       font-weight: 400;
       color: #000000;
-      margin-bottom: 10px;
+      // margin-bottom: 5px;
     }
     .footer-text2 {
       font-size: 26px;

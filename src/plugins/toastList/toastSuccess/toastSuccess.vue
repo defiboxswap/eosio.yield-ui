@@ -119,6 +119,7 @@ export default {
     width: 100%;
     height: 40px;
     margin-bottom: 3px;
+    background: #1c1dff !important;
   }
 }
 </style>

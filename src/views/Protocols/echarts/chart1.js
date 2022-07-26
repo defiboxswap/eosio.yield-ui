@@ -16,6 +16,7 @@ export default {
   init(options) {
     this.vueThis = options.self
     this.chartsData = options.data
+    this.type = options.type
     // this.poolChartAction();
     this.vueThis.$nextTick(() => {
       this.poolChartAction()
@@ -36,20 +37,21 @@ export default {
       xAxis: {
         type: "category",
         boundaryGap: false,
-        data: this.chartsData.map((item) => moment(item.line_id * 1000).format("YYYY-MM-DD")),
+        data: this.chartsData.map((item) => moment(item.line_id * 1000).format("MM-DD")),
       },
       yAxis: {
         type: "value",
         axisLabel: {
           fontSize: 12,
           formatter: (value) => {
-            return '$' + this.vueThis.getKMBUnit(value, 0)
+            const val = this.type === 'USD' ? `$${this.vueThis.getKMBUnit(value, 0)}` : this.vueThis.getKMBUnit(value, 0)
+            return val
           },
         },
       },
       series: [
         {
-          data: this.chartsData.map((item) => toFixed(item.tvl_usd, 2)),
+          data: this.type === 'USD' ? this.chartsData.map((item) => toFixed(item.tvl_usd, 2)) : this.chartsData.map((item) => toFixed(item.tvl_eos, 2)),
           type: "line",
           areaStyle: {},
         },
