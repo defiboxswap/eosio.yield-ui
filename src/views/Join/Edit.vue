@@ -104,7 +104,7 @@
               <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
               <input type="file" accept="image/*" @change="fileImage" title="" />
               <div class="closeIcon" @click="clearLogo" v-if="form.logo">
-                <v-icon class="" size="20" style="margin: 0 0 -2px 4px">mdi-close-circle-outline</v-icon>
+                <v-icon class="" size="20" style="margin: 5px -12px -2px 4px">mdi-close-circle-outline</v-icon>
               </div>
             </div>
             <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
