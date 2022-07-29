@@ -21,7 +21,7 @@
                   <div class="flex flex-wrap">
                     <div class="box-label" style="text-align: center">{{ handleCategory(projectInfo.category) }}</div>
                     <!-- <div class="box-label">Corss-chain</div> -->
-                    <div class="box-label"  v-if="handleGrade(projectInfo.tvl_eos)">{{ handleGrade(projectInfo.tvl_eos) }}</div>
+                    <!-- <div class="box-label"  v-if="handleGrade(projectInfo.tvl_eos)">{{ handleGrade(projectInfo.tvl_eos) }}</div> -->
                   </div>
                 </div>
               </div>
@@ -132,12 +132,11 @@
                   </div>
                 </div>
               </div>
-
               <div class="flex">
                 <div class="box-w">
-                  <div class="box3-title">{{ $t("yield.yield55") }}</div>
+                  <div class="box3-title">{{ $t("yield.yield189") }}</div>
                   <div class="box3-text">
-                    <span v-if="projectInfo.marketcap">{{ projectInfo.marketcap }}</span>
+                    <span v-if="projectInfo.eosPrice">{{ projectInfo.eosPrice }}</span>
                     <span v-else>-</span>
                   </div>
                 </div>
@@ -158,7 +157,75 @@
                   </div>
                 </div>
               </div>
-
+              <div class="box-line"></div>
+              <div class="flex">
+                <div class="box-w">
+                  <div class="box3-title">{{ $t("yield.yield55") }}</div>
+                  <div class="box3-text">
+                    <span v-if="projectInfo.marketcap">{{ projectInfo.marketcap }}</span>
+                    <span v-else>-</span>
+                  </div>
+                </div>
+                <div class="box-w">
+                  <div class="box3-title" @click="tipsShow1 = !tipsShow1" v-click-outside="hideShow1">
+                    <v-tooltip bottom v-model="tipsShow1" :openOnHover="false" :openOnFocus="false" :attach="true">
+                      <template v-slot:activator="{ on, attrs }">
+                        <div class="flex curPoint" v-bind="attrs" v-on="on">
+                        {{ $t("yield.yield179") }}
+                          <v-icon class="" size="16" style="margin: 0 0 -2px 4px">mdi-information-outline</v-icon>
+                        </div>
+                      </template>
+                      <div style="width: 300px">
+                        {{ $t("yield.yield184") }}
+                      </div>
+                    </v-tooltip>
+                  </div>
+                  <div class="box3-text">
+                    <span v-if="projectInfo.mcTvlRatio">{{ projectInfo.mcTvlRatio }}</span>
+                    <span v-else>-</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="box-w">
+                  <div class="box3-title" @click="tipsShow2 = !tipsShow2" v-click-outside="hideShow2">
+                    <v-tooltip bottom v-model="tipsShow2" :openOnHover="false" :openOnFocus="false" :attach="true">
+                      <template v-slot:activator="{ on, attrs }">
+                        <div class="flex curPoint" v-bind="attrs" v-on="on">
+                        {{ $t("yield.yield180") }}
+                          <v-icon class="" size="16" style="margin: 0 0 -2px 4px">mdi-information-outline</v-icon>
+                        </div>
+                      </template>
+                      <div style="width: 300px">
+                        {{ $t("yield.yield182") }}
+                      </div>
+                    </v-tooltip>
+                  </div>
+                  <div class="box3-text">
+                    <span v-if="projectInfo.fullyDVal">{{ projectInfo.fullyDVal }}</span>
+                    <span v-else>-</span>
+                  </div>
+                </div>
+                <div class="box-w">
+                  <div class="box3-title" @click="tipsShow3 = !tipsShow3" v-click-outside="hideShow3">
+                    <v-tooltip bottom v-model="tipsShow3" :openOnHover="false" :openOnFocus="false" :attach="true">
+                      <template v-slot:activator="{ on, attrs }">
+                        <div class="flex curPoint" v-bind="attrs" v-on="on">
+                        {{ $t("yield.yield178") }}
+                          <v-icon class="" size="16" style="margin: 0 0 -2px 4px">mdi-information-outline</v-icon>
+                        </div>
+                      </template>
+                      <div style="width: 300px">
+                        {{ $t("yield.yield183") }}
+                      </div>
+                    </v-tooltip>
+                  </div>
+                  <div class="box3-text">
+                    <span v-if="projectInfo.fullyDValTvlRatio">{{ projectInfo.fullyDValTvlRatio }}</span>
+                    <span v-else>-</span>
+                  </div>
+                </div>
+              </div>
               <div class="box-line"></div>
 
               <div class="flex">
@@ -424,7 +491,7 @@
                     <div class="flex flex-wrap">
                       <div class="box1-label">{{ handleCategory(projectInfo.category) }}</div>
                       <!-- <div class="box1-label">Corss-chain</div> -->
-                      <div class="box1-label" v-if="handleGrade(projectInfo.tvl_eos)">{{ handleGrade(projectInfo.tvl_eos) }}</div>
+                      <!-- <div class="box1-label" v-if="handleGrade(projectInfo.tvl_eos)">{{ handleGrade(projectInfo.tvl_eos) }}</div> -->
                     </div>
                   </div>
                 </div>
@@ -526,69 +593,148 @@
             <div class="ProtocolsDetailsPC-box3Title">{{ $t("yield.yield118") }}</div>
 
             <div class="flex flex-jus-between">
-              <div class="ProtocolsDetailsPC-box3">
-                <div class="flext">
-                  <div class="box3-left">
-                    <div>
-                      <div class="box3-title">{{ $t("yield.yield143") }}</div>
-                      <div class="box3-text">
-                        <span v-if="projectInfo.tokenCode === null">-</span>
-                        <template v-else>
-                          <span v-if="projectInfo.tokenCode">{{ projectInfo.tokenCode }}</span>
+              <div class="ProtocolsDetailsPC-box3 ProtocolsDetailsPC-box3-l flex">
+                <div class="ProtocolsDetailsPC-box3-l_contL">
+                  <div class="flext">
+                    <div class="box3-top">
+                      <div>
+                        <div class="box3-title">{{ $t("yield.yield143") }}</div>
+                        <div class="box3-text">
+                          <span v-if="projectInfo.tokenCode === null">-</span>
+                          <template v-else>
+                            <span v-if="projectInfo.tokenCode">{{ projectInfo.tokenCode }}</span>
+                            <span v-else>-</span>
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="box3-top">
+                      <div>
+                        <div class="box3-title">{{ $t("yield.yield142") }}</div>
+                        <div class="box3-text">
+                          <!-- <span v-if="projectInfo.otherInfo.main_contract === null">-</span>
+                          <span v-else>{{ projectInfo.otherInfo.main_contract }}</span> -->
+                          <span v-if="projectInfo.tokenSymcode === null">-</span>
+                          <template v-else>
+                            <span v-if="projectInfo.tokenSymcode">{{ projectInfo.tokenSymcode }}</span>
+                            <span v-else>-</span>
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="box3-top">
+                      <div>
+                        <div class="box3-title text-right">{{ $t("yield.yield189") }}</div>
+                        <div class="box3-text text-right">
+                          <span v-if="projectInfo.eosPrice">${{ projectInfo.eosPrice }}</span>
                           <span v-else>-</span>
-                        </template>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="box3-center flext flex-jus-between">
-                    <div>
-                      <div class="box3-title">{{ $t("yield.yield142") }}</div>
-                      <div class="box3-text">
-                        <!-- <span v-if="projectInfo.otherInfo.main_contract === null">-</span>
-                        <span v-else>{{ projectInfo.otherInfo.main_contract }}</span> -->
-                        <span v-if="projectInfo.tokenSymcode === null">-</span>
-                        <template v-else>
-                          <span v-if="projectInfo.tokenSymcode">{{ projectInfo.tokenSymcode }}</span>
+                  <div class="flext">
+                    <div class="box3-bottom">
+                      <div>
+                        <div class="box3-title">{{ $t("yield.yield135") }}</div>
+                        <div class="box3-text">
+                          <span v-if="projectInfo.circulating">{{ projectInfo.circulating }}</span>
                           <span v-else>-</span>
-                        </template>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="box3-right flext flex-jus-between">
-                    <div>
-                      <div class="box3-title">{{ $t("yield.yield55") }}</div>
-                      <div class="box3-text">
-                        <span v-if="projectInfo.marketcap">${{ projectInfo.marketcap }}</span>
-                        <span v-else>-</span>
+                    <div class="box3-bottom">
+                      <div>
+                        <div class="box3-title">{{ $t("yield.yield136") }}</div>
+                        <div class="box3-text">
+                          <span v-if="projectInfo.maxSupply">{{ projectInfo.maxSupply }}</span>
+                          <span v-else>-</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="flext">
-                  <div class="box3-left">
-                    <div>
-                      <div class="box3-title">{{ $t("yield.yield135") }}</div>
-                      <div class="box3-text">
-                        <span v-if="projectInfo.circulating">{{ projectInfo.circulating }}</span>
-                        <span v-else>-</span>
+                <div class="ProtocolsDetailsPC-box3-l_contR">
+                  <div class="flext">
+                    <div class="box3-top">
+                      <div>
+                        <div class="box3-title">{{ $t("yield.yield55") }}</div>
+                        <div class="box3-text">
+                          <span v-if="projectInfo.marketcap">${{ projectInfo.marketcap }}</span>
+                          <span v-else>-</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="box3-top">
+                      <div @click="tipsShow1 = !tipsShow1" v-click-outside="hideShow1">
+                        <div class="box3-title">
+                          <v-tooltip bottom v-model="tipsShow1" :openOnHover="false" :openOnFocus="false" :attach="true">
+                            <template v-slot:activator="{ on, attrs }">
+                              <div class="flex curPoint" v-bind="attrs" v-on="on">
+                              {{ $t("yield.yield179") }}
+                                <v-icon class="" size="16" style="margin: 0 0 -2px 4px">mdi-information-outline</v-icon>
+                              </div>
+                            </template>
+                            <div style="width: 300px">
+                              {{ $t("yield.yield184") }}
+                            </div>
+                          </v-tooltip>
+                        </div>
+                        <div class="box3-text">
+                          <span v-if="projectInfo.mcTvlRatio">{{ projectInfo.mcTvlRatio }}</span>
+                          <span v-else>-</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="box3-center flext flex-jus-between">
-                    <div>
-                      <div class="box3-title">{{ $t("yield.yield136") }}</div>
-                      <div class="box3-text">
-                        <span v-if="projectInfo.maxSupply">{{ projectInfo.maxSupply }}</span>
-                        <span v-else>-</span>
+                  <div class="flext">
+                    <div class="box3-bottom">
+                      <div @click="tipsShow2 = !tipsShow2" v-click-outside="hideShow2">
+                        <div class="box3-title">
+                          <v-tooltip bottom v-model="tipsShow2" :openOnHover="false" :openOnFocus="false" :attach="true">
+                            <template v-slot:activator="{ on, attrs }">
+                              <div class="flex curPoint" v-bind="attrs" v-on="on">
+                              {{ $t("yield.yield180") }}
+                                <v-icon class="" size="16" style="margin: 0 0 -2px 4px">mdi-information-outline</v-icon>
+                              </div>
+                            </template>
+                            <div style="width: 300px">
+                              {{ $t("yield.yield182") }}
+                            </div>
+                          </v-tooltip>
+                        </div>
+                        <div class="box3-text">
+                          <span v-if="projectInfo.fullyDVal">{{ projectInfo.fullyDVal }}</span>
+                          <span v-else>-</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="box3-bottom">
+                      <div @click="tipsShow3 = !tipsShow3" v-click-outside="hideShow3">
+                        <div class="box3-title">
+                          <v-tooltip bottom v-model="tipsShow3" :openOnHover="false" :openOnFocus="false" :attach="true">
+                            <template v-slot:activator="{ on, attrs }">
+                              <div class="flex curPoint" v-bind="attrs" v-on="on">
+                              {{ $t("yield.yield178") }}
+                                <v-icon class="" size="16" style="margin: 0 0 -2px 4px">mdi-information-outline</v-icon>
+                              </div>
+                            </template>
+                            <div style="width: 300px">
+                              {{ $t("yield.yield183") }}
+                            </div>
+                          </v-tooltip>
+                        </div>
+                        <div class="box3-text">
+                          <span v-if="projectInfo.fullyDValTvlRatio">{{ projectInfo.fullyDValTvlRatio }}</span>
+                          <span v-else>-</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="box3-right flext flex-jus-between"></div>
                 </div>
               </div>
-              <div class="ProtocolsDetailsPC-box3">
-                <div class="flext">
-                  <div class="box3-left">
+              <div class="ProtocolsDetailsPC-box3 ProtocolsDetailsPC-box3-r">
+                <div class="flext flex-wrap">
+                  <div class="box3-left mb">
                     <div>
                       <div class="box3-title">{{ $t("yield.yield73") }}</div>
                       <div class="box3-text">
@@ -597,7 +743,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="box3-center flext flex-jus-between">
+                  <div class="box3-center flext flex-jus-between mb">
                     <div>
                       <div class="box3-title">{{ $t("yield.yield72") }}</div>
                       <div class="box3-text">
@@ -621,8 +767,6 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="flext">
                   <div class="box3-center">
                     <div>
                       <div class="box3-title">Auditing report</div>
@@ -634,13 +778,6 @@
                       </div>
                     </div>
                   </div>
-                  <!-- <div class="box3-center flext flex-jus-between">
-                    <div>
-                      <div class="box3-title">OPEN SURCE</div>
-                      <div class="box3-text">NO</div>
-                    </div>
-                  </div> -->
-                  <!-- <div class="box3-right flext flex-jus-between"></div> -->
                 </div>
               </div>
             </div>
@@ -883,8 +1020,7 @@ export default {
       projectInfo: null,
       claimLoading: false,
 
-      adminAccountList: ["d.a.yield", "admin.yield"],
-
+      adminAccountList: [this.contractA, "admin.yield"],
 
       overViewData: {
         tvl_usd: 0,
@@ -901,7 +1037,10 @@ export default {
       },
       descriptionHidden: true,
       checkedVal1: 'USD',
-      overViewData1: []
+      overViewData1: [],
+      tipsShow1: false,
+      tipsShow2: false,
+      tipsShow3: false,
     }
   },
   components: {},
@@ -942,8 +1081,8 @@ export default {
     },
   },
   created() {
-    if (!this.$route.query?.name) this.$router.push("/")
-    this.projectName = decodeURIComponent(this.$route.query.name)
+    if (!this.$route.params?.contract) this.$router.push("/")
+    this.projectName = decodeURIComponent(this.$route.params.contract)
 
     this.getAdminAccount()
     this.getInfo()
@@ -958,8 +1097,8 @@ export default {
     async getRewards() {
       if (this.role !== 2) return
       const params = {
-        code: "d.e.yield",
-        scope: "d.e.yield",
+        code: this.contractE,
+        scope: this.contractE,
         table: "protocols",
         json: true,
         limit: -1,
@@ -989,7 +1128,7 @@ export default {
           if (item.tvl_eos_change > 0) item.tvl_eos_change = `+${item.tvl_eos_change}%`
           else item.tvl_eos_change = `${item.tvl_eos_change}%`
 
-          if (item.tvl_eos_changeOld == item.tvl_eos) item.tvl_eos_change = '0.00%'
+          if (item.tvl_eos_changeDayOld == item.tvl_eos) item.tvl_eos_change = '0.00%'
 
           if (res.data.length > 1) {
             let lastItem = JSON.parse(JSON.stringify(res.data[res.data.length - 2]))
@@ -1092,7 +1231,10 @@ export default {
         this.projectInfo.marketcap = this.getKMBUnit(this.toFixed(info.price.marketcap_usd, 2))
         this.projectInfo.circulating = this.formatNumber(this.toFixed(info.supply.circulating, 2))
         this.projectInfo.maxSupply = this.formatNumber(this.toFixed(info.supply.max, 0))
-
+        this.projectInfo.eosPrice = this.getKMBUnit(this.toFixed(info.price.quotes.USD, 2))
+        this.projectInfo.mcTvlRatio = this.toFixed(this.accDiv(info.price.marketcap_usd, this.overViewData.tvl_usd) * 100, 2)
+        this.projectInfo.fullyDVal = this.getKMBUnit(this.accMul(info.price.quotes.USD, info?.supply.max))
+        this.projectInfo.fullyDValTvlRatio = this.toFixed(this.accDiv(this.accMul(info.price?.quotes.USD, info.supply.max), this.overViewData.tvl_usd) * 100, 2)
         this.$forceUpdate()
       })
     },
@@ -1126,11 +1268,11 @@ export default {
       }
       this.claimLoading = true
       params.actions.push({
-        account: "d.e.yield",
+        account: this.contractE,
         name: "setcategory",
         authorization: [
           {
-            actor: "d.a.yield",
+            actor: this.contractA,
             permission: "active",
           },
           {
@@ -1177,11 +1319,11 @@ export default {
       }
       this.claimLoading = true
       params.actions.push({
-        account: "d.e.yield",
+        account: this.contractE,
         name: "approve",
         authorization: [
           {
-            actor: "d.a.yield",
+            actor: this.contractA,
             permission: "active",
           },
           {
@@ -1229,11 +1371,11 @@ export default {
       }
       this.claimLoading = true
       params.actions.push({
-        account: "d.e.yield",
+        account: this.contractE,
         name: "deny",
         authorization: [
           {
-            actor: "d.a.yield",
+            actor: this.contractA,
             permission: "active",
           },
           {
@@ -1281,7 +1423,7 @@ export default {
       }
       this.claimLoading = true
       params.actions.push({
-        account: "d.e.yield",
+        account: this.contractE,
         name: "claim",
         authorization: [
           {
@@ -1365,7 +1507,16 @@ export default {
       } else {
         return 'Dimond'
       }
-    }
+    },
+    hideShow1() {
+      this.tipsShow1 = false
+    },
+    hideShow2() {
+      this.tipsShow2 = false
+    },
+    hideShow3() {
+      this.tipsShow3 = false
+    },
   },
 }
 </script>
@@ -1787,12 +1938,52 @@ export default {
     border-radius: 15px;
     border: 1px solid #e8e8e8;
     background-color: #fff;
-    padding: 50px;
+    padding: 30px;
     margin-bottom: 18px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    &-l {
+      width: 810px;
+      flex-flow: wrap;
+
+      &_contL, &_contR {
+        width: 50%;
+        .box3-top {
+          width: 33%;
+          margin-bottom: 45px;
+        }
+        .box3-bottom {
+          width: 50%;
+        }
+      }
+      &_contL {
+        padding-right: 15px;
+        border-right: 1px solid #e8e8e8;
+      }
+      &_contR {
+        padding-left: 15px;
+
+        .box3-top {
+          width: 50%;
+          margin-bottom: 45px;
+        }
+      }
+    }
+
+    &-r {
+      width: 370px;
+      .box3-left, .box3-center, .box3-right {
+        width: 50% !important;
+      }
+
+      .mb {
+        margin-bottom: 45px !important;
+      }
+    }
+
     .box3-line {
       width: 1px;
       height: 100%;
@@ -1801,17 +1992,17 @@ export default {
       align-self: center;
     }
     .box3-left {
-      width: 204px;
-      padding-right: 10px;
+      // width: 204px;
+      // padding-right: 10px;
     }
     .box3-center {
       flex: 1;
       // padding: 0 55px;
-      padding-right: 10px;
+      padding-left: 40px;
     }
     .box3-right {
-      width: 100px;
-      padding-left: 10px;
+      // width: 100px;
+      // padding-left: 10px;
     }
     .box3-title {
       height: 40px;

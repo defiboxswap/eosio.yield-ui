@@ -3,7 +3,7 @@ import store from "@/store"
 import qs from "qs" // fromData to string
 // const CancelToken = axios.CancelToken
 const https = axios.create({
-  baseURL: process.env.NODE_ENV === "production" ? "https://eos.defibox.io": "",
+  baseURL: process.env.NODE_ENV === "production" ? "https://api.tokenyield.io": "",
   timeout: process.env.NODE_ENV === "production" ? 20000 : 60000,
   auth: {
     username: localStorage.getItem("token") || "",

@@ -33,7 +33,7 @@
                 <div class="flex flex-wrap">
                   <div class="box-label">{{ handleCategory(item.category) }}</div>
                   <!-- <div class="box-label">Corss-chain</div> -->
-                  <div class="box-label"  v-if="handleGrade(item.tvl_eos)">{{ handleGrade(item.tvl_eos) }}</div>
+                  <!-- <div class="box-label"  v-if="handleGrade(item.tvl_eos)">{{ handleGrade(item.tvl_eos) }}</div> -->
                 </div>
               </div>
             </div>
@@ -45,8 +45,16 @@
                   <div class="data-number">${{ getKMBUnit(item.tvl_usd) }}</div>
                 </div>
                 <div class="data-box flex-1">
+                  <div class="data-name">{{ $t("yield.yield175") }}</div>
+                  <div class="data-number" :class="getColor(item.tvl_eos_change_8h)">{{ item.tvl_eos_change_8h }}</div>
+                </div>
+                <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield42") }}</div>
-                  <div class="data-number" :class="getColor(item.tvl_eos_change)">{{ item.tvl_eos_change }}</div>
+                  <div class="data-number" :class="getColor(item.tvl_eos_change_day)">{{ item.tvl_eos_change_day }}</div>
+                </div>
+                <div class="data-box flex-1">
+                  <div class="data-name">{{ $t("yield.yield176") }}</div>
+                  <div class="data-number" :class="getColor(item.tvl_eos_change_week)">{{ item.tvl_eos_change_week }}</div>
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield54") }}</div>
@@ -149,7 +157,13 @@
                 <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
               </div> -->
               <div class="box-3 flex flex-jus-center">
+                <span>{{ $t("yield.yield175") }}</span>
+              </div>
+              <div class="box-3 flex flex-jus-center">
                 <span>{{ $t("yield.yield42") }}</span>
+              </div>
+              <div class="box-3 flex flex-jus-center">
+                <span>{{ $t("yield.yield176") }}</span>
               </div>
               <div class="box-4 flex flex-jus-center" @click="order = 'agg_rewards'">
                 <!-- REWARD(EOS) -->
@@ -175,13 +189,15 @@
                     <div class="item-name">{{ item.name }}</div>
                     <div class="flex flex-wrap">
                       <div class="item-label">{{ handleCategory(item.category) }}</div>
-                      <div class="item-label" v-if="handleGrade(item.tvl_eos)">{{ handleGrade(item.tvl_eos) }}</div>
+                      <!-- <div class="item-label" v-if="handleGrade(item.tvl_eos)">{{ handleGrade(item.tvl_eos) }}</div> -->
                     </div>
                   </div>
                 </div>
 
                 <div class="box-2">${{ getKMBUnit(item.tvl_usd) }}</div>
-                <div class="box-3" :class="getColor(item.tvl_eos_change)">{{ item.tvl_eos_change }}</div>
+                <div class="box-3" :class="getColor(item.tvl_eos_change_8h)">{{ item.tvl_eos_change_8h }}</div>
+                <div class="box-3" :class="getColor(item.tvl_eos_change_day)">{{ item.tvl_eos_change_day }}</div>
+                <div class="box-3" :class="getColor(item.tvl_eos_change_week)">{{ item.tvl_eos_change_week }}</div>
                 <div class="box-4">{{ item.agg_rewards_change.toFixed(4) }}</div>
                 <!-- <div class="box-5">$123.43M</div> -->
               </a>
@@ -299,7 +315,7 @@ export default {
           value: 'Staking'
         }
       ],
-      selectVal: ''
+      selectVal: '',
     }
   },
   props: {},
@@ -313,7 +329,8 @@ export default {
     order: function () {
       this.initList()
     },
-    selectVal: function () {
+    selectVal: function (oldVal, newVal) {
+      if (oldVal === newVal) return
       this.initList()
     },
   },
@@ -376,10 +393,9 @@ export default {
         ]
       }
       this.infoTab = infoTab
-      if (this.selectVal.value !== 'All') {
-        this.selectVal = ''
-        return
-      }
+      // if (this.selectVal.value !== 'All') {
+      this.selectVal = ''
+      // }
       this.initList()
     },
     initList() {
@@ -394,6 +410,26 @@ export default {
       this.getList()
     },
     async getList() {
+      let status = ''
+      let category = ''
+      if (this.infoTab === 'Audit') {
+        category = ''
+        if (this.selectVal.value !== 'All') {
+          status = this.selectVal
+        } else {
+          status = ''
+        }
+      } else {
+        status = 'active'
+        if (this.selectVal.value !== 'All') {
+          category = this.selectVal
+        } else {
+          category = ''
+        }
+      }
+      console.log('====================================');
+      console.log(category, status);
+      console.log('====================================');
       try {
         this.loading = true
         let result = await protocols.list({
@@ -401,30 +437,36 @@ export default {
           pageSize: this.pageSize,
           search: this.search.replace(/(^\s*)|(\s*$)/g, ""),
           order: this.infoTab == 'Audit' ? 'create_at' : this.order,
-          status: this.infoTab === 'TVLRankings' ? '' : this.selectVal.value === 'All' ? '' : this.selectVal,
-          category: this.infoTab === 'Audit' ? '' : this.selectVal.value === 'All' ? '' : this.selectVal
+          status,
+          category
         })
         if (result?.code === 200 && result.data) {
           result.data.forEach((item) => {
             // item.logo = ""
-            item.nameUrlencode = "/ProtocolsDetails?name=" + encodeURIComponent(item.name)
-            // if (!item.metadata) return
-            // item.metadataInfo = item.metadata
-
-            // item.metadataInfo.forEach((i) => {
-            //   if (i.key == "logo") item.logo = `https://ipfs.pink.gg/ipfs/${i.value}`
-            //   else if (i.key == "name") item.name = i.value
-            // })
+            item.nameUrlencode = `/protocols/${encodeURIComponent(item.name)}`
+            // item.nameUrlencode = "/ProtocolsDetails?name=" + encodeURIComponent(item.name)
             item.logo = `https://ipfs.pink.gg/ipfs/${item.metadata.logo}`
             item.name = item.metadata.name
-            item.tvl_eos_changeOld = item.tvl_eos_change
-            if (this.accSub(item.tvl_eos, item.tvl_eos_change) != 0 && this.accSub(item.tvl_eos, item.tvl_eos_change)) item.tvl_eos_change = this.accDiv(item.tvl_eos_change, this.accDiv(this.accSub(item.tvl_eos, item.tvl_eos_change), 100))
+            item.tvl_eos_changeDayOld = item.tvl_eos_change_day
+            item.tvl_eos_change8hOld = item.tvl_eos_change_8h
+            item.tvl_eos_changeWeekOld = item.tvl_eos_change_week
+            // item.tvl_eos_change_day = item.tvl_eos_change_day/(tvl_eos-tvl_eos_change_day)*100
+            if (this.accSub(item.tvl_eos, item.tvl_eos_change_day) != 0 && this.accSub(item.tvl_eos, item.tvl_eos_change_day)) item.tvl_eos_change_day = this.accDiv(item.tvl_eos_change_day, this.accDiv(this.accSub(item.tvl_eos, item.tvl_eos_change_day), 100))
+            if (this.accSub(item.tvl_eos, item.tvl_eos_change_8h) != 0 && this.accSub(item.tvl_eos, item.tvl_eos_change_8h)) item.tvl_eos_change_8h = this.accDiv(item.tvl_eos_change_8h, this.accDiv(this.accSub(item.tvl_eos, item.tvl_eos_change_8h), 100))
+            if (this.accSub(item.tvl_eos, item.tvl_eos_change_week) != 0 && this.accSub(item.tvl_eos, item.tvl_eos_change_week)) item.tvl_eos_change_week = this.accDiv(item.tvl_eos_change_week, this.accDiv(this.accSub(item.tvl_eos, item.tvl_eos_change_week), 100))
 
-            item.tvl_eos_change = this.toFixed(item.tvl_eos_change, 2)
-            if (item.tvl_eos_change > 0) item.tvl_eos_change = `+${item.tvl_eos_change}%`
-            else item.tvl_eos_change = `${item.tvl_eos_change}%`
-
-            if (item.tvl_eos_changeOld == item.tvl_eos) item.tvl_eos_change = '0.00%'
+            item.tvl_eos_change_day = this.toFixed(item.tvl_eos_change_day, 2)
+            item.tvl_eos_change_8h = this.toFixed(item.tvl_eos_change_8h, 2)
+            item.tvl_eos_change_week = this.toFixed(item.tvl_eos_change_week, 2)
+            if (item.tvl_eos_change_day > 0) item.tvl_eos_change_day = `+${item.tvl_eos_change_day}%`
+            else item.tvl_eos_change_day = `${item.tvl_eos_change_day}%`
+            if (item.tvl_eos_change_8h > 0) item.tvl_eos_change_8h = `+${item.tvl_eos_change_8h}%`
+            else item.tvl_eos_change_8h = `${item.tvl_eos_change_8h}%`
+            if (item.tvl_eos_change_week > 0) item.tvl_eos_change_week = `+${item.tvl_eos_change_week}%`
+            else item.tvl_eos_change_week = `${item.tvl_eos_change_week}%`
+            if (item.tvl_eos_changeDayOld == item.tvl_eos) item.tvl_eos_change_day = '0.00%'
+            if (item.tvl_eos_change8hOld == item.tvl_eos) item.tvl_eos_change_8h = '0.00%'
+            if (item.tvl_eos_changeWeekOld == item.tvl_eos) item.tvl_eos_change_week = '0.00%'
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]

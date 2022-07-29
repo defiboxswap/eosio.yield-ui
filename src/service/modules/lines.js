@@ -81,13 +81,13 @@ export function lines3(duration) {
 
 // ProtocolsDetails lines
 export function protocolsDetails(params) {
-  params.duration = params.duration || 'day'
+  params.duration = params.duration || '180'
   return new Promise((resolve, reject) => {
     axios({
       baseURL,
       method: "get",
       params,
-      url: `/v1/lines/${params.duration}`,
+      url: `/v1/lines/day`,
       headers: getHeaders(),
     })
       .then((res) => {

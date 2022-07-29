@@ -22,7 +22,18 @@ Vue.prototype.$openTxid = (Txid) => {
   else window.open(`https://bloks.io/transaction/${Txid}`)
 };
 
-import { accAdd, toFixed, formatNumber, accDiv, accMul, accSub, getKMBUnit, handleHttp, handleCategory, handleCategoryTransform, deepClone } from '@/utils/public'
+const origin = window.location.origin.indexOf('https://api.tokenyield.io')
+if (origin < 0) {
+  Vue.prototype.contractO = 'd.o.yield';
+  Vue.prototype.contractA = 'd.a.yield';
+  Vue.prototype.contractE = 'd.e.yield';
+} else {
+  Vue.prototype.contractO = 'eosio.yield';
+  Vue.prototype.contractA = 'oracle.yield';
+  Vue.prototype.contractE = 'admin.yield';
+}
+
+import { accAdd, toFixed, formatNumber, accDiv, accMul, accSub, getKMBUnit, handleHttp, handleCategory, handleCategoryTransform, deepClone, isHttp } from '@/utils/public'
 Vue.prototype.accAdd = accAdd
 Vue.prototype.toFixed = toFixed
 Vue.prototype.formatNumber = formatNumber
@@ -34,7 +45,7 @@ Vue.prototype.handleHttp = handleHttp
 Vue.prototype.handleCategory = handleCategory
 Vue.prototype.handleCategoryTransform = handleCategoryTransform
 Vue.prototype.deepClone = deepClone
-
+Vue.prototype.isHttp = isHttp
 
 Vue.prototype.openWindow = (url) => {
   if (!url) return

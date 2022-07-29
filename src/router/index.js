@@ -21,7 +21,7 @@ const constantRouter = [
         component: () => import("@/views/Home/Index.vue"),
       },
       { // 
-        path: "/Overview",
+        path: "/overview",
         name: "Overview",
         meta: {
           HeaderDark: true
@@ -29,15 +29,24 @@ const constantRouter = [
         component: () => import("@/views/Overview/Index.vue"),
       },
       { // 
-        path: "/Protocols",
+        path: "/protocols",
         name: "Protocols",
         meta: {
           HeaderDark: true
         },
         component: () => import("@/views/Protocols/Index.vue"),
       },
+      {
+        path: '/protocols/:contract',
+        name: "ProtocolsDetails",
+        meta: {
+          noFooter: true,
+          HeaderDark: true
+        },
+        component: () => import("@/views/Protocols/ProtocolsDetails.vue"),
+      },
       { // 
-        path: "/Join",
+        path: "/join",
         name: "Join",
         meta: {
           HeaderDark: true,
@@ -46,24 +55,14 @@ const constantRouter = [
         component: () => import("@/views/Join/Index.vue"),
       },
       { // 
-        path: "/Join/Edit",
+        path: "/join/edit",
         name: "JoinEdit",
         meta: {
           HeaderDark: true,
           noFooter: true
         },
         component: () => import("@/views/Join/Edit.vue"),
-      },
-      { // 
-        path: "/ProtocolsDetails",
-        name: "ProtocolsDetails",
-        meta: {
-          noFooter: true,
-          HeaderDark: true
-        },
-        component: () => import("@/views/Protocols/ProtocolsDetails.vue"),
-      },
-      
+      }
     ],
   },
   {

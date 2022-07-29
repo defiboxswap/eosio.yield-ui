@@ -482,3 +482,11 @@ export function deepClone(obj) {
   }
   return newObj
 }
+
+export function isHttp(url) {
+  const reg = /^https?:\/\/([\w-]+\.)+([\w-]+)/i;
+  if (!reg.test(url)) {
+    return false
+  }
+  return true
+}

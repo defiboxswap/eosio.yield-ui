@@ -49,7 +49,7 @@
           <a class="BaseHeaderPC-tab" :href="item.url" :class="{ 'BaseHeaderPC-tabActive': item.routerName == $route.name }" v-for="(item, index) in tabList" :key="index" @click.prevent="gotoRouter(item)">{{ $t(item.name) }}</a>
         </div>
 
-        <v-menu nudge-width="0" nudge-top="-10" nudge-left="70" v-model="accountVisible" offset-y rounded="lg">
+        <v-menu nudge-width="0" nudge-top="-10" nudge-left="30" v-model="accountVisible" offset-y rounded="lg">
           <template v-slot:activator="{ on, attrs }">
             <div v-bind="attrs" v-on="on">
               <div style="width: 120px;" class="flex flex-jus-end">
@@ -114,25 +114,25 @@ export default {
           // name: 'OVERVIEW',
           name: "yield.yield2",
           routerName: "Overview",
-          url: "/Overview",
+          url: "/overview",
         },
         {
           // name: 'PROTOCOLS',
           name: "yield.yield3",
           routerName: "Protocols",
-          url: "/Protocols",
+          url: "/protocols",
         },
         {
           // name: 'JOIN YIELD',
           name: "yield.yield4",
           routerName: "Join",
-          url: "/Join",
+          url: "/join",
         },
         {
           // name: 'YIELD+ BLUEPAPER',
           name: "yield.yield5",
           routerName: "Bluepaper",
-          url: "/Bluepaper",
+          url: "/bluepaper",
         },
       ],
     }

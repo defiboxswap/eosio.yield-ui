@@ -18,7 +18,7 @@
 
           <div class="basicInfo-box">
             <!-- Protocols contract -->
-            <div class="basicInfo-subtitle flex">
+            <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow" v-click-outside="hideTipsShow">
               <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
               <v-tooltip bottom v-model="tipsShow" :openOnHover="false" :openOnFocus="false" :attach="true">
                 <template v-slot:activator="{ on, attrs }">
@@ -46,8 +46,9 @@
           <div class="basicInfo-box">
             <!-- Project website -->
             <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield64") }}</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.website" @change="formWrongTips.website = false" :placeholder="$t('yield.yield140')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.website" @change="formWrongTips.website = false; formWrongTips.websiteFalse = false" :placeholder="$t('yield.yield140')" />
             <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t("yield.yield121") }}</div>
+            <div class="basicInfo-wrongTips" v-if="form.website && formWrongTips.websiteFalse">{{ $t("yield.yield190") }}</div>
           </div>
 
           <div class="basicInfo-box">
@@ -102,6 +103,9 @@
               <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" style="width: 100%; height: 100%" />
               <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
               <input type="file" accept="image/*" @change="fileImage" title="" />
+              <div class="closeIcon" @click="clearLogo" v-if="form.logo">
+                <v-icon class="" size="20" style="margin: 0 0 -2px 4px">mdi-close-circle-outline</v-icon>
+              </div>
             </div>
             <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
           </div>
@@ -137,24 +141,28 @@
           <div class="basicInfo-box">
             <!-- CoinMarketCap -->
             <div class="basicInfo-subtitle">CoinMarketCap</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" :placeholder="$t('yield.yield153')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" @change="formWrongTips.cmc = false"  :placeholder="$t('yield.yield153')" />
+            <div class="basicInfo-wrongTips" v-if="formWrongTips.cmc">{{ $t("yield.yield190") }}</div>
           </div>
           <div class="basicInfo-box">
             <!--  CoinGecko -->
             <div class="basicInfo-subtitle">CoinGecko</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.coingecko" :placeholder="$t('yield.yield154')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.coingecko" @change="formWrongTips.coingecko = false"  :placeholder="$t('yield.yield154')" />
+            <div class="basicInfo-wrongTips" v-if="formWrongTips.coingecko">{{ $t("yield.yield190") }}</div>
           </div>
 
           <div class="basicInfo-box">
             <!-- DefiLlama -->
             <div class="basicInfo-subtitle">DefiLlama</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.defillama" :placeholder="$t('yield.yield155')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.defillama" @change="formWrongTips.defillama = false"  :placeholder="$t('yield.yield155')" />
+            <div class="basicInfo-wrongTips" v-if="formWrongTips.defillama">{{ $t("yield.yield190") }}</div>
           </div>
 
           <div class="basicInfo-box">
             <!--  DappRadar -->
             <div class="basicInfo-subtitle">DappRadar</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.dappradar" :placeholder="$t('yield.yield156')" />
+            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.dappradar" @change="formWrongTips.dappradar = false"  :placeholder="$t('yield.yield156')" />
+            <div class="basicInfo-wrongTips" v-if="formWrongTips.dappradar">{{ $t("yield.yield190") }}</div>
           </div>
         </div>
 
@@ -222,7 +230,7 @@
           <div class="flext marb-25">
             <div class="basicInfo-left">
               <!-- Protocols contract -->
-              <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow">
+              <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow" v-click-outside="hideTipsShow">
                 <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
 
                 <v-tooltip bottom v-model="tipsShow" :openOnHover="false" :openOnFocus="false" :attach="true">
@@ -296,6 +304,9 @@
                 <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" style="width: 100%; height: 100%" />
                 <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
                 <input type="file" accept="image/*" @change="fileImage" title="" />
+                <div class="closeIcon" @click="clearLogo" v-if="form.logo">
+                  <v-icon class="" size="20" style="margin: 0 0 -2px 4px">mdi-close-circle-outline</v-icon>
+                </div>
               </div>
               <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
             </div>
@@ -342,12 +353,14 @@
             <div class="basicInfo-left">
               <!-- CoinMarketCap -->
               <div class="basicInfo-subtitle">CoinMarketCap</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" :placeholder="$t('yield.yield153')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" @change="formWrongTips.cmc = false" :placeholder="$t('yield.yield153')" />
+              <div class="basicInfo-wrongTips" v-if="formWrongTips.cmc">{{ $t("yield.yield190") }}</div>
             </div>
             <div>
               <!--  CoinGecko -->
               <div class="basicInfo-subtitle">CoinGecko</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.coingecko" :placeholder="$t('yield.yield154')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.coingecko" @change="formWrongTips.coingecko = false" :placeholder="$t('yield.yield154')" />
+              <div class="basicInfo-wrongTips" v-if="formWrongTips.cmc">{{ $t("yield.yield190") }}</div>
             </div>
           </div>
 
@@ -355,12 +368,14 @@
             <div class="basicInfo-left">
               <!-- DefiLlama -->
               <div class="basicInfo-subtitle">DefiLlama</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.defillama" :placeholder="$t('yield.yield155')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.defillama" @change="formWrongTips.defillama = false" :placeholder="$t('yield.yield155')" />
+              <div class="basicInfo-wrongTips" v-if="formWrongTips.cmc">{{ $t("yield.yield190") }}</div>
             </div>
             <div>
               <!--  DappRadar -->
               <div class="basicInfo-subtitle">DappRadar</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.dappradar" :placeholder="$t('yield.yield156')" />
+              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.dappradar" @change="formWrongTips.dappradar = false" :placeholder="$t('yield.yield156')" />
+              <div class="basicInfo-wrongTips" v-if="formWrongTips.cmc">{{ $t("yield.yield190") }}</div>
             </div>
           </div>
         </div>
@@ -449,6 +464,10 @@ export default {
         // logo: { required: true, gotoId: "basic" },
         // description: { required: true, gotoId: "basic" },
         name: { required: true, gotoId: "basic" },
+        cmc: { check: true, gotoId: "basic" },
+        coingecko: { check: true, gotoId: "basic" },
+        dappradar: { check: true, gotoId: "basic" },
+        defillama: { check: true, gotoId: "basic" },
       },
       formWrongTips: {
         tokenCode: false,
@@ -467,12 +486,14 @@ export default {
         telegram: false,
         twitter: false,
         website: false,
+        websiteFalse: false,
       },
       loading: false,
       projectName: "",
       projectInfo: null,
       projectStatus: "active",
       adminAccountList: [],
+      tokenVeri: false,
     }
   },
   watch: {
@@ -483,7 +504,7 @@ export default {
           this.$forceUpdate()
         })
       },
-    },
+    }
   },
   computed: {
     ...mapState({
@@ -619,11 +640,37 @@ export default {
             gotoId = this.formRules[key].gotoId
           }
         }
+        if (this.form[key] && this.formRules[key].check) {
+          if (!this.isHttp(this.form[key])) {
+            if (key === 'website') {
+              this.formWrongTips.websiteFalse = true
+            } else {
+              this.formWrongTips[key] = true
+            }
+            this.formWrongTips.website = false
+            gotoId = this.formRules[key].gotoId
+          }
+        }
       }
       if (gotoId) {
         this.gotoId(gotoId)
         return
       }
+
+      if (this.form['tokenSymcode'] && !this.form['tokenCode']) {
+        this.formWrongTips['tokenSymcode'] = false
+        this.formWrongTips['tokenCode'] = true
+        return
+      }
+
+      if (!this.form['tokenSymcode'] && this.form['tokenCode']) {
+        this.formWrongTips['tokenSymcode'] = true
+        this.formWrongTips['tokenCode'] = false
+        return
+      }
+
+      if (this.tokenVeri) return
+
       this.$toastLoading(this.$t("yield.yield151"))
 
       let metadata = []
@@ -646,7 +693,7 @@ export default {
       this.btnLoading = true
       if (this.projectStatus !== "active") {
         params.actions.push({
-          account: "d.e.yield",
+          account: this.contractE,
           name: "regprotocol",
           authorization: [
             {
@@ -662,7 +709,7 @@ export default {
         })
       } else {
         params.actions.push({
-          account: "d.e.yield",
+          account: this.contractE,
           name: "setmetadata",
           authorization: [
             {
@@ -745,6 +792,22 @@ export default {
     handleWalletLogin() {
       this.$store.dispatch("setWalletLoginVisible", true)
     },
+    hideTipsShow() {
+      this.tipsShow = false
+    },
+    async handleVeriToken() {
+      // use Token name+Token contract veri
+      if (this.form['tokenSymcode'] && this.form['tokenCode']) {
+        this.formWrongTips['tokenSymcode'] = false
+        this.formWrongTips['tokenCode'] = false
+        const resultVeri = await this.verifiStat()
+        if (!resultVeri) {
+          this.tokenVeri = true
+        } else {
+          this.tokenVeri = false
+        }
+      }
+    },
     // getAdminAccount
     getAdminAccount() {
       axios({
@@ -765,6 +828,9 @@ export default {
         }
       })
     },
+    clearLogo() {
+      this.form.logo = ''
+    }
   },
 }
 </script>
@@ -925,6 +991,13 @@ export default {
           height: 100%;
           opacity: 0;
           cursor: pointer;
+        }
+        .closeIcon {
+          position: absolute;
+          top: -14px;
+          right: -10px;
+          cursor: pointer;
+          z-index: 10;
         }
       }
 
@@ -1186,6 +1259,13 @@ export default {
         height: 100%;
         opacity: 0;
         cursor: pointer;
+      }
+      .closeIcon {
+        position: absolute;
+        top: -14px;
+        right: -10px;
+        cursor: pointer;
+        z-index: 10;
       }
     }
   }

@@ -44,7 +44,7 @@ export default {
   methods: {
     gotoDetails() {
       setTimeout(() => {
-        this.$router.push("/ProtocolsDetails?name=" + encodeURIComponent(this.projectName))
+        this.$router.push(`/protocols/${encodeURIComponent(this.projectName)}`)
       }, 1000)
 
       this.active = false
