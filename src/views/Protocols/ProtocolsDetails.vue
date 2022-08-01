@@ -114,9 +114,9 @@
                 <div class="box-w">
                   <div class="box3-title">{{ $t("yield.yield143") }}</div>
                   <div class="box3-text">
-                    <span v-if="projectInfo.tokenCode === null">-</span>
+                    <span v-if="projectInfo.tokenSymcode === null">-</span>
                     <template v-else>
-                      <span v-if="projectInfo.tokenCode">{{ projectInfo.tokenCode }}</span>
+                      <span v-if="projectInfo.tokenSymcode">{{ projectInfo.tokenSymcode }}</span>
                       <span v-else>-</span>
                     </template>
                   </div>
@@ -124,9 +124,9 @@
                 <div class="box-w">
                   <div class="box3-title">{{ $t("yield.yield142") }}</div>
                   <div class="box3-text">
-                    <span v-if="projectInfo.tokenSymcode === null">-</span>
+                    <span v-if="projectInfo.tokenCode === null">-</span>
                     <template v-else>
-                      <span v-if="projectInfo.tokenSymcode">{{ projectInfo.tokenSymcode }}</span>
+                      <span v-if="projectInfo.tokenCode">{{ projectInfo.tokenCode }}</span>
                       <span v-else>-</span>
                     </template>
                   </div>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="box-w">
                   <div class="box3-title" @click="tipsShow1 = !tipsShow1" v-click-outside="hideShow1">
-                    <v-tooltip bottom v-model="tipsShow1" :openOnHover="false" :openOnFocus="false" :attach="true">
+                    <v-tooltip bottom v-model="tipsShow1" :openOnHover="true" :openOnFocus="false" :attach="true">
                       <template v-slot:activator="{ on, attrs }">
                         <div class="flex curPoint" v-bind="attrs" v-on="on">
                         {{ $t("yield.yield179") }}
@@ -189,7 +189,7 @@
               <div class="flex">
                 <div class="box-w">
                   <div class="box3-title" @click="tipsShow2 = !tipsShow2" v-click-outside="hideShow2">
-                    <v-tooltip bottom v-model="tipsShow2" :openOnHover="false" :openOnFocus="false" :attach="true">
+                    <v-tooltip bottom v-model="tipsShow2" :openOnHover="true" :openOnFocus="false" :attach="true">
                       <template v-slot:activator="{ on, attrs }">
                         <div class="flex curPoint" v-bind="attrs" v-on="on">
                         {{ $t("yield.yield180") }}
@@ -208,7 +208,7 @@
                 </div>
                 <div class="box-w">
                   <div class="box3-title" @click="tipsShow3 = !tipsShow3" v-click-outside="hideShow3">
-                    <v-tooltip bottom v-model="tipsShow3" :openOnHover="false" :openOnFocus="false" :attach="true">
+                    <v-tooltip bottom v-model="tipsShow3" :openOnHover="true" :openOnFocus="false" :attach="true">
                       <template v-slot:activator="{ on, attrs }">
                         <div class="flex curPoint" v-bind="attrs" v-on="on">
                         {{ $t("yield.yield178") }}
@@ -261,9 +261,35 @@
                 <div class="box-w">
                   <div class="box3-title">Auditing report</div>
                   <div class="box3-text">
-                    <template v-if="projectInfo.otherInfo.audit_report.length > 0">
+                    <!-- <template v-if="projectInfo.otherInfo.audit_report.length > 0">
                       <div class="curPoint" @click="openWindow(url)" v-for="(url, index) in projectInfo.otherInfo.audit_report" :key="index">report{{ index + 1 }}</div>
-                    </template>
+                    </template> -->
+                    <!-- <div v-else>-</div> -->
+                    <v-menu
+                      offset-y
+                      nudge-bottom="10"
+                      v-if="projectInfo.otherInfo.audit_report.length > 0"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          v-bind="attrs"
+                          v-on="on"
+                        >
+                          Report&nbsp;<img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/>
+                        </v-btn>
+                        <!-- <v-icon class="" size="16" style="margin: 0 0 -2px 4px">mdi-arrow-top-right</v-icon> -->
+                      </template>
+
+                      <v-list>
+                        <v-list-item
+                          v-for="(item, index) in projectInfo.otherInfo.audit_report"
+                          :key="index"
+                          @click="openWindow(item)"
+                        >
+                          <v-list-item-title>report{{ index + 1 }}</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
                     <div v-else>-</div>
                   </div>
                 </div>
@@ -600,9 +626,9 @@
                       <div>
                         <div class="box3-title">{{ $t("yield.yield143") }}</div>
                         <div class="box3-text">
-                          <span v-if="projectInfo.tokenCode === null">-</span>
+                          <span v-if="projectInfo.tokenSymcode === null">-</span>
                           <template v-else>
-                            <span v-if="projectInfo.tokenCode">{{ projectInfo.tokenCode }}</span>
+                            <span v-if="projectInfo.tokenSymcode">{{ projectInfo.tokenSymcode }}</span>
                             <span v-else>-</span>
                           </template>
                         </div>
@@ -614,9 +640,9 @@
                         <div class="box3-text">
                           <!-- <span v-if="projectInfo.otherInfo.main_contract === null">-</span>
                           <span v-else>{{ projectInfo.otherInfo.main_contract }}</span> -->
-                          <span v-if="projectInfo.tokenSymcode === null">-</span>
+                          <span v-if="projectInfo.tokenCode === null">-</span>
                           <template v-else>
-                            <span v-if="projectInfo.tokenSymcode">{{ projectInfo.tokenSymcode }}</span>
+                            <span v-if="projectInfo.tokenCode">{{ projectInfo.tokenCode }}</span>
                             <span v-else>-</span>
                           </template>
                         </div>
@@ -667,7 +693,7 @@
                     <div class="box3-top">
                       <div @click="tipsShow1 = !tipsShow1" v-click-outside="hideShow1">
                         <div class="box3-title">
-                          <v-tooltip bottom v-model="tipsShow1" :openOnHover="false" :openOnFocus="false" :attach="true">
+                          <v-tooltip bottom v-model="tipsShow1" :openOnHover="true" :openOnFocus="false" :attach="true">
                             <template v-slot:activator="{ on, attrs }">
                               <div class="flex curPoint" v-bind="attrs" v-on="on">
                               {{ $t("yield.yield179") }}
@@ -690,7 +716,7 @@
                     <div class="box3-bottom">
                       <div @click="tipsShow2 = !tipsShow2" v-click-outside="hideShow2">
                         <div class="box3-title">
-                          <v-tooltip bottom v-model="tipsShow2" :openOnHover="false" :openOnFocus="false" :attach="true">
+                          <v-tooltip bottom v-model="tipsShow2" :openOnHover="true" :openOnFocus="false" :attach="true">
                             <template v-slot:activator="{ on, attrs }">
                               <div class="flex curPoint" v-bind="attrs" v-on="on">
                               {{ $t("yield.yield180") }}
@@ -711,7 +737,7 @@
                     <div class="box3-bottom">
                       <div @click="tipsShow3 = !tipsShow3" v-click-outside="hideShow3">
                         <div class="box3-title">
-                          <v-tooltip bottom v-model="tipsShow3" :openOnHover="false" :openOnFocus="false" :attach="true">
+                          <v-tooltip bottom v-model="tipsShow3" :openOnHover="true" :openOnFocus="false" :attach="true">
                             <template v-slot:activator="{ on, attrs }">
                               <div class="flex curPoint" v-bind="attrs" v-on="on">
                               {{ $t("yield.yield178") }}
@@ -771,10 +797,37 @@
                     <div>
                       <div class="box3-title">Auditing report</div>
                       <div class="box3-text flex" style="gap: 10px">
-                        <template v-if="projectInfo.otherInfo.audit_report.length > 0">
+                        <!-- <template v-if="projectInfo.otherInfo.audit_report.length > 0">
                           <span class="curPoint" @click="openWindow(url)" v-for="(url, index) in projectInfo.otherInfo.audit_report" :key="index">report{{ index + 1 }}</span>
                         </template>
-                        <span v-else>-</span>
+                        <span v-else>-</span> -->
+                        <v-menu
+                          offset-y
+                          nudge-bottom="10"
+                          :ripple="false"
+                          v-if="projectInfo.otherInfo.audit_report.length > 0"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                              v-bind="attrs"
+                              v-on="on"
+                            >
+                              Report&nbsp;<img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/>
+                            </v-btn>
+                            <!-- <v-icon class="" size="16" style="margin: 0 0 -2px 4px">mdi-arrow-top-right</v-icon> -->
+                          </template>
+
+                          <v-list>
+                            <v-list-item
+                              v-for="(item, index) in projectInfo.otherInfo.audit_report"
+                              :key="index"
+                              @click="openWindow(item)"
+                            >
+                              <v-list-item-title>report{{ index + 1 }}</v-list-item-title>
+                            </v-list-item>
+                          </v-list>
+                        </v-menu>
+                        <div v-else>-</div>
                       </div>
                     </div>
                   </div>
@@ -785,61 +838,61 @@
             <div class="ProtocolsDetailsPC-box4 flex">
               <div class="flex-1 flext flex-column flex-jus-between" style="height: 103px">
                 <div class="flex flex-jus-between" style="width: 100%">
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.cmc)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.cmc)" :class="{'noCursorPoint': !projectInfo.cmc}">
                     <img src="@/assets/img/ProtocolsDetails/CoinMarketCap.png" class="box4-img" />
                     <!-- CoinMarketCap -->
                     <span v-if="projectInfo.cmc">CoinMarketCap <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
-                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
+                    <span v-else class="color-999 noCursorPoint">{{ $t("yield.yield161") }}</span>
                   </div>
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.coingecko)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.coingecko)" :class="{'noCursorPoint': !projectInfo.coingecko}">
                     <img src="@/assets/img/ProtocolsDetails/CoinGecko.png" class="box4-img" />
                     <!-- <span>CoinGecko</span> -->
                     <span v-if="projectInfo.coingecko">CoinGecko <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
-                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
+                    <span v-else class="color-999 noCursorPoint">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
                 <div class="flex flex-jus-between" style="width: 100%">
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.defillama)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.defillama)" :class="{'noCursorPoint': !projectInfo.defillama}">
                     <img src="@/assets/img/ProtocolsDetails/DefiLlama.png" class="box4-img" />
                     <!-- <span>DefiLlama</span> -->
                     <span v-if="projectInfo.defillama">DefiLlama <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
-                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
+                    <span v-else class="color-999 noCursorPoint">{{ $t("yield.yield161") }}</span>
                   </div>
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.dappradar)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.dappradar)" :class="{'noCursorPoint': !projectInfo.dappradar}">
                     <img src="@/assets/img/ProtocolsDetails/DappRadar.png" class="box4-img" />
                     <!-- <span>DappRadar</span> -->
                     <span v-if="projectInfo.dappradar">DappRadar <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
-                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
+                    <span v-else class="color-999 noCursorPoint">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
               </div>
               <div class="box4-line"></div>
               <div class="box4-right flex-1 flext flex-column flex-jus-between" style="height: 103px">
                 <div class="flex flex-jus-between" style="width: 100%">
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.twitter)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.twitter)" :class="{'noCursorPoint': !projectInfo.twitter}">
                     <img src="@/assets/img/ProtocolsDetails/Twitter.png" class="box4-img" />
                     <!-- Twitter -->
                     <span v-if="projectInfo.twitter">Twitter <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
-                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
+                    <span v-else class="color-999 noCursorPoint">{{ $t("yield.yield161") }}</span>
                   </div>
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.discord)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.discord)" :class="{'noCursorPoint': !projectInfo.discord}">
                     <img src="@/assets/img/ProtocolsDetails/Discord.png" class="box4-img" />
                     <!-- Discord -->
                     <span v-if="projectInfo.discord">Discord <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
-                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
+                    <span v-else class="color-999 noCursorPoint">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
                 <div class="flex flex-jus-between" style="width: 100%">
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.telegram)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.telegram)" :class="{'noCursorPoint': !projectInfo.telegram}">
                     <img src="@/assets/img/ProtocolsDetails/Telegram.png" class="box4-img" />
                     <!-- Telegram -->
                     <span v-if="projectInfo.telegram">Telegram <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
-                    <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
+                    <span v-else class="color-999 noCursorPoint">{{ $t("yield.yield161") }}</span>
                   </div>
-                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.github)">
+                  <div class="flex-1 box4-w flex" @click="openWindow(projectInfo.github)" :class="{'noCursorPoint': !projectInfo.github}">
                     <img src="@/assets/img/ProtocolsDetails/git1.png?v=1.0" class="box4-img" />
                     <!-- github -->
-                    <span v-if="projectInfo.telegram" class="flex">github <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
+                    <span v-if="projectInfo.github" class="flex">github <img src="@/assets/img/ProtocolsDetails/out1.png" width="10"/></span>
                     <span v-else class="color-999">{{ $t("yield.yield161") }}</span>
                   </div>
                 </div>
@@ -1041,6 +1094,7 @@ export default {
       tipsShow1: false,
       tipsShow2: false,
       tipsShow3: false,
+      audit_report: ['reports11', 'reports22', 'reports33']
     }
   },
   components: {},
@@ -2174,5 +2228,18 @@ export default {
 .imgStyle {
   width: 8px !important;
   height: 8px !important;
+}
+.box3-text {
+  ::v-deep .v-btn:before, ::v-deep .theme--light.v-btn.v-btn--has-bg, ::v-deep .v-btn--is-elevated:active {
+    background: none;
+    box-shadow: none;
+    padding-left: 0 !important;
+  }
+}
+.noCursorPoint {
+  cursor: text !important;
+}
+::v-deep .v-list {
+  padding: 0 0!important;
 }
 </style>
