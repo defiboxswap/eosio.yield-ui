@@ -69,7 +69,7 @@
             <!-- Project category -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield61") }}</div>
             <!-- <v-select class="basicInfo-input1 select-all" :items="categoryList" v-model="categoryItem" label="" solo :attach="true" :full-width="true"></v-select> -->
-            <div class="basicInfo-input1" v-if="projectStatus !== 'active'">
+            <div class="basicInfo-input1" v-if="projectStatus !== 'active'" v-click-outside="categoryHide">
               <div class="flex curPoint" @click="categoryShow = !categoryShow">
                 <div class="flex-1" style="padding: 0 10px">{{ categoryItem }}</div>
                 <v-icon v-if="!categoryShow">mdi-menu-down</v-icon>
@@ -104,7 +104,7 @@
               <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
               <input type="file" accept="image/*" @change="fileImage" title="" />
               <div class="closeIcon" @click="clearLogo" v-if="form.logo">
-                <v-icon class="" size="20" style="margin: 0 0 -2px 4px">mdi-close-circle-outline</v-icon>
+                <v-icon class="" size="20" style="margin: 5px -12px -2px 4px">mdi-close-circle-outline</v-icon>
               </div>
             </div>
             <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -198,7 +198,7 @@
         <v-btn class="footer-button" @click="submit" :loading="btnLoading">{{ $t("yield.yield83") }}</v-btn>
       </div>
     </div>
-    <div class="JoinPC" v-else>
+    <div class="JoinPC" v-else @click="categoryShow = false">
       <div class="JoinPC-overLay">
         <div class="JoinPC-layout flex flex-jus-between">
           <!-- Projects -->
@@ -252,7 +252,7 @@
               <!-- Project category -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield61") }}</div>
               <!-- <v-select class="basicInfo-input1 select-all" :items="categoryList" v-model="categoryItem" label="" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select> -->
-              <div class="basicInfo-input1" v-if="projectStatus !== 'active'">
+              <div class="basicInfo-input1" v-if="projectStatus !== 'active'" v-click-outside="categoryHide">
                 <div class="flex curPoint" @click="categoryShow = !categoryShow">
                   <div class="flex-1" style="padding: 0 10px">{{ categoryItem }}</div>
                   <v-icon v-if="!categoryShow">mdi-menu-down</v-icon>
@@ -305,7 +305,7 @@
                 <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
                 <input type="file" accept="image/*" @change="fileImage" title="" />
                 <div class="closeIcon" @click="clearLogo" v-if="form.logo">
-                  <v-icon class="" size="20" style="margin: 0 0 -2px 4px">mdi-close-circle-outline</v-icon>
+                  <v-icon class="" size="20" style="margin: 5px -12px -2px 4px">mdi-close-circle-outline</v-icon>
                 </div>
               </div>
               <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -431,9 +431,8 @@ export default {
   data() {
     return {
       categoryShow: false,
-
       tipsShow: false,
-      categoryItem: this.$t("yield.yield46"),
+      categoryItem: this.$t("yield.yield192"),
       categoryList: [this.$t("yield.yield46"), this.$t("yield.yield47"), this.$t("yield.yield48"), this.$t("yield.yield49"), this.$t("yield.yield149")],
       categoryDesList: ["yield.yield144", "yield.yield145", "yield.yield146", "yield.yield147", "yield.yield148"],
 
@@ -504,7 +503,21 @@ export default {
           this.$forceUpdate()
         })
       },
-    }
+    },
+    'form.tokenCode': {
+      handler: function(val) {
+        if (val) {
+          this.form.tokenCode = val.toLowerCase()
+        }
+      }
+    },
+    'form.tokenSymcode': {
+      handler: function(val) {
+        if (val) {
+          this.form.tokenSymcode = val.replace(/[^a-z|A-Z]/g, '').toUpperCase()
+        }
+      }
+    },
   },
   computed: {
     ...mapState({
@@ -826,6 +839,30 @@ export default {
             this.adminAccountList.push(i.permission.actor)
           })
         }
+      })
+    },
+    verifiStat() {
+      return new Promise(async (resolve) => {
+        axios({
+          url: `${this.$store.state.sys.node.httpEndpoint}/v1/chain/get_currency_stats`,
+          method: "post",
+          headers: {
+            "content-type": "text/plain;charset=UTF-8",
+          },
+          data: {
+            symbol: this.form['tokenSymcode'],
+            code: this.form['tokenCode']
+          },
+        }).then((res) => {
+          if (Object.keys(res?.data).length) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+        }).catch((error) => {
+          resolve(false)
+          console.log(error);
+        })
       })
     },
     clearLogo() {

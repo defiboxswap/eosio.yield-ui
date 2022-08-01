@@ -29,7 +29,7 @@
                 <img :src="item.logo" class="box-avatar" :onerror="errImg" />
               </div>
               <div class="flex-1">
-                <div class="box-name">{{ item.name }}</div>
+                <div class="box-name">{{ item.metadata_name }}</div>
                 <div class="flex flex-wrap">
                   <div class="box-label">{{ handleCategory(item.category) }}</div>
                   <!-- <div class="box-label">Corss-chain</div> -->
@@ -40,24 +40,57 @@
 
             <div class="box-data">
               <div class="flext">
-                <div class="data-box flex-1">
-                  <div class="data-name">{{ $t("yield.yield53") }}</div>
+                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_usd')">
+                  <div class="data-name" :style="{'color': order === 'tvl_usd' ? '#000' : ''}">
+                    {{ $t("yield.yield53") }}
+                    <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_usd' && order_type === 'desc'" />
+                    <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_usd' && order_type === 'asc'" />
+                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
+                  </div>
                   <div class="data-number">${{ getKMBUnit(item.tvl_usd) }}</div>
                 </div>
-                <div class="data-box flex-1">
-                  <div class="data-name">{{ $t("yield.yield175") }}</div>
+                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_eos_change_8h')">
+                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_8h' ? '#000' : ''}">
+                    {{ $t("yield.yield175") }}
+                    <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_8h' && order_type === 'desc'" />
+                    <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_8h' && order_type === 'asc'" />
+                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
+                  </div>
                   <div class="data-number" :class="getColor(item.tvl_eos_change_8h)">{{ item.tvl_eos_change_8h }}</div>
                 </div>
-                <div class="data-box flex-1">
-                  <div class="data-name">{{ $t("yield.yield42") }}</div>
+                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_eos_change_day')">
+                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_day' ? '#000' : ''}">
+                    {{ $t("yield.yield42") }}
+                    <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_day' && order_type === 'desc'" />
+                    <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_day' && order_type === 'asc'" />
+                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
+                  </div>
                   <div class="data-number" :class="getColor(item.tvl_eos_change_day)">{{ item.tvl_eos_change_day }}</div>
                 </div>
-                <div class="data-box flex-1">
-                  <div class="data-name">{{ $t("yield.yield176") }}</div>
+              </div>
+              <div class="flext">
+                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_eos_change_week')">
+                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_week' ? '#000' : ''}">
+                    {{ $t("yield.yield176") }}
+                    <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_week' && order_type === 'desc'" />
+                    <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_week' && order_type === 'asc'" />
+                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
+                  </div>
                   <div class="data-number" :class="getColor(item.tvl_eos_change_week)">{{ item.tvl_eos_change_week }}</div>
                 </div>
                 <div class="data-box flex-1">
-                  <div class="data-name">{{ $t("yield.yield54") }}</div>
+                  <div class="data-name">{{ $t("yield.yield177") }}</div>
+                  <div class="data-number">
+                    <img width="70" height="50" alt="7d chart" :src="getImgUrl(item.name)" />
+                  </div>
+                </div>
+                <div class="data-box flex-1" @click.stop="handleOrderType('agg_rewards')">
+                  <div class="data-name" :style="{'color': order === 'agg_rewards' ? '#000' : ''}">
+                    {{ $t("yield.yield54") }}
+                    <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'agg_rewards' && order_type === 'desc'" />
+                    <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'agg_rewards' && order_type === 'asc'" />
+                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
+                  </div>
                   <div class="data-number">{{ item.agg_rewards_change.toFixed(4) }}</div>
                 </div>
               </div>
@@ -79,7 +112,7 @@
                 <img :src="item.logo" class="box-avatar" :onerror="errImg" />
               </div>
               <div class="flex-1">
-                <div class="box-name">{{ item.name }}</div>
+                <div class="box-name">{{ item.metadata_name }}</div>
                 <div class="flex flex-wrap">
                   <div class="box-label">{{ handleCategory(item.category) }}</div>
                   <!-- <div class="box-label">Corss-chain</div> -->
@@ -144,10 +177,11 @@
             <div class="box-title flex flex-align-center">
               <!-- PROTOCOLS NAME -->
               <div class="box-1" style="text-align: left; padding-left: 80px">{{ $t("yield.yield52") }}</div>
-              <div class="box-2 flex flex-jus-center" @click="order = 'tvl_usd'">
+              <div class="box-2 flex flex-jus-center" @click="handleOrderType('tvl_usd')">
                 <!-- TVL -->
                 <span :style="{'color': order === 'tvl_usd' ? '#000' : ''}">{{ $t("yield.yield53") }}</span>
-                <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_usd'" />
+                <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_usd' && order_type === 'desc'" />
+                <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_usd' && order_type === 'asc'" />
                 <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
               </div>
               <!-- CHANGE(24H) -->
@@ -156,19 +190,36 @@
                 <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_usd_change'" />
                 <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
               </div> -->
-              <div class="box-3 flex flex-jus-center">
-                <span>{{ $t("yield.yield175") }}</span>
+              <!-- 8h -->
+              <div class="box-3 flex flex-jus-center" @click="handleOrderType('tvl_eos_change_8h')">
+                <span :style="{'color': order === 'tvl_eos_change_8h' ? '#000' : ''}">{{ $t("yield.yield175") }}</span>
+                <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_8h' && order_type === 'desc'" />
+                <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_8h' && order_type === 'asc'" />
+                <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
               </div>
-              <div class="box-3 flex flex-jus-center">
-                <span>{{ $t("yield.yield42") }}</span>
+              <!-- 24h -->
+              <div class="box-3 flex flex-jus-center" @click="handleOrderType('tvl_eos_change_day')">
+                <span :style="{'color': order === 'tvl_eos_change_day' ? '#000' : ''}">{{ $t("yield.yield42") }}</span>
+                <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_day' && order_type === 'desc'" />
+                <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_day' && order_type === 'asc'" />
+                <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
               </div>
-              <div class="box-3 flex flex-jus-center">
-                <span>{{ $t("yield.yield176") }}</span>
+              <!-- 7day -->
+              <div class="box-3 flex flex-jus-center" @click="handleOrderType('tvl_eos_change_week')">
+                <span :style="{'color': order === 'tvl_eos_change_week' ? '#000' : ''}">{{ $t("yield.yield176") }}</span>
+                <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_week' && order_type === 'desc'" />
+                <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_week' && order_type === 'asc'" />
+                <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
               </div>
-              <div class="box-4 flex flex-jus-center" @click="order = 'agg_rewards'">
+              <!-- Last 7 Days -->
+              <div class="box-3 flex flex-jus-center">
+                <span>{{ $t("yield.yield177") }}</span>
+              </div>
+              <div class="box-4 flex flex-jus-center" @click="handleOrderType('agg_rewards')">
                 <!-- REWARD(EOS) -->
                 <span :style="{'color': order === 'agg_rewards' ? '#000' : ''}">{{ $t("yield.yield54") }}</span>
-                <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'agg_rewards'" />
+                <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'agg_rewards' && order_type === 'desc'" />
+                <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'agg_rewards' && order_type === 'asc'" />
                 <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
               </div>
               <!-- MARKET CAP -->
@@ -186,7 +237,7 @@
                     <img :src="item.logo" alt="" :onerror="errImg" />
                   </div>
                   <div>
-                    <div class="item-name">{{ item.name }}</div>
+                    <div class="item-name">{{ item.metadata_name }}</div>
                     <div class="flex flex-wrap">
                       <div class="item-label">{{ handleCategory(item.category) }}</div>
                       <!-- <div class="item-label" v-if="handleGrade(item.tvl_eos)">{{ handleGrade(item.tvl_eos) }}</div> -->
@@ -198,6 +249,10 @@
                 <div class="box-3" :class="getColor(item.tvl_eos_change_8h)">{{ item.tvl_eos_change_8h }}</div>
                 <div class="box-3" :class="getColor(item.tvl_eos_change_day)">{{ item.tvl_eos_change_day }}</div>
                 <div class="box-3" :class="getColor(item.tvl_eos_change_week)">{{ item.tvl_eos_change_week }}</div>
+                <div class="box-3">
+                  <img  width="135" height="50" alt="7d chart"
+                    :src="getImgUrl(item.name)" />
+                </div>
                 <div class="box-4">{{ item.agg_rewards_change.toFixed(4) }}</div>
                 <!-- <div class="box-5">$123.43M</div> -->
               </a>
@@ -239,7 +294,7 @@
                     <img :src="item.logo" alt="" :onerror="errImg" />
                   </div>
                   <div>
-                    <div class="item-name" style="margin-bottom: 0">{{ item.name }}</div>
+                    <div class="item-name" style="margin-bottom: 0">{{ item.metadata_name }}</div>
                     <!-- <div class="flex flex-wrap">
                       <div class="item-label">{{ item.category }}</div>
                       <div class="item-label">Corss-chain</div>
@@ -279,6 +334,7 @@ export default {
       pageSize: 10,
       search: "",
       order: "tvl_usd",
+      order_type: "desc",
       isMore: true,
       protocolsList: [],
       searchTimer: null,
@@ -315,7 +371,7 @@ export default {
           value: 'Staking'
         }
       ],
-      selectVal: '',
+      selectVal: undefined,
     }
   },
   props: {},
@@ -340,16 +396,21 @@ export default {
   created() {
     this.initList()
   },
-  mounted() {},
+  mounted() {
+  },
   beforeDestroy() {},
   methods: {
+    async getsparkline() {
+      let result = await protocols.sparkline('ballp.defi')
+      return result
+    },
     clickInfoTab(infoTab) {
       if (this.infoTab == infoTab) return
       if (infoTab === 'TVLRankings') {
         this.items = [
           {
             text: this.$t('yield.yield174'),
-            value: ''
+            value: undefined
           },
           {
             text: 'CDP',
@@ -376,7 +437,7 @@ export default {
         this.items = [
           {
             text: this.$t('yield.yield174'),
-            value: ''
+            value: undefined
           },
           {
             text: this.$t('yield.yield162'),
@@ -393,10 +454,8 @@ export default {
         ]
       }
       this.infoTab = infoTab
-      // if (this.selectVal.value !== 'All') {
-      this.selectVal = ''
-      // }
       this.initList()
+      this.selectVal = undefined
     },
     initList() {
       this.isMore = true
@@ -410,26 +469,23 @@ export default {
       this.getList()
     },
     async getList() {
-      let status = ''
+      let status = undefined
       let category = ''
       if (this.infoTab === 'Audit') {
         category = ''
-        if (this.selectVal.value !== 'All') {
+        if (this.selectVal !== undefined) {
           status = this.selectVal
         } else {
-          status = ''
+          status = undefined
         }
       } else {
         status = 'active'
-        if (this.selectVal.value !== 'All') {
+        if (this.selectVal !== undefined) {
           category = this.selectVal
         } else {
-          category = ''
+          category = undefined
         }
       }
-      console.log('====================================');
-      console.log(category, status);
-      console.log('====================================');
       try {
         this.loading = true
         let result = await protocols.list({
@@ -438,7 +494,8 @@ export default {
           search: this.search.replace(/(^\s*)|(\s*$)/g, ""),
           order: this.infoTab == 'Audit' ? 'create_at' : this.order,
           status,
-          category
+          category,
+          order_type: this.infoTab == 'Audit' ? '' : this.order_type
         })
         if (result?.code === 200 && result.data) {
           result.data.forEach((item) => {
@@ -446,7 +503,7 @@ export default {
             item.nameUrlencode = `/protocols/${encodeURIComponent(item.name)}`
             // item.nameUrlencode = "/ProtocolsDetails?name=" + encodeURIComponent(item.name)
             item.logo = `https://ipfs.pink.gg/ipfs/${item.metadata.logo}`
-            item.name = item.metadata.name
+            // item.name = item.metadata.name
             item.tvl_eos_changeDayOld = item.tvl_eos_change_day
             item.tvl_eos_change8hOld = item.tvl_eos_change_8h
             item.tvl_eos_changeWeekOld = item.tvl_eos_change_week
@@ -480,6 +537,20 @@ export default {
         this.loading = false
         this.isMore = false
       }
+    },
+    handleOrderType(type) {
+      if (type === this.order) {
+        this.order_type === 'desc' ? this.order_type = 'asc' : this.order_type = 'desc'
+        this.initList()
+        return
+      } else {
+        this.order_type = 'desc'
+      }
+      this.order = type
+    },
+    getImgUrl(name) {
+      const baseURL = "https://api.tokenyield.io"
+      return `${baseURL}/v1/protocols/${name}/sparkline?tvl_type=tvl_eos`
     },
     getColor(item) {
       const val = item.slice(0, item.length - 1)
@@ -712,10 +783,16 @@ export default {
           margin-top: 25px;
         }
         .data-name {
+          // display: flex;
           font-size: 13px;
           font-weight: 400;
           color: #666666;
           margin-bottom: 5px;
+          .svg {
+            width: 16px;
+            margin: -2px 0 0 0;
+            vertical-align: middle;
+          }
         }
         .data-number {
           font-size: 17px;
@@ -896,10 +973,10 @@ export default {
         padding-left: 40px;
       }
       .box-2 {
-        width: 250px;
+        width: 200px;
       }
       .box-3 {
-        width: 250px;
+        width: 200px;
       }
       .box-4 {
         width: 275px;
@@ -981,5 +1058,8 @@ input {
     /* Internet Explorer 10-11 */
     color: #999 !important;
   }
+}
+.rotate180 {
+  transform: rotate(180deg);
 }
 </style>
