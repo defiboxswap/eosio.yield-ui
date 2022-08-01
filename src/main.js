@@ -22,7 +22,7 @@ Vue.prototype.$openTxid = (Txid) => {
   else window.open(`https://bloks.io/transaction/${Txid}`)
 };
 
-const origin = window.location.origin.indexOf('https://api.tokenyield.io')
+const origin = window.location.origin.indexOf('https://tokenyield.io')
 if (origin < 0) {
   Vue.prototype.contractO = 'd.o.yield';
   Vue.prototype.contractA = 'd.a.yield';
