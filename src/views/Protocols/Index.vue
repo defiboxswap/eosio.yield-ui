@@ -40,39 +40,57 @@
 
             <div class="box-data">
               <div class="flext">
-                <div class="data-box flex-1">
-                   <!-- @click="handleOrderType('tvl_usd')" -->
-                  <div class="data-name">
-                     <!-- :style="{'color': order === 'tvl_usd' ? '#000' : ''}" -->
+                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_usd')">
+                  <div class="data-name" :style="{'color': order === 'tvl_usd' ? '#000' : ''}">
                     {{ $t("yield.yield53") }}
-                    <!-- <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_usd' && order_type === 'desc'" />
+                    <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_usd' && order_type === 'desc'" />
                     <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_usd' && order_type === 'asc'" />
-                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else /> -->
+                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
                   </div>
                   <div class="data-number">${{ getKMBUnit(item.tvl_usd) }}</div>
                 </div>
-                <div class="data-box flex-1">
-                  <div class="data-name">{{ $t("yield.yield175") }}</div>
+                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_eos_change_8h')">
+                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_8h' ? '#000' : ''}">
+                    {{ $t("yield.yield175") }}
+                    <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_8h' && order_type === 'desc'" />
+                    <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_8h' && order_type === 'asc'" />
+                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
+                  </div>
                   <div class="data-number" :class="getColor(item.tvl_eos_change_8h)">{{ item.tvl_eos_change_8h }}</div>
                 </div>
-                <div class="data-box flex-1">
-                  <div class="data-name">{{ $t("yield.yield42") }}</div>
+                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_eos_change_day')">
+                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_day' ? '#000' : ''}">
+                    {{ $t("yield.yield42") }}
+                    <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_day' && order_type === 'desc'" />
+                    <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_day' && order_type === 'asc'" />
+                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
+                  </div>
                   <div class="data-number" :class="getColor(item.tvl_eos_change_day)">{{ item.tvl_eos_change_day }}</div>
                 </div>
               </div>
               <div class="flext">
-                <div class="data-box flex-1">
-                  <div class="data-name">{{ $t("yield.yield176") }}</div>
+                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_eos_change_week')">
+                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_week' ? '#000' : ''}">
+                    {{ $t("yield.yield176") }}
+                    <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_week' && order_type === 'desc'" />
+                    <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_week' && order_type === 'asc'" />
+                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
+                  </div>
                   <div class="data-number" :class="getColor(item.tvl_eos_change_week)">{{ item.tvl_eos_change_week }}</div>
                 </div>
                 <div class="data-box flex-1">
                   <div class="data-name">{{ $t("yield.yield177") }}</div>
                   <div class="data-number">
-                    <img  width="135" height="50" alt="7d chart" :src="getImgUrl(item.name)" />
+                    <img width="70" height="50" alt="7d chart" :src="getImgUrl(item.name)" />
                   </div>
                 </div>
-                <div class="data-box flex-1">
-                  <div class="data-name">{{ $t("yield.yield54") }}</div>
+                <div class="data-box flex-1" @click.stop="handleOrderType('agg_rewards')">
+                  <div class="data-name" :style="{'color': order === 'agg_rewards' ? '#000' : ''}">
+                    {{ $t("yield.yield54") }}
+                    <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'agg_rewards' && order_type === 'desc'" />
+                    <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'agg_rewards' && order_type === 'asc'" />
+                    <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
+                  </div>
                   <div class="data-number">{{ item.agg_rewards_change.toFixed(4) }}</div>
                 </div>
               </div>
@@ -532,7 +550,7 @@ export default {
     },
     getImgUrl(name) {
       const baseURL = "https://api.tokenyield.io"
-      return `${baseURL}/v1/protocols/${name}/sparkline?tvl_type=tvl_usd`
+      return `${baseURL}/v1/protocols/${name}/sparkline?tvl_type=tvl_eos`
     },
     getColor(item) {
       const val = item.slice(0, item.length - 1)
@@ -770,10 +788,11 @@ export default {
           font-weight: 400;
           color: #666666;
           margin-bottom: 5px;
-          // .svg {
-          //   width: 16px;
-          //   margin-left: 4px;
-          // }
+          .svg {
+            width: 16px;
+            margin: -2px 0 0 0;
+            vertical-align: middle;
+          }
         }
         .data-number {
           font-size: 17px;
@@ -954,10 +973,10 @@ export default {
         padding-left: 40px;
       }
       .box-2 {
-        width: 250px;
+        width: 200px;
       }
       .box-3 {
-        width: 250px;
+        width: 200px;
       }
       .box-4 {
         width: 275px;
