@@ -104,7 +104,7 @@
               <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
               <input type="file" accept="image/*" @change="fileImage" title="" />
               <div class="closeIcon" @click="clearLogo" v-if="form.logo">
-                <v-icon class="" size="20" style="margin: 5px -12px -2px 4px">mdi-close-circle-outline</v-icon>
+                <v-icon class="" size="20" style="margin: 0 0 -2px 4px">mdi-close-circle-outline</v-icon>
               </div>
             </div>
             <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -117,23 +117,22 @@
 
           <div class="basicInfo-box">
             <!-- Recover+ project ID -->
-            <!-- ( What is Recover + ? ) -->
             <div class="basicInfo-subtitle">
-              {{ $t("yield.yield73") }}
-              <span @click="openWindow('https://eosrecover.com/')" class="curPoint color-999">{{ $t("yield.yield74") }}</span>
+              <span class="color-red">*&nbsp;</span>{{ $t("yield.yield73") }}
             </div>
-            <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.recover" />
-          </div>
+            <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.recover"  @change="formWrongTips.description = false"/>
+            <div class="basicInfo-wrongTips" v-if="formWrongTips.recover">{{ $t("yield.yield191") }}</div>
 
-          <div class="basicInfo-box">
-            <div class="basicInfo-subtitle">{{ $t("yield.yield75") }}</div>
-            <div class="flex">
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.audits" />
-              <!-- <img src="@/assets/img/svg/add_circled.svg" class="basicInfo-addSvg" /> -->
+            <div class="recoverCls">
+              <span class="recoverCls_caption">{{ $t("yield.yield74") }}</span>
+              <div class="recoverCls_word">
+                {{ $t("yield.yield193") }}
+              </div>
+              <div class="recoverCls_btn" @click="openWindow('https://eosrecover.com/project/form')">{{ $t("yield.yield194") }}</div>
+              <img src="@/assets/img/recover.png" alt="">
             </div>
           </div>
         </div>
-
         <div class="Join-basicInfo">
           <!-- *Analytics -->
           <div class="basicInfo-title">{{ $t("yield.yield130") }}</div>
@@ -305,7 +304,7 @@
                 <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
                 <input type="file" accept="image/*" @change="fileImage" title="" />
                 <div class="closeIcon" @click="clearLogo" v-if="form.logo">
-                  <v-icon class="" size="20" style="margin: 5px -12px -2px 4px">mdi-close-circle-outline</v-icon>
+                  <v-icon class="" size="20" style="margin: 0 0 -2px 4px">mdi-close-circle-outline</v-icon>
                 </div>
               </div>
               <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
@@ -321,26 +320,28 @@
         </div>
 
         <div class="JoinPC-basicInfo">
-          <!-- *Contract security -->
-          <div class="basicInfo-title">{{ $t("yield.yield68") }}</div>
-
-          <div class="flex marb-25">
-            <div class="basicInfo-left">
-              <!-- Recover+ project ID -->
-              <!-- ( What is Recover + ? ) -->
-              <div class="basicInfo-subtitle">
-                {{ $t("yield.yield73") }}
-                <span @click="openWindow('https://eosrecover.com/')" class="curPoint color-999">{{ $t("yield.yield74") }}</span>
+          <div class="flex">
+            <div>
+              <!-- *Contract security -->
+              <div class="basicInfo-title">{{ $t("yield.yield68") }}</div>
+              <div class="flex marb-25">
+                <div class="basicInfo-left">
+                  <!-- Recover+ project ID -->
+                  <div class="basicInfo-subtitle">
+                    <span class="color-red">*&nbsp;</span>{{ $t("yield.yield73") }}
+                  </div>
+                  <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.recover" @change="formWrongTips.description = false"/>
+                  <div class="basicInfo-wrongTips" v-if="formWrongTips.recover">{{ $t("yield.yield191") }}</div>
+                </div>
               </div>
-              <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.recover" />
             </div>
-            <div v-if="false">
-              <!-- Security Audits of smart contracts  (URL) -->
-              <div class="basicInfo-subtitle">{{ $t("yield.yield75") }}</div>
-              <div class="flex">
-                <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.audits" />
-                <!-- <img src="@/assets/img/svg/add_circled.svg" class="basicInfo-addSvg" /> -->
+            <div class="recoverCls">
+              <span class="recoverCls_caption">{{ $t("yield.yield74") }}</span>
+              <div class="recoverCls_word">
+                {{ $t("yield.yield193") }}
               </div>
+              <div class="recoverCls_btn" @click="openWindow('https://eosrecover.com/project/form')">{{ $t("yield.yield194") }}</div>
+              <img src="@/assets/img/recover.png" alt="">
             </div>
           </div>
         </div>
@@ -467,6 +468,7 @@ export default {
         coingecko: { check: true, gotoId: "basic" },
         dappradar: { check: true, gotoId: "basic" },
         defillama: { check: true, gotoId: "basic" },
+        recover: { required: true, gotoId: "basic" },
       },
       formWrongTips: {
         tokenCode: false,
@@ -1057,6 +1059,39 @@ export default {
         margin-left: 5px;
       }
     }
+    .recoverCls {
+      position: relative;
+      align-self: flex-start;
+      background: #005c6b;
+      padding: 20px;
+      color: #fff;
+      border-radius: 10px;
+      margin-top: 20px;
+      &_caption {
+        font-size: 20px;
+      }
+      &_word {
+        width: 280px;
+        font-size: 12px;
+        line-height: 14px;
+        margin: 5px 0 10px;
+      }
+      &_btn {
+        color: rgb(17, 94, 105);
+        background: linear-gradient(90deg,#2ef2f6,#ffd183);
+        border-radius: 20px;
+        width: 160px;
+        padding: 4px 0;
+        text-align: center;
+        font-size: 14px !important;
+        cursor: pointer;
+      }
+      img {
+        position: absolute;
+        top: 30px;
+        right: 15px;
+      }
+    }
   }
 
   .Join-footer {
@@ -1303,6 +1338,40 @@ export default {
         right: -10px;
         cursor: pointer;
         z-index: 10;
+      }
+    }
+    .recoverCls {
+      position: relative;
+      align-self: flex-start;
+      width: 550px;
+      height: 150px;
+      background: #005c6b;
+      padding: 20px;
+      color: #fff;
+      border-radius: 10px;
+      &_caption {
+        font-size: 20px;
+      }
+      &_word {
+        width: 400px;
+        font-size: 12px;
+        line-height: 14px;
+        margin: 5px 0 10px;
+      }
+      &_btn {
+        color: rgb(17, 94, 105);
+        background: linear-gradient(90deg,#2ef2f6,#ffd183);
+        border-radius: 20px;
+        width: 160px;
+        padding: 4px 0;
+        text-align: center;
+        font-size: 14px !important;
+        cursor: pointer;
+      }
+      img {
+        position: absolute;
+        top: 15px;
+        right: 15px;
       }
     }
   }
