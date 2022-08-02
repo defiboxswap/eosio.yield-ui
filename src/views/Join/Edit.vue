@@ -1071,7 +1071,7 @@ export default {
         font-size: 20px;
       }
       &_word {
-        width: 280px;
+        width: 240px;
         font-size: 12px;
         line-height: 14px;
         margin: 5px 0 10px;
@@ -1087,6 +1087,7 @@ export default {
         cursor: pointer;
       }
       img {
+        width: 40px;
         position: absolute;
         top: 30px;
         right: 15px;
