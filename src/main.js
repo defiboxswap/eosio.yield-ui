@@ -28,9 +28,9 @@ if (origin < 0) {
   Vue.prototype.contractA = 'd.a.yield';
   Vue.prototype.contractE = 'd.e.yield';
 } else {
-  Vue.prototype.contractO = 'eosio.yield';
-  Vue.prototype.contractA = 'oracle.yield';
-  Vue.prototype.contractE = 'admin.yield';
+  Vue.prototype.contractO = 'oracle.yield';
+  Vue.prototype.contractA = 'admin.yield';
+  Vue.prototype.contractE = 'eosio.yield';
 }
 
 import { accAdd, toFixed, formatNumber, accDiv, accMul, accSub, getKMBUnit, handleHttp, handleCategory, handleCategoryTransform, deepClone, isHttp } from '@/utils/public'

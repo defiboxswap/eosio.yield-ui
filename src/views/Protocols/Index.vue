@@ -790,7 +790,7 @@ export default {
           margin-bottom: 5px;
           .svg {
             width: 16px;
-            margin: -2px 0 0 0;
+            margin: -2px 0 0 -7px;
             vertical-align: middle;
           }
         }
