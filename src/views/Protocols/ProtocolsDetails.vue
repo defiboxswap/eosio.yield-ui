@@ -1258,14 +1258,13 @@ export default {
           item.otherInfo.open_source = null
           item.otherInfo.main_contract = ""
           item.otherInfo.audit_report = []
-
           this.projectInfo = item
+          // this.getSupplyInfo()
+          await this.initView1Data()
           if (item.recover) this.getRecoverInfo()
           if (item.tokenCode && item.tokenSymcode) this.getSupplyInfo()
-          // this.getSupplyInfo()
-          this.$nextTick(() => {
-            this.initView1Data()
-          })
+          // this.$nextTick(() => {
+          // })
           // console.log("this.projectInfo is ", this.projectInfo)
         } else {
           this.projectInfo = null
@@ -1292,9 +1291,9 @@ export default {
         this.projectInfo.circulating = this.formatNumber(this.toFixed(info.supply.circulating, 2))
         this.projectInfo.maxSupply = this.formatNumber(this.toFixed(info.supply.max, 0))
         this.projectInfo.eosPrice = this.getKMBUnit(this.toFixed(info.price.quotes.USD, 2))
-        this.projectInfo.mcTvlRatio = this.toFixed(this.accDiv(info.price.marketcap_usd, this.overViewData.tvl_usd) * 100, 2)
+        this.projectInfo.mcTvlRatio = this.toFixed(this.accDiv(info.price.marketcap_usd, this.overViewData.tvl_usd), 2)
         this.projectInfo.fullyDVal = this.getKMBUnit(this.accMul(info.price.quotes.USD, info?.supply.max))
-        this.projectInfo.fullyDValTvlRatio = this.toFixed(this.accDiv(this.accMul(info.price?.quotes.USD, info.supply.max), this.overViewData.tvl_usd) * 100, 2)
+        this.projectInfo.fullyDValTvlRatio = this.toFixed(this.accDiv(this.accMul(info.price?.quotes.USD, info.supply.max), this.overViewData.tvl_usd), 2)
         this.$forceUpdate()
       })
     },
