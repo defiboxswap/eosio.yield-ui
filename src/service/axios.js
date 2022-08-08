@@ -1,10 +1,12 @@
 import axios from "axios"
 import store from "@/store"
 import qs from "qs" // fromData to string
+import { baseURL, VUE_APP_TIMEOUT } from "../config";
+
 // const CancelToken = axios.CancelToken
 const https = axios.create({
-  baseURL: process.env.NODE_ENV === "production" ? "https://api.tokenyield.io": "",
-  timeout: process.env.NODE_ENV === "production" ? 20000 : 60000,
+  baseURL,
+  timeout: VUE_APP_TIMEOUT,
   auth: {
     username: localStorage.getItem("token") || "",
   },

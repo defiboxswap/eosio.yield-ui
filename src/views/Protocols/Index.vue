@@ -325,6 +325,8 @@
 // import CustomPagination from "@/utils/pagination"
 import { mapState } from "vuex"
 import { protocols } from "@/service"
+import { baseURL } from "../../config";
+
 export default {
   name: "Protocols",
   data() {
@@ -549,7 +551,6 @@ export default {
       this.order = type
     },
     getImgUrl(name) {
-      const baseURL = "https://api.tokenyield.io"
       return `${baseURL}/v1/protocols/${name}/sparkline?tvl_type=tvl_eos`
     },
     getColor(item) {

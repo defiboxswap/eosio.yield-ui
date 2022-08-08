@@ -1,7 +1,6 @@
 import axios from "axios"
 import store from "@/store"
-
-const baseURL = process.env.NODE_ENV === "development" ? "" : "https://api.tokenyield.io"
+import { baseURL } from "../../config"
 
 function getHeaders() {
   return {

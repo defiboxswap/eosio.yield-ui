@@ -371,8 +371,10 @@ export default {
     getStat() {
       protocols.stat().then((res) => {
         if (res.code === 200) {
-          this.claimed = this.formatNumber(res.data.claimed)
-          this.agg_protocol_count = res.data.agg_protocol_count
+          if ( res.data ) {
+            this.claimed = this.formatNumber(res.data.claimed)
+            this.agg_protocol_count = res.data.agg_protocol_count
+          }
         }
       })
     },
