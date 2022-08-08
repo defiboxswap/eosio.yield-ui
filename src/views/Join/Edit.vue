@@ -576,9 +576,9 @@ export default {
             category = 'Yield'
           }
           this.categoryItem = category
-          this.form.logo = `https://ipfs.pink.gg/ipfs/${item.metadata.logo}`
+          this.form.logo = `${item.metadata.logo}`
           this.form.name = item.metadata.name
-          this.form.audits = item.metadata.audits
+          // this.form.audits = item.metadata.audits
           this.form.description = item.metadata.description
           this.form.website = item.metadata.website
           this.form.cmc = item.metadata.cmc
@@ -1071,7 +1071,7 @@ export default {
         font-size: 20px;
       }
       &_word {
-        width: 280px;
+        width: 230px;
         font-size: 12px;
         line-height: 14px;
         margin: 5px 0 10px;
@@ -1087,6 +1087,7 @@ export default {
         cursor: pointer;
       }
       img {
+        width: 40px;
         position: absolute;
         top: 30px;
         right: 15px;

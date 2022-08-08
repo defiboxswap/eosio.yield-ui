@@ -19,9 +19,7 @@ class AnchorModel {
   async init({ networkConfig, chain }, call) {
     this.chain = chain;
     this.networkConfig = networkConfig;
-    const transport = new AnchorLinkBrowserTransport({
-      fuelReferrer: "eosio.yield"
-    });
+    const transport = new AnchorLinkBrowserTransport();
     const params = { transport };
     params.chains = [
       {
@@ -41,7 +39,7 @@ class AnchorModel {
   // getAccount
   async getAccount() {
     try {
-      let result = await this.anchorJs.login("eosio.yield");
+      let result = await this.anchorJs.login(location.hostname);
       if (result && result.session) {
         const account = result.session;
         this.account = {
@@ -67,7 +65,7 @@ class AnchorModel {
    * restoreSession
    */
   async restoreSession() {
-    const session = await this.anchorJs.restoreSession("eosio.yield");
+    const session = await this.anchorJs.restoreSession(location.hostname);
     return session;
   }
 

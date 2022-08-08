@@ -40,8 +40,8 @@
 
             <div class="box-data">
               <div class="flext">
-                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_usd')">
-                  <div class="data-name" :style="{'color': order === 'tvl_usd' ? '#000' : ''}">
+                <div class="data-box flex-1">
+                  <div class="data-name" :style="{'color': order === 'tvl_usd' ? '#000' : ''}" @click.stop="handleOrderType('tvl_usd')">
                     {{ $t("yield.yield53") }}
                     <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_usd' && order_type === 'desc'" />
                     <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_usd' && order_type === 'asc'" />
@@ -49,8 +49,8 @@
                   </div>
                   <div class="data-number">${{ getKMBUnit(item.tvl_usd) }}</div>
                 </div>
-                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_eos_change_8h')">
-                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_8h' ? '#000' : ''}">
+                <div class="data-box flex-1">
+                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_8h' ? '#000' : ''}" @click.stop="handleOrderType('tvl_eos_change_8h')">
                     {{ $t("yield.yield175") }}
                     <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_8h' && order_type === 'desc'" />
                     <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_8h' && order_type === 'asc'" />
@@ -58,8 +58,8 @@
                   </div>
                   <div class="data-number" :class="getColor(item.tvl_eos_change_8h)">{{ item.tvl_eos_change_8h }}</div>
                 </div>
-                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_eos_change_day')">
-                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_day' ? '#000' : ''}">
+                <div class="data-box flex-1">
+                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_day' ? '#000' : ''}" @click.stop="handleOrderType('tvl_eos_change_day')">
                     {{ $t("yield.yield42") }}
                     <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_day' && order_type === 'desc'" />
                     <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_day' && order_type === 'asc'" />
@@ -69,8 +69,8 @@
                 </div>
               </div>
               <div class="flext">
-                <div class="data-box flex-1" @click.stop="handleOrderType('tvl_eos_change_week')">
-                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_week' ? '#000' : ''}">
+                <div class="data-box flex-1">
+                  <div class="data-name" :style="{'color': order === 'tvl_eos_change_week' ? '#000' : ''}" @click.stop="handleOrderType('tvl_eos_change_week')">
                     {{ $t("yield.yield176") }}
                     <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_eos_change_week' && order_type === 'desc'" />
                     <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'tvl_eos_change_week' && order_type === 'asc'" />
@@ -84,8 +84,8 @@
                     <img width="70" height="50" alt="7d chart" :src="getImgUrl(item.name)" />
                   </div>
                 </div>
-                <div class="data-box flex-1" @click.stop="handleOrderType('agg_rewards')">
-                  <div class="data-name" :style="{'color': order === 'agg_rewards' ? '#000' : ''}">
+                <div class="data-box flex-1">
+                  <div class="data-name" :style="{'color': order === 'agg_rewards' ? '#000' : ''}" @click.stop="handleOrderType('agg_rewards')">
                     {{ $t("yield.yield54") }}
                     <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'agg_rewards' && order_type === 'desc'" />
                     <img src="@/assets/img/svg/down.png" class="svg rotate180" v-else-if="order === 'agg_rewards' && order_type === 'asc'" />
@@ -213,7 +213,7 @@
               </div>
               <!-- Last 7 Days -->
               <div class="box-3 flex flex-jus-center">
-                <span>{{ $t("yield.yield177") }}</span>
+                <span style="cursor: text;">{{ $t("yield.yield177") }}</span>
               </div>
               <div class="box-4 flex flex-jus-center" @click="handleOrderType('agg_rewards')">
                 <!-- REWARD(EOS) -->
@@ -473,7 +473,7 @@ export default {
       let category = ''
       if (this.infoTab === 'Audit') {
         category = ''
-        if (this.selectVal !== undefined) {
+        if (this.selectVal !== undefined && this.selectVal !== 'All') {
           status = this.selectVal
         } else {
           status = undefined
@@ -752,6 +752,10 @@ export default {
         .box-avatar {
           width: 46px;
           height: 46px;
+          border-radius: 50%;
+          img{
+            border-radius: 50%;
+          }
         }
       }
 
@@ -964,7 +968,7 @@ export default {
           width: 14px;
           // margin-left: 5px;
         }
-        span {
+        span, img {
           cursor: pointer;
         }
       }
@@ -1003,11 +1007,12 @@ export default {
           width: 42px;
           height: 42px;
           margin-right: 8px;
-          // border-radius: 50%;
+          border-radius: 50%;
           // background-color: antiquewhite;
           img {
             width: 100%;
             height: 100%;
+            border-radius: 50%;
           }
         }
         .item-name {
