@@ -75,7 +75,7 @@ export function getUrlParams(url) {
 }
 
 //
-export function getReqUrl(hostname) {
+export function getReqUrl() {
   if ( baseURL ) return baseURL;
   return location.origin;
 }
