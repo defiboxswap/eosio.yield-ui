@@ -572,7 +572,6 @@
         "@babel/helper-plugin-utils": "^7.10.4"
       }
     },
-
     "@babel/plugin-syntax-object-rest-spread": {
       "version": "7.8.3",
       "resolved": "https://registry.npmjs.org/@babel/plugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.8.3.tgz",
@@ -1828,7 +1827,7 @@
           }
         },
         "vue-loader-v16": {
-          "version": "16.8.3",
+          "version": "npm:vue-loader-v16@16.8.3",
           "resolved": "https://registry.npmjs.org/vue-loader/-/vue-loader-16.8.3.tgz",
           "integrity": "sha512-7vKN45IxsKxe5GcVCbc2qFU5aWzyiLrYJyUuMz4BQLKctCj/fmCa0w6fGiiQ2cLFetNcek1ppGJQDCup0c1hpA==",
           "dev": true,
@@ -2461,8 +2460,7 @@
     "animate.css": {
       "version": "4.1.1",
       "resolved": "https://registry.npmjs.org/animate.css/-/animate.css-4.1.1.tgz",
-      "integrity": "sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==",
-      "dev": true
+      "integrity": "sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ=="
     },
     "ansi-colors": {
       "version": "3.2.4",
@@ -12354,6 +12352,7 @@
           "resolved": "https://registry.npmjs.org/extend-shallow/-/extend-shallow-2.0.1.tgz",
           "integrity": "sha1-Ua99YUrZqfYQ6huvu5idaxxWiQ8=",
           "dev": true,
+          "optional": true,
           "requires": {
             "is-extendable": "^0.1.0"
           }
@@ -12419,7 +12418,8 @@
           "version": "0.1.1",
           "resolved": "https://registry.npmjs.org/is-extendable/-/is-extendable-0.1.1.tgz",
           "integrity": "sha1-YrEQ4omkcUGOPsNqYX1HLjAd/Ik=",
-          "dev": true
+          "dev": true,
+          "optional": true
         },
         "readdirp": {
           "version": "2.2.1",
@@ -13187,10 +13187,7 @@
       "version": "1.1.3",
       "resolved": "https://registry.npmjs.org/wowjs/-/wowjs-1.1.3.tgz",
       "integrity": "sha1-RA/Bu0x+iWhA7keXIpaitZB1rL0=",
-      "dev": true,
-      "requires": {
-        "animate.css": "^4.1.1"
-      }
+      "dev": true
     },
     "wrap-ansi": {
       "version": "6.2.0",
