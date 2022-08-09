@@ -13,27 +13,19 @@ import '@/assets/fonts/index.scss'
 // Vue.use(VueClipboard)
 // import Vconsole from 'vconsole';
 // new Vconsole();
-
 import https from '@/service/axios';
+import { accAdd, toFixed, formatNumber, accDiv, accMul, accSub, getKMBUnit, handleHttp, handleCategory, handleCategoryTransform, deepClone, isHttp } from '@/utils/public'
+import { TRANSACTION_URL, CONTRACT_ORACLE, CONTRACT_ADMIN, CONTRACT_YIELD } from "./config"
+
 Vue.prototype.$http = https;
 
 Vue.prototype.$openTxid = (Txid) => {
-  if (process.env.NODE_ENV === "production") window.open(`https://bloks.io/transaction/${Txid}`)
-  else window.open(`https://bloks.io/transaction/${Txid}`)
+  window.open(`${ TRANSACTION_URL }${Txid}`)
 };
 
-const origin = window.location.origin.indexOf('https://tokenyield.io')
-if (origin < 0) {
-  Vue.prototype.contractO = 'd.o.yield';
-  Vue.prototype.contractA = 'd.a.yield';
-  Vue.prototype.contractE = 'd.e.yield';
-} else {
-  Vue.prototype.contractO = 'oracle.yield';
-  Vue.prototype.contractA = 'admin.yield';
-  Vue.prototype.contractE = 'eosio.yield';
-}
-
-import { accAdd, toFixed, formatNumber, accDiv, accMul, accSub, getKMBUnit, handleHttp, handleCategory, handleCategoryTransform, deepClone, isHttp } from '@/utils/public'
+Vue.prototype.contractO = CONTRACT_ORACLE;
+Vue.prototype.contractA = CONTRACT_ADMIN;
+Vue.prototype.contractE = CONTRACT_YIELD;
 Vue.prototype.accAdd = accAdd
 Vue.prototype.toFixed = toFixed
 Vue.prototype.formatNumber = formatNumber

@@ -1,14 +1,16 @@
 var webpack = require('webpack');
 const isProduction = process.env.NODE_ENV === 'production';
 // const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
-let proxyEnv = {
-  "/v1/": {
-    // target: `http://${process.env.VUE_APP_BASEURL}:${process.env.VUE_APP_PORT29}`,
-    target: 'https://api.tokenyield.io',
-    ws: false,
-    changeOrigin: true,
-  },
-};
+
+// const { baseURL } = require("./src/config");
+
+// const proxyEnv = {
+//   "/v1/": {
+//     target: baseURL,
+//     ws: false,
+//     changeOrigin: true,
+//   },
+// };
 
 
 module.exports = {
@@ -16,9 +18,9 @@ module.exports = {
   devServer: {
     open: true,
     // port: process.env.SERVER_PORT,
-    port: 7002,
+    // port: 7002,
     hot: true,
-    proxy: proxyEnv
+    // proxy: proxyEnv
   },
   css: {
     extract: false,

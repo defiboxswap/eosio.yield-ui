@@ -902,6 +902,8 @@
 import { mapState } from "vuex"
 import axios from "axios"
 import DApp from "@/utils/wallet/index"
+import { baseURL } from "../../config";
+
 export default {
     name: "Join",
     data() {
@@ -1166,7 +1168,6 @@ export default {
             // this.$toast("submit success!")
         },
         fileImage(event) {
-            const baseURL = process.env.NODE_ENV === "development" ? "" : "https://api.tokenyield.io"
             this.formWrongTips.logo = false
             let formData = new FormData()
             let files = event.target.files[0]

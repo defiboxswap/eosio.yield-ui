@@ -1,5 +1,6 @@
 import Decimal from "decimal.js"
 import numeral from "numeral"
+import { baseURL } from "../config"
 
 export function toFixed(number, pp) {
   let num = isNaN(number) || !number ? 0 : number
@@ -75,21 +76,8 @@ export function getUrlParams(url) {
 
 //
 export function getReqUrl(hostname) {
-  const env = process.env.NODE_ENV
-  let linkUrl = ""
-  switch (env) {
-    case "tron":
-    case "development":
-      linkUrl = `http://${process.env.VUE_APP_BASEURL}:${process.env.VUE_APP_PORT1}`
-      if (hostname) {
-        linkUrl = process.env.VUE_APP_BASEURL
-      }
-      break
-    default:
-      linkUrl = location.origin
-      break
-  }
-  return linkUrl
+  if ( baseURL ) return baseURL;
+  return location.origin;
 }
 
 export function isIOS() {

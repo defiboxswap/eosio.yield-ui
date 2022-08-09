@@ -1,10 +1,11 @@
 import axios from "axios"
-import qs from "qs" 
+import qs from "qs"
 import store from "@/store"
+import { baseURL, VUE_APP_TIMEOUT } from "../config";
 
 const https = axios.create({
-  baseURL: process.env.NODE_ENV === "production" ? "https://eos.defibox.io": "",
-  timeout: process.env.NODE_ENV === "production" ? 20000 : 60000,
+  baseURL,
+  timeout: VUE_APP_TIMEOUT,
   auth: {
     username: localStorage.getItem("token") || "", // TokenKey = 'token';
   },
@@ -14,7 +15,7 @@ https.defaults.transformRequest = [
   (data, header) => {
     const headerThis = header
     const token = localStorage.getItem('token');
-    if (token) { // 
+    if (token) { //
       headerThis.token = token; // eslint-disable-line
     }
     if (store.state.app.scatter && store.state.app.accountInfo.account) {
@@ -29,11 +30,9 @@ https.defaults.transformRequest = [
 
 https.interceptors.request.use(
   (config) => {
-    
     // console.log(config);
     const token = localStorage.getItem("token")
     if (token) {
-      
       config.auth.username = token // eslint-disable-line
     }
     return config
@@ -43,7 +42,6 @@ https.interceptors.request.use(
 
 https.interceptors.response.use(
   (response) => {
-    
     const res = response.data
     if (res.code === 401) {
       localStorage.setItem("token", "")
