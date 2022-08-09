@@ -12,9 +12,9 @@
               <!-- Projects -->
               {{ $t("yield.yield7") }}
               <br />
-              <span class="text-2" style="color:#1c1dff">{{ claimed }}</span>
-              <!-- Claimed -->
-              EOS {{ $t("yield.yield8") }}
+              <span class="text-2" style="color:#1c1dff">${{ tvl_usd }}</span>
+              <!-- TVL -->
+              TVL
             </div>
             <v-btn class="text-button" @click="$router.push('/Join')">{{ $t("yield.yield4") }}</v-btn>
           </div>
@@ -178,9 +178,9 @@
               <!-- Projects -->
               {{ $t("yield.yield7") }}
               <br />
-              <span class="text-2">{{ claimed }}</span>
-              <!-- Claimed -->
-              EOS {{ $t("yield.yield8") }}
+              <span class="text-2">${{ tvl_usd }}</span>
+              <!-- TVL -->
+              TVL
             </div>
             <!-- Join Yield + -->
             <v-btn class="text-button" @click="$router.push('/Join')">{{ $t("yield.yield4") }}</v-btn>
@@ -330,6 +330,7 @@ export default {
     return {
       agg_protocol_count: "",
       claimed: "",
+      tvl_usd: "",
 
       infoTab: "Launch",
       info: {
@@ -373,6 +374,7 @@ export default {
         if (res.code === 200) {
           if ( res.data ) {
             this.claimed = this.formatNumber(res.data.claimed)
+            this.tvl_usd = this.getKMBUnit(res.data.tvl_usd, 2)
             this.agg_protocol_count = res.data.agg_protocol_count
           }
         }
