@@ -2457,11 +2457,6 @@
         }
       }
     },
-    "animate.css": {
-      "version": "4.1.1",
-      "resolved": "https://registry.npmjs.org/animate.css/-/animate.css-4.1.1.tgz",
-      "integrity": "sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ=="
-    },
     "ansi-colors": {
       "version": "3.2.4",
       "resolved": "https://registry.npmjs.org/ansi-colors/-/ansi-colors-3.2.4.tgz",
@@ -13187,7 +13182,18 @@
       "version": "1.1.3",
       "resolved": "https://registry.npmjs.org/wowjs/-/wowjs-1.1.3.tgz",
       "integrity": "sha1-RA/Bu0x+iWhA7keXIpaitZB1rL0=",
-      "dev": true
+      "dev": true,
+      "requires": {
+        "animate.css": "^4.1.1"
+      },
+      "dependencies": {
+        "animate.css": {
+          "version": "4.1.1",
+          "resolved": "https://registry.npmmirror.com/animate.css/-/animate.css-4.1.1.tgz",
+          "integrity": "sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==",
+          "dev": true
+        }
+      }
     },
     "wrap-ansi": {
       "version": "6.2.0",
