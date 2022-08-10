@@ -202,7 +202,7 @@ const items = {
     "zhTW": {
         "yield1": "首頁",
         "yield2": "概述",
-        "yield3": "協議",
+        "yield3": "DeFi dApps",
         "yield4": "加入 Yield+",
         "yield5": "Yield+藍皮書",
         "yield6": "Yield+ 支持",
@@ -399,7 +399,7 @@ const items = {
     "en": {
         "yield1": "Home",
         "yield2": "Overview",
-        "yield3": "Protocols",
+        "yield3": "DeFi dApps",
         "yield4": "Join Yield +",
         "yield5": "Yield+ Bluepaper",
         "yield6": "Yield+ supports",
@@ -596,7 +596,7 @@ const items = {
     "ko": {
         "yield1": "집",
         "yield2": "개요",
-        "yield3": "프로토콜",
+        "yield3": "DeFi 디앱",
         "yield4": "가입 Yield +",
         "yield5": "Yield+ 블루페이퍼",
         "yield6": "Yield+ 지원",
