@@ -23,7 +23,7 @@ export default {
   watch: {
     "$store.state.app.language": {
       handler: function () {
-        document.title = "Yield+"
+        document.title = "Yield+ - EOS Network Foundation"
         this.setDocumentTitle()
       },
       immediate: true,
