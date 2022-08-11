@@ -149,7 +149,7 @@
       <div class="ProtocolsPC-overLay">
         <div class="ProtocolsPC-layout flex flex-jus-between">
           <!-- Projects -->
-          <div class="overLay-title">{{ $t("yield.yield3") }}</div>
+          <div class="overLay-title">{{ $t("yield.yield3a") }}</div>
 
           <div class="overLay-select flex">
             <div class="select-audit flex flex-align-center">
