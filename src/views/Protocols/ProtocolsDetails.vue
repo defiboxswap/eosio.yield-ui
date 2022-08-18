@@ -1698,6 +1698,16 @@ export default {
       audit_report: ['reports11', 'reports22', 'reports33']
     }
   },
+  head: {
+    title () {
+      return {
+        inner: `Yield+ | ${this.projectName}`
+      }
+    },
+    meta: [
+      { name: 'description', content: `${this.projectName} | Designed to build economic activity on $EOS through incentivizing DeFi dApps that increase TVL and generate yield.` }
+    ]
+  },
   components: {},
   props: {},
   watch: {
