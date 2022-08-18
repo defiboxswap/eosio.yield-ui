@@ -1701,11 +1701,11 @@ export default {
   head: {
     title () {
       return {
-        inner: `Yield+ | ${this.projectName}`
+        inner: `Yield+ | ${this?.projectName}`
       }
     },
     meta: [
-      { name: 'description', content: `${this.projectName} | Designed to build economic activity on $EOS through incentivizing DeFi dApps that increase TVL and generate yield.` }
+      { name: 'description', content: `${this?.projectName} | Designed to build economic activity on $EOS through incentivizing DeFi dApps that increase TVL and generate yield.` }
     ]
   },
   components: {},
