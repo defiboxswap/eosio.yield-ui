@@ -1,24 +1,42 @@
 <template>
   <div>
-
-    <div class="BaseFooter flex flex-align-center flex-jus-center" v-if="isMobile">
-      <div class="flex flex-column flex-align-center">
+    <div
+      class="BaseFooter flex flex-align-center flex-jus-center"
+      v-if="isMobile"
+    >
+      <div>
         <!-- <img class="BaseFooter-logo" src="@/assets/img/BaseFooter/logo.png" /> -->
-        <img class="BaseFooter-logo" src="@/assets/img/BaseHeader/logoDark.png" />
+        <div class="flexb">
+          <img
+            class="BaseFooter-logo"
+            src="@/assets/img/BaseHeader/logoDark.png"
+          />
+          <div
+            class="BaseFooter-tips"
+            @click="handleOpen"
+          >{{$t('yield.yield198')}}</div>
+        </div>
         <div class="BaseFooter-tips">Copyright © 2022 Yield+ All rights reserved.</div>
       </div>
-
     </div>
-    <div class="BaseFooterPC" v-else>
-
+    <div
+      class="BaseFooterPC"
+      v-else
+    >
       <div class="BaseFooterPC-Layout flex flex-align-center flex-jus-between">
         <div>
           <!-- <img class="BaseFooterPC-logo" src="@/assets/img/BaseFooter/logo.png" /> -->
-          <img class="BaseFooterPC-logo" src="@/assets/img/BaseHeader/logoDark.png" />
+          <img
+            class="BaseFooterPC-logo"
+            src="@/assets/img/BaseHeader/logoDark.png"
+          />
           <div class="BaseFooterPC-tips">Copyright © 2022 Yield+ All rights reserved.</div>
         </div>
         <!-- <div class="BaseFooterPC-tips">If you have any questions please contact xxxxxx@gmail.com</div> -->
-        <div class="BaseFooterPC-tips"> </div>
+        <div
+          class="BaseFooterPC-tips pointer"
+          @click="handleOpen"
+        >{{ $t('yield.yield198') }}</div>
       </div>
     </div>
   </div>
@@ -38,11 +56,14 @@ export default {
   computed: mapState({
     isMobile: state => state.app.isMobile
   }),
-  created() {},
+  created() { },
   mounted() {
   },
-  beforeDestroy() {},
+  beforeDestroy() { },
   methods: {
+    handleOpen() {
+      window.open('https://docs.tokenyield.io/')
+    }
   },
 };
 </script>
@@ -59,7 +80,7 @@ export default {
   .BaseFooter-tips {
     font-size: 11px;
     font-weight: 300;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }
 .BaseFooterPC {
@@ -80,7 +101,7 @@ export default {
     margin-top: 10px;
     font-size: 14px;
     font-weight: 300;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }
 </style>
