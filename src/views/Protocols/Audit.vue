@@ -336,7 +336,7 @@ export default {
       if (this.infoTab == infoTab) return
       this.infoTab = infoTab
       if (infoTab === 'TVLRankings') {
-        this.$router.push("/Protocols")
+        this.$router.push("/protocols")
         return
       }
     },

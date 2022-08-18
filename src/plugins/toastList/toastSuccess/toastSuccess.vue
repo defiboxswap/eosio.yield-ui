@@ -54,7 +54,7 @@ export default {
     },
     close() {
       setTimeout(() => {
-        this.$router.push("/Protocols")
+        this.$router.push("/protocols")
       }, 1000)
       this.active = false
     },
