@@ -246,7 +246,6 @@
 // import CustomPagination from "@/utils/pagination"
 import { mapState } from "vuex"
 import { protocols } from "@/service"
-// import { baseURL } from "../../config";
 
 export default {
   name: "Protocols",

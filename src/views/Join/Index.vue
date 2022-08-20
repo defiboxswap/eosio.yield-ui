@@ -280,9 +280,9 @@
               <span class="color-red">*&nbsp;</span>{{ $t("yield.yield73") }}
             </div>
             <input
-              type="number"
+              type="text"
               class="basicInfo-input1"
-              maxlength="1024"
+              maxlength="12"
               v-model="form.recover"
               @change="formWrongTips.description = false"
             />
@@ -733,9 +733,9 @@
                     <span class="color-red">*&nbsp;</span>{{ $t("yield.yield73") }}
                   </div>
                   <input
-                    type="number"
+                    type="text"
                     class="basicInfo-input1"
-                    maxlength="1024"
+                    maxlength="12"
                     v-model="form.recover"
                     @change="formWrongTips.description = false"
                   />
@@ -1069,7 +1069,7 @@ export default {
 
       let gotoId = ""
       // if (this.form.cmc) this.form.cmc = parseFloat(this.form.cmc)
-      if (this.form.recover) this.form.recover = parseFloat(this.form.recover)
+      // if (this.form.recover) this.form.recover = parseFloat(this.form.recover)
       for (let key in this.formRules) {
         if (this.formRules[key].required) {
           if (this.form[key] == null || this.form[key] == "") {
