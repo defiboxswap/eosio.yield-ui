@@ -32,218 +32,65 @@
             <div class="select-audit flex">
               <div
                 class="audit-tips1 flex-1"
-                style="color: #000"
+                style="color: #999"
                 @click="clickInfoTab('TVLRankings')"
               >{{ $t("yield.yield50") }}</div>
               <div class="audit-line"></div>
               <div
                 class="audit-tips2 flex-1"
-                style="color: #999"
+                style="color: #000"
                 @click="clickInfoTab('Audit')"
               >{{ $t("yield.yield51") }}</div>
             </div>
           </div>
         </div>
       </div>
+
       <div class="Protocols-projectList">
         <template v-if="protocolsList && protocolsList.length > 0">
           <div
+            class="projectList-box"
             v-for="(item, index) in protocolsList"
             :key="index"
             @click.prevent="$router.push(item.nameUrlencode)"
           >
-            <div class="projectList-box">
-              <div class="flex">
-                <div class="box-left flex">
-                  <div class="box-index">{{ index + 1 }}</div>
-                  <img
-                    :src="item.logo"
-                    class="box-avatar"
-                    :onerror="errImg"
-                  />
-                </div>
-                <div class="flex-1">
-                  <div class="box-name">{{ item.metadata_name }}</div>
-                  <div class="flex flex-wrap">
-                    <div class="box-label">{{ handleCategory(item.category) }}</div>
-                    <div
-                      class="box-label maxTagCls"
-                      v-if="item.maxTag"
-                    >{{ $t("yield.yield202") }}</div>
-                    <div
-                      class="box-label midTagCls"
-                      v-if="item.midTag"
-                    >{{ $t("yield.yield201") }}</div>
-                    <div
-                      class="box-label minTagCls"
-                      v-if="item.minTag"
-                    >{{ $t("yield.yield200") }}</div>
-                    <!-- <div class="box-label">Corss-chain</div> -->
-                    <!-- <div class="box-label"  v-if="handleGrade(item.tvl_eos)">{{ handleGrade(item.tvl_eos) }}</div> -->
-                  </div>
-                </div>
+            <div class="flex">
+              <div class="box-left flex">
+                <div class="box-index">{{ index + 1 }}</div>
+                <img
+                  :src="item.logo"
+                  class="box-avatar"
+                  :onerror="errImg"
+                />
               </div>
-
-              <div class="box-data">
-                <div class="flext">
-                  <div class="data-box flex-1">
-                    <div
-                      class="data-name"
-                      :style="{'color': order === 'tvl_usd' ? '#000' : ''}"
-                      @click.stop="handleOrderType('tvl_usd')"
-                    >
-                      {{ $t("yield.yield53") }}
-                      <img
-                        src="@/assets/img/svg/down.png"
-                        class="svg"
-                        v-if="order === 'tvl_usd' && order_type === 'desc'"
-                      />
-                      <img
-                        src="@/assets/img/svg/down.png"
-                        class="svg rotate180"
-                        v-else-if="order === 'tvl_usd' && order_type === 'asc'"
-                      />
-                      <img
-                        src="@/assets/img/svg/downFail.png"
-                        class="svg"
-                        v-else
-                      />
-                    </div>
-                    <div class="data-number">${{ getKMBUnit(item.tvl_usd) }}</div>
-                  </div>
-                  <div class="data-box flex-1">
-                    <div
-                      class="data-name"
-                      :style="{'color': order === 'tvl_usd_change_8h' ? '#000' : ''}"
-                      @click.stop="handleOrderType('tvl_usd_change_8h')"
-                    >
-                      {{ $t("yield.yield175") }}
-                      <img
-                        src="@/assets/img/svg/down.png"
-                        class="svg"
-                        v-if="order === 'tvl_usd_change_8h' && order_type === 'desc'"
-                      />
-                      <img
-                        src="@/assets/img/svg/down.png"
-                        class="svg rotate180"
-                        v-else-if="order === 'tvl_usd_change_8h' && order_type === 'asc'"
-                      />
-                      <img
-                        src="@/assets/img/svg/downFail.png"
-                        class="svg"
-                        v-else
-                      />
-                    </div>
-                    <div
-                      class="data-number"
-                      :class="getColor(item.tvl_usd_change_8h)"
-                    >{{ item.tvl_usd_change_8h }}</div>
-                  </div>
-                  <div class="data-box flex-1">
-                    <div
-                      class="data-name"
-                      :style="{'color': order === 'tvl_usd_change_day' ? '#000' : ''}"
-                      @click.stop="handleOrderType('tvl_usd_change_day')"
-                    >
-                      {{ $t("yield.yield42") }}
-                      <img
-                        src="@/assets/img/svg/down.png"
-                        class="svg"
-                        v-if="order === 'tvl_usd_change_day' && order_type === 'desc'"
-                      />
-                      <img
-                        src="@/assets/img/svg/down.png"
-                        class="svg rotate180"
-                        v-else-if="order === 'tvl_usd_change_day' && order_type === 'asc'"
-                      />
-                      <img
-                        src="@/assets/img/svg/downFail.png"
-                        class="svg"
-                        v-else
-                      />
-                    </div>
-                    <div
-                      class="data-number"
-                      :class="getColor(item.tvl_usd_change_day)"
-                    >{{ item.tvl_usd_change_day }}</div>
-                  </div>
-                </div>
-                <div class="flext">
-                  <div class="data-box flex-1">
-                    <div
-                      class="data-name"
-                      :style="{'color': order === 'tvl_usd_change_week' ? '#000' : ''}"
-                      @click.stop="handleOrderType('tvl_usd_change_week')"
-                    >
-                      {{ $t("yield.yield176") }}
-                      <img
-                        src="@/assets/img/svg/down.png"
-                        class="svg"
-                        v-if="order === 'tvl_usd_change_week' && order_type === 'desc'"
-                      />
-                      <img
-                        src="@/assets/img/svg/down.png"
-                        class="svg rotate180"
-                        v-else-if="order === 'tvl_usd_change_week' && order_type === 'asc'"
-                      />
-                      <img
-                        src="@/assets/img/svg/downFail.png"
-                        class="svg"
-                        v-else
-                      />
-                    </div>
-                    <div
-                      class="data-number"
-                      :class="getColor(item.tvl_usd_change_week)"
-                    >{{ item.tvl_usd_change_week }}</div>
-                  </div>
-                  <div class="data-box flex-1">
-                    <div class="data-name">{{ $t("yield.yield177") }}</div>
-                    <div class="data-number">
-                      <img
-                        width="70"
-                        height="50"
-                        alt="7d chart"
-                        :src="getImgUrl(item.name)"
-                      />
-                    </div>
-                  </div>
-                  <div class="data-box flex-1">
-                    <div
-                      class="data-name"
-                      :style="{'color': order === 'agg_rewards' ? '#000' : ''}"
-                      @click.stop="handleOrderType('agg_rewards')"
-                    >
-                      {{ $t("yield.yield54") }}
-                      <img
-                        src="@/assets/img/svg/down.png"
-                        class="svg"
-                        v-if="order === 'agg_rewards' && order_type === 'desc'"
-                      />
-                      <img
-                        src="@/assets/img/svg/down.png"
-                        class="svg rotate180"
-                        v-else-if="order === 'agg_rewards' && order_type === 'asc'"
-                      />
-                      <img
-                        src="@/assets/img/svg/downFail.png"
-                        class="svg"
-                        v-else
-                      />
-                    </div>
-                    <div class="data-number">{{ item.agg_rewards_change.toFixed(4) }}</div>
-                  </div>
+              <div class="flex-1">
+                <div class="box-name">{{ item.metadata_name }}</div>
+                <div class="flex flex-wrap">
+                  <div class="box-label">{{ handleCategory(item.category) }}</div>
+                  <!-- <div class="box-label">Corss-chain</div> -->
                 </div>
               </div>
             </div>
-            <div
-              v-if="item.maxTips && order === 'tvl_usd'"
-              class="tipsBack"
-            >{{ $t("yield.yield196") }}</div>
-            <div
-              v-if="item.minTips && order === 'tvl_usd'"
-              class="tipsBack"
-            >{{ $t("yield.yield197") }}</div>
+
+            <div class="box-data audit-font">
+              <div class="flext">
+                <div class="data-box flex-1">
+                  <div class="data-name">{{ $t("yield.yield86") }}</div>
+                  <div class="data-number">{{ handleCategory(item.category) }}</div>
+                </div>
+                <div class="data-box flex-1">
+                  <div class="data-name">{{ $t("yield.yield87") }}</div>
+                  <div
+                    class="data-number"
+                    style="font-size:14px"
+                  >{{ item.create_at * 1000 | dateFormatYMDF }}</div>
+                </div>
+                <div class="data-box flex-1 plcl">
+                  <div class="data-name">{{ $t("yield.yield88") }}</div>
+                  <div class="data-number">{{ $t(statusToLanguage[item.status]) }}</div>
+                </div>
+              </div>
+            </div>
           </div>
           <div
             id="pagesBox"
@@ -272,14 +119,14 @@
               <!-- TVL Rankings -->
               <div
                 class="audit-tips1 flex-1"
-                style="color: #000"
+                style="color: #999"
                 @click="clickInfoTab('TVLRankings')"
               >{{ $t("yield.yield50") }}</div>
               <div class="audit-line"></div>
               <!-- Audit -->
               <div
                 class="audit-tips2 flex-1"
-                style="color: #999"
+                style="color: #000"
                 @click="clickInfoTab('Audit')"
               >{{ $t("yield.yield51") }}</div>
             </div>
@@ -316,209 +163,67 @@
 
       <div class="ProtocolsPC-projectList">
         <div class="ProtocolsPC-layout">
+
           <div class="projectList-box">
             <div class="box-title flex flex-align-center">
               <!-- PROTOCOLS NAME -->
               <div
                 class="box-1"
-                style="text-align: left; padding-left: 40px"
+                style="text-align: left; padding-left: 80px"
               >{{ $t("yield.yield52") }}</div>
-              <div
-                class="box-2 flex flex-jus-center"
-                @click="handleOrderType('tvl_usd')"
-              >
-                <!-- TVL -->
-                <span :style="{'color': order === 'tvl_usd' ? '#000' : ''}">{{ $t("yield.yield53") }}</span>
-                <img
-                  src="@/assets/img/svg/down.png"
-                  class="svg"
-                  v-if="order === 'tvl_usd' && order_type === 'desc'"
-                />
-                <img
-                  src="@/assets/img/svg/down.png"
-                  class="svg rotate180"
-                  v-else-if="order === 'tvl_usd' && order_type === 'asc'"
-                />
-                <img
-                  src="@/assets/img/svg/downFail.png"
-                  class="svg"
-                  v-else
-                />
+              <div class="box-2 flex flex-jus-center">
+                <!-- Type -->
+                <span>{{ $t("yield.yield86") }}</span>
               </div>
-              <!-- CHANGE(24H) -->
-              <!-- <div class="box-3 flex flex-jus-center" @click="order = 'tvl_usd_change'">
-                <span>{{ $t("yield.yield42") }}</span>
-                <img src="@/assets/img/svg/down.png" class="svg" v-if="order === 'tvl_usd_change'" />
-                <img src="@/assets/img/svg/downFail.png" class="svg" v-else />
-              </div> -->
-              <!-- 8h -->
-              <div
-                class="box-3 flex flex-jus-center"
-                @click="handleOrderType('tvl_usd_change_8h')"
-              >
-                <span :style="{'color': order === 'tvl_usd_change_8h' ? '#000' : ''}">{{ $t("yield.yield175") }}</span>
-                <img
-                  src="@/assets/img/svg/down.png"
-                  class="svg"
-                  v-if="order === 'tvl_usd_change_8h' && order_type === 'desc'"
-                />
-                <img
-                  src="@/assets/img/svg/down.png"
-                  class="svg rotate180"
-                  v-else-if="order === 'tvl_usd_change_8h' && order_type === 'asc'"
-                />
-                <img
-                  src="@/assets/img/svg/downFail.png"
-                  class="svg"
-                  v-else
-                />
-              </div>
-              <!-- 24h -->
-              <div
-                class="box-3 flex flex-jus-center"
-                @click="handleOrderType('tvl_usd_change_day')"
-              >
-                <span :style="{'color': order === 'tvl_usd_change_day' ? '#000' : ''}">{{ $t("yield.yield42") }}</span>
-                <img
-                  src="@/assets/img/svg/down.png"
-                  class="svg"
-                  v-if="order === 'tvl_usd_change_day' && order_type === 'desc'"
-                />
-                <img
-                  src="@/assets/img/svg/down.png"
-                  class="svg rotate180"
-                  v-else-if="order === 'tvl_usd_change_day' && order_type === 'asc'"
-                />
-                <img
-                  src="@/assets/img/svg/downFail.png"
-                  class="svg"
-                  v-else
-                />
-              </div>
-              <!-- 7day -->
-              <div
-                class="box-3 flex flex-jus-center"
-                @click="handleOrderType('tvl_usd_change_week')"
-              >
-                <span :style="{'color': order === 'tvl_usd_change_week' ? '#000' : ''}">{{ $t("yield.yield176") }}</span>
-                <img
-                  src="@/assets/img/svg/down.png"
-                  class="svg"
-                  v-if="order === 'tvl_usd_change_week' && order_type === 'desc'"
-                />
-                <img
-                  src="@/assets/img/svg/down.png"
-                  class="svg rotate180"
-                  v-else-if="order === 'tvl_usd_change_week' && order_type === 'asc'"
-                />
-                <img
-                  src="@/assets/img/svg/downFail.png"
-                  class="svg"
-                  v-else
-                />
-              </div>
-              <!-- Last 7 Days -->
               <div class="box-3 flex flex-jus-center">
-                <span style="cursor: text;">{{ $t("yield.yield177") }}</span>
+                <!-- Apply Time -->
+                <span>{{ $t("yield.yield87") }}</span>
               </div>
-              <div
-                class="box-4 flex flex-jus-center"
-                @click="handleOrderType('agg_rewards')"
-              >
-                <!-- REWARD(EOS) -->
-                <span :style="{'color': order === 'agg_rewards' ? '#000' : ''}">{{ $t("yield.yield54") }}</span>
-                <img
-                  src="@/assets/img/svg/down.png"
-                  class="svg"
-                  v-if="order === 'agg_rewards' && order_type === 'desc'"
-                />
-                <img
-                  src="@/assets/img/svg/down.png"
-                  class="svg rotate180"
-                  v-else-if="order === 'agg_rewards' && order_type === 'asc'"
-                />
-                <img
-                  src="@/assets/img/svg/downFail.png"
-                  class="svg"
-                  v-else
-                />
+              <div class="box-4 flex flex-jus-center">
+                <!-- State -->
+                <span>{{ $t("yield.yield88") }}</span>
               </div>
-              <!-- MARKET CAP -->
-              <!-- <div class="box-5 flex flex-jus-center">
-                <span>{{ $t("yield.yield55") }}</span>
-                <img src="@/assets/img/svg/down.svg" class="svg" />
-              </div> -->
+              <div class="box-5 flex flex-jus-center">
+                <!-- Action -->
+                <span>{{ $t("yield.yield89") }}</span>
+              </div>
             </div>
 
             <template v-if="protocolsList && protocolsList.length > 0">
               <a
                 :href="item.nameUrlencode"
+                class="box-item flex flex-align-center"
                 v-for="(item, index) in protocolsList"
                 :key="index"
                 @click.prevent="$router.push(item.nameUrlencode)"
               >
-                <div class="box-item flex flex-align-center">
-                  <div class="box-1 flex flex-align-center">
-                    <div class="item-index">{{ index + 1 }}</div>
-                    <div class="item-avatar">
-                      <img
-                        :src="item.logo"
-                        alt=""
-                        :onerror="errImg"
-                      />
-                    </div>
-                    <div>
-                      <div class="item-name">{{ item.metadata_name }}</div>
-                      <div class="flex">
-                        <div class="item-label">{{ handleCategory(item.category) }}</div>
-                        <div
-                          class="item-label maxTagCls"
-                          v-if="item.maxTag"
-                        >{{ $t("yield.yield202") }}</div>
-                        <div
-                          class="item-label midTagCls"
-                          v-if="item.midTag"
-                        >{{ $t("yield.yield201") }}</div>
-                        <div
-                          class="item-label minTagCls"
-                          v-if="item.minTag"
-                        >{{ $t("yield.yield200") }}</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="box-2">${{ getKMBUnit(item.tvl_usd) }}</div>
-                  <div
-                    class="box-3"
-                    :class="getColor(item.tvl_usd_change_8h)"
-                  >{{ item.tvl_usd_change_8h }}</div>
-                  <div
-                    class="box-3"
-                    :class="getColor(item.tvl_usd_change_day)"
-                  >{{ item.tvl_usd_change_day }}</div>
-                  <div
-                    class="box-3"
-                    :class="getColor(item.tvl_usd_change_week)"
-                  >{{ item.tvl_usd_change_week }}</div>
-                  <div class="box-3">
+                <div class="box-1 flex flex-align-center">
+                  <div class="item-index">{{ index + 1 }}</div>
+                  <div class="item-avatar">
                     <img
-                      width="135"
-                      height="50"
-                      alt="7d chart"
-                      :src="getImgUrl(item.name)"
+                      :src="item.logo"
+                      alt=""
+                      :onerror="errImg"
                     />
                   </div>
-                  <div class="box-4">{{ item.agg_rewards_change.toFixed(4) }}</div>
-                  <!-- <div class="box-5">$123.43M</div> -->
+                  <div>
+                    <div
+                      class="item-name"
+                      style="margin-bottom: 0"
+                    >{{ item.metadata_name }}</div>
+                    <!-- <div class="flex flex-wrap">
+                      <div class="item-label">{{ item.category }}</div>
+                      <div class="item-label">Corss-chain</div>
+                    </div> -->
+                  </div>
                 </div>
-                <div
-                  v-if="item.maxTips && order === 'tvl_usd'"
-                  class="tipsBack"
-                >{{ $t("yield.yield196") }}</div>
-                <div
-                  v-if="item.minTips && order === 'tvl_usd'"
-                  class="tipsBack"
-                >{{ $t("yield.yield197") }}</div>
+
+                <div class="box-2">{{ handleCategory(item.category) }}</div>
+                <div class="box-3">{{ item.create_at * 1000 | dateFormatYMDF }}</div>
+                <div class="box-4">{{ $t(statusToLanguage[item.status]) }}</div>
+                <div class="box-5 flex flex-align-center flex-jus-center">
+                  <v-btn>{{ $t("yield.yield132") }}</v-btn>
+                </div>
               </a>
 
               <div
@@ -541,13 +246,12 @@
 // import CustomPagination from "@/utils/pagination"
 import { mapState } from "vuex"
 import { protocols } from "@/service"
-import { baseURL } from "../../config";
 
 export default {
   name: "Protocols",
   data() {
     return {
-      infoTab: "TVLRankings",
+      infoTab: "Audit",
       pageNo: 1,
       pageSize: 10,
       search: "",
@@ -569,28 +273,19 @@ export default {
           value: undefined
         },
         {
-          text: 'CDP',
-          value: 'CDP'
+          text: this.$t('yield.yield162'),
+          value: 'pending'
         },
         {
-          text: 'Lending',
-          value: 'Lending'
+          text: this.$t('yield.yield163'),
+          value: 'active'
         },
         {
-          text: 'Dexes',
-          value: 'Dexes'
-        },
-        {
-          text: 'Yield',
-          value: 'Yield'
-        },
-        {
-          text: 'Liquid Staking',
-          value: 'Liquid Staking'
+          text: this.$t('yield.yield164'),
+          value: 'denied'
         }
       ],
       selectVal: this.$t('yield.yield174'),
-      hasParams: false
     }
   },
   props: {},
@@ -606,16 +301,16 @@ export default {
     },
     selectVal: function (oldVal, newVal) {
       if (oldVal === newVal) return
-      if (oldVal === this.$route?.query?.category) return
+      if (oldVal === this.$route?.query?.state) return
       if (this.selectVal === this.$t('yield.yield174')) {
         this.$router.push({
-          name: 'Protocols'
+          name: 'Audit'
         })
       } else {
         this.$router.push({
-          name: 'Protocols',
+          name: 'Audit',
           query: {
-            category: this.selectVal
+            state: this.selectVal
           }
         })
       }
@@ -639,10 +334,9 @@ export default {
     clickInfoTab(infoTab) {
       if (this.infoTab == infoTab) return
       this.infoTab = infoTab
-      if (infoTab !== 'TVLRankings') {
-        this.$router.push({
-          name: 'Audit'
-        })
+      if (infoTab === 'TVLRankings') {
+        this.$router.push("/protocols")
+        return
       }
     },
     initList() {
@@ -657,36 +351,27 @@ export default {
       this.getList()
     },
     async getList() {
-      if (this.$route?.query?.category) {
-        this.selectVal = this.$route?.query?.category
+      if (this.$route?.query?.state) {
+        this.selectVal = this.$route?.query?.state
       }
-      let category = undefined
-      if (this.selectVal === this.$t('yield.yield174')) {
-        category = undefined
+      let status = undefined
+      if (this.selectVal !== undefined && this.selectVal !== this.$t('yield.yield174')) {
+        status = this.selectVal
       } else {
-        category = this.selectVal
+        status = undefined
       }
-
       try {
         this.loading = true
         let result = await protocols.list({
           pageNo: this.pageNo,
           pageSize: this.pageSize,
           search: this.search.replace(/(^\s*)|(\s*$)/g, ""),
-          order: this.order,
-          status: 'active',
-          category,
-          order_type: this.order_type
+          order: 'create_at',
+          status,
+          order_type: ''
         })
         if (result?.code === 200 && result.data) {
-          result.data.forEach((item, index) => {
-            if (item.tvl_eos > 6000000) {
-              item.maxTag = true
-            } else if (item.tvl_eos < 200000) {
-              item.minTag = true
-            } else {
-              item.midTag = true
-            }
+          result.data.forEach((item) => {
             // item.logo = ""
             item.nameUrlencode = `/protocols/${encodeURIComponent(item.name)}`
             // item.nameUrlencode = "/ProtocolsDetails?name=" + encodeURIComponent(item.name)
@@ -712,17 +397,6 @@ export default {
             if (item.tvl_usd_changeDayOld == item.tvl_usd) item.tvl_usd_change_day = '0.00%'
             if (item.tvl_usd_change8hOld == item.tvl_usd) item.tvl_usd_change_8h = '0.00%'
             if (item.tvl_usd_changeWeekOld == item.tvl_usd) item.tvl_usd_change_week = '0.00%'
-            result.data.forEach((items, indexs) => {
-              if (item.tvl_eos > 6000000) {
-                if (indexs === index + 1 && items.tvl_eos <= 6000000) {
-                  item.maxTips = true
-                }
-              } else if (item.tvl_eos > 200000) {
-                if (indexs === index + 1 && items.tvl_eos <= 200000) {
-                  item.minTips = true
-                }
-              }
-            })
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]
@@ -748,7 +422,7 @@ export default {
       this.order = type
     },
     getImgUrl(name) {
-      return `${baseURL}/v1/protocols/${name}/sparkline?tvl_type=tvl_usd`
+      return `https://dev.api.tokenyield.io/v1/protocols/${name}/sparkline?tvl_type=tvl_usd`
     },
     getColor(item) {
       const val = item.slice(0, item.length - 1)
@@ -779,14 +453,6 @@ export default {
 <style lang="scss" scoped>
 .Protocols {
   background-color: #f9fafb;
-
-  .tipsBack {
-    background: rgba(0, 0, 0, 0.05);
-    padding: 4px 0 4px 4px;
-    color: #333;
-    font-size: 14px;
-    text-align: center;
-  }
   .Protocols-layout {
     max-width: 420px;
     margin: 0 auto;
@@ -976,6 +642,7 @@ export default {
         min-width: 77px;
         padding: 0 10px;
         height: 22px;
+        line-height: 22px;
         border-radius: 15px;
         margin-right: 8px;
         margin-bottom: 3px;
@@ -984,19 +651,6 @@ export default {
         color: #000000;
         border: 1px solid #d9d9d9;
         text-align: center;
-      }
-
-      .maxTagCls {
-        color: #13a57a;
-        border: 2px solid #13a57a;
-      }
-      .midTagCls {
-        color: #13a57a;
-        border: 1px solid #13a57a;
-      }
-      .minTagCls {
-        color: rgba(234, 87, 60, 1);
-        border: 1px solid rgba(234, 87, 60, 1);
       }
 
       .box-data {
@@ -1047,13 +701,6 @@ export default {
     width: 1200px;
     margin: 0 auto;
   }
-  .tipsBack {
-    background: rgba(0, 0, 0, 0.05);
-    padding: 4px 0 4px 120px;
-    color: #333;
-    font-size: 14px;
-    text-align: center;
-  }
 
   .ProtocolsPC-overLay {
     width: 100%;
@@ -1065,7 +712,6 @@ export default {
       font-weight: 600;
       color: #ffffff;
     }
-
     .overLay-select {
       .select-audit {
         padding: 9px 0 9px 15px;
@@ -1252,24 +898,13 @@ export default {
           min-width: 77px;
           padding: 0 10px;
           height: 22px;
+          line-height: 22px;
           border-radius: 15px;
           margin-right: 8px;
           font-size: 10px;
           font-weight: 400;
           color: #000000;
           border: 1px solid #d9d9d9;
-        }
-        .maxTagCls {
-          color: #13a57a;
-          border: 2px solid #13a57a;
-        }
-        .midTagCls {
-          color: #13a57a;
-          border: 1px solid #13a57a;
-        }
-        .minTagCls {
-          color: rgba(234, 87, 60, 1);
-          border: 1px solid rgba(234, 87, 60, 1);
         }
       }
     }

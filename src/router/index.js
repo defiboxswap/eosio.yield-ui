@@ -16,7 +16,7 @@ const constantRouter = [
         path: "/",
         name: "Home",
         meta: {
-          
+
         },
         component: () => import("@/views/Home/Index.vue"),
       },
@@ -35,6 +35,14 @@ const constantRouter = [
           HeaderDark: true
         },
         component: () => import("@/views/Protocols/Index.vue"),
+      },
+      { // 
+        path: "/protocols/audit",
+        name: "Audit",
+        meta: {
+          HeaderDark: true
+        },
+        component: () => import("@/views/Protocols/Audit.vue"),
       },
       {
         path: '/protocols/:contract',
@@ -74,7 +82,7 @@ const constantRouter = [
     component: () => import("@/views/ClearStorage/ClearStorage"),
   },
   {
-    path: '*', 
+    path: '*',
     redirect: '/',
   },
 ];

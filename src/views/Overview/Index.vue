@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="Overview" v-if="isMobile">
+    <div
+      class="Overview"
+      v-if="isMobile"
+    >
       <div class="Overview-layout">
         <div class="Overview-dataList">
           <div class="dataList-title">Overview</div>
@@ -15,7 +18,10 @@
                 <!-- Change (24h) -->
                 <div class="des-w flex">
                   <div class="des-1">{{ $t("yield.yield42") }}</div>
-                  <div class="des-2" :class="getColor(overViewData.tvl_eos_change)">{{ overViewData.tvl_eos_change }}</div>
+                  <div
+                    class="des-2"
+                    :class="getColor(overViewData.tvl_usd_change)"
+                  >{{ overViewData.tvl_usd_change }}</div>
                 </div>
                 <!-- Projects -->
                 <div class="des-w flex">
@@ -25,9 +31,12 @@
               </div>
             </div>
             <div class="tabCls">
-              <BaseTab v-model="checkedVal1"/>
+              <BaseTab v-model="checkedVal1" />
             </div>
-            <div class="box-data" id="view1Data"></div>
+            <div
+              class="box-data"
+              id="view1Data"
+            ></div>
           </div>
         </div>
 
@@ -36,20 +45,35 @@
           <div class="tvl-title">
             <div>{{ $t("yield.yield43") }}</div>
             <div class="mt">
-              <Select v-model="charts2Value" :list="charts2Items" />
+              <Select
+                v-model="charts2Value"
+                :list="charts2Items"
+              />
             </div>
           </div>
 
           <!-- <div class="tvl-box" id="view2Data" :style="{'height': 650 + (this.chart2Data[0].length / 4 * 400) + 'px'}"></div> -->
-          <div class="tabCls" style="margin-bottom: 15px; margin-top: -20px;">
-            <BaseTab v-model="checkedVal2"/>
+          <div
+            class="tabCls"
+            style="margin-bottom: 15px; margin-top: -20px;"
+          >
+            <BaseTab v-model="checkedVal2" />
           </div>
-          <div class="tvl-box" id="view2Data">
+          <div
+            class="tvl-box"
+            id="view2Data"
+          >
           </div>
           <div class="mt">
-            <Select v-model="charts3Value" :list="charts3Items" />
+            <Select
+              v-model="charts3Value"
+              :list="charts3Items"
+            />
           </div>
-          <div class="tvl-box" id="view3Data"></div>
+          <div
+            class="tvl-box"
+            id="view3Data"
+          ></div>
         </div>
 
         <!-- Analysis report -->
@@ -67,7 +91,10 @@
         </div>
       </div>
     </div>
-    <div v-else class="OverviewPC">
+    <div
+      v-else
+      class="OverviewPC"
+    >
       <!-- <div style="height: 100px;background-color: black;"></div> -->
       <div class="OverviewPC-overLay">
         <div class="OverviewPC-layout">
@@ -83,7 +110,10 @@
             <div class="dataList-data flex flex-align-end">
               <!-- Change (24h) -->
               <div class="data-text1">{{ $t("yield.yield42") }}</div>
-              <div class="data-text2" :class="getColor(overViewData.tvl_eos_change)">{{ overViewData.tvl_eos_change }}</div>
+              <div
+                class="data-text2"
+                :class="getColor(overViewData.tvl_usd_change)"
+              >{{ overViewData.tvl_usd_change }}</div>
             </div>
 
             <div class="dataList-data flex flex-align-end">
@@ -98,7 +128,7 @@
       <div class="OverviewPC-view1">
         <div class="OverviewPC-layout">
           <div class="tabCls">
-            <BaseTab v-model="checkedVal1"/>
+            <BaseTab v-model="checkedVal1" />
           </div>
           <div id="view1Data"></div>
         </div>
@@ -108,19 +138,31 @@
         <div class="view2-title flexb">
           <span>{{ $t("yield.yield43") }}</span>
           <div style="width: 200px">
-            <Select v-model="charts2Value" :list="charts2Items" />
+            <Select
+              v-model="charts2Value"
+              :list="charts2Items"
+            />
           </div>
         </div>
-        <div class="OverviewPC-layout" style="margin-bottom: 28px; height: 550px">
-          <div class="tabCls" style="padding-right: 75px">
-            <BaseTab v-model="checkedVal2"/>
+        <div
+          class="OverviewPC-layout"
+          style="margin-bottom: 28px; height: 550px"
+        >
+          <div
+            class="tabCls"
+            style="padding-right: 75px"
+          >
+            <BaseTab v-model="checkedVal2" />
           </div>
           <div id="view2Data"></div>
         </div>
 
         <div class="flex flex-row-reverse view2-title">
           <div style="width: 200px;">
-            <Select v-model="charts3Value" :list="charts3Items" />
+            <Select
+              v-model="charts3Value"
+              :list="charts3Items"
+            />
           </div>
         </div>
         <div class="OverviewPC-layout">
@@ -165,7 +207,7 @@ export default {
       overViewData: {
         agg_protocol_count: 0,
         tvl_eos: 0,
-        tvl_eos_change: "0.00",
+        tvl_usd_change: "0.00",
       },
       chart1Data: [],
       chart2Data: [[]],
@@ -291,7 +333,7 @@ export default {
   computed: mapState({
     isMobile: (state) => state.app.isMobile,
   }),
-  created() {},
+  created() { },
   mounted() {
     this.$nextTick(() => {
       this.initView1Data()
@@ -299,7 +341,7 @@ export default {
       this.initView3Data()
     })
   },
-  beforeDestroy() {},
+  beforeDestroy() { },
   methods: {
     async initView1Data() {
       try {
@@ -312,14 +354,14 @@ export default {
         this.chart1Data = res.data
         if (res.data.length > 0) {
           let item = JSON.parse(JSON.stringify(res.data[res.data.length - 1]))
-          item.tvl_eos_changeOld = item.tvl_eos_change
+          item.tvl_usd_changeOld = item.tvl_usd_change
           // item.tvl_usd_change = item.tvl_usd_change/(tvl_usd-tvl_usd_change)*100
-          if (this.accSub(item.tvl_eos, item.tvl_eos_change) != 0 && this.accSub(item.tvl_eos, item.tvl_eos_change)) item.tvl_eos_change = this.accDiv(item.tvl_eos_change, this.accDiv(this.accSub(item.tvl_eos, item.tvl_eos_change), 100))
+          if (this.accSub(item.tvl_usd, item.tvl_usd_change) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change), 100))
 
-          item.tvl_eos_change = this.toFixed(item.tvl_eos_change, 2)
-          if (item.tvl_eos_change > 0) item.tvl_eos_change = `+${item.tvl_eos_change}%`
-          else item.tvl_eos_change = `${item.tvl_eos_change}%`
-          if (item.tvl_eos_changeOld == item.tvl_eos) item.tvl_eos_change = '0.00%'
+          item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
+          if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
+          else item.tvl_usd_change = `${item.tvl_usd_change}%`
+          if (item.tvl_usd_changeOld == item.tvl_usd) item.tvl_usd_change = '0.00%'
           this.overViewData = item
         }
       } catch (error) {

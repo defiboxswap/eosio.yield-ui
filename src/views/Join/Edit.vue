@@ -1,67 +1,148 @@
 <template>
   <div>
-    <div class="Join" v-if="isMobile">
+    <div
+      class="Join"
+      v-if="isMobile"
+    >
       <div class="Join-layout">
         <!-- Projects -->
-        <div class="Join-title">{{ $t("yield.yield4") }}</div>
+        <div class="Join-title flexb">
+          <div>
+            {{ $t("yield.yield4") }}
+          </div>
+          <div
+            class="Join-word"
+            @click="handleOpen"
+          >{{$t('yield.yield199')}} ></div>
+        </div>
 
-        <div class="Join-basicInfo" id="basic">
+        <div
+          class="Join-basicInfo"
+          id="basic"
+        >
           <!-- *Basic Information -->
           <div class="basicInfo-title">{{ $t("yield.yield60") }}</div>
           <div class="basicInfo-box">
             <!-- project name -->
             <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield116") }}</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.name" @change="formWrongTips.name = false" />
-            <div class="basicInfo-wrongTips" v-if="formWrongTips.name">{{ $t("yield.yield120") }}</div>
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.name"
+              @change="formWrongTips.name = false"
+            />
+            <div
+              class="basicInfo-wrongTips"
+              v-if="formWrongTips.name"
+            >{{ $t("yield.yield120") }}</div>
           </div>
-
 
           <div class="basicInfo-box">
             <!-- Protocols contract -->
-            <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow" v-click-outside="hideTipsShow">
+            <div
+              class="basicInfo-subtitle flex"
+              @click="tipsShow = !tipsShow"
+              v-click-outside="hideTipsShow"
+            >
               <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
-              <v-tooltip bottom v-model="tipsShow" :openOnHover="false" :openOnFocus="false" :attach="true">
+              <v-tooltip
+                bottom
+                v-model="tipsShow"
+                :openOnHover="false"
+                :openOnFocus="false"
+                :attach="true"
+              >
                 <template v-slot:activator="{ on, attrs }">
-                  <div class="flex curPoint" v-bind="attrs" v-on="on">
+                  <div
+                    class="flex curPoint"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
                     <!-- {{ $t('yield.yield61') }} -->
-                    <v-icon class="" size="16" style="margin: 0 0 -2px 4px">mdi-information-outline</v-icon>
+                    <v-icon
+                      class=""
+                      size="16"
+                      style="margin: 0 0 -2px 4px"
+                    >mdi-information-outline</v-icon>
                   </div>
                 </template>
                 <div style="width: 300px">
                   {{ $t("yield.yield131") }}
-                  <span class="curPoint" @click="openWindow('https://yield-docs-seven.vercel.app/docs/contracts/eosio.yield')">{{ $t("yield.yield132") }} ></span>
+                  <span
+                    class="curPoint"
+                    @click="openWindow('https://yield-docs-seven.vercel.app/docs/contracts/eosio.yield')"
+                  >{{ $t("yield.yield132") }} ></span>
                 </div>
               </v-tooltip>
             </div>
-            <input type="text" class="basicInfo-input1" disabled v-model="eosAccount" />
+            <input
+              type="text"
+              class="basicInfo-input1"
+              disabled
+              v-model="eosAccount"
+            />
           </div>
 
           <!-- Project description -->
           <div class="basicInfo-box">
             <div class="basicInfo-subtitle">{{ $t("yield.yield63") }}</div>
-            <textarea class="basicInfo-input1" maxlength="1024" v-model="form.description" @change="formWrongTips.description = false"></textarea>
-            <div class="basicInfo-wrongTips" v-if="formWrongTips.description">{{ $t("yield.yield122") }}</div>
+            <textarea
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.description"
+              @change="formWrongTips.description = false"
+            ></textarea>
+            <div
+              class="basicInfo-wrongTips"
+              v-if="formWrongTips.description"
+            >{{ $t("yield.yield122") }}</div>
           </div>
 
           <div class="basicInfo-box">
             <!-- Project website -->
             <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield64") }}</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.website" @change="formWrongTips.website = false; formWrongTips.websiteFalse = false" :placeholder="$t('yield.yield140')" />
-            <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t("yield.yield121") }}</div>
-            <div class="basicInfo-wrongTips" v-if="form.website && formWrongTips.websiteFalse">{{ $t("yield.yield190") }}</div>
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.website"
+              @change="formWrongTips.website = false; formWrongTips.websiteFalse = false"
+              :placeholder="$t('yield.yield140')"
+            />
+            <div
+              class="basicInfo-wrongTips"
+              v-if="formWrongTips.website"
+            >{{ $t("yield.yield121") }}</div>
+            <div
+              class="basicInfo-wrongTips"
+              v-if="form.website && formWrongTips.websiteFalse"
+            >{{ $t("yield.yield190") }}</div>
           </div>
 
           <div class="basicInfo-box">
             <!-- Token contract -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield141") }}</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenCode" @change="formWrongTips.tokenCode = false" />
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.tokenCode"
+              @change="formWrongTips.tokenCode = false"
+            />
             <!-- <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t('yield.yield121') }}</div> -->
           </div>
 
           <div class="basicInfo-box">
             <!-- Token name -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield142") }}</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenSymcode" @change="formWrongTips.tokenSymcode = false" />
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.tokenSymcode"
+              @change="formWrongTips.tokenSymcode = false"
+            />
             <!-- <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t('yield.yield121') }}</div> -->
           </div>
 
@@ -69,9 +150,19 @@
             <!-- Project category -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield61") }}</div>
             <!-- <v-select class="basicInfo-input1 select-all" :items="categoryList" v-model="categoryItem" label="" solo :attach="true" :full-width="true"></v-select> -->
-            <div class="basicInfo-input1" v-if="projectStatus !== 'active'" v-click-outside="categoryHide">
-              <div class="flex curPoint" @click="categoryShow = !categoryShow">
-                <div class="flex-1" style="padding: 0 10px">{{ categoryItem }}</div>
+            <div
+              class="basicInfo-input1"
+              v-if="projectStatus !== 'active'"
+              v-click-outside="categoryHide"
+            >
+              <div
+                class="flex curPoint"
+                @click="categoryShow = !categoryShow"
+              >
+                <div
+                  class="flex-1"
+                  style="padding: 0 10px"
+                >{{ categoryItem }}</div>
                 <v-icon v-if="!categoryShow">mdi-menu-down</v-icon>
                 <v-icon v-else>mdi-menu-up</v-icon>
               </div>
@@ -82,32 +173,77 @@
                   <div class="item-text">{{ $t(item) }}</div>
                 </div>
               </div> -->
-              <v-list class="input1-selectList" dense v-if="categoryShow == true">
+              <v-list
+                class="input1-selectList"
+                dense
+                v-if="categoryShow == true"
+              >
                 <v-list-item-group color="primary">
-                  <v-list-item v-for="(item, index) in categoryDesList" :key="index">
+                  <v-list-item
+                    v-for="(item, index) in categoryDesList"
+                    :key="index"
+                  >
                     <v-list-item-content @click="select(index)">
                       <v-list-item-title v-html="categoryList[index]"></v-list-item-title>
-                      <v-list-item-subtitle v-html="$t(item)" style="overflow: visible; text-overflow: initial; white-space: normal"></v-list-item-subtitle>
+                      <v-list-item-subtitle
+                        v-html="$t(item)"
+                        style="overflow: visible; text-overflow: initial; white-space: normal"
+                      ></v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
             </div>
-            <input type="text" class="basicInfo-input1" disabled v-model="categoryItem" v-else />
+            <input
+              type="text"
+              class="basicInfo-input1"
+              disabled
+              v-model="categoryItem"
+              v-else
+            />
           </div>
 
           <div class="basicInfo-box">
             <!-- Project logo (300*300) -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
-            <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
-              <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" style="width: 100%; height: 100%" />
-              <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
-              <input type="file" accept="image/*" @change="fileImage" title="" />
-              <div class="closeIcon" @click="clearLogo" v-if="form.logo">
-                <v-icon class="" size="20" style="margin: 0 0 -2px 4px">mdi-close-circle-outline</v-icon>
+            <div
+              class="basicInfo-logo flex flex-jus-center"
+              v-loading="uploadLoading"
+            >
+              <img
+                :src="'https://ipfs.pink.gg/ipfs/' + form.logo"
+                v-if="form.logo"
+                style="width: 100%; height: 100%"
+              />
+              <img
+                src="@/assets/img/add.png"
+                v-show="!form.logo"
+                style="width: 15px; height: 15px; vertical-align: middle"
+                :key="form.logo"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                @change="fileImage"
+                title=""
+              />
+              <div
+                class="closeIcon"
+                @click="clearLogo"
+                v-if="form.logo"
+              >
+                <v-icon
+                  class=""
+                  size="20"
+                  style="margin: 0 0 -2px 4px"
+                >mdi-close-circle-outline</v-icon>
               </div>
             </div>
-            <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
+            <div style="color: #c1c2c4; font-size: 12px;">{{ $t("yield.yield188") }}</div>
+            <div
+              class="basicInfo-wrongTips"
+              v-if="formWrongTips.logo"
+            >{{ $t("yield.yield123") }}</div>
           </div>
         </div>
 
@@ -120,16 +256,31 @@
             <div class="basicInfo-subtitle">
               <span class="color-red">*&nbsp;</span>{{ $t("yield.yield73") }}
             </div>
-            <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.recover"  @change="formWrongTips.description = false"/>
-            <div class="basicInfo-wrongTips" v-if="formWrongTips.recover">{{ $t("yield.yield191") }}</div>
+            <input
+              type="text"
+              maxlength="12"
+              class="basicInfo-input1"
+              v-model="form.recover"
+              @change="formWrongTips.description = false"
+            />
+            <div
+              class="basicInfo-wrongTips"
+              v-if="formWrongTips.recover"
+            >{{ $t("yield.yield191") }}</div>
 
             <div class="recoverCls">
               <span class="recoverCls_caption">{{ $t("yield.yield74") }}</span>
               <div class="recoverCls_word">
                 {{ $t("yield.yield193") }}
               </div>
-              <div class="recoverCls_btn" @click="openWindow('https://eosrecover.com/project/form')">{{ $t("yield.yield194") }}</div>
-              <img src="@/assets/img/recover.png" alt="">
+              <div
+                class="recoverCls_btn"
+                @click="openWindow('https://eosrecover.com/project/form')"
+              >{{ $t("yield.yield194") }}</div>
+              <img
+                src="@/assets/img/recover.png"
+                alt=""
+              >
             </div>
           </div>
         </div>
@@ -140,28 +291,68 @@
           <div class="basicInfo-box">
             <!-- CoinMarketCap -->
             <div class="basicInfo-subtitle">CoinMarketCap</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" @change="formWrongTips.cmc = false"  :placeholder="$t('yield.yield153')" />
-            <div class="basicInfo-wrongTips" v-if="formWrongTips.cmc">{{ $t("yield.yield190") }}</div>
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.cmc"
+              @change="formWrongTips.cmc = false"
+              :placeholder="$t('yield.yield153')"
+            />
+            <div
+              class="basicInfo-wrongTips"
+              v-if="formWrongTips.cmc"
+            >{{ $t("yield.yield190") }}</div>
           </div>
           <div class="basicInfo-box">
             <!--  CoinGecko -->
             <div class="basicInfo-subtitle">CoinGecko</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.coingecko" @change="formWrongTips.coingecko = false"  :placeholder="$t('yield.yield154')" />
-            <div class="basicInfo-wrongTips" v-if="formWrongTips.coingecko">{{ $t("yield.yield190") }}</div>
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.coingecko"
+              @change="formWrongTips.coingecko = false"
+              :placeholder="$t('yield.yield154')"
+            />
+            <div
+              class="basicInfo-wrongTips"
+              v-if="formWrongTips.coingecko"
+            >{{ $t("yield.yield190") }}</div>
           </div>
 
           <div class="basicInfo-box">
             <!-- DefiLlama -->
             <div class="basicInfo-subtitle">DefiLlama</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.defillama" @change="formWrongTips.defillama = false"  :placeholder="$t('yield.yield155')" />
-            <div class="basicInfo-wrongTips" v-if="formWrongTips.defillama">{{ $t("yield.yield190") }}</div>
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.defillama"
+              @change="formWrongTips.defillama = false"
+              :placeholder="$t('yield.yield155')"
+            />
+            <div
+              class="basicInfo-wrongTips"
+              v-if="formWrongTips.defillama"
+            >{{ $t("yield.yield190") }}</div>
           </div>
 
           <div class="basicInfo-box">
             <!--  DappRadar -->
             <div class="basicInfo-subtitle">DappRadar</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.dappradar" @change="formWrongTips.dappradar = false"  :placeholder="$t('yield.yield156')" />
-            <div class="basicInfo-wrongTips" v-if="formWrongTips.dappradar">{{ $t("yield.yield190") }}</div>
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.dappradar"
+              @change="formWrongTips.dappradar = false"
+              :placeholder="$t('yield.yield156')"
+            />
+            <div
+              class="basicInfo-wrongTips"
+              v-if="formWrongTips.dappradar"
+            >{{ $t("yield.yield190") }}</div>
           </div>
         </div>
 
@@ -172,42 +363,79 @@
           <div class="basicInfo-box">
             <!-- Twitter -->
             <div class="basicInfo-subtitle">Twitter</div>
-            <input type="text" class="basicInfo-input1" v-model="form.twitter" :placeholder="$t('yield.yield158')" />
+            <input
+              type="text"
+              class="basicInfo-input1"
+              v-model="form.twitter"
+              :placeholder="$t('yield.yield158')"
+            />
           </div>
           <div class="basicInfo-box">
             <!-- Discord -->
             <div class="basicInfo-subtitle">Discord</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.discord" :placeholder="$t('yield.yield159')" />
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.discord"
+              :placeholder="$t('yield.yield159')"
+            />
           </div>
           <div class="basicInfo-box">
             <!-- Telegram -->
             <div class="basicInfo-subtitle">Telegram</div>
-            <input type="text" class="basicInfo-input1" v-model="form.telegram" :placeholder="$t('yield.yield157')" />
+            <input
+              type="text"
+              class="basicInfo-input1"
+              v-model="form.telegram"
+              :placeholder="$t('yield.yield157')"
+            />
           </div>
           <div class="basicInfo-box">
             <!-- Github -->
             <div class="basicInfo-subtitle">Github</div>
-            <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.github" :placeholder="$t('yield.yield160')" />
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.github"
+              :placeholder="$t('yield.yield160')"
+            />
           </div>
         </div>
       </div>
 
       <!-- SUBMIT -->
       <div class="Join-footer flex flex-align-center flex-jus-center">
-        <v-btn class="footer-button" @click="submit" :loading="btnLoading">{{ $t("yield.yield83") }}</v-btn>
+        <v-btn
+          class="footer-button"
+          @click="submit"
+          :loading="btnLoading"
+        >{{ $t("yield.yield83") }}</v-btn>
       </div>
     </div>
-    <div class="JoinPC" v-else @click="categoryShow = false">
+    <div
+      class="JoinPC"
+      v-else
+      @click="categoryShow = false"
+    >
       <div class="JoinPC-overLay">
         <div class="JoinPC-layout flex flex-jus-between">
           <!-- Projects -->
           <div class="overLay-title">{{ $t("yield.yield4") }}</div>
+          <div
+            class="overLay-word pointer"
+            @click="handleOpen"
+          >{{$t('yield.yield199')}} ></div>
         </div>
       </div>
 
       <div class="JoinPC-layout">
         <!-- Projects -->
-        <div class="JoinPC-basicInfo JoinPC-basicInfoTop" id="basic">
+        <div
+          class="JoinPC-basicInfo JoinPC-basicInfoTop"
+          id="basic"
+        >
           <!-- *Basic Information -->
           <div class="basicInfo-title">{{ $t("yield.yield60") }}</div>
 
@@ -215,45 +443,100 @@
             <div class="basicInfo-left">
               <!-- project name -->
               <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield116") }}</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.name" @change="formWrongTips.name = false" />
-              <div class="basicInfo-wrongTips" v-if="formWrongTips.name">{{ $t("yield.yield120") }}</div>
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.name"
+                @change="formWrongTips.name = false"
+              />
+              <div
+                class="basicInfo-wrongTips"
+                v-if="formWrongTips.name"
+              >{{ $t("yield.yield120") }}</div>
             </div>
             <div>
               <!-- Project website -->
               <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield64") }}</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.website" @change="formWrongTips.website = false" :placeholder="$t('yield.yield140')" />
-              <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t("yield.yield121") }}</div>
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.website"
+                @change="formWrongTips.website = false"
+                :placeholder="$t('yield.yield140')"
+              />
+              <div
+                class="basicInfo-wrongTips"
+                v-if="formWrongTips.website"
+              >{{ $t("yield.yield121") }}</div>
             </div>
           </div>
 
           <div class="flext marb-25">
             <div class="basicInfo-left">
               <!-- Protocols contract -->
-              <div class="basicInfo-subtitle flex" @click="tipsShow = !tipsShow" v-click-outside="hideTipsShow">
+              <div
+                class="basicInfo-subtitle flex"
+                @click="tipsShow = !tipsShow"
+                v-click-outside="hideTipsShow"
+              >
                 <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
 
-                <v-tooltip bottom v-model="tipsShow" :openOnHover="false" :openOnFocus="false" :attach="true">
+                <v-tooltip
+                  bottom
+                  v-model="tipsShow"
+                  :openOnHover="false"
+                  :openOnFocus="false"
+                  :attach="true"
+                >
                   <template v-slot:activator="{ on, attrs }">
-                    <div class="flex curPoint" v-bind="attrs" v-on="on">
+                    <div
+                      class="flex curPoint"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
                       <!-- {{ $t('yield.yield61') }} -->
-                      <v-icon class="" size="16" style="margin: 0 0 -2px 4px">mdi-information-outline</v-icon>
+                      <v-icon
+                        class=""
+                        size="16"
+                        style="margin: 0 0 -2px 4px"
+                      >mdi-information-outline</v-icon>
                     </div>
                   </template>
                   <div style="width: 400px">
                     {{ $t("yield.yield131") }}
-                    <span class="curPoint" @click="openWindow('https://yield-docs-seven.vercel.app/docs/contracts/eosio.yield')">{{ $t("yield.yield132") }} ></span>
+                    <span
+                      class="curPoint"
+                      @click="openWindow('https://yield-docs-seven.vercel.app/docs/contracts/eosio.yield')"
+                    >{{ $t("yield.yield132") }} ></span>
                   </div>
                 </v-tooltip>
               </div>
-              <input type="text" class="basicInfo-input1" disabled v-model="eosAccount" />
+              <input
+                type="text"
+                class="basicInfo-input1"
+                disabled
+                v-model="eosAccount"
+              />
             </div>
             <div>
               <!-- Project category -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield61") }}</div>
               <!-- <v-select class="basicInfo-input1 select-all" :items="categoryList" v-model="categoryItem" label="" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select> -->
-              <div class="basicInfo-input1" v-if="projectStatus !== 'active'" v-click-outside="categoryHide">
-                <div class="flex curPoint" @click="categoryShow = !categoryShow">
-                  <div class="flex-1" style="padding: 0 10px">{{ categoryItem }}</div>
+              <div
+                class="basicInfo-input1"
+                v-if="projectStatus !== 'active'"
+                v-click-outside="categoryHide"
+              >
+                <div
+                  class="flex curPoint"
+                  @click="categoryShow = !categoryShow"
+                >
+                  <div
+                    class="flex-1"
+                    style="padding: 0 10px"
+                  >{{ categoryItem }}</div>
                   <v-icon v-if="!categoryShow">mdi-menu-down</v-icon>
                   <v-icon v-else>mdi-menu-up</v-icon>
                 </div>
@@ -264,18 +547,34 @@
                     <div class="item-text">{{ $t(item) }}</div>
                   </div>
                 </div> -->
-                <v-list class="input1-selectList" dense v-if="categoryShow == true">
+                <v-list
+                  class="input1-selectList"
+                  dense
+                  v-if="categoryShow == true"
+                >
                   <v-list-item-group color="primary">
-                    <v-list-item v-for="(item, index) in categoryDesList" :key="index">
+                    <v-list-item
+                      v-for="(item, index) in categoryDesList"
+                      :key="index"
+                    >
                       <v-list-item-content @click="select(index)">
                         <v-list-item-title v-html="categoryList[index]"></v-list-item-title>
-                        <v-list-item-subtitle v-html="$t(item)" style="overflow: visible; text-overflow: initial; white-space: normal"></v-list-item-subtitle>
+                        <v-list-item-subtitle
+                          v-html="$t(item)"
+                          style="overflow: visible; text-overflow: initial; white-space: normal"
+                        ></v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
                   </v-list-item-group>
                 </v-list>
               </div>
-              <input type="text" class="basicInfo-input1" disabled v-model="categoryItem" v-else />
+              <input
+                type="text"
+                class="basicInfo-input1"
+                disabled
+                v-model="categoryItem"
+                v-else
+              />
             </div>
           </div>
 
@@ -283,14 +582,26 @@
             <div class="basicInfo-left">
               <!-- 	Token contract code -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield141") }}</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenCode" @change="formWrongTips.tokenCode = false" />
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.tokenCode"
+                @change="formWrongTips.tokenCode = false"
+              />
 
               <!-- <div class="basicInfo-wrongTips" v-if="formWrongTips.tokenSymcode">{{ $t('yield.yield120') }}</div> -->
             </div>
             <div>
               <!-- 	Token symbol code -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield142") }}</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.tokenSymcode" @change="formWrongTips.tokenSymcode = false" />
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.tokenSymcode"
+                @change="formWrongTips.tokenSymcode = false"
+              />
               <!-- <div class="basicInfo-wrongTips" v-if="formWrongTips.tokenCode">{{ $t('yield.yield121') }}</div> -->
             </div>
           </div>
@@ -299,23 +610,60 @@
             <div class="basicInfo-left">
               <!-- Project logo (300*300) -->
               <div class="basicInfo-subtitle">{{ $t("yield.yield65") }}</div>
-              <div class="basicInfo-logo flex flex-jus-center" v-loading="uploadLoading">
-                <img :src="'https://ipfs.pink.gg/ipfs/' + form.logo" v-if="form.logo" style="width: 100%; height: 100%" />
-                <img src="@/assets/img/add.png" v-show="!form.logo" style="width: 15px; height: 15px; vertical-align: middle" :key="form.logo" />
-                <input type="file" accept="image/*" @change="fileImage" title="" />
-                <div class="closeIcon" @click="clearLogo" v-if="form.logo">
-                  <v-icon class="" size="20" style="margin: 0 0 -2px 4px">mdi-close-circle-outline</v-icon>
+              <div
+                class="basicInfo-logo flex flex-jus-center"
+                v-loading="uploadLoading"
+              >
+                <img
+                  :src="'https://ipfs.pink.gg/ipfs/' + form.logo"
+                  v-if="form.logo"
+                  style="width: 100%; height: 100%"
+                />
+                <img
+                  src="@/assets/img/add.png"
+                  v-show="!form.logo"
+                  style="width: 15px; height: 15px; vertical-align: middle"
+                  :key="form.logo"
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  @change="fileImage"
+                  title=""
+                />
+                <div
+                  class="closeIcon"
+                  @click="clearLogo"
+                  v-if="form.logo"
+                >
+                  <v-icon
+                    class=""
+                    size="20"
+                    style="margin: 0 0 -2px 4px"
+                  >mdi-close-circle-outline</v-icon>
                 </div>
               </div>
-              <div class="basicInfo-wrongTips" v-if="formWrongTips.logo">{{ $t("yield.yield123") }}</div>
+              <div style="color: #c1c2c4; font-size: 12px;">{{ $t("yield.yield188") }}</div>
+              <div
+                class="basicInfo-wrongTips"
+                v-if="formWrongTips.logo"
+              >{{ $t("yield.yield123") }}</div>
             </div>
           </div>
 
           <div class="marb-25">
             <!-- Project description -->
             <div class="basicInfo-subtitle">{{ $t("yield.yield63") }}</div>
-            <textarea class="basicInfo-textarea" maxlength="1024" v-model="form.description" @change="formWrongTips.description = false"></textarea>
-            <div class="basicInfo-wrongTips" v-if="formWrongTips.description">{{ $t("yield.yield122") }}</div>
+            <textarea
+              class="basicInfo-textarea"
+              maxlength="1024"
+              v-model="form.description"
+              @change="formWrongTips.description = false"
+            ></textarea>
+            <div
+              class="basicInfo-wrongTips"
+              v-if="formWrongTips.description"
+            >{{ $t("yield.yield122") }}</div>
           </div>
         </div>
 
@@ -330,8 +678,17 @@
                   <div class="basicInfo-subtitle">
                     <span class="color-red">*&nbsp;</span>{{ $t("yield.yield73") }}
                   </div>
-                  <input type="number" class="basicInfo-input1" maxlength="1024" v-model="form.recover" @change="formWrongTips.description = false"/>
-                  <div class="basicInfo-wrongTips" v-if="formWrongTips.recover">{{ $t("yield.yield191") }}</div>
+                  <input
+                    type="text"
+                    maxlength="12"
+                    class="basicInfo-input1"
+                    v-model="form.recover"
+                    @change="formWrongTips.description = false"
+                  />
+                  <div
+                    class="basicInfo-wrongTips"
+                    v-if="formWrongTips.recover"
+                  >{{ $t("yield.yield191") }}</div>
                 </div>
               </div>
             </div>
@@ -340,8 +697,14 @@
               <div class="recoverCls_word">
                 {{ $t("yield.yield193") }}
               </div>
-              <div class="recoverCls_btn" @click="openWindow('https://eosrecover.com/project/form')">{{ $t("yield.yield194") }}</div>
-              <img src="@/assets/img/recover.png" alt="">
+              <div
+                class="recoverCls_btn"
+                @click="openWindow('https://eosrecover.com/project/form')"
+              >{{ $t("yield.yield194") }}</div>
+              <img
+                src="@/assets/img/recover.png"
+                alt=""
+              >
             </div>
           </div>
         </div>
@@ -354,14 +717,34 @@
             <div class="basicInfo-left">
               <!-- CoinMarketCap -->
               <div class="basicInfo-subtitle">CoinMarketCap</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.cmc" @change="formWrongTips.cmc = false" :placeholder="$t('yield.yield153')" />
-              <div class="basicInfo-wrongTips" v-if="formWrongTips.cmc">{{ $t("yield.yield190") }}</div>
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.cmc"
+                @change="formWrongTips.cmc = false"
+                :placeholder="$t('yield.yield153')"
+              />
+              <div
+                class="basicInfo-wrongTips"
+                v-if="formWrongTips.cmc"
+              >{{ $t("yield.yield190") }}</div>
             </div>
             <div>
               <!--  CoinGecko -->
               <div class="basicInfo-subtitle">CoinGecko</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.coingecko" @change="formWrongTips.coingecko = false" :placeholder="$t('yield.yield154')" />
-              <div class="basicInfo-wrongTips" v-if="formWrongTips.cmc">{{ $t("yield.yield190") }}</div>
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.coingecko"
+                @change="formWrongTips.coingecko = false"
+                :placeholder="$t('yield.yield154')"
+              />
+              <div
+                class="basicInfo-wrongTips"
+                v-if="formWrongTips.cmc"
+              >{{ $t("yield.yield190") }}</div>
             </div>
           </div>
 
@@ -369,14 +752,34 @@
             <div class="basicInfo-left">
               <!-- DefiLlama -->
               <div class="basicInfo-subtitle">DefiLlama</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.defillama" @change="formWrongTips.defillama = false" :placeholder="$t('yield.yield155')" />
-              <div class="basicInfo-wrongTips" v-if="formWrongTips.cmc">{{ $t("yield.yield190") }}</div>
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.defillama"
+                @change="formWrongTips.defillama = false"
+                :placeholder="$t('yield.yield155')"
+              />
+              <div
+                class="basicInfo-wrongTips"
+                v-if="formWrongTips.cmc"
+              >{{ $t("yield.yield190") }}</div>
             </div>
             <div>
               <!--  DappRadar -->
               <div class="basicInfo-subtitle">DappRadar</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.dappradar" @change="formWrongTips.dappradar = false" :placeholder="$t('yield.yield156')" />
-              <div class="basicInfo-wrongTips" v-if="formWrongTips.cmc">{{ $t("yield.yield190") }}</div>
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.dappradar"
+                @change="formWrongTips.dappradar = false"
+                :placeholder="$t('yield.yield156')"
+              />
+              <div
+                class="basicInfo-wrongTips"
+                v-if="formWrongTips.cmc"
+              >{{ $t("yield.yield190") }}</div>
             </div>
           </div>
         </div>
@@ -389,12 +792,23 @@
             <div class="basicInfo-left">
               <!-- Twitter -->
               <div class="basicInfo-subtitle">Twitter</div>
-              <input type="text" class="basicInfo-input1" v-model="form.twitter" :placeholder="$t('yield.yield158')" />
+              <input
+                type="text"
+                class="basicInfo-input1"
+                v-model="form.twitter"
+                :placeholder="$t('yield.yield158')"
+              />
             </div>
             <div>
               <!-- Discord -->
               <div class="basicInfo-subtitle">Discord</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.discord" :placeholder="$t('yield.yield159')" />
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.discord"
+                :placeholder="$t('yield.yield159')"
+              />
             </div>
           </div>
 
@@ -402,21 +816,39 @@
             <div class="basicInfo-left">
               <!-- Telegram -->
               <div class="basicInfo-subtitle">Telegram</div>
-              <input type="text" class="basicInfo-input1" v-model="form.telegram" :placeholder="$t('yield.yield157')" />
+              <input
+                type="text"
+                class="basicInfo-input1"
+                v-model="form.telegram"
+                :placeholder="$t('yield.yield157')"
+              />
             </div>
             <div>
               <!-- Github -->
               <div class="basicInfo-subtitle">Github</div>
-              <input type="text" class="basicInfo-input1" maxlength="1024" v-model="form.github" :placeholder="$t('yield.yield160')" />
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.github"
+                :placeholder="$t('yield.yield160')"
+              />
             </div>
           </div>
         </div>
       </div>
 
       <div class="JoinPC-footer">
-        <div class="JoinPC-layout flex flex-jus-end flex-align-center" style="height: 100%">
+        <div
+          class="JoinPC-layout flex flex-jus-end flex-align-center"
+          style="height: 100%"
+        >
           <!-- SUBMIT -->
-          <v-btn class="footer-button" @click="submit" :loading="btnLoading">{{ $t("yield.yield83") }}</v-btn>
+          <v-btn
+            class="footer-button"
+            @click="submit"
+            :loading="btnLoading"
+          >{{ $t("yield.yield83") }}</v-btn>
         </div>
       </div>
     </div>
@@ -507,14 +939,14 @@ export default {
       },
     },
     'form.tokenCode': {
-      handler: function(val) {
+      handler: function (val) {
         if (val) {
           this.form.tokenCode = val.toLowerCase()
         }
       }
     },
     'form.tokenSymcode': {
-      handler: function(val) {
+      handler: function (val) {
         if (val) {
           this.form.tokenSymcode = val.replace(/[^a-z|A-Z]/g, '').toUpperCase()
         }
@@ -550,8 +982,8 @@ export default {
     if (this.role !== 2) this.$router.go(-1)
     this.getInfo()
   },
-  mounted() {},
-  beforeDestroy() {},
+  mounted() { },
+  beforeDestroy() { },
   methods: {
     async getInfo() {
       this.btnLoading = true
@@ -647,7 +1079,7 @@ export default {
       }
       let gotoId = ""
       // if (this.form.cmc) this.form.cmc = parseFloat(this.form.cmc)
-      if (this.form.recover) this.form.recover = parseFloat(this.form.recover)
+      // if (this.form.recover) this.form.recover = parseFloat(this.form.recover)
       for (let key in this.formRules) {
         if (this.formRules[key].required) {
           if (this.form[key] == null || this.form[key] == "") {
@@ -767,14 +1199,15 @@ export default {
       })
     },
     fileImage(event) {
-      // if(files.size/1024 > 200){
-      //     // 200KB
-      // }
       this.formWrongTips.logo = false
       let formData = new FormData()
       let files = event.target.files[0]
       formData.append("image", files, files.name)
       console.log(files)
+      if (files.size / 1024 > 2000) {
+        this.$toast(this.$t("yield.yield188"))
+        return
+      }
       this.uploadLoading = true
       axios({
         url: "https://ipfs-gateway.pink.gg/v1/upload",
@@ -938,6 +1371,10 @@ export default {
     color: #000000;
     margin-bottom: 10px;
   }
+  .Join-word {
+    font-size: 14px;
+    color: #000000;
+  }
   .Join-basicInfo {
     padding: 22px 25px;
     border: 1px solid #efefef;
@@ -1078,7 +1515,7 @@ export default {
       }
       &_btn {
         color: rgb(17, 94, 105);
-        background: linear-gradient(90deg,#2ef2f6,#ffd183);
+        background: linear-gradient(90deg, #2ef2f6, #ffd183);
         border-radius: 20px;
         width: 160px;
         padding: 4px 0;
@@ -1189,6 +1626,11 @@ export default {
       font-size: 30px;
       font-weight: 600;
       color: #ffffff;
+    }
+    .overLay-word {
+      font-size: 14px;
+      color: #ffffff;
+      margin-bottom: -25px;
     }
   }
   .JoinPC-title {
@@ -1320,6 +1762,8 @@ export default {
       // margin-left: 36px;
       border: 1px solid #e8e8e8;
       position: relative;
+      margin: 3px 0;
+
       img {
         width: 100%;
         height: 100%;
@@ -1361,7 +1805,7 @@ export default {
       }
       &_btn {
         color: rgb(17, 94, 105);
-        background: linear-gradient(90deg,#2ef2f6,#ffd183);
+        background: linear-gradient(90deg, #2ef2f6, #ffd183);
         border-radius: 20px;
         width: 160px;
         padding: 4px 0;
