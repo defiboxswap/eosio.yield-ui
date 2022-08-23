@@ -97,7 +97,7 @@
               <div class="table-height2 flext">
                 <div class="table-width">
                   <div>{{ $t('yield.yield114') }}</div>
-                  <div :key="infoTab">{{ infoTab == 'Launch' ? $t('yield.yield113'): $t('yield.yield115') }}</div>
+                  <div :key="infoTab" class="font14">{{ infoTab == 'Launch' ? $t('yield.yield113'): $t('yield.yield115') }}</div>
                 </div>
                 <div class="table-width">
                   <div v-for="(item, index) in info[infoTab].maxTvl[0]" :key="index">{{ item }}</div>
@@ -229,7 +229,7 @@
               <div class="table-width" v-if="infoTab != 'Launch'">{{ $t("yield.yield119") }}</div>
             </div>
             <div class="table-height2 flext" style="border-bottom: 1px solid RGBA(73, 78, 86, 1)">
-              <div class="table-width">{{ $t("yield.yield21") }} {{ $t("yield.yield22") }}</div>
+              <div class="table-width">{{ $t("yield.yield21") }} <div class="font14">{{ $t("yield.yield22") }}</div></div>
               <div class="table-width">
                 <div v-for="(item, index) in info[infoTab].rewards[0]" :key="index">{{ item }}</div>
               </div>
@@ -246,7 +246,7 @@
             <div class="table-height2 flext" style="border-bottom: 1px solid RGBA(73, 78, 86, 1)">
               <div class="table-width">
                 <div>{{ $t("yield.yield112") }}</div>
-                <div :key="infoTab">{{ infoTab == "Launch" ? $t("yield.yield113") : $t("yield.yield115") }}</div>
+                <div :key="infoTab" class="font14">{{ infoTab == "Launch" ? $t("yield.yield113") : $t("yield.yield115") }}</div>
               </div>
               <div class="table-width">
                 <div v-for="(item, index) in info[infoTab].minTvl[0]" :key="index">{{ item }}</div>
@@ -264,7 +264,7 @@
             <div class="table-height2 flext">
               <div class="table-width">
                 <div>{{ $t("yield.yield114") }}</div>
-                <div :key="infoTab">{{ infoTab == "Launch" ? $t("yield.yield113") : $t("yield.yield115") }}</div>
+                <div :key="infoTab" class="font14">{{ infoTab == "Launch" ? $t("yield.yield113") : $t("yield.yield115") }}</div>
               </div>
               <div class="table-width">
                 <div v-for="(item, index) in info[infoTab].maxTvl[0]" :key="index">{{ item }}</div>
