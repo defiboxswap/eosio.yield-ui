@@ -71,7 +71,7 @@
                   {{ $t("yield.yield131") }}
                   <span
                     class="curPoint"
-                    @click="openWindow('https://yield-docs-seven.vercel.app/docs/contracts/eosio.yield')"
+                    @click="openWindow('https://docs.tokenyield.io/contracts/eosio.yield')"
                   >{{ $t("yield.yield132") }} ></span>
                 </div>
               </v-tooltip>
@@ -540,7 +540,7 @@
                     {{ $t("yield.yield131") }}
                     <span
                       class="curPoint"
-                      @click="openWindow('https://yield-docs-seven.vercel.app/docs/contracts/eosio.yield')"
+                      @click="openWindow('https://docs.tokenyield.io/contracts/eosio.yield')"
                     >{{ $t("yield.yield132") }} ></span>
                   </div>
                 </v-tooltip>
