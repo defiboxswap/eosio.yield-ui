@@ -1237,6 +1237,9 @@ export default {
       // console.log(this.$el.querySelector(name).offsetTop, "this.$el.querySelector")
       document.documentElement.scrollTop = this.$el.querySelector("#" + name).offsetTop - 60
     },
+    handleOpen() {
+      window.open('https://docs.tokenyield.io/category/user-guide')
+    },
     handleWalletLogin() {
       this.$store.dispatch("setWalletLoginVisible", true)
     },
