@@ -28,9 +28,19 @@
                   <div class="des-1">{{ $t("yield.yield7") }}</div>
                   <div class="des-2">{{ overViewData.agg_protocol_count }}</div>
                 </div>
+                <!-- Assets -->
+                <div class="des-w flex">
+                  <div class="des-1">{{ $t("yield.yield207") }}</div>
+                  <div class="des-2">2</div>
+                </div>
               </div>
             </div>
-            <div class="tabCls">
+            <div class="tabCls flexb" style="flex-direction: row;">
+              <div class="sup-assets">
+                {{ $t("yield.yield203") }}
+                <img src="@/assets/img/usdt.png" alt="" @click="handleLink('USD')">
+                <img src="@/assets/img/eos.png" alt="" @click="handleLink('EOS')">
+              </div>
               <BaseTab v-model="checkedVal1" />
             </div>
             <div
@@ -121,13 +131,24 @@
               <div class="data-text1">{{ $t("yield.yield7") }}</div>
               <div class="data-text2">{{ overViewData.agg_protocol_count }}</div>
             </div>
+
+            <div class="dataList-data flex flex-align-end">
+              <!-- Assets -->
+              <div class="data-text1">{{ $t("yield.yield207") }}</div>
+              <div class="data-text2">2</div>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="OverviewPC-view1">
         <div class="OverviewPC-layout">
-          <div class="tabCls">
+          <div class="tabCls flexb" style="flex-direction: row;">
+            <div class="sup-assets">
+              {{ $t("yield.yield203") }}
+              <img src="@/assets/img/usdt.png" alt="" @click="handleLink('USD')">
+              <img src="@/assets/img/eos.png" alt="" @click="handleLink('EOS')">
+            </div>
             <BaseTab v-model="checkedVal1" />
           </div>
           <div id="view1Data"></div>
@@ -407,6 +428,13 @@ export default {
         console.log(error)
       }
     },
+    handleLink(type) {
+      if (type === 'USD') {
+        window.open('https://coinmarketcap.com/currencies/tether/')
+      } else {
+        window.open('https://coinmarketcap.com/currencies/eos/')
+      }
+    },
     getColor(item) {
       const val = item.slice(0, item.length - 1)
       if (val > 0) {
@@ -478,6 +506,19 @@ export default {
           font-size: 10px;
         }
       }
+      .sup-assets {
+        display: flex;
+        padding: 8px 0 0 10px;
+        font-weight: bold;
+        color: #000;
+        cursor: pointer;
+        align-items: center;
+        img {
+          width: 20px;
+          height: 20px;
+          margin-left: 10px;
+        }
+      }
     }
   }
   .Overview-dataList {
@@ -496,7 +537,7 @@ export default {
         padding: 30px 30px 0 30px;
         border-bottom: 1px solid #efefef;
         .des-1 {
-          min-width: 70px;
+          min-width: 56px;
           font-size: 12px;
           font-weight: 500;
           color: #999999;
@@ -640,6 +681,18 @@ export default {
       flex-direction: row-reverse;
       padding-right: 110px;
       padding-top: 10px;
+      .sup-assets {
+        display: flex;
+        padding: 0 30px 0 50px;
+        font-weight: bold;
+        color: #000;
+        cursor: pointer;
+        align-items: center;
+        img {
+          width: 30px;
+          margin-left: 15px;
+        }
+      }
     }
   }
   .OverviewPC-overLay {

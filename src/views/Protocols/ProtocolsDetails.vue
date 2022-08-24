@@ -67,6 +67,7 @@
                         target="_blank"
                       >
                         <span
+
                           v-if="projectInfo.website"
                           style="color: #000;"
                         >{{ handleHttp(projectInfo.website) }}</span>
@@ -80,11 +81,39 @@
                   <div class="data-box flex-1">
                     <div class="data-name">{{ $t("yield.yield92") }}</div>
                     <a class="data-number">
-                      <span
-                        v-if="projectInfo.contracts"
-                        @click="openWindow('https://bloks.io/account/' + projectInfo.contracts)"
-                      >{{ projectInfo.contracts }}</span>
-                      <span v-else>-</span>
+                      <div
+                        class="box3-text flex"
+                        style="gap: 10px; font-size: 22px;"
+                      >
+                        <v-menu
+                          offset-y
+                          nudge-bottom="10"
+                          :ripple="false"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                              v-bind="attrs"
+                              v-on="on"
+                            >
+                              <span style="font-size: 16px; margin-right: 5px; font-weight: 600;">{{projectInfo.contracts[0]}}</span>
+                              <img
+                                src="@/assets/img/ProtocolsDetails/out1.png"
+                                width="12"
+                              />
+                            </v-btn>
+                          </template>
+
+                          <v-list>
+                            <v-list-item
+                              v-for="(item, index) in projectInfo.contracts"
+                              :key="index"
+                              @click="openWindow('https://bloks.io/account/' + item)"
+                            >
+                              <v-list-item-title>{{ item }}</v-list-item-title>
+                            </v-list-item>
+                          </v-list>
+                        </v-menu>
+                      </div>
                     </a>
                   </div>
                   <!-- <div class="data-box flex-1">
@@ -167,7 +196,16 @@
           </div>
 
           <div class="ProtocolsDetails-overview">
-            <div class="overview-title">{{ $t('yield.yield118') }}</div>
+            <div class="overview-title flexb">
+              <div>{{ $t("yield.yield118") }}</div>
+              <div style="font-size: 14px;" v-if="projectInfo.metadata.article" @click="openWindow(projectInfo.metadata.article)" class="pointer">
+                {{ $t("yield.yield204") }}
+                <img
+                    src="@/assets/img/ProtocolsDetails/out1.png"
+                    width="10"
+                  />
+              </div>
+            </div>
             <div class="overview-box">
               <div class="flex">
                 <div class="box-w">
@@ -848,12 +886,39 @@
                     <!-- Protocols address -->
                     <div class="info-title">{{ $t("yield.yield92") }}</div>
                     <div class="info-text curPoint">
-                      <span
-                        v-if="projectInfo.contracts"
-                        class="hover-blue"
-                        @click="openWindow('https://bloks.io/account/' + projectInfo.contracts)"
-                      >{{ projectInfo.contracts }}</span>
-                      <span v-else>-</span>
+                      <div
+                        class="box3-text flex"
+                        style="gap: 10px; font-size: 22px;"
+                      >
+                        <v-menu
+                          offset-y
+                          nudge-bottom="10"
+                          :ripple="false"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                              v-bind="attrs"
+                              v-on="on"
+                            >
+                              <span style="font-size: 22px; margin-right: 5px; font-weight: 600;">{{projectInfo.contracts[0]}}</span>
+                              <img
+                                src="@/assets/img/ProtocolsDetails/out1.png"
+                                width="12"
+                              />
+                            </v-btn>
+                          </template>
+
+                          <v-list>
+                            <v-list-item
+                              v-for="(item, index) in projectInfo.contracts"
+                              :key="index"
+                              @click="openWindow('https://bloks.io/account/' + item)"
+                            >
+                              <v-list-item-title>{{ item }}</v-list-item-title>
+                            </v-list-item>
+                          </v-list>
+                        </v-menu>
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -944,7 +1009,16 @@
 
           <div>
             <!-- Information -->
-            <div class="ProtocolsDetailsPC-box3Title">{{ $t("yield.yield118") }}</div>
+            <div class="ProtocolsDetailsPC-box3Title flexb">
+              <div>{{ $t("yield.yield118") }}</div>
+              <div style="font-size: 14px;" v-if="projectInfo.metadata.article" @click="openWindow(projectInfo.metadata.article)" class="pointer">
+                {{ $t("yield.yield204") }}
+                <img
+                    src="@/assets/img/ProtocolsDetails/out1.png"
+                    width="10"
+                  />
+              </div>
+            </div>
 
             <div class="flex flex-jus-between">
               <div class="ProtocolsDetailsPC-box3 ProtocolsDetailsPC-box3-l flex">
@@ -1823,7 +1897,6 @@ export default {
         if (result.code === 200 && result.data) {
           let item = result.data
           // item.logo = ""
-          item.contracts = item.contracts[0]
           item.metadataInfo = item.metadata
 
           item.logo = `https://ipfs.pink.gg/ipfs/${item.metadata.logo}`

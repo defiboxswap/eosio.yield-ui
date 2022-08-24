@@ -13,7 +13,7 @@
         class="grey--text text-caption flex"
       >
         <span class="back-cls">{{ chartsValue.length }}</span>
-        <span>Items</span>
+        <span style="color: #000;">Items</span>
       </span>
     </template>
     <template v-slot:prepend-item>

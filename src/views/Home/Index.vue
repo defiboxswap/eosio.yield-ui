@@ -17,6 +17,16 @@
               TVL
             </div>
             <v-btn class="text-button" @click="$router.push('/Join')">{{ $t("yield.yield4") }}</v-btn>
+            <div class="flex linkCls">
+              <div class="flex pointer" @click="handleLink('discord')">
+                <img src="@/assets/img/svg/discord.svg" class="svg" />
+                Discord
+              </div>
+              <div class="flex pointer" @click="handleLink('telegram')">
+                <img src="@/assets/img/svg/telegram.svg" class="svg" />
+                Telegram
+              </div>
+            </div>
           </div>
         </div>
         <!-- <img src="@/assets/img/Home/par1BG.png" class="part1-bg" /> -->
@@ -97,7 +107,7 @@
               <div class="table-height2 flext">
                 <div class="table-width">
                   <div>{{ $t('yield.yield114') }}</div>
-                  <div :key="infoTab" class="font14">{{ infoTab == 'Launch' ? $t('yield.yield113'): $t('yield.yield115') }}</div>
+                  <div :key="infoTab">{{ infoTab == 'Launch' ? $t('yield.yield113'): $t('yield.yield115') }}</div>
                 </div>
                 <div class="table-width">
                   <div v-for="(item, index) in info[infoTab].maxTvl[0]" :key="index">{{ item }}</div>
@@ -184,6 +194,16 @@
             </div>
             <!-- Join Yield + -->
             <v-btn class="text-button" @click="$router.push('/Join')">{{ $t("yield.yield4") }}</v-btn>
+            <div class="flex linkCls">
+              <div class="flex pointer" @click="handleLink('discord')">
+                <img src="@/assets/img/svg/discord.svg" class="svg" />
+                <span>Discord</span>
+              </div>
+              <div class="flex pointer" @click="handleLink('telegram')">
+                <img src="@/assets/img/svg/telegram.svg" class="svg" />
+                <span>Telegram</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -380,6 +400,13 @@ export default {
         }
       })
     },
+    handleLink(type) {
+      if (type === 'discord') {
+        window.open('https://discord.gg/wDqjXVmt')
+      } else {
+        window.open('https://t.me/yieldplus')
+      }
+    }
   },
 }
 </script>
@@ -423,6 +450,19 @@ export default {
         border-radius: 24px;
         background-color: #1c1dff;
         text-transform: none !important;
+      }
+      .linkCls {
+        color: #85A6FF;
+        margin-top: 20px;
+        font-size: 12px;
+        .pointer:first-child {
+          margin-right: 20px;
+          margin-left: 10px;
+        }
+        .svg {
+          width: 20px;
+          margin-right: 4px;
+        }
       }
     }
   }
@@ -698,6 +738,20 @@ export default {
         background-color: #1c1dff;
         border-radius: 10px;
         text-transform: none !important;
+      }
+      .linkCls {
+        color: #85A6FF;
+        margin-top: 30px;
+        font-size: 14px;
+        font-weight: bold;
+        .pointer:first-child {
+          margin-right: 40px;
+          margin-left: 10px;
+        }
+        .svg {
+          width: 20px;
+          margin-right: 8px;
+        }
       }
     }
   }

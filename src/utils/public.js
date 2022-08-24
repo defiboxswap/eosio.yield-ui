@@ -430,9 +430,13 @@ export function checkType(arg) {
 // handleHttp
 export function handleHttp(url) {
   if (!url) return "-"
-  if (url.substr(0, 7).toLowerCase() == "http://") return url.substring(7)
-  if (url.substr(0, 8).toLowerCase() == "https://") return url.substring(8)
-  return url
+  let urlData = url
+  if (urlData.split('')[urlData.length - 1] === '/') {
+    urlData = url.slice(0, url.length - 1)
+  }
+  if (urlData.substr(0, 7).toLowerCase() == "http://") return urlData.substring(7)
+  if (urlData.substr(0, 8).toLowerCase() == "https://") return urlData.substring(8)
+  return urlData
 }
 
 // handleCategory

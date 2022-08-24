@@ -11,10 +11,22 @@
           <div>
             {{ $t("yield.yield4") }}
           </div>
-          <div
-            class="Join-word"
-            @click="handleOpen"
-          >{{$t('yield.yield199')}} ></div>
+          <div class="flex">
+            <div class="flex linkCls" style="color: #000">
+              <div class="flex pointer" @click="handleOpen('discord')">
+                <img src="@/assets/img/svg/discord-black.svg" class="svg" />
+                Discord
+              </div>
+              <div class="flex pointer" style="color: #000" @click="handleOpen('telegram')">
+                <img src="@/assets/img/svg/telegram-black.svg" class="svg" />
+                Telegram
+              </div>
+            </div>
+            <div
+              class="Join-word"
+              @click="handleOpen"
+            >{{$t('yield.yield199')}} ></div>
+          </div>
         </div>
         <div
           class="Join-basicInfo"
@@ -268,6 +280,22 @@
               v-if="formWrongTips.logo"
             >{{ $t("yield.yield123") }}</div>
           </div>
+
+          <div class="basicInfo-box">
+            <!-- 	Reward strategy article -->
+            <div class="basicInfo-subtitle">
+              {{ $t("yield.yield204") }}
+              <span style="color: #c1c2c4; font-size: 12px;">{{ $t("yield.yield205") }}</span>
+            </div>
+            <input
+              type="text"
+              class="basicInfo-input1"
+              maxlength="1024"
+              v-model="form.article"
+              :placeholder="$t('yield.yield206')"
+            />
+            <!-- <div class="basicInfo-wrongTips" v-if="formWrongTips.website">{{ $t('yield.yield121') }}</div> -->
+          </div>
         </div>
 
         <div class="Join-basicInfo">
@@ -450,10 +478,22 @@
         <div class="JoinPC-layout flex flex-jus-between">
           <!-- Projects -->
           <div class="overLay-title">{{ $t("yield.yield4") }}</div>
-          <div
-            class="overLay-word pointer"
-            @click="handleOpen"
-          >{{$t('yield.yield199')}} ></div>
+          <div class="flex">
+            <div class="flex linkCls" style="color: #fff">
+              <div class="flex pointer" @click="handleOpen('discord')">
+                <img src="@/assets/img/svg/discord-white.svg" class="svg" />
+                Discord
+              </div>
+              <div class="flex pointer" @click="handleOpen('telegram')">
+                <img src="@/assets/img/svg/telegram-white.svg" class="svg" />
+                Telegram
+              </div>
+            </div>
+            <div
+              class="overLay-word pointer"
+              @click="handleOpen"
+            >{{$t('yield.yield199')}} ></div>
+          </div>
         </div>
       </div>
 
@@ -701,6 +741,23 @@
             </div>
           </div>
 
+          <div class="flext marb-25">
+            <div class="basicInfo-left">
+              <!-- 	Reward strategy article -->
+              <div class="basicInfo-subtitle">
+                {{ $t("yield.yield204") }}
+                <span style="color: #c1c2c4; font-size: 12px;">{{ $t("yield.yield205") }}</span>
+              </div>
+              <input
+                type="text"
+                class="basicInfo-input1"
+                maxlength="1024"
+                v-model="form.article"
+                :placeholder="$t('yield.yield206')"
+              />
+            </div>
+          </div>
+
           <div class="marb-25">
             <!-- Project description -->
             <div class="flex flexb">
@@ -916,7 +973,7 @@
 import { mapState } from "vuex"
 import axios from "axios"
 import DApp from "@/utils/wallet/index"
-import { baseURL } from "../../config";
+// import { baseURL } from "../../config";
 
 export default {
   name: "Join",
@@ -950,6 +1007,7 @@ export default {
         website: null,
         tokenCode: null,
         tokenSymcode: null,
+        article: null
       },
       formRules: {
         website: { required: true, check: true, gotoId: "basic" },
@@ -980,6 +1038,7 @@ export default {
         twitter: false,
         website: false,
         websiteFalse: false,
+        article: false,
       },
       accountTip: false,
       tokenVeri: false,
@@ -1192,8 +1251,7 @@ export default {
       }
       this.uploadLoading = true
       axios({
-        baseURL,
-        url: "/v1/ipfs/logo",
+        url: "https://dev.api.tokenyield.io/v1/ipfs/logo",
         method: "POST",
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
@@ -1213,8 +1271,14 @@ export default {
         })
       event.target.value = null
     },
-    handleOpen() {
-      window.open('https://docs.tokenyield.io/category/user-guide')
+    handleOpen(type) {
+      if (type === 'discord') {
+        window.open('https://discord.gg/wDqjXVmt')
+      } else if (type === 'telegram') {
+        window.open('https://t.me/yieldplus')
+      } else {
+        window.open('https://docs.tokenyield.io/category/user-guide')
+      }
     },
     gotoId(name) {
       if (!name) return
@@ -1378,6 +1442,18 @@ export default {
   .Join-word {
     font-size: 14px;
     color: #000000;
+  }
+
+  .linkCls {
+    color: #85A6FF;
+    font-size: 12px;
+    .pointer {
+      margin-right: 10px;
+    }
+    .svg {
+      width: 20px;
+      margin-right: 4px;
+    }
   }
   .Join-basicInfo {
     padding: 22px 25px;
@@ -1636,6 +1712,21 @@ export default {
       font-size: 14px;
       color: #ffffff;
       margin-bottom: -25px;
+    }
+
+    .linkCls {
+      color: #85A6FF;
+      margin-top: 10px;
+      font-size: 12px;
+      margin-bottom: -15px;
+      .pointer {
+        margin-right: 20px;
+        margin-left: 10px;
+      }
+      .svg {
+        width: 20px;
+        margin-right: 4px;
+      }
     }
   }
   .JoinPC-title {

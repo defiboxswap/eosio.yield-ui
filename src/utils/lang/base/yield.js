@@ -207,7 +207,12 @@ const items = {
         "yield202": "",
         "yield203": "",
         "yield204": "",
-        "yield205": ""
+        "yield205": "",
+        "yield206": "",
+        "yield207": "",
+        "yield208": "",
+        "yield209": "",
+        "yield210": ""
     },
     "zhTW": {
         "yield1": "首頁",
@@ -412,9 +417,14 @@ const items = {
         "yield200": "未達標",
         "yield201": "達標",
         "yield202": "最大",
-        "yield203": "",
-        "yield204": "null",
-        "yield205": ""
+        "yield203": "支持資產",
+        "yield204": "獎勵策略文章",
+        "yield205": "(Medium / Twitter post, etc…)",
+        "yield206": "https://medium.com/@Protocol/...",
+        "yield207": "資產",
+        "yield208": "",
+        "yield209": "",
+        "yield210": ""
     },
     "en": {
         "yield1": "Home",
@@ -619,9 +629,14 @@ const items = {
         "yield200": "Unpaid",
         "yield201": "Paid",
         "yield202": "Max",
-        "yield203": "",
-        "yield204": "",
-        "yield205": ""
+        "yield203": "Supported Assets",
+        "yield204": "Reward strategy article",
+        "yield205": "(Medium / Twitter post, etc…)",
+        "yield206": "https://medium.com/@Protocol/...",
+        "yield207": "Assets",
+        "yield208": "",
+        "yield209": "",
+        "yield210": ""
     },
     "ko": {
         "yield1": "집",
@@ -826,9 +841,14 @@ const items = {
         "yield200": "보수의를 지불하지 않는다",
         "yield201": "지불하다",
         "yield202": "맥스",
-        "yield203": "null",
-        "yield204": "",
-        "yield205": ""
+        "yield203": "자산을 뒷받침",
+        "yield204": "보상 전략의 글",
+        "yield205": "(Medium / Twitter post, etc…)",
+        "yield206": "https://medium.com/@Protocol/...",
+        "yield207": "자산",
+        "yield208": "",
+        "yield209": "",
+        "yield210": ""
     }
   }
 }
