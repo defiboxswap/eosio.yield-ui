@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div
       class="Join"
       v-if="isMobile"
@@ -1168,10 +1167,12 @@ export default {
           if (keyName == "tokenSymcode") {
             keyName = "token.symcode"
           }
-          metadata.push({
-            key: keyName,
-            value: this.form[key],
-          })
+          if (keyName !== 'categoryItem') {
+            metadata.push({
+              key: keyName,
+              value: this.form[key],
+            })
+          }
         }
       }
 

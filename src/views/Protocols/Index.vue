@@ -549,7 +549,7 @@ export default {
     return {
       infoTab: "TVLRankings",
       pageNo: 1,
-      pageSize: 10,
+      pageSize: 20,
       search: "",
       order: "tvl_usd",
       order_type: "desc",
@@ -648,7 +648,7 @@ export default {
     initList() {
       this.isMore = true
       this.pageNo = 1
-      this.pageSize = 10
+      this.pageSize = 20
       this.protocolsList = []
       this.getList()
     },

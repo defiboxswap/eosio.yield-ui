@@ -253,7 +253,7 @@ export default {
     return {
       infoTab: "Audit",
       pageNo: 1,
-      pageSize: 10,
+      pageSize: 20,
       search: "",
       order: "tvl_usd",
       order_type: "desc",
@@ -342,7 +342,7 @@ export default {
     initList() {
       this.isMore = true
       this.pageNo = 1
-      this.pageSize = 10
+      this.pageSize = 20
       this.protocolsList = []
       this.getList()
     },
@@ -400,6 +400,9 @@ export default {
           })
           if (result.data.length < this.pageSize) this.isMore = false
           this.protocolsList = [...this.protocolsList, ...result.data]
+          this.protocolsList = this.protocolsList.sort((a, b) => {
+            return b.create_at - a.create_at
+          })
 
           this.loading = false
         } else {
