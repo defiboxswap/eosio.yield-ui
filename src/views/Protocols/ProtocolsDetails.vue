@@ -188,7 +188,7 @@
               <div class="flex">
                 <div class="flex-1">
                   <div class="view-title">{{ $t("yield.yield54") }}</div>
-                  <div class="view-text">{{ toFixed(projectInfo.agg_rewards_change, 4) }}</div>
+                  <div class="view-text">{{ toFixed(overViewData.agg_rewards_change, 4) }}</div>
                 </div>
                 <div class="flex-1"></div>
               </div>
@@ -983,7 +983,7 @@
                   <div class="box2-circle"></div>
                   <div class="">{{ $t("yield.yield54") }}</div>
                 </div>
-                <div class="box2-number">{{ toFixed(projectInfo.agg_rewards_change, 4) }}</div>
+                <div class="box2-number">{{ toFixed(overViewData.agg_rewards_change, 4) }}</div>
               </div>
             </div>
             <div
@@ -1769,7 +1769,8 @@ export default {
       tipsShow1: false,
       tipsShow2: false,
       tipsShow3: false,
-      audit_report: ['reports11', 'reports22', 'reports33']
+      audit_report: ['reports11', 'reports22', 'reports33'],
+      annualRate: 0
     }
   },
   components: {},
@@ -1809,10 +1810,11 @@ export default {
       return null
     },
   },
-  created() {
+  async created() {
     if (!this.$route.params?.contract) this.$router.push("/")
     this.projectName = decodeURIComponent(this.$route.params.contract)
-
+    
+    await this.getRate()
     this.getAdminAccount()
     this.getInfo()
     this.getRewards()
@@ -1820,6 +1822,23 @@ export default {
   mounted() { },
   beforeDestroy() { },
   methods: {
+    async getRate() {
+      try {
+        const params = {
+          code: this.contractE,
+          scope: this.contractE,
+          json: true,
+          limit: -1,
+          table: 'config',
+        }
+        let res = await DApp.getTableRows(params)
+        if (res.length > 0) {
+          this.annualRate = res[0].annual_rate
+        }
+      } catch (error) {
+        console.log(error, 'error');
+      }
+    },
     gotoEdit() {
       this.$router.push("/join/edit?name=" + encodeURIComponent(this.projectName))
     },
@@ -1860,9 +1879,12 @@ export default {
           }
           if (item.tvl_eos > 6000000) {
             item.maxTag = true
+            item.agg_rewards_change = this.accDiv(this.accDiv(this.accMul(6000000, this.annualRate), 365), 10000)
           } else if (item.tvl_eos < 200000) {
+            item.agg_rewards_change = 0
             item.minTag = true
           } else {
+            item.agg_rewards_change = this.accDiv(this.accDiv(this.accMul(item.tvl_eos, this.annualRate), 365), 10000)
             item.midTag = true
           }
           item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)

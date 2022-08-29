@@ -139,7 +139,7 @@
                       :class="getColor(item.tvl_usd_change_8h)"
                     >{{ item.tvl_usd_change_8h }}</div>
                   </div>
-                  <div class="data-box flex-1">
+                  <div class="data-box flex-1" style="flex: 1.2">
                     <div
                       class="data-name"
                       :style="{'color': order === 'tvl_usd_change_day' ? '#000' : ''}"
@@ -208,7 +208,7 @@
                       />
                     </div>
                   </div>
-                  <div class="data-box flex-1">
+                  <div class="data-box flex-1" style="flex: 1.2">
                     <div
                       class="data-name"
                       :style="{'color': order === 'agg_rewards' ? '#000' : ''}"
@@ -231,7 +231,7 @@
                         v-else
                       />
                     </div>
-                    <div class="data-number">{{ item.agg_rewards_change.toFixed(4) }}</div>
+                    <div class="data-number">{{ toFixed(item.agg_rewards_change, 4) }}</div>
                   </div>
                 </div>
               </div>
@@ -542,6 +542,7 @@
 import { mapState } from "vuex"
 import { protocols } from "@/service"
 import { baseURL } from "../../config";
+import DApp from "@/utils/wallet/index"
 
 export default {
   name: "Protocols",
@@ -590,7 +591,8 @@ export default {
         }
       ],
       selectVal: this.$t('yield.yield174'),
-      hasParams: false
+      hasParams: false,
+      annualRate: 0
     }
   },
   props: {},
@@ -625,13 +627,31 @@ export default {
   computed: mapState({
     isMobile: (state) => state.app.isMobile,
   }),
-  created() {
+  async created() {
+    await this.getRate()
     this.initList()
   },
   mounted() {
   },
   beforeDestroy() { },
   methods: {
+    async getRate() {
+      try {
+        const params = {
+          code: this.contractE,
+          scope: this.contractE,
+          json: true,
+          limit: -1,
+          table: 'config',
+        }
+        let res = await DApp.getTableRows(params)
+        if (res.length > 0) {
+          this.annualRate = res[0].annual_rate
+        }
+      } catch (error) {
+        console.log(error, 'error');
+      }
+    },
     async getsparkline() {
       let result = await protocols.sparkline('ballp.defi')
       return result
@@ -682,9 +702,12 @@ export default {
           result.data.forEach((item, index) => {
             if (item.tvl_eos > 6000000) {
               item.maxTag = true
+              item.agg_rewards_change = this.accDiv(this.accDiv(this.accMul(6000000, this.annualRate), 365), 10000)
             } else if (item.tvl_eos < 200000) {
+              item.agg_rewards_change = 0
               item.minTag = true
             } else {
+              item.agg_rewards_change = this.accDiv(this.accDiv(this.accMul(item.tvl_eos, this.annualRate), 365), 10000)
               item.midTag = true
             }
             // item.logo = ""
