@@ -508,7 +508,7 @@
                       :src="getImgUrl(item.name)"
                     />
                   </div>
-                  <div class="box-4">{{ item.agg_rewards_change.toFixed(4) }}</div>
+                  <div class="box-4">{{ toFixed(item.agg_rewards_change, 4) }}</div>
                   <!-- <div class="box-5">$123.43M</div> -->
                 </div>
                 <div
