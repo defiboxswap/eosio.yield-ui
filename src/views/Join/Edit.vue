@@ -1368,6 +1368,9 @@ export default {
         })
       })
     },
+    categoryHide() {
+      this.categoryShow = false
+    },
     clearLogo() {
       this.form.logo = ''
     }
