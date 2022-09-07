@@ -15,7 +15,6 @@
             <span v-if="projectInfo">> {{ projectInfo.name }}</span>
           </span>
         </div>
-
         <div v-if="projectInfo">
           <div class="ProtocolsDetails-projectList">
             <div class="projectList-box">
@@ -186,9 +185,12 @@
               </div>
 
               <div class="flex">
+                <!-- 24h Reward -->
                 <div class="flex-1">
                   <div class="view-title">{{ $t("yield.yield54") }}</div>
-                  <div class="view-text">{{ toFixed(overViewData.agg_rewards_change, 4) }}</div>
+                  <div class="view-text">
+                    {{ checkedVal1 === 'USD' ? `$${toFixed(overViewData.agg_rewards_change, 2)}` : `${toFixed(overViewData.agg_rewards_change, 2)} EOS` }}
+                  </div>
                 </div>
                 <div class="flex-1"></div>
               </div>
@@ -983,7 +985,9 @@
                   <div class="box2-circle"></div>
                   <div class="">{{ $t("yield.yield54") }}</div>
                 </div>
-                <div class="box2-number">{{ toFixed(overViewData.agg_rewards_change, 4) }}</div>
+                <div class="box2-number">
+                  {{ checkedVal1 === 'USD' ? `$${toFixed(overViewData.agg_rewards_change, 2)}` : `${toFixed(overViewData.agg_rewards_change, 2)} EOS` }}
+                </div>
               </div>
             </div>
             <div
@@ -997,13 +1001,18 @@
             </div>
             <div
               v-else
-              class="flex flexc review"
+              class="review"
             >
-              <img
-                src="@/assets/img/BaseNoData/review.png"
-                alt=""
-              />
-              <span>{{ $t("yield.yield167") }}</span>
+              <div class="tabCls">
+                <BaseTab v-model="checkedVal1" />
+              </div>
+              <div class="flex flexc review">
+                <img
+                  src="@/assets/img/BaseNoData/review.png"
+                  alt=""
+                />
+                <span>{{ $t("yield.yield167") }}</span>
+              </div>
             </div>
           </div>
 
@@ -1733,9 +1742,15 @@ import chart1 from "./echarts/chart1.js"
 import { mapState } from "vuex"
 import { protocols, lines } from "@/service"
 export default {
+  metaInfo () {
+    return {
+      meta: this.meta
+    }
+  },
   name: "ProtocolsDetails",
   data() {
     return {
+      meta: [],
       hasData: 0,
       // categoryItem: "cdp",
       // categoryList: ["cdp", "dexes", "lending", "staking", "yield"],
@@ -1770,20 +1785,23 @@ export default {
       tipsShow2: false,
       tipsShow3: false,
       audit_report: ['reports11', 'reports22', 'reports33'],
-      annualRate: 0
+      annualRate: 0,
+      eosRateUsdVal: 1
     }
   },
   components: {},
   props: {},
   watch: {
     'checkedVal1': {
-      handler: async function (val) {
+      handler: async function () {
         try {
-          chart1.init({
-            self: this,
-            data: this.overViewData1,
-            type: val
-          })
+          let item = JSON.parse(JSON.stringify(this.overViewData1[this.overViewData1.length - 1]))
+          this.formatData(this.overViewData, this.overViewData1)
+          // chart1.init({
+          //   self: this,
+          //   data: this.overViewData1,
+          //   type: val
+          // })
         } catch (error) {
           console.log(error)
         }
@@ -1813,8 +1831,8 @@ export default {
   async created() {
     if (!this.$route.params?.contract) this.$router.push("/")
     this.projectName = decodeURIComponent(this.$route.params.contract)
-    
     await this.getRate()
+    await this.eosRateUsd()
     this.getAdminAccount()
     this.getInfo()
     this.getRewards()
@@ -1822,6 +1840,25 @@ export default {
   mounted() { },
   beforeDestroy() { },
   methods: {
+    async eosRateUsd() {
+      try {
+        const params = {
+          code: 'oracle.defi',
+          scope: 'oracle.defi',
+          json: true,
+          limit: -1,
+          table: 'prices',
+          lower_bound: 1,
+          upper_bound: 1,
+        }
+        let res = await DApp.getTableRows(params)
+        if (res.length > 0) {
+          this.eosRateUsdVal = this.accDiv(res[0].avg_price, 10000)
+        }
+      } catch (error) {
+        console.log(error, 'error');
+      }
+    },
     async getRate() {
       try {
         const params = {
@@ -1865,52 +1902,83 @@ export default {
           name: this.projectName,
         })
         if (res.data.length > 0) {
-          this.hasData = 1
           let item = JSON.parse(JSON.stringify(res.data[res.data.length - 1]))
-          item.tvl_usd_changeOld = item.tvl_usd_change
-          // item.tvl_usd_change = item.tvl_usd_change/(tvl_eos-tvl_usd_change)*100
-          // before
-          // if (this.accSub(item.tvl_eos, item.tvl_usd_change) != 0 && this.accSub(item.tvl_eos, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_eos, item.tvl_usd_change), 100))
-          // now
-          if (this.accSub(this.projectInfo.tvl_usd, this.projectInfo.tvl_usd_change_day) != 0) {
-            item.tvl_usd_change = this.accDiv(this.projectInfo.tvl_usd_change_day, this.accDiv(this.accSub(this.projectInfo.tvl_usd, this.projectInfo.tvl_usd_change_day), 100))
-          } else {
-            item.tvl_usd_change = 0
-          }
-          if (item.tvl_eos > 6000000) {
-            item.maxTag = true
-            item.agg_rewards_change = this.accDiv(this.accDiv(this.accMul(6000000, this.annualRate), 365), 10000)
-          } else if (item.tvl_eos < 200000) {
-            item.agg_rewards_change = 0
-            item.minTag = true
-          } else {
-            item.agg_rewards_change = this.accDiv(this.accDiv(this.accMul(item.tvl_eos, this.annualRate), 365), 10000)
-            item.midTag = true
-          }
-          item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
-          item.tvl_usd = this.toFixed(item.tvl_usd, 2)
-          if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
-          else item.tvl_usd_change = `${item.tvl_usd_change}%`
-
-          if (item.tvl_usd_changeDayOld == item.tvl_usd) item.tvl_usd_change = '0.00%'
-
-          if (res.data.length > 1) {
-            let lastItem = JSON.parse(JSON.stringify(res.data[res.data.length - 2]))
-            if (lastItem.tvl_usd == 0) item.tvl_usd_change = '0.00%'
-          }
-
-          this.overViewData = item
-
-          chart1.init({
-            self: this,
-            data: res.data,
-            type: this.checkedVal1
-          })
-          this.overViewData1 = res.data
+          this.formatData(item, res.data)
         }
       } catch (error) {
         console.log(error)
       }
+    },
+    formatData(item, res) {
+      this.hasData = 1
+      if (item.tvl_eos > 6000000) {
+        item.maxTag = true
+        item.agg_rewards_change = this.checkedVal1 === 'USD' ?
+          this.accMul(this.accDiv(this.accDiv(this.accMul(6000000, this.annualRate), 365), 10000), this.eosRateUsdVal)
+          : this.accDiv(this.accDiv(this.accMul(6000000, this.annualRate), 365), 10000)
+      } else if (item.tvl_eos < 200000) {
+        item.agg_rewards_change = 0
+        item.minTag = true
+      } else {
+        item.agg_rewards_change = this.checkedVal1 === 'USD' ?
+          this.accMul(this.accDiv(this.accDiv(this.accMul(item.tvl_eos, this.annualRate), 365), 10000), this.eosRateUsdVal)
+          : this.accDiv(this.accDiv(this.accMul(item.tvl_eos, this.annualRate), 365), 10000)
+        item.midTag = true
+      }
+      if (this.checkedVal1 === 'USD') {
+        item.tvl_usd_changeOld = item.tvl_usd_change
+        // item.tvl_usd_change = item.tvl_usd_change/(tvl_eos-tvl_usd_change)*100
+        // before
+        // if (this.accSub(item.tvl_eos, item.tvl_usd_change) != 0 && this.accSub(item.tvl_eos, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_eos, item.tvl_usd_change), 100))
+        // now
+        if (this.accSub(this.projectInfo.tvl_usd, this.projectInfo.tvl_usd_change_day) != 0) {
+          item.tvl_usd_change = this.accDiv(this.projectInfo.tvl_usd_change_day, this.accDiv(this.accSub(this.projectInfo.tvl_usd, this.projectInfo.tvl_usd_change_day), 100))
+        } else {
+          item.tvl_usd_change = 0
+        }
+        item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
+        item.tvl_usd = this.toFixed(item.tvl_usd, 2)
+        if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
+        else item.tvl_usd_change = `${item.tvl_usd_change}%`
+
+        if (item.tvl_usd_changeDayOld == item.tvl_usd) item.tvl_usd_change = '0.00%'
+
+        if (res.length > 1) {
+          let lastItem = JSON.parse(JSON.stringify(res[res.length - 2]))
+          if (lastItem.tvl_usd == 0) item.tvl_usd_change = '0.00%'
+        }
+      } else {
+        item.tvl_usd_changeOld = item.tvl_eos_change
+        // item.tvl_usd_change = item.tvl_usd_change/(tvl_eos-tvl_usd_change)*100
+        // before
+        // if (this.accSub(item.tvl_eos, item.tvl_usd_change) != 0 && this.accSub(item.tvl_eos, item.tvl_usd_change)) item.tvl_usd_change = this.accDiv(item.tvl_usd_change, this.accDiv(this.accSub(item.tvl_eos, item.tvl_usd_change), 100))
+        // now
+        if (this.accSub(this.projectInfo.tvl_eos, this.projectInfo.tvl_eos_change_day) != 0) {
+          item.tvl_usd_change = this.accDiv(this.projectInfo.tvl_eos_change_day, this.accDiv(this.accSub(this.projectInfo.tvl_eos, this.projectInfo.tvl_eos_change_day), 100))
+        } else {
+          item.tvl_usd_change = 0
+        }
+        item.tvl_usd_change = this.toFixed(item.tvl_usd_change, 2)
+        item.tvl_usd = this.toFixed(item.tvl_usd, 2)
+        if (item.tvl_usd_change > 0) item.tvl_usd_change = `+${item.tvl_usd_change}%`
+        else item.tvl_usd_change = `${item.tvl_usd_change}%`
+
+        if (item.tvl_usd_changeDayOld == item.tvl_eos) item.tvl_usd_change = '0.00%'
+
+        if (res.length > 1) {
+          let lastItem = JSON.parse(JSON.stringify(res[res.length - 2]))
+          if (lastItem.tvl_eos == 0) item.tvl_usd_change = '0.00%'
+        }
+      }
+
+      this.overViewData = item
+
+      chart1.init({
+        self: this,
+        data: res,
+        type: this.checkedVal1
+      })
+      this.overViewData1 = res
     },
     async getInfo() {
       this.loading = true
@@ -1937,24 +2005,6 @@ export default {
           item.github = item.metadata.github
           item.tokenCode = item.metadata['token.code']
           item.tokenSymcode = item.metadata['token.symcode']
-
-          // item.metadataInfo.forEach((i) => {
-          //   if (i.key == "logo") item.logo = `https://ipfs.pink.gg/ipfs/${i.value}`
-          //   else if (i.key == "description") item.description = i.value
-          //   else if (i.key == "website") item.website = i.value
-          //   else if (i.key == "cmc") item.cmc = i.value
-          //   else if (i.key == "recover") item.recover = i.value
-          //   else if (i.key == "coingecko") item.coingecko = i.value
-          //   else if (i.key == "dappradar") item.dappradar = i.value
-          //   else if (i.key == "defillama") item.defillama = i.value
-          //   else if (i.key == "discord") item.discord = i.value
-          //   else if (i.key == "telegram") item.telegram = i.value
-          //   else if (i.key == "twitter") item.twitter = i.value
-          //   else if (i.key == "github") item.github = i.value
-          //   else if (i.key == "token.code") item.tokenCode = i.value
-          //   else if (i.key == "token.symcode") item.tokenSymcode = i.value
-          //   else if (i.key == "name") item.name = i.value
-          // })
           item.otherInfo = {}
           item.otherInfo.name = ""
           item.otherInfo.multi_sig = null
@@ -1968,7 +2018,7 @@ export default {
           if (item.tokenCode && item.tokenSymcode) this.getSupplyInfo()
           // this.$nextTick(() => {
           // })
-          // console.log("this.projectInfo is ", this.projectInfo)
+          // console.log("this.projectInfo is ", this.projectInfo)=
         } else {
           this.projectInfo = null
         }
@@ -2332,6 +2382,7 @@ export default {
         min-width: 77px;
         padding: 0 10px;
         height: 22px;
+        line-height: 22px;
         border-radius: 15px;
         margin-right: 8px;
         margin-bottom: 3px;
@@ -2606,7 +2657,7 @@ export default {
       min-width: 70px;
       padding: 0 10px;
       height: 26px;
-      line-height: 22px;
+      line-height: 26px;
       border-radius: 15px;
       margin-right: 8px;
       margin-bottom: 5px;
@@ -2649,8 +2700,8 @@ export default {
     border: 1px solid #e8e8e8;
     background-color: #fff;
     .box2-left {
-      width: 220px;
-      padding-left: 38px;
+      width: 260px;
+      padding-left: 30px;
       // padding-top: 82px;
       font-size: 14px;
       font-weight: 500;
@@ -2899,7 +2950,8 @@ export default {
 
 .maxTagCls {
   color: #13a57a !important;
-  border: 2px solid #13a57a !important;
+  border: 1px solid #13a57a !important;
+  font-weight: bold !important;
 }
 .midTagCls {
   color: #13a57a !important;
@@ -2943,16 +2995,24 @@ export default {
   // margin-: 24px;
 }
 .review {
+  position: relative;
   // border: 1px solid red;
   flex-direction: column;
-  margin: 0 auto;
-  min-height: 300px;
+  width: 100%;
+  height: 100%;
+  // min-height: 300px;
   img {
     width: 80px;
   }
   span {
     font-size: 14px;
     margin: 20px 0;
+  }
+  .tabCls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
   }
 }
 .imgStyle {

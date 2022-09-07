@@ -7,6 +7,21 @@
     >
       <div class="Protocols-title">
         <div class="Protocols-layout">
+          <div class="title-select flex specil-cls mb">
+            <div class="select-audit flex">
+              <div
+                class="audit-tips1"
+                style="color: #999"
+                @click="clickInfoTab('TVLRankings')"
+              >{{ $t("yield.yield50") }}</div>
+              <div class="audit-line"></div>
+              <div
+                class="audit-tips2"
+                style="color: #000"
+                @click="clickInfoTab('Audit')"
+              >{{ $t("yield.yield51") }}</div>
+            </div>
+          </div>
           <div class="flex">
             <div class="title-search">
               <img src="@/assets/img/svg/sousuo.svg" />
@@ -26,21 +41,6 @@
                 :full-width="true"
                 :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"
               ></v-select>
-            </div>
-          </div>
-          <div class="title-select flex">
-            <div class="select-audit flex">
-              <div
-                class="audit-tips1 flex-1"
-                style="color: #999"
-                @click="clickInfoTab('TVLRankings')"
-              >{{ $t("yield.yield50") }}</div>
-              <div class="audit-line"></div>
-              <div
-                class="audit-tips2 flex-1"
-                style="color: #000"
-                @click="clickInfoTab('Audit')"
-              >{{ $t("yield.yield51") }}</div>
             </div>
           </div>
         </div>
@@ -474,7 +474,7 @@ export default {
       border: 1px solid #000;
       padding: 0 60px 0 17px;
       margin-bottom: 16px;
-      border-radius: 25px;
+      border-radius: 10px;
       img,
       svg {
         margin-right: 12px;
@@ -552,6 +552,16 @@ export default {
           font-size: 14px;
           font-weight: 500;
           color: #999999;
+        }
+      }
+      &.specil-cls {
+        .select-audit {
+          border: 0;
+          padding: 9px 0 0px;
+        }
+        .audit-line {
+          margin: 0 15px;
+          height: 60%;
         }
       }
     }

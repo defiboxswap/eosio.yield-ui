@@ -106,7 +106,7 @@
           <a
             class="BaseHeaderPC-tab"
             :href="item.url"
-            :class="{ 'BaseHeaderPC-tabActive': item.routerName == $route.name }"
+            :class="{ 'BaseHeaderPC-tabActive': (item.routerName == $route.name) || ($route.name === 'Audit' && item.routerName === 'Protocols')}"
             v-for="(item, index) in tabList"
             :key="index"
             @click.prevent="gotoRouter(item)"

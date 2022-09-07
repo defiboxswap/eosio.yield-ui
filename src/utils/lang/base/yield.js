@@ -268,7 +268,7 @@ const items = {
         "yield51": "審核",
         "yield52": "名稱",
         "yield53": "TVL",
-        "yield54": "24h已獎勵 (EOS)",
+        "yield54": "24h已獎勵",
         "yield55": "市值",
         "yield56": "搜索",
         "yield57": "更多",
@@ -422,7 +422,7 @@ const items = {
         "yield205": "(Medium / Twitter post, etc…)",
         "yield206": "https://medium.com/@Protocol/...",
         "yield207": "資產",
-        "yield208": "",
+        "yield208": "24h",
         "yield209": "",
         "yield210": ""
     },
@@ -480,7 +480,7 @@ const items = {
         "yield51": "Audit",
         "yield52": "Name",
         "yield53": "TVL",
-        "yield54": "24h Reward (EOS)",
+        "yield54": "24h Reward",
         "yield55": "Market Cap",
         "yield56": "Search",
         "yield57": "More",
@@ -634,7 +634,7 @@ const items = {
         "yield205": "(Medium / Twitter post, etc…)",
         "yield206": "https://medium.com/@Protocol/...",
         "yield207": "Assets",
-        "yield208": "",
+        "yield208": "24h",
         "yield209": "",
         "yield210": ""
     },
@@ -692,7 +692,7 @@ const items = {
         "yield51": "심사",
         "yield52": "이름",
         "yield53": "TVL",
-        "yield54": "24h보상 (EOS)",
+        "yield54": "24h보상",
         "yield55": "시가총액",
         "yield56": "검색",
         "yield57": "더",
@@ -846,7 +846,7 @@ const items = {
         "yield205": "(Medium / Twitter post, etc…)",
         "yield206": "https://medium.com/@Protocol/...",
         "yield207": "자산",
-        "yield208": "",
+        "yield208": "24h",
         "yield209": "",
         "yield210": ""
     }

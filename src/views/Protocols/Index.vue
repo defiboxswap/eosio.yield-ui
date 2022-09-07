@@ -4,10 +4,25 @@
     <div
       class="Protocols"
       v-if="isMobile"
-    >
+      >
       <div class="Protocols-title">
         <div class="Protocols-layout">
-          <div class="flex">
+          <div class="title-select flex mb specil-cls">
+            <div class="select-audit flex">
+              <div
+                class="audit-tips1"
+                style="color: #000"
+                @click="clickInfoTab('TVLRankings')"
+              >{{ $t("yield.yield50") }}</div>
+              <div class="audit-line"></div>
+              <div
+                class="audit-tips2"
+                style="color: #999"
+                @click="clickInfoTab('Audit')"
+              >{{ $t("yield.yield51") }}</div>
+            </div>
+          </div>
+          <div class="flex mb">
             <div class="title-search">
               <img src="@/assets/img/svg/sousuo.svg" />
               <input
@@ -27,20 +42,19 @@
                 :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"
               ></v-select>
             </div>
-          </div>
-          <div class="title-select flex">
-            <div class="select-audit flex">
-              <div
-                class="audit-tips1 flex-1"
-                style="color: #000"
-                @click="clickInfoTab('TVLRankings')"
-              >{{ $t("yield.yield50") }}</div>
-              <div class="audit-line"></div>
-              <div
-                class="audit-tips2 flex-1"
-                style="color: #999"
-                @click="clickInfoTab('Audit')"
-              >{{ $t("yield.yield51") }}</div>
+            <div class="title-select flex unit-cls">
+              <div class="select-audit flex">
+                <div
+                  class="audit-tips1 flex-1"
+                  :style="{ color: (unitBoolean ? '#000' : '#999')}"
+                  @click="handleUnit('USD')"
+                >USD</div>
+                <div
+                  class="audit-tips2 flex-1"
+                  :style="{ color: (!unitBoolean ? '#000' : '#999')}"
+                  @click="handleUnit('EOS')"
+                >EOS</div>
+              </div>
             </div>
           </div>
         </div>
@@ -109,7 +123,7 @@
                         v-else
                       />
                     </div>
-                    <div class="data-number">${{ getKMBUnit(item.tvl_usd) }}</div>
+                    <div class="data-number">{{ unitBoolean ? `$${getKMBUnit(item.tvl_usd)}` : `${getKMBUnit(item.tvl_eos)} EOS` }}</div>
                   </div>
                   <div class="data-box flex-1">
                     <div
@@ -145,7 +159,7 @@
                       :style="{'color': order === 'tvl_usd_change_day' ? '#000' : ''}"
                       @click.stop="handleOrderType('tvl_usd_change_day')"
                     >
-                      {{ $t("yield.yield42") }}
+                      {{ $t("yield.yield208") }}
                       <img
                         src="@/assets/img/svg/down.png"
                         class="svg"
@@ -231,17 +245,17 @@
                         v-else
                       />
                     </div>
-                    <div class="data-number">{{ toFixed(item.agg_rewards_change, 4) }}</div>
+                    <div class="data-number">{{ unitBoolean ? `$${toFixed(item.agg_rewards_change, 4)}` : `${toFixed(item.agg_rewards_change, 4)} EOS` }}</div>
                   </div>
                 </div>
               </div>
             </div>
             <div
-              v-if="item.maxTips && order === 'tvl_usd'"
+              v-if="item.maxTips && order === 'tvl_usd' && order_type === 'desc'"
               class="tipsBack"
             >{{ $t("yield.yield196") }}</div>
             <div
-              v-if="item.minTips && order === 'tvl_usd'"
+              v-if="item.minTips && order === 'tvl_usd' && order_type === 'desc'"
               class="tipsBack"
             >{{ $t("yield.yield197") }}</div>
           </div>
@@ -297,6 +311,22 @@
               :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"
             ></v-select>
 
+            <div class="select-audit flex flex-align-center unit-cls" style="margin-right: 8px;">
+              <!-- unit usd -->
+              <div
+                class="audit-tips1 flex-1"
+                :style="{ color: (unitBoolean ? '#000' : '#999')}"
+                @click="handleUnit('USD')"
+              >USD</div>
+              <div class="audit-line"></div>
+              <!-- unit eos -->
+              <div
+                class="audit-tips2 flex-1"
+                :style="{ color: (!unitBoolean ? '#000' : '#999')}"
+                @click="handleUnit('EOS')"
+              >EOS</div>
+            </div>
+
             <div class="select-search flex">
               <!-- <div class="flex-1">{{ $t("yield.yield56") }}</div> -->
               <input
@@ -321,7 +351,7 @@
               <!-- PROTOCOLS NAME -->
               <div
                 class="box-1"
-                style="text-align: left; padding-left: 40px"
+                style="text-align: left; padding-left: 20px; width: 380px;"
               >{{ $t("yield.yield52") }}</div>
               <div
                 class="box-2 flex flex-jus-center"
@@ -378,7 +408,7 @@
                 class="box-3 flex flex-jus-center"
                 @click="handleOrderType('tvl_usd_change_day')"
               >
-                <span :style="{'color': order === 'tvl_usd_change_day' ? '#000' : ''}">{{ $t("yield.yield42") }}</span>
+                <span :style="{'color': order === 'tvl_usd_change_day' ? '#000' : ''}">{{ $t("yield.yield208") }}</span>
                 <img
                   src="@/assets/img/svg/down.png"
                   class="svg"
@@ -487,7 +517,7 @@
                     </div>
                   </div>
 
-                  <div class="box-2">${{ getKMBUnit(item.tvl_usd) }}</div>
+                  <div class="box-2">{{ unitBoolean ? `$${getKMBUnit(item.tvl_usd)}` : `${getKMBUnit(item.tvl_eos)} EOS` }}</div>
                   <div
                     class="box-3"
                     :class="getColor(item.tvl_usd_change_8h)"
@@ -508,15 +538,15 @@
                       :src="getImgUrl(item.name)"
                     />
                   </div>
-                  <div class="box-4">{{ toFixed(item.agg_rewards_change, 4) }}</div>
+                  <div class="box-4">{{ unitBoolean ? `$${toFixed(item.agg_rewards_change, 4)}` : `${toFixed(item.agg_rewards_change, 4)} EOS` }}</div>
                   <!-- <div class="box-5">$123.43M</div> -->
                 </div>
                 <div
-                  v-if="item.maxTips && order === 'tvl_usd'"
+                  v-if="item.maxTips && order === 'tvl_usd' && order_type === 'desc'"
                   class="tipsBack"
                 >{{ $t("yield.yield196") }}</div>
                 <div
-                  v-if="item.minTips && order === 'tvl_usd'"
+                  v-if="item.minTips && order === 'tvl_usd' && order_type === 'desc'"
                   class="tipsBack"
                 >{{ $t("yield.yield197") }}</div>
               </a>
@@ -592,7 +622,9 @@ export default {
       ],
       selectVal: this.$t('yield.yield174'),
       hasParams: false,
-      annualRate: 0
+      annualRate: 0,
+      unit: 'USD',
+      eosRateUsdVal: 1
     }
   },
   props: {},
@@ -603,9 +635,9 @@ export default {
         this.initList()
       }, 500)
     },
-    order: function () {
-      this.initList()
-    },
+    // order: function () {
+    //   this.initList()
+    // },
     selectVal: function (oldVal, newVal) {
       if (oldVal === newVal) return
       if (oldVal === this.$route?.query?.category) return
@@ -624,11 +656,18 @@ export default {
       this.initList()
     },
   },
-  computed: mapState({
-    isMobile: (state) => state.app.isMobile,
-  }),
+  computed: {
+    unitBoolean() {
+      if (this.unit === 'USD') return true
+      else return false
+    },
+    ...mapState({
+      isMobile: state => state.app.isMobile
+    }),
+  },
   async created() {
     await this.getRate()
+    await this.eosRateUsd()
     this.initList()
   },
   mounted() {
@@ -647,6 +686,25 @@ export default {
         let res = await DApp.getTableRows(params)
         if (res.length > 0) {
           this.annualRate = res[0].annual_rate
+        }
+      } catch (error) {
+        console.log(error, 'error');
+      }
+    },
+    async eosRateUsd() {
+      try {
+        const params = {
+          code: 'oracle.defi',
+          scope: 'oracle.defi',
+          json: true,
+          limit: -1,
+          table: 'prices',
+          lower_bound: 1,
+          upper_bound: 1,
+        }
+        let res = await DApp.getTableRows(params)
+        if (res.length > 0) {
+          this.eosRateUsdVal = this.accDiv(res[0].avg_price, 10000)
         }
       } catch (error) {
         console.log(error, 'error');
@@ -696,45 +754,71 @@ export default {
           order: this.order,
           status: 'active',
           category,
-          order_type: this.order_type
+          order_type: 'desc'
         })
         if (result?.code === 200 && result.data) {
           result.data.forEach((item, index) => {
             if (item.tvl_eos > 6000000) {
               item.maxTag = true
-              item.agg_rewards_change = this.accDiv(this.accDiv(this.accMul(6000000, this.annualRate), 365), 10000)
+              item.agg_rewards_change = this.unitBoolean ?
+                this.accMul(this.accDiv(this.accDiv(this.accMul(6000000, this.annualRate), 365), 10000), this.eosRateUsdVal)
+                : this.accDiv(this.accDiv(this.accMul(6000000, this.annualRate), 365), 10000)
             } else if (item.tvl_eos < 200000) {
               item.agg_rewards_change = 0
               item.minTag = true
             } else {
-              item.agg_rewards_change = this.accDiv(this.accDiv(this.accMul(item.tvl_eos, this.annualRate), 365), 10000)
+              item.agg_rewards_change = this.unitBoolean ?
+                this.accMul(this.accDiv(this.accDiv(this.accMul(item.tvl_eos, this.annualRate), 365), 10000), this.eosRateUsdVal)
+                : this.accDiv(this.accDiv(this.accMul(item.tvl_eos, this.annualRate), 365), 10000)
               item.midTag = true
             }
             // item.logo = ""
             item.nameUrlencode = `/protocols/${encodeURIComponent(item.name)}`
             // item.nameUrlencode = "/ProtocolsDetails?name=" + encodeURIComponent(item.name)
             item.logo = `https://ipfs.pink.gg/ipfs/${item.metadata.logo}`
-            // item.name = item.metadata.name
-            item.tvl_usd_changeDayOld = item.tvl_usd_change_day
-            item.tvl_usd_change8hOld = item.tvl_usd_change_8h
-            item.tvl_usd_changeWeekOld = item.tvl_usd_change_week
-            // item.tvl_usd_change_day = item.tvl_usd_change_day/(tvl_usd-tvl_usd_change_day)*100
-            if (this.accSub(item.tvl_usd, item.tvl_usd_change_day) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change_day)) item.tvl_usd_change_day = this.accDiv(item.tvl_usd_change_day, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change_day), 100))
-            if (this.accSub(item.tvl_usd, item.tvl_usd_change_8h) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change_8h)) item.tvl_usd_change_8h = this.accDiv(item.tvl_usd_change_8h, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change_8h), 100))
-            if (this.accSub(item.tvl_usd, item.tvl_usd_change_week) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change_week)) item.tvl_usd_change_week = this.accDiv(item.tvl_usd_change_week, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change_week), 100))
+            if (this.unit === 'USD') {
+              item.tvl_usd_changeDayOld = item.tvl_usd_change_day
+              item.tvl_usd_change8hOld = item.tvl_usd_change_8h
+              item.tvl_usd_changeWeekOld = item.tvl_usd_change_week
+              // item.tvl_usd_change_day = item.tvl_usd_change_day/(tvl_usd-tvl_usd_change_day)*100
+              if (this.accSub(item.tvl_usd, item.tvl_usd_change_day) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change_day)) item.tvl_usd_change_day = this.accDiv(item.tvl_usd_change_day, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change_day), 100))
+              if (this.accSub(item.tvl_usd, item.tvl_usd_change_8h) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change_8h)) item.tvl_usd_change_8h = this.accDiv(item.tvl_usd_change_8h, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change_8h), 100))
+              if (this.accSub(item.tvl_usd, item.tvl_usd_change_week) != 0 && this.accSub(item.tvl_usd, item.tvl_usd_change_week)) item.tvl_usd_change_week = this.accDiv(item.tvl_usd_change_week, this.accDiv(this.accSub(item.tvl_usd, item.tvl_usd_change_week), 100))
 
-            item.tvl_usd_change_day = this.toFixed(item.tvl_usd_change_day, 2)
-            item.tvl_usd_change_8h = this.toFixed(item.tvl_usd_change_8h, 2)
-            item.tvl_usd_change_week = this.toFixed(item.tvl_usd_change_week, 2)
-            if (item.tvl_usd_change_day > 0) item.tvl_usd_change_day = `+${item.tvl_usd_change_day}%`
-            else item.tvl_usd_change_day = `${item.tvl_usd_change_day}%`
-            if (item.tvl_usd_change_8h > 0) item.tvl_usd_change_8h = `+${item.tvl_usd_change_8h}%`
-            else item.tvl_usd_change_8h = `${item.tvl_usd_change_8h}%`
-            if (item.tvl_usd_change_week > 0) item.tvl_usd_change_week = `+${item.tvl_usd_change_week}%`
-            else item.tvl_usd_change_week = `${item.tvl_usd_change_week}%`
-            if (item.tvl_usd_changeDayOld == item.tvl_usd) item.tvl_usd_change_day = '0.00%'
-            if (item.tvl_usd_change8hOld == item.tvl_usd) item.tvl_usd_change_8h = '0.00%'
-            if (item.tvl_usd_changeWeekOld == item.tvl_usd) item.tvl_usd_change_week = '0.00%'
+              item.tvl_usd_change_day = this.toFixed(item.tvl_usd_change_day, 2)
+              item.tvl_usd_change_8h = this.toFixed(item.tvl_usd_change_8h, 2)
+              item.tvl_usd_change_week = this.toFixed(item.tvl_usd_change_week, 2)
+              if (item.tvl_usd_change_day > 0) item.tvl_usd_change_day = `+${item.tvl_usd_change_day}%`
+              else item.tvl_usd_change_day = `${item.tvl_usd_change_day}%`
+              if (item.tvl_usd_change_8h > 0) item.tvl_usd_change_8h = `+${item.tvl_usd_change_8h}%`
+              else item.tvl_usd_change_8h = `${item.tvl_usd_change_8h}%`
+              if (item.tvl_usd_change_week > 0) item.tvl_usd_change_week = `+${item.tvl_usd_change_week}%`
+              else item.tvl_usd_change_week = `${item.tvl_usd_change_week}%`
+              if (item.tvl_usd_changeDayOld == item.tvl_usd) item.tvl_usd_change_day = '0.00%'
+              if (item.tvl_usd_change8hOld == item.tvl_usd) item.tvl_usd_change_8h = '0.00%'
+              if (item.tvl_usd_changeWeekOld == item.tvl_usd) item.tvl_usd_change_week = '0.00%'
+            } else {
+              item.tvl_usd_changeDayOld = item.tvl_eos_change_day
+              item.tvl_usd_change8hOld = item.tvl_eos_change_8h
+              item.tvl_usd_changeWeekOld = item.tvl_eos_change_week
+              // item.tvl_usd_change_day = item.tvl_usd_change_day/(tvl_usd-tvl_usd_change_day)*100
+              if (this.accSub(item.tvl_eos, item.tvl_eos_change_day) != 0 && this.accSub(item.tvl_eos, item.tvl_eos_change_day)) item.tvl_usd_change_day = this.accDiv(item.tvl_eos_change_day, this.accDiv(this.accSub(item.tvl_eos, item.tvl_eos_change_day), 100))
+              if (this.accSub(item.tvl_eos, item.tvl_eos_change_8h) != 0 && this.accSub(item.tvl_eos, item.tvl_eos_change_8h)) item.tvl_usd_change_8h = this.accDiv(item.tvl_eos_change_8h, this.accDiv(this.accSub(item.tvl_eos, item.tvl_eos_change_8h), 100))
+              if (this.accSub(item.tvl_eos, item.tvl_eos_change_week) != 0 && this.accSub(item.tvl_eos, item.tvl_eos_change_week)) item.tvl_usd_change_week = this.accDiv(item.tvl_eos_change_week, this.accDiv(this.accSub(item.tvl_eos, item.tvl_eos_change_week), 100))
+
+              item.tvl_usd_change_day = this.toFixed(item.tvl_usd_change_day, 2)
+              item.tvl_usd_change_8h = this.toFixed(item.tvl_usd_change_8h, 2)
+              item.tvl_usd_change_week = this.toFixed(item.tvl_usd_change_week, 2)
+              if (item.tvl_usd_change_day > 0) item.tvl_usd_change_day = `+${item.tvl_usd_change_day}%`
+              else item.tvl_usd_change_day = `${item.tvl_usd_change_day}%`
+              if (item.tvl_usd_change_8h > 0) item.tvl_usd_change_8h = `+${item.tvl_usd_change_8h}%`
+              else item.tvl_usd_change_8h = `${item.tvl_usd_change_8h}%`
+              if (item.tvl_usd_change_week > 0) item.tvl_usd_change_week = `+${item.tvl_usd_change_week}%`
+              else item.tvl_usd_change_week = `${item.tvl_usd_change_week}%`
+              if (item.tvl_usd_changeDayOld == item.tvl_eos) item.tvl_usd_change_day = '0.00%'
+              if (item.tvl_usd_change8hOld == item.tvl_eos) item.tvl_usd_change_8h = '0.00%'
+              if (item.tvl_usd_changeWeekOld == item.tvl_eos) item.tvl_usd_change_week = '0.00%'
+            }
             result.data.forEach((items, indexs) => {
               if (item.tvl_eos > 6000000) {
                 if (indexs === index + 1 && items.tvl_eos <= 6000000) {
@@ -763,15 +847,47 @@ export default {
     handleOrderType(type) {
       if (type === this.order) {
         this.order_type === 'desc' ? this.order_type = 'asc' : this.order_type = 'desc'
-        this.initList()
-        return
       } else {
         this.order_type = 'desc'
       }
+
+      if (type === 'tvl_usd_change_8h' && this.order_type === 'desc') {
+        this.protocolsList = this.protocolsList.sort(function (a, b) { return parseFloat(b.tvl_usd_change_8h) - parseFloat(a.tvl_usd_change_8h) });
+      } else if (type === 'tvl_usd_change_8h' && this.order_type === 'asc') {
+        this.protocolsList = this.protocolsList.sort(function (a, b) { return parseFloat(a.tvl_usd_change_8h) - parseFloat(b.tvl_usd_change_8h) });
+      }
+      if (type === 'tvl_usd_change_day' && this.order_type === 'desc') {
+        this.protocolsList.sort(function (a, b) { return parseFloat(b.tvl_usd_change_day) - parseFloat(a.tvl_usd_change_day) });
+      } else if (type === 'tvl_usd_change_day' && this.order_type === 'asc') {
+        this.protocolsList.sort(function (a, b) { return parseFloat(a.tvl_usd_change_day) - parseFloat(b.tvl_usd_change_day) });
+      }
+      if (type === 'tvl_usd_change_week' && this.order_type === 'desc') {
+        this.protocolsList.sort(function (a, b) { return parseFloat(b.tvl_usd_change_week) - parseFloat(a.tvl_usd_change_week) });
+      } else if (type === 'tvl_usd_change_week' && this.order_type === 'asc') {
+        this.protocolsList.sort(function (a, b) { return parseFloat(a.tvl_usd_change_week) - parseFloat(b.tvl_usd_change_week) });
+      }
+      if (type === 'agg_rewards' && this.order_type === 'desc') {
+        this.protocolsList.sort(function (a, b) { return b.agg_rewards - a.agg_rewards });
+      } else if (type === 'agg_rewards' && this.order_type === 'asc') {
+        this.protocolsList.sort(function (a, b) { return a.agg_rewards - b.agg_rewards });
+      }
+      if (type === 'tvl_usd' && this.order_type === 'desc' && this.unit === 'USD') {
+        this.protocolsList.sort(function (a, b) { return b.tvl_usd - a.tvl_usd });
+      } else if (type === 'tvl_usd' && this.order_type === 'asc' && this.unit === 'USD') {
+        this.protocolsList.sort(function (a, b) { return a.tvl_usd - b.tvl_usd });
+      } else if (type === 'tvl_usd' && this.order_type === 'desc' && this.unit === 'EOS') {
+        this.protocolsList.sort(function (a, b) { return b.tvl_eos - a.tvl_eos });
+      } else if (type === 'tvl_usd' && this.order_type === 'asc' && this.unit === 'EOS') {
+        this.protocolsList.sort(function (a, b) { return a.tvl_eos - b.tvl_eos });
+      }
       this.order = type
     },
+    handleUnit(item) {
+      this.unit = item
+      this.initList()
+    },
     getImgUrl(name) {
-      return `${baseURL}/v1/protocols/${name}/sparkline?tvl_type=tvl_usd`
+      return `${baseURL}/v1/protocols/${name}/sparkline?tvl_type=tvl_${this.unit.toLowerCase()}`
     },
     getColor(item) {
       const val = item.slice(0, item.length - 1)
@@ -826,16 +942,16 @@ export default {
       height: 45px;
       line-height: 45px;
       border: 1px solid #000;
-      padding: 0 60px 0 17px;
-      margin-bottom: 16px;
-      border-radius: 25px;
+      padding: 0 8px 0 17px;
+      border-radius: 10px;
+      margin-right: 10px;
       img,
       svg {
-        margin-right: 12px;
+        margin-right: 10px;
         width: 20px;
         display: inline-block;
         vertical-align: middle;
-        margin-top: -5px;
+        margin-top: -3px;
       }
       ::-webkit-input-placeholder {
         /* WebKit, Blink, Edge */
@@ -885,8 +1001,9 @@ export default {
         height: 45px;
         line-height: 45px;
         padding: 9px 0 9px 15px;
-        border-radius: 25px;
+        border-radius: 10px;
         border: 1px solid #000;
+
         .audit-line {
           width: 1px;
           height: 100%;
@@ -899,13 +1016,35 @@ export default {
           color: #000000;
         }
         .audit-tips2 {
-          width: 70px;
+          width: 60px;
           text-align: center;
           // text-align: right;
           padding-right: 25px;
           font-size: 14px;
           font-weight: 500;
           color: #999999;
+        }
+      }
+      &.unit-cls {
+
+        .select-audit {
+          padding: 9px 2px;
+        }
+        .audit-tips2 {
+          padding-right: 0;
+        }
+      }
+      &.specil-cls {
+        .select-audit {
+          border: 0;
+          padding: 9px 0 0px;
+        }
+        .audit-line {
+          margin: 0 15px;
+          height: 60%;
+        }
+        .audit-tips1, .audit-tips2 {
+          font-size: 18px;
         }
       }
     }
@@ -999,6 +1138,7 @@ export default {
         min-width: 77px;
         padding: 0 10px;
         height: 22px;
+        line-height: 22px;
         border-radius: 15px;
         margin-right: 8px;
         margin-bottom: 3px;
@@ -1010,8 +1150,9 @@ export default {
       }
 
       .maxTagCls {
-        color: #13a57a;
-        border: 2px solid #13a57a;
+        color: #13a57a !important;
+        border: 1px solid #13a57a !important;
+        font-weight: bold !important;
       }
       .midTagCls {
         color: #13a57a;
@@ -1114,6 +1255,11 @@ export default {
           font-size: 14px;
           font-weight: 500;
           color: #999999;
+        }
+
+        &.unit-cls {
+          width: 150px;
+          padding: 9px 10px 9px 10px;
         }
       }
 
@@ -1222,8 +1368,8 @@ export default {
         }
       }
       .box-1 {
-        width: 340px;
-        padding-left: 40px;
+        width: 350px;
+        padding-left: 20px;
       }
       .box-2 {
         width: 200px;
@@ -1275,6 +1421,7 @@ export default {
           min-width: 77px;
           padding: 0 10px;
           height: 22px;
+          line-height: 22px;
           border-radius: 15px;
           margin-right: 8px;
           font-size: 10px;
