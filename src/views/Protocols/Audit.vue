@@ -563,6 +563,9 @@ export default {
           margin: 0 15px;
           height: 60%;
         }
+        .audit-tips1, .audit-tips2 {
+          font-size: 18px;
+        }
       }
     }
     .select-all {
