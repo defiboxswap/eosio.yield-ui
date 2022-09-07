@@ -245,7 +245,7 @@
                         v-else
                       />
                     </div>
-                    <div class="data-number">{{ unitBoolean ? `$${toFixed(item.agg_rewards_change, 4)}` : `${toFixed(item.agg_rewards_change, 4)} EOS` }}</div>
+                    <div class="data-number">{{ unitBoolean ? `$${toFixed(item.agg_rewards_change, 2)}` : `${toFixed(item.agg_rewards_change, 4)} EOS` }}</div>
                   </div>
                 </div>
               </div>
@@ -538,7 +538,7 @@
                       :src="getImgUrl(item.name)"
                     />
                   </div>
-                  <div class="box-4">{{ unitBoolean ? `$${toFixed(item.agg_rewards_change, 4)}` : `${toFixed(item.agg_rewards_change, 4)} EOS` }}</div>
+                  <div class="box-4">{{ unitBoolean ? `$${toFixed(item.agg_rewards_change, 2)}` : `${toFixed(item.agg_rewards_change, 4)} EOS` }}</div>
                   <!-- <div class="box-5">$123.43M</div> -->
                 </div>
                 <div
