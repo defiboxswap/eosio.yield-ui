@@ -1431,7 +1431,8 @@ export default {
         }
         .maxTagCls {
           color: #13a57a;
-          border: 2px solid #13a57a;
+          border: 1px solid #13a57a !important;
+          font-weight: bold !important;
         }
         .midTagCls {
           color: #13a57a;
