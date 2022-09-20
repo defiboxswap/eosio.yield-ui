@@ -273,11 +273,11 @@ export default {
   methods: {
     gotoRouter(item) {
       if (item.routerName == "Bluepaper") {
-        if (this.$store.state.app.language == "zh-TW") window.open("https://eosnetwork.com/zh/blog/eos-yield-blue-paper/")
-        else window.open("https://eosnetwork.com/blog/eos-yield-blue-paper/")
+        window.open("https://eosnetwork.com/blog/category/yield-reports/")
         return
       } else if (item.routerName == "Docs") {
         window.open(item.url)
+        return
       }
       this.$router.push(item.url)
     },

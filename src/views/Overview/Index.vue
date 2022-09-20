@@ -86,17 +86,24 @@
           ></div>
         </div>
 
-        <!-- Analysis report -->
+        <!-- Report -->
         <div class="Overview-report">
-          <div class="report-title">{{ $t("yield.yield44") }}</div>
-          <!-- <div class="report-card" v-for="(item, index) in 5" :key="index">
-            <div class="card-title">YEILD + DATA RESEARCH REPORT</div>
-            <div class="card-time">03/23/2022</div>
-            <v-btn class="card-button">View</v-btn>
-          </div>
-          <div class="report-add text-flex-center">Add</div> -->
-          <div style="margin-top: -50px;">
-            <BaseNoData></BaseNoData>
+          <div class="report-title">{{ $t("yield.yield5") }}</div>
+          <div class="Overview-report-wrap" @click="openWindow('https://eosnetwork.com/blog/eos-yield-blue-paper/')">
+            <div class="Overview-report-wrap__item">
+              <img src="@/assets/img/report/report1.png" alt="">
+              <div class="report-name">
+                May 26 · By EOS Network Foundation
+              </div>
+              <div class="report-word">EOS Yield+ Blue Paper</div>
+              <div class="report-read flex">
+                <v-icon
+                  color="#000"
+                  size="18"
+                >mdi-clock-outline</v-icon>
+                <span class="ml5">3 min read</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -192,21 +199,24 @@
       </div>
 
       <div class="OverviewPC-report">
-        <!-- Analysis Report -->
-        <div class="report-title">{{ $t("yield.yield44") }}</div>
-
         <div class="OverviewPC-layout">
-          <!-- <div class="flex flex-align-center flex-wrap">
-            <div class="report-card" v-for="(item, index) in 4" :key="index">
-              <div class="card-title">YEILD + DATA RESEARCH REPORT</div>
-              <div class="card-time">03/23/2022</div>
-              <v-btn class="card-button">View</v-btn>
+          <!-- Report -->
+          <div class="report-title">{{ $t("yield.yield5") }}</div>
+          <div class="OverviewPC-report-wrap">
+            <div class="OverviewPC-report-wrap__item" @click="openWindow('https://eosnetwork.com/blog/eos-yield-blue-paper/')">
+              <img src="@/assets/img/report/report1.png" alt="">
+              <div class="report-name">
+                May 26 · By EOS Network Foundation
+              </div>
+              <div class="report-word">EOS Yield+ Blue Paper</div>
+              <div class="report-read flex">
+                <v-icon
+                  color="#000"
+                  size="18"
+                >mdi-clock-outline</v-icon>
+                <span class="ml5">3 min read</span>
+              </div>
             </div>
-
-            <div class="report-add text-flex-center">Add</div>
-          </div> -->
-          <div style="margin-top: -50px;">
-            <BaseNoData></BaseNoData>
           </div>
         </div>
       </div>
@@ -601,49 +611,29 @@ export default {
       margin-bottom: 13px;
       margin-top: 30px;
     }
-    .report-card {
-      width: 100%;
-      border: 1px solid #efefef;
-      background-color: #fff;
-      border-radius: 12px;
-      padding: 40px;
-      margin-bottom: 10px;
-      .card-title {
-        font-size: 22px;
-        font-weight: 600;
-        color: #000000;
+    &-wrap {
+      display: flex;
+      &__item {
+        cursor: pointer;
+        img {
+          display: block;
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        .report-name {
+          font-size: 12px;
+          color: #757575;
+        }
+        .report-word {
+          font-size: 22px;
+          color: #000;
+          line-height: 46px;
+        }
+        .report-read {
+          font-size: 12px;
+          color: #000;
+        }
       }
-      .card-time {
-        font-size: 18px;
-        font-weight: 400;
-        color: #000000;
-        margin-top: 10px;
-        margin-bottom: 30px;
-      }
-      .card-button {
-        min-width: 98px;
-        height: 43px;
-        line-height: 43px;
-        padding: 0 25px;
-        border-radius: 20px;
-        background-color: #1c1dff;
-        font-size: 18px;
-        font-weight: 600;
-        color: #ffffff;
-      }
-    }
-    .report-add {
-      border: 1px solid #efefef;
-      background-color: #fff;
-      border-radius: 12px;
-      width: 100%;
-      height: 258px;
-      line-height: 258px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 600;
-      color: #000000;
-      cursor: pointer;
     }
   }
 }
@@ -776,61 +766,41 @@ export default {
 
   .OverviewPC-report {
     margin-top: 70px;
+    .OverviewPC-layout {
+      padding-left: 20px;
+    }
     .report-title {
-      width: 1200px;
-      margin: 0 auto;
-      padding-left: 16px;
       font-size: 28px;
       font-weight: 600;
       color: #000000;
       margin-bottom: 23px;
     }
-    .OverviewPC-layout {
-      padding-left: 20px;
-    }
-    .report-card {
-      width: 374px;
-      height: 244px;
-      margin-right: 18px;
-      margin-bottom: 18px;
-      padding: 43px 43px 32px;
-      border: 1px solid #e8e8e8;
-      .card-title {
-        font-size: 22px;
-        font-weight: 600;
-        color: #000000;
+
+    &-wrap {
+      display: flex;
+
+      &__item {
+        width: 33.33%;
+        cursor: pointer;
+        img {
+          display: block;
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        .report-name {
+          font-size: 12px;
+          color: #757575;
+        }
+        .report-word {
+          font-size: 22px;
+          color: #000;
+          line-height: 46px;
+        }
+        .report-read {
+          font-size: 12px;
+          color: #000;
+        }
       }
-      .card-time {
-        font-size: 18px;
-        font-weight: 400;
-        color: #000000;
-        margin-top: 10px;
-        margin-bottom: 15px;
-      }
-      .card-button {
-        min-width: 98px;
-        height: 43px;
-        line-height: 43px;
-        padding: 0 25px;
-        border-radius: 20px;
-        background-color: #1c1dff;
-        font-size: 18px;
-        font-weight: 600;
-        color: #ffffff;
-      }
-    }
-    .report-add {
-      width: 374px;
-      height: 244px;
-      line-height: 244px;
-      text-align: center;
-      background-color: #f9fafb;
-      font-size: 16px;
-      font-weight: 600;
-      color: #000000;
-      margin-right: 18px;
-      margin-bottom: 18px;
-      cursor: pointer;
     }
   }
 }

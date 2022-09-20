@@ -1795,7 +1795,7 @@ export default {
     'checkedVal1': {
       handler: async function () {
         try {
-          let item = JSON.parse(JSON.stringify(this.overViewData1[this.overViewData1.length - 1]))
+          // let item = JSON.parse(JSON.stringify(this.overViewData1[this.overViewData1.length - 1]))
           this.formatData(this.overViewData, this.overViewData1)
           // chart1.init({
           //   self: this,
