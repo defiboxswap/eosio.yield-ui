@@ -1367,15 +1367,18 @@ export default {
           cursor: pointer;
         }
       }
+
       .box-1 {
-        width: 350px;
+        width: 400px;
         padding-left: 20px;
       }
+
       .box-2 {
-        width: 200px;
+        width: 150px;
       }
+
       .box-3 {
-        width: 200px;
+        width: 150px;
       }
       .box-4 {
         width: 275px;
