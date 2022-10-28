@@ -212,7 +212,8 @@ const items = {
         "yield207": "",
         "yield208": "",
         "yield209": "",
-        "yield210": ""
+        "yield210": "",
+        "yield211": ""
     },
     "zhTW": {
         "yield1": "首頁",
@@ -423,8 +424,9 @@ const items = {
         "yield206": "https://medium.com/@Protocol/...",
         "yield207": "資產",
         "yield208": "24h",
-        "yield209": "",
-        "yield210": ""
+        "yield209": "賬戶不存在",
+        "yield210": "接收獎勵",
+        "yield211": "請輸入接收賬戶"
     },
     "en": {
         "yield1": "Home",
@@ -635,8 +637,9 @@ const items = {
         "yield206": "https://medium.com/@Protocol/...",
         "yield207": "Assets",
         "yield208": "24h",
-        "yield209": "",
-        "yield210": ""
+        "yield209": "Account not exist",
+        "yield210": "Receive rewards",
+        "yield211": "Please enter the receiving account"
     },
     "ko": {
         "yield1": "집",
@@ -847,8 +850,9 @@ const items = {
         "yield206": "https://medium.com/@Protocol/...",
         "yield207": "자산",
         "yield208": "24h",
-        "yield209": "",
-        "yield210": ""
+        "yield209": "계정이 존재하지 않음",
+        "yield210": "보너스를 받다",
+        "yield211": "수신 계정을 입력해 주세요"
     }
   }
 }

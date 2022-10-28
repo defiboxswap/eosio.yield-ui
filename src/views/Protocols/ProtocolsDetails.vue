@@ -673,6 +673,7 @@
                 color="footer-button1"
                 :loading="claimLoading"
                 @click="handleClaim"
+                :disabled="parseInt(rewards) === 0"
                 v-if="rewards && rewards != '-'"
               >{{ $t("yield.yield97") }}</v-btn>
               <v-btn
@@ -1535,6 +1536,7 @@
                   class="footer-button1"
                   :loading="claimLoading"
                   @click="handleClaim"
+                  :disabled="parseInt(rewards) === 0"
                   v-if="projectInfo.status == 'active' && rewards && rewards != '-'"
                 >{{ $t("yield.yield97") }}</v-btn>
                 <v-btn
@@ -1733,6 +1735,45 @@
         </div>
       </div>
     </v-dialog>
+
+    <!-- claim name dialog -->
+    <v-dialog
+      width="90%"
+      max-width="360px"
+      v-model="claimDialogVisible"
+      :persistent="true"
+    >
+      <div class="dialogC">
+        <div
+          class="dialogC-close"
+          @click="claimDialogVisible = false"
+        >
+          <v-icon small>mdi-window-close</v-icon>
+        </div>
+        <div class="categoryDialog">
+          <div class="categoryDialog-title">{{ $t("yield.yield210") }}</div>
+          <input
+            class="input-cls"
+            type="text"
+            v-model="claimFormName"
+            :placeholder="$t('yield.yield211')"
+          />
+          <!-- <div class="error-cls" v-if="claimFormName === ''">请输入接收账户</div> -->
+          <div class="error-cls" v-if="claimFormName && !claimFormNameVeri">{{ $t("yield.yield209") }}</div>
+          <div
+            class="flex flex-jus-center"
+            style="margin-top: 30px; width: 100%;"
+          >
+            <v-btn
+              class="setCategoryBtn btn-cls"
+              @click="handleClaimLast"
+              :disabled="claimFormName === ''"
+              :loading="claimLoading"
+            >{{ $t("yield.yield169") }}</v-btn>
+          </div>
+        </div>
+      </div>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -1757,6 +1798,9 @@ export default {
       categoryItem: this.$t("yield.yield46"),
       categoryList: [this.$t("yield.yield46"), this.$t("yield.yield47"), this.$t("yield.yield48"), this.$t("yield.yield49"), this.$t("yield.yield149")],
       categoryDialogVisible: false,
+      claimDialogVisible: false,
+      claimFormName: '',
+      claimFormNameVeri: true,
 
       loading: false,
       projectName: "",
@@ -1792,6 +1836,11 @@ export default {
   components: {},
   props: {},
   watch: {
+    'claimFormName': {
+      handler: function (val) {
+        if (!val) this.claimFormNameVeri = true
+      }
+    },
     'checkedVal1': {
       handler: async function () {
         try {
@@ -1826,6 +1875,7 @@ export default {
       // projectOwner
       if (this.$store.state.app.accountInfo.account == this.projectName) return 2
       return null
+      // return 2
     },
   },
   async created() {
@@ -2224,9 +2274,14 @@ export default {
         this.getRewards()
       }, 2000)
     },
-    // Claim
-    async handleClaim() {
-      if (this.rewards == "-" || !this.rewards) return
+    async handleClaimLast() {
+      const veriResult = await this.handleGetAccount()
+      if (!veriResult) {
+        this.claimFormNameVeri = false
+        return
+      } else {
+        this.claimFormNameVeri = true
+      }
       const permission = Array.isArray(this.$store.state.app.accountInfo.permissions) ? this.$store.state.app.accountInfo.permissions[0] : this.$store.state.app.accountInfo.permissions
       const formName = this.$store.state.app.accountInfo.account
       if (!formName) return
@@ -2249,7 +2304,7 @@ export default {
         ],
         data: {
           protocol: this.projectName,
-          receiver: formName,
+          receiver: this.claimFormName,
         },
       })
 
@@ -2270,8 +2325,37 @@ export default {
         this.getInfo()
         this.getRewards()
       }, 2000)
+      this.claimDialogVisible = false
       // yes
       this.$toast("claim success!")
+    },
+    // account veri
+    handleGetAccount() {
+      const params = {
+        account_name: this.claimFormName,
+      };
+      return new Promise(async (resolve) => {
+        axios
+        .post(`${this.$store.state.sys.node.httpEndpoint}/v1/chain/get_account`, JSON.stringify(params))
+        .then((result) => {
+          const res = result.data;
+          if (res.account_name === this.claimFormName) {
+            resolve(true);
+            return;
+          }
+          resolve(false);
+        })
+        .catch(() => {
+          resolve(false);
+        });
+      })
+    },
+    // Claim
+    async handleClaim() {
+      if (this.rewards == "-" || !this.rewards) return
+      this.claimFormNameVeri = true
+      this.claimDialogVisible = true
+      this.claimFormName = this.$store.state.app.accountInfo.account
     },
     // getAdminAccount
     getAdminAccount() {
@@ -3033,5 +3117,28 @@ export default {
 }
 ::v-deep .v-list {
   padding: 0 0 !important;
+}
+
+.input-cls {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 10px;
+  border: 1px solid #efefef;
+  border-radius: 12px;
+  position: relative;
+  margin: 10px 0 5px;
+}
+.error-cls {
+  color: red;
+}
+
+.btn-cls {
+  width: 100% !important;
+}
+
+.categoryDialog-title {
+  margin: 10px 0 0 !important;
+  font-weight: bold;
 }
 </style>
