@@ -2240,7 +2240,7 @@ export default {
         authorization: [
           {
             actor: this.projectName,
-            permission: "active",
+            permission: permission || "active",
           },
           {
             actor: formName,
