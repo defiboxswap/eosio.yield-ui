@@ -89,6 +89,22 @@
         <!-- Report -->
         <div class="Overview-report">
           <div class="report-title">{{ $t("yield.yield5") }}</div>
+          <div class="Overview-report-wrap mb15" @click="openWindow('https://eosnetwork.com/blog/october-2022-yield-report/')">
+            <div class="Overview-report-wrap__item">
+              <img src="@/assets/img/report/report3.jpeg" alt="">
+              <div class="report-name">
+                Nov 8 · By EOS Network Foundation
+              </div>
+              <div class="report-word">October 2022 Yield+ Report</div>
+              <div class="report-read flex">
+                <v-icon
+                  color="#000"
+                  size="18"
+                >mdi-clock-outline</v-icon>
+                <span class="ml5">5 min read</span>
+              </div>
+            </div>
+          </div>
           <div class="Overview-report-wrap mb15" @click="openWindow('https://eosnetwork.com/blog/september-2022-yield-report/')">
             <div class="Overview-report-wrap__item">
               <img src="@/assets/img/report/report2.png" alt="">
@@ -117,7 +133,7 @@
                   color="#000"
                   size="18"
                 >mdi-clock-outline</v-icon>
-                <span class="ml5">30 min read</span>
+                <span class="ml5">3 min read</span>
               </div>
             </div>
           </div>
@@ -219,6 +235,20 @@
           <!-- Report -->
           <div class="report-title">{{ $t("yield.yield5") }}</div>
           <div class="OverviewPC-report-wrap">
+            <div class="OverviewPC-report-wrap__item mr15" @click="openWindow('https://eosnetwork.com/blog/october-2022-yield-report/')">
+              <img src="@/assets/img/report/report3.jpeg" alt="">
+              <div class="report-name">
+                Nov 8 · By EOS Network Foundation
+              </div>
+              <div class="report-word">October 2022 Yield+ Report</div>
+              <div class="report-read flex">
+                <v-icon
+                  color="#000"
+                  size="18"
+                >mdi-clock-outline</v-icon>
+                <span class="ml5">5 min read</span>
+              </div>
+            </div>
             <div class="OverviewPC-report-wrap__item mr15" @click="openWindow('https://eosnetwork.com/blog/september-2022-yield-report/')">
               <img src="@/assets/img/report/report2.png" alt="">
               <div class="report-name">
@@ -244,7 +274,7 @@
                   color="#000"
                   size="18"
                 >mdi-clock-outline</v-icon>
-                <span class="ml5">30 min read</span>
+                <span class="ml5">3 min read</span>
               </div>
             </div>
           </div>
