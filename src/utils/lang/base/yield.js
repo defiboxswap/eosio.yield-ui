@@ -213,7 +213,9 @@ const items = {
         "yield208": "",
         "yield209": "",
         "yield210": "",
-        "yield211": ""
+        "yield211": "",
+        "yield212": "",
+        "yield213": ""
     },
     "zhTW": {
         "yield1": "首頁",
@@ -227,7 +229,7 @@ const items = {
         "yield9": "語言",
         "yield10": "登錄",
         "yield11": "什麼是Yield+？",
-        "yield12": "Yield+ 是一項 EOSIO 社區計劃，旨在增加 dApp 開發人員獲得獎勵和 EOS 用戶在 EOS 主網上賺取收益的機會。 Yield+ 工作組為 EOS 設計並提出了流動性獎勵計劃。這是一個鏈上計劃，直接衡量和獎勵 EOS 上增加的經濟活動。",
+        "yield12": "Yield+ 是一項",
         "yield13": "Yield+階段",
         "yield14": "這個階段大約每季度分發 {num} 個 EOS。",
         "yield15": "上線",
@@ -426,7 +428,9 @@ const items = {
         "yield208": "24h",
         "yield209": "賬戶不存在",
         "yield210": "接收獎勵",
-        "yield211": "請輸入接收賬戶"
+        "yield211": "請輸入接收賬戶",
+        "yield212": "Antelope",
+        "yield213": "社區計劃，旨在增加 dApp 開發人員獲得獎勵和 EOS 用戶在 EOS 主網上賺取收益的機會。 Yield+ 工作組為 EOS 設計並提出了流動性獎勵計劃。這是一個鏈上計劃，直接衡量和獎勵 EOS 上增加的經濟活動。"
     },
     "en": {
         "yield1": "Home",
@@ -440,7 +444,7 @@ const items = {
         "yield9": "Language",
         "yield10": "Login",
         "yield11": "What is  Yield+ ?",
-        "yield12": "Yield+ is an EOSIO community initiative designed to increase opportunities for dApp developers to be rewarded and EOS users to earn yield on the EOS mainnet. The Yield+ working group has designed and proposed a Liquidity Rewards Program for EOS. This is an on-chain program that directly measures and rewards increased economic activity on EOS.",
+        "yield12": "Yield+ is an",
         "yield13": "Yield+ Stages",
         "yield14": "This stage has an approximation of {num} EOS being distributed per quarter .",
         "yield15": "Launch",
@@ -639,7 +643,9 @@ const items = {
         "yield208": "24h",
         "yield209": "Account not exist",
         "yield210": "Receive rewards",
-        "yield211": "Please enter the receiving account"
+        "yield211": "Please enter the receiving account",
+        "yield212": "Antelope",
+        "yield213": "community initiative designed to increase opportunities for dApp developers to be rewarded and EOS users to earn yield on the EOS mainnet. The Yield+ working group has designed and proposed a Liquidity Rewards Program for EOS. This is an on-chain program that directly measures and rewards increased economic activity on EOS."
     },
     "ko": {
         "yield1": "집",
@@ -653,7 +659,7 @@ const items = {
         "yield9": "언어",
         "yield10": "로그인",
         "yield11": "수율+ 란 무엇입니까?",
-        "yield12": "Yield+는 dApp 개발자가 보상을 받고 EOS 사용자가 EOS 메인넷에서 수익을 얻을 수 있는 기회를 늘리기 위해 고안된 EOSIO 커뮤니티 이니셔티브입니다. Yield+ 작업 그룹은 EOS를 위한 유동성 보상 프로그램을 설계하고 제안했습니다. EOS에서 증가된 경제 활동을 직접 측정하고 보상하는 온체인 프로그램입니다.",
+        "yield12": "Yield+는 dApp 개발자가 보상을 받고 EOS 사용자가 EOS 메인넷에서 수익을 얻을 수 있는 기회를 늘리기 위해 고안된",
         "yield13": "수익률+ 단계",
         "yield14": "이 단계는 분기당 대략 {num}개의 EOS가 배포됩니다.",
         "yield15": "출시 ",
@@ -852,7 +858,9 @@ const items = {
         "yield208": "24h",
         "yield209": "계정이 존재하지 않음",
         "yield210": "보너스를 받다",
-        "yield211": "수신 계정을 입력해 주세요"
+        "yield211": "수신 계정을 입력해 주세요",
+        "yield212": "Antelope",
+        "yield213": "커뮤니티 이니셔티브입니다. Yield+ 작업 그룹은 EOS를 위한 유동성 보상 프로그램을 설계하고 제안했습니다. EOS에서 증가된 경제 활동을 직접 측정하고 보상하는 온체인 프로그램입니다."
     }
   }
 }

@@ -38,7 +38,13 @@
           <div class="part2-text">
             <!-- What is  Yield+ ? -->
             <div class="text-2">{{ $t("yield.yield11") }}</div>
-            <div style="line-height: 25px">{{ $t("yield.yield12") }}</div>
+            <div style="line-height: 25px">
+              <span>{{ $t("yield.yield12") }}</span>
+              <span
+                style="border-bottom: 1px dotted;margin: 0 6px;"
+                @click="openWindow('https://antelope.io/')">{{ $t("yield.yield212") }}</span>
+              <span>{{ $t("yield.yield213") }}</span>
+            </div>
           </div>
         </div>
         <img src="@/assets/img/Home/part2BG.png" class="part2-bg" />
@@ -213,7 +219,13 @@
           <div class="part2-text">
             <!-- What is  Yield+ ? -->
             <div class="text-2">{{ $t("yield.yield11") }}</div>
-            <div style="line-height: 25px">{{ $t("yield.yield12") }}</div>
+            <div style="line-height: 25px">
+              <span>{{ $t("yield.yield12") }}</span>
+              <span
+                style="border-bottom: 1px dotted;margin: 0 6px; cursor: pointer;"
+                @click="openWindow('https://antelope.io/')">{{ $t("yield.yield212") }}</span>
+              <span>{{ $t("yield.yield213") }}</span>
+            </div>
           </div>
 
           <img src="@/assets/img/Home/part2BG.png" class="part2-bg" />
