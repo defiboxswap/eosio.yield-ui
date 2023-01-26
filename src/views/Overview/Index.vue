@@ -89,51 +89,19 @@
         <!-- Report -->
         <div class="Overview-report">
           <div class="report-title">{{ $t("yield.yield5") }}</div>
-          <div class="Overview-report-wrap mb15" @click="openWindow('https://eosnetwork.com/blog/october-2022-yield-report/')">
+          <div class="Overview-report-wrap mb15" v-for="(item, index) in reportList" :key="index" @click="openWindow(item.jumpLink)">
             <div class="Overview-report-wrap__item">
-              <img src="@/assets/img/report/report3.jpeg" alt="">
+              <img :src="item.imgUrl" alt="">
               <div class="report-name">
-                Nov 8 · By EOS Network Foundation
+                {{ item.name }}
               </div>
-              <div class="report-word">October 2022 Yield+ Report</div>
+              <div class="report-word">{{ item.title }}</div>
               <div class="report-read flex">
                 <v-icon
                   color="#000"
                   size="18"
                 >mdi-clock-outline</v-icon>
-                <span class="ml5">5 min read</span>
-              </div>
-            </div>
-          </div>
-          <div class="Overview-report-wrap mb15" @click="openWindow('https://eosnetwork.com/blog/september-2022-yield-report/')">
-            <div class="Overview-report-wrap__item">
-              <img src="@/assets/img/report/report2.png" alt="">
-              <div class="report-name">
-                Oct 11 · By EOS Network Foundation
-              </div>
-              <div class="report-word">September 2022 Yield+ Report</div>
-              <div class="report-read flex">
-                <v-icon
-                  color="#000"
-                  size="18"
-                >mdi-clock-outline</v-icon>
-                <span class="ml5">5 min read</span>
-              </div>
-            </div>
-          </div>
-          <div class="Overview-report-wrap" @click="openWindow('https://eosnetwork.com/blog/eos-yield-blue-paper/')">
-            <div class="Overview-report-wrap__item">
-              <img src="@/assets/img/report/report1.png" alt="">
-              <div class="report-name">
-                May 26 · By EOS Network Foundation
-              </div>
-              <div class="report-word">EOS Yield+ Blue Paper</div>
-              <div class="report-read flex">
-                <v-icon
-                  color="#000"
-                  size="18"
-                >mdi-clock-outline</v-icon>
-                <span class="ml5">3 min read</span>
+                <span class="ml5">{{ item.readTime }} min read</span>
               </div>
             </div>
           </div>
@@ -235,46 +203,18 @@
           <!-- Report -->
           <div class="report-title">{{ $t("yield.yield5") }}</div>
           <div class="OverviewPC-report-wrap">
-            <div class="OverviewPC-report-wrap__item mr15" @click="openWindow('https://eosnetwork.com/blog/october-2022-yield-report/')">
-              <img src="@/assets/img/report/report3.jpeg" alt="">
+            <div class="OverviewPC-report-wrap__item" v-for="(item, index) in reportList" :key="index" @click="openWindow(item.jumpLink)">
+              <img :src="item.imgUrl" alt="">
               <div class="report-name">
-                Nov 8 · By EOS Network Foundation
+                {{ item.name }}
               </div>
-              <div class="report-word">October 2022 Yield+ Report</div>
+              <div class="report-word">{{ item.title }}</div>
               <div class="report-read flex">
                 <v-icon
                   color="#000"
                   size="18"
                 >mdi-clock-outline</v-icon>
-                <span class="ml5">5 min read</span>
-              </div>
-            </div>
-            <div class="OverviewPC-report-wrap__item mr15" @click="openWindow('https://eosnetwork.com/blog/september-2022-yield-report/')">
-              <img src="@/assets/img/report/report2.png" alt="">
-              <div class="report-name">
-                Oct 11 · By EOS Network Foundation
-              </div>
-              <div class="report-word">September 2022 Yield+ Report</div>
-              <div class="report-read flex">
-                <v-icon
-                  color="#000"
-                  size="18"
-                >mdi-clock-outline</v-icon>
-                <span class="ml5">5 min read</span>
-              </div>
-            </div>
-            <div class="OverviewPC-report-wrap__item" @click="openWindow('https://eosnetwork.com/blog/eos-yield-blue-paper/')">
-              <img src="@/assets/img/report/report1.png" alt="">
-              <div class="report-name">
-                May 26 · By EOS Network Foundation
-              </div>
-              <div class="report-word">EOS Yield+ Blue Paper</div>
-              <div class="report-read flex">
-                <v-icon
-                  color="#000"
-                  size="18"
-                >mdi-clock-outline</v-icon>
-                <span class="ml5">3 min read</span>
+                <span class="ml5">{{ item.readTime }} min read</span>
               </div>
             </div>
           </div>
@@ -309,6 +249,43 @@ export default {
       charts3Value: [],
       checkedVal1: 'USD',
       checkedVal2: 'USD',
+      reportList:[
+        {
+          name: 'Jan 13 · By EOS Network Foundation',
+          title:'December 2022 Yield+ Report',
+          readTime: 4,
+          imgUrl: require('@/assets/img/report/report5.png'),
+          jumpLink: 'https://eosnetwork.com/blog/december-2022-yield-report'
+        },
+        {
+          name: 'Dec 9 · By EOS Network Foundation',
+          title:'November 2022 Yield+ Report',
+          readTime: 5,
+          imgUrl: require('@/assets/img/report/report4.png'),
+          jumpLink: 'https://eosnetwork.com/blog/november-2022-yield-report'
+        },
+        {
+          name: 'Nov 8 · By EOS Network Foundation',
+          title:'October 2022 Yield+ Report',
+          readTime: 5,
+          imgUrl: require('@/assets/img/report/report3.jpeg'),
+          jumpLink: 'https://eosnetwork.com/blog/october-2022-yield-report'
+        },
+        {
+          name: 'Oct 11 · By EOS Network Foundation',
+          title:'September 2022 Yield+ Report',
+          readTime: 5,
+          imgUrl: require('@/assets/img/report/report2.png'),
+          jumpLink: 'https://eosnetwork.com/blog/september-2022-yield-report'
+        },
+        {
+          name: 'May 26 · By EOS Network Foundation',
+          title:'EOS Yield+ Blue Paper',
+          readTime: 3,
+          imgUrl: require('@/assets/img/report/report1.png'),
+          jumpLink: 'https://eosnetwork.com/blog/eos-yield-blue-paper'
+        },
+      ]
     }
   },
   components: {
@@ -838,9 +815,15 @@ export default {
 
     &-wrap {
       display: flex;
-
+      flex-wrap: wrap;
+      justify-content: space-between;
+      &::after {
+        content: '';
+        width: calc(33.33% - 10px);
+      }
       &__item {
-        width: 33.33%;
+        width: calc(33.33% - 10px);
+        margin-bottom: 20px;
         cursor: pointer;
         img {
           display: block;
