@@ -27,7 +27,72 @@
                   />
                 </div>
                 <div class="flex-1">
-                  <div class="box-name">{{ projectInfo.name }}</div>
+                  <div class="box-name flex">
+                    <span>
+                      {{ projectInfo.name }}
+                    </span>
+                    <div
+                      class="box3-title"
+                      @click="tipsShow4 = !tipsShow4"
+                      v-click-outside="hideShow4"
+                      v-if="showWarnTip"
+                    >
+                      <v-tooltip
+                        bottom
+                        v-model="tipsShow4"
+                        :openOnHover="true"
+                        :openOnFocus="false"
+                        :attach="true"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <div
+                            class="flex curPoint"
+                            v-bind="attrs"
+                            v-on="on"
+                          >
+                            <img
+                              src="@/assets/img/tip.png"
+                              style="width: 20px; margin-left: 5px"
+                            />
+                          </div>
+                        </template>
+                        <div style="width: 300px">
+                          <div>{{ $t("yield.yield214") }}</div>
+                          <div>
+                            <div class="flex flex-wrap">
+                              <div class="flex">
+                                <div class="box3-title">{{ $t("yield.yield72") }}: </div>
+                                <div class="box3-text ml5">
+                                  <span v-if="projectInfo.otherInfo.open_source === null">-</span>
+                                  <template v-else>
+                                    <span v-if="projectInfo.otherInfo.open_source">yes</span>
+                                    <span v-else>no</span>
+                                  </template>
+                                </div>
+                              </div>
+                              <div class="ml mr flex">
+                                <div class="box3-title">{{ $t("yield.yield69") }}: </div>
+                                <div class="box3-text ml5">
+                                  <span v-if="projectInfo.otherInfo.multi_sig === null">-</span>
+                                  <template v-else>
+                                    <span v-if="projectInfo.otherInfo.multi_sig">yes</span>
+                                    <span v-else>no</span>
+                                  </template>
+                                </div>
+                              </div>
+                              <div class="flex">
+                                <div class="box3-title">{{ $t("yield.yield95") }}: </div>
+                                <div class="box3-text ml5">
+                                  <span v-if="projectInfo.otherInfo.audit_report.length > 0">yes</span>
+                                  <span v-else>no</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </v-tooltip>
+                    </div>
+                  </div>
                   <div class="flex flex-wrap">
                     <div
                       class="box-label"
@@ -415,7 +480,7 @@
                   </div>
                 </div>
                 <div class="box-w">
-                  <div class="box3-title">Auditing report</div>
+                  <div class="box3-title">{{ $t("yield.yield95") }}</div>
                   <div class="box3-text">
                     <!-- <template v-if="projectInfo.otherInfo.audit_report.length > 0">
                       <div class="curPoint" @click="openWindow(url)" v-for="(url, index) in projectInfo.otherInfo.audit_report" :key="index">report{{ index + 1 }}</div>
@@ -838,7 +903,72 @@
                     :onerror="errImg"
                   />
                   <div>
-                    <div class="box1-text1">{{ projectInfo.name }}</div>
+                    <div class="box1-text1 flex">
+                      <div>
+                        {{ projectInfo.name }}
+                      </div>
+                      <div
+                        class="box3-title"
+                        @click="tipsShow4 = !tipsShow4"
+                        v-click-outside="hideShow4"
+                        v-if="showWarnTip"
+                      >
+                        <v-tooltip
+                          bottom
+                          v-model="tipsShow4"
+                          :openOnHover="true"
+                          :openOnFocus="false"
+                          :attach="true"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <div
+                              class="flex curPoint"
+                              v-bind="attrs"
+                              v-on="on"
+                            >
+                              <img
+                                src="@/assets/img/tip.png"
+                                style="width: 20px; margin-left: 5px"
+                              />
+                            </div>
+                          </template>
+                          <div style="width: 300px">
+                            <div>{{ $t("yield.yield214") }}</div>
+                            <div>
+                              <div class="flex flex-wrap">
+                                <div class="flex">
+                                  <div class="box3-title">{{ $t("yield.yield72") }}: </div>
+                                  <div class="box3-text ml5">
+                                    <span v-if="projectInfo.otherInfo.open_source === null">-</span>
+                                    <template v-else>
+                                      <span v-if="projectInfo.otherInfo.open_source">yes</span>
+                                      <span v-else>no</span>
+                                    </template>
+                                  </div>
+                                </div>
+                                <div class="ml mr flex">
+                                  <div class="box3-title">{{ $t("yield.yield69") }}: </div>
+                                  <div class="box3-text ml5">
+                                    <span v-if="projectInfo.otherInfo.multi_sig === null">-</span>
+                                    <template v-else>
+                                      <span v-if="projectInfo.otherInfo.multi_sig">yes</span>
+                                      <span v-else>no</span>
+                                    </template>
+                                  </div>
+                                </div>
+                                <div class="flex">
+                                  <div class="box3-title">{{ $t("yield.yield95") }}: </div>
+                                  <div class="box3-text ml5">
+                                    <span v-if="projectInfo.otherInfo.audit_report.length > 0">yes</span>
+                                    <span v-else>no</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </v-tooltip>
+                      </div>
+                    </div>
                     <div class="flex flex-wrap">
                       <div class="box1-label">{{ handleCategory(projectInfo.category) }}</div>
                       <div
@@ -1261,7 +1391,7 @@
                   </div>
                   <div class="box3-center">
                     <div>
-                      <div class="box3-title">Auditing report</div>
+                      <div class="box3-title">{{ $t("yield.yield95") }}</div>
                       <div
                         class="box3-text flex"
                         style="gap: 10px"
@@ -1828,6 +1958,7 @@ export default {
       tipsShow1: false,
       tipsShow2: false,
       tipsShow3: false,
+      tipsShow4: false,
       audit_report: ['reports11', 'reports22', 'reports33'],
       annualRate: 0,
       eosRateUsdVal: 1
@@ -1877,6 +2008,15 @@ export default {
       return null
       // return 2
     },
+    showWarnTip() {
+      let showTip = Number(this.projectInfo.otherInfo.open_source) ^ 1 + Number(this.projectInfo.otherInfo.multi_sig) ^ 1 + Number(this.projectInfo.otherInfo.audit_report.length > 0) ^ 1
+      if (showTip > 1) {
+        showTip = true
+      } else {
+        showTip = false
+      }
+      return showTip
+    }
   },
   async created() {
     if (!this.$route.params?.contract) this.$router.push("/")
@@ -2412,6 +2552,9 @@ export default {
     },
     hideShow3() {
       this.tipsShow3 = false
+    },
+    hideShow4() {
+      this.tipsShow4 = false
     },
   },
 }

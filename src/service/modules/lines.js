@@ -98,3 +98,22 @@ export function protocolsDetails(params) {
       })
   })
 }
+
+// Overview reports
+export function overviewReports(params) {
+  return new Promise((resolve, reject) => {
+    axios({
+      baseURL,
+      method: "get",
+      params,
+      url: `/v1/reports`,
+      headers: getHeaders(),
+    })
+      .then((res) => {
+        resolve(res.data)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}

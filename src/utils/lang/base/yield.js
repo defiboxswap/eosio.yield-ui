@@ -215,7 +215,12 @@ const items = {
         "yield210": "",
         "yield211": "",
         "yield212": "",
-        "yield213": ""
+        "yield213": "",
+        "yield214": "",
+        "yield215": "",
+        "yield216": "",
+        "yield217": "",
+        "yield218": ""
     },
     "zhTW": {
         "yield1": "首頁",
@@ -430,7 +435,12 @@ const items = {
         "yield210": "接收獎勵",
         "yield211": "請輸入接收賬戶",
         "yield212": "Antelope",
-        "yield213": "社區計劃，旨在增加 dApp 開發人員獲得獎勵和 EOS 用戶在 EOS 主網上賺取收益的機會。 Yield+ 工作組為 EOS 設計並提出了流動性獎勵計劃。這是一個鏈上計劃，直接衡量和獎勵 EOS 上增加的經濟活動。"
+        "yield213": "社區計劃，旨在增加 dApp 開發人員獲得獎勵和 EOS 用戶在 EOS 主網上賺取收益的機會。 Yield+ 工作組為 EOS 設計並提出了流動性獎勵計劃。這是一個鏈上計劃，直接衡量和獎勵 EOS 上增加的經濟活動。",
+        "yield214": "警告：該項目安全審核級別較低，請您仔細甄別後加入。",
+        "yield215": "",
+        "yield216": "",
+        "yield217": "",
+        "yield218": ""
     },
     "en": {
         "yield1": "Home",
@@ -645,7 +655,12 @@ const items = {
         "yield210": "Receive rewards",
         "yield211": "Please enter the receiving account",
         "yield212": "Antelope",
-        "yield213": "community initiative designed to increase opportunities for dApp developers to be rewarded and EOS users to earn yield on the EOS mainnet. The Yield+ working group has designed and proposed a Liquidity Rewards Program for EOS. This is an on-chain program that directly measures and rewards increased economic activity on EOS."
+        "yield213": "community initiative designed to increase opportunities for dApp developers to be rewarded and EOS users to earn yield on the EOS mainnet. The Yield+ working group has designed and proposed a Liquidity Rewards Program for EOS. This is an on-chain program that directly measures and rewards increased economic activity on EOS.",
+        "yield214": "Warning: The security review level of this project is low, please be cautious if you decide to join.",
+        "yield215": "",
+        "yield216": "",
+        "yield217": "",
+        "yield218": ""
     },
     "ko": {
         "yield1": "집",
@@ -860,7 +875,12 @@ const items = {
         "yield210": "보너스를 받다",
         "yield211": "수신 계정을 입력해 주세요",
         "yield212": "Antelope",
-        "yield213": "커뮤니티 이니셔티브입니다. Yield+ 작업 그룹은 EOS를 위한 유동성 보상 프로그램을 설계하고 제안했습니다. EOS에서 증가된 경제 활동을 직접 측정하고 보상하는 온체인 프로그램입니다."
+        "yield213": "커뮤니티 이니셔티브입니다. Yield+ 작업 그룹은 EOS를 위한 유동성 보상 프로그램을 설계하고 제안했습니다. EOS에서 증가된 경제 활동을 직접 측정하고 보상하는 온체인 프로그램입니다.",
+        "yield214": "경고:이 프로젝트의 보안 검토 수준은 낮으며, 참여하기로 결정했다면 주의하십시오.",
+        "yield215": "",
+        "yield216": "",
+        "yield217": "",
+        "yield218": ""
     }
   }
 }

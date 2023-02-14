@@ -404,6 +404,7 @@ export default {
   created() { },
   mounted() {
     this.$nextTick(() => {
+      this.getReportsList()
       this.initView1Data()
       this.initView2Data()
       this.initView3Data()
@@ -471,6 +472,15 @@ export default {
         //   self: this,
         //   data: list,
         // })
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async getReportsList() {
+      console.log(1111)
+      try {
+        let res = await lines.overviewReports()
+        console.log(res, 'resresresresresresresresres')
       } catch (error) {
         console.log(error)
       }
