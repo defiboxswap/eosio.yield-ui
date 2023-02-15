@@ -904,7 +904,7 @@
                   />
                   <div>
                     <div class="box1-text1 flex">
-                      <div>
+                      <div style="font-size: 18px;">
                         {{ projectInfo.name }}
                       </div>
                       <div
