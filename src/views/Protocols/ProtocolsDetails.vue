@@ -2009,8 +2009,8 @@ export default {
       // return 2
     },
     showWarnTip() {
-      let showTip = Number(this.projectInfo.otherInfo.open_source) ^ 1 + Number(this.projectInfo.otherInfo.multi_sig) ^ 1 + Number(this.projectInfo.otherInfo.audit_report.length > 0) ^ 1
-      if (showTip > 1) {
+      let showTip = Number(this.projectInfo.otherInfo.open_source) + Number(this.projectInfo.otherInfo.multi_sig) + Number(this.projectInfo.otherInfo.audit_report.length > 0)
+      if (showTip < 2) {
         showTip = true
       } else {
         showTip = false
