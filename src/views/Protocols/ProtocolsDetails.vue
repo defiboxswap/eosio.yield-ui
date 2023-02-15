@@ -32,6 +32,7 @@
                       {{ projectInfo.name }}
                     </span>
                     <div
+                      v-cloak
                       class="box3-title"
                       @click="tipsShow4 = !tipsShow4"
                       v-click-outside="hideShow4"
@@ -903,7 +904,7 @@
                     :onerror="errImg"
                   />
                   <div>
-                    <div class="box1-text1 flex">
+                    <div class="box1-text1 flex" >
                       <div style="font-size: 18px;">
                         {{ projectInfo.name }}
                       </div>
@@ -1961,7 +1962,8 @@ export default {
       tipsShow4: false,
       audit_report: ['reports11', 'reports22', 'reports33'],
       annualRate: 0,
-      eosRateUsdVal: 1
+      eosRateUsdVal: 1,
+      firstshow: false,
     }
   },
   components: {},
@@ -2010,7 +2012,9 @@ export default {
     },
     showWarnTip() {
       let showTip = Number(this.projectInfo.otherInfo.open_source) + Number(this.projectInfo.otherInfo.multi_sig) + Number(this.projectInfo.otherInfo.audit_report.length > 0)
-      if (showTip < 2) {
+      if (this.projectInfo.otherInfo.open_source === null && this.projectInfo.otherInfo.multi_sig === null && this.projectInfo.otherInfo.audit_report.length > 0 === false) {
+        showTip = false
+      } else if (showTip < 2) {
         showTip = true
       } else {
         showTip = false
@@ -3283,5 +3287,8 @@ export default {
 .categoryDialog-title {
   margin: 10px 0 0 !important;
   font-weight: bold;
+}
+[v-cloak] {
+  display: none;
 }
 </style>
