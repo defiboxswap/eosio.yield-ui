@@ -89,11 +89,11 @@
         <!-- Report -->
         <div class="Overview-report">
           <div class="report-title">{{ $t("yield.yield5") }}</div>
-          <div class="Overview-report-wrap mb15" v-for="(item, index) in reportList" :key="index" @click="openWindow(item.jumpLink)">
+          <div class="Overview-report-wrap mb15" v-for="(item, index) in reportList" :key="index" @click="openWindow(item.url)">
             <div class="Overview-report-wrap__item">
-              <img :src="item.imgUrl" alt="">
+              <img :src="item.image" alt="">
               <div class="report-name">
-                {{ item.name }}
+                {{ item.create_at }} · By EOS Network Foundation
               </div>
               <div class="report-word">{{ item.title }}</div>
               <div class="report-read flex">
@@ -101,7 +101,7 @@
                   color="#000"
                   size="18"
                 >mdi-clock-outline</v-icon>
-                <span class="ml5">{{ item.readTime }} min read</span>
+                <span class="ml5">{{ item.laste_reading }}</span>
               </div>
             </div>
           </div>
@@ -203,10 +203,10 @@
           <!-- Report -->
           <div class="report-title">{{ $t("yield.yield5") }}</div>
           <div class="OverviewPC-report-wrap">
-            <div class="OverviewPC-report-wrap__item" v-for="(item, index) in reportList" :key="index" @click="openWindow(item.jumpLink)">
-              <img :src="item.imgUrl" alt="">
+            <div class="OverviewPC-report-wrap__item" v-for="(item, index) in reportList" :key="index" @click="openWindow(item.url)">
+              <img :src="item.image" alt="">
               <div class="report-name">
-                {{ item.name }}
+                {{ item.create_at }} · By EOS Network Foundation
               </div>
               <div class="report-word">{{ item.title }}</div>
               <div class="report-read flex">
@@ -214,7 +214,7 @@
                   color="#000"
                   size="18"
                 >mdi-clock-outline</v-icon>
-                <span class="ml5">{{ item.readTime }} min read</span>
+                <span class="ml5">{{ item.laste_reading }}</span>
               </div>
             </div>
           </div>
@@ -477,10 +477,9 @@ export default {
       }
     },
     async getReportsList() {
-      console.log(1111)
       try {
-        let res = await lines.overviewReports()
-        console.log(res, 'resresresresresresresresres')
+        let { data } = await lines.overviewReports()
+        this.reportList = data
       } catch (error) {
         console.log(error)
       }
