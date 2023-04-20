@@ -2330,7 +2330,7 @@ export default {
         authorization: [
           {
             actor: this.contractA,
-            permission: "active",
+            permission: "admin",
           },
           {
             actor: formName,
@@ -2382,7 +2382,7 @@ export default {
         authorization: [
           {
             actor: this.contractA,
-            permission: "active",
+            permission: "admin",
           },
           {
             actor: formName,
