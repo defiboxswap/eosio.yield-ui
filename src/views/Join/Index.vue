@@ -48,55 +48,120 @@
               v-if="formWrongTips.name"
             >{{ $t("yield.yield120") }}</div>
           </div>
-
+          <!-- Network -->
           <div class="basicInfo-box">
-            <!-- Protocols contract -->
+            <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("Network") }}</div>
             <div
-              class="basicInfo-subtitle flex"
-              @click="tipsShow = !tipsShow"
-              v-click-outside="hideTipsShow"
-            >
-              <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
-              <v-tooltip
-                bottom
-                v-model="tipsShow"
-                :openOnHover="false"
-                :openOnFocus="false"
-                :attach="true"
+                class="basicInfo-input1"
+                v-click-outside="networkHide"
               >
-                <template v-slot:activator="{ on, attrs }">
+                <div
+                  class="flex curPoint"
+                  @click="networkShow = !networkShow"
+                  style="min-height: 40px;"
+                >
                   <div
-                    class="flex curPoint"
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    <!-- {{ $t('yield.yield61') }} -->
-                    <v-icon
-                      class=""
-                      size="16"
-                      style="margin: 0 0 -2px 4px"
-                    >mdi-information-outline</v-icon>
-                  </div>
-                </template>
-                <div style="width: 300px">
-                  {{ $t("yield.yield131") }}
-                  <span
-                    class="curPoint"
-                    @click="openWindow('https://docs.tokenyield.io/contracts/eosio.yield')"
-                  >{{ $t("yield.yield132") }} ></span>
+                    class="flex-1"
+                    style="padding: 0 10px; color: #ccc;font-size: 12px;"
+                    v-if="!networkItem"
+                  >{{ $t("yield.yield219") }}</div>
+                  <div
+                    class="flex-1"
+                    style="padding: 0 10px"
+                    v-else
+                  >{{ networkItem }}</div>
+                  <v-icon v-if="!networkShow">mdi-menu-down</v-icon>
+                  <v-icon v-else>mdi-menu-up</v-icon>
                 </div>
-              </v-tooltip>
+
+                <v-list
+                  class="input1-selectList"
+                  dense
+                  v-if="networkShow == true"
+                >
+                  <v-list-item-group color="primary">
+                    <v-list-item
+                      v-for="(item, index) in networkList"
+                      :key="index"
+                    >
+                      <v-list-item-content @click="selectNetwork(index)">
+                        <v-list-item-title v-html="networkList[index]"></v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </div>
+              <div
+                class="basicInfo-wrongTips"
+                v-if="networkTip"
+              >{{ $t("yield.yield191") }}</div>
+          </div>
+
+          <div class="basicInfo-box" v-if="networkItem">
+            <!-- Protocols contract -->
+            <div class="flexb title">
+              <div
+                class="basicInfo-subtitle flex"
+                @click="tipsShow = !tipsShow"
+                v-click-outside="hideTipsShow"
+              >
+                <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
+                <v-tooltip
+                  bottom
+                  v-model="tipsShow"
+                  :openOnHover="false"
+                  :openOnFocus="false"
+                  :attach="true"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <div
+                      class="flex curPoint"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      <!-- {{ $t('yield.yield61') }} -->
+                      <v-icon
+                        class=""
+                        size="16"
+                        style="margin: 0 0 -2px 4px"
+                      >mdi-information-outline</v-icon>
+                    </div>
+                  </template>
+                  <div style="width: 300px">
+                    {{ $t("yield.yield131") }}
+                    <span
+                      class="curPoint"
+                      @click="openWindow('https://docs.tokenyield.io/contracts/eosio.yield')"
+                    >{{ $t("yield.yield132") }} ></span>
+                  </div>
+                </v-tooltip>
+              </div>
+              <div class="add pointer" @click="addContractAddress" :style="{'color': addressList.length > 9 ? '#c1c2c4' : '#1c1dff'}">{{ $t("yield.yield221") }}</div>
             </div>
-            <input
-              type="text"
-              class="basicInfo-input1"
-              disabled
-              v-model="eosAccount"
-            />
-            <div
-              class="basicInfo-wrongTips"
-              v-if="accountTip"
-            >{{$t("yield.yield171")}}</div>
+            <div class="flex addressBox">
+              <!-- <input
+                type="text"
+                class="basicInfo-input1"
+                disabled
+                v-model="eosAccount"
+              /> -->
+              <div v-for="(item, index) in addressList" :key="index" class="addressInputBox" :class="{'moreInput':addressLength > 2 }">
+                  <input
+                    type="text"
+                    class="basicInfo-input1 addressInput"
+                    :placeholder="$t('yield.yield217')"
+                    v-model="item.address"
+                    @blur="validateAccount(index)"
+                  />
+                  <div class="basicInfo-wrongTips" v-if="!addressList.some(item => item.address) && index == 0">{{ $t('yield.yield191') }}</div>
+                  <div class="basicInfo-wrongTips" v-if="isDuplicateAddress(item.address)">{{ $t('yield.yield220') }}</div>
+                  <div
+                    class="basicInfo-wrongTips"
+                    v-else-if="item.address && item.isInvalid"
+                  >{{$t("yield.yield218")}}</div>
+                </div>
+            </div>
+            <div style="color: #c1c2c4; font-size: 12px;line-height: 16px;">{{ $t("yield.yield216") }}</div>
           </div>
 
           <!-- Project description -->
@@ -297,7 +362,7 @@
           </div>
         </div>
 
-        <div class="Join-basicInfo">
+        <div class="Join-basicInfo" id="join" v-if="networkItem === 'EOS'">
           <!-- *Contract security -->
           <div class="basicInfo-title">{{ $t("yield.yield68") }}</div>
 
@@ -313,9 +378,10 @@
               v-model="form.recover"
               @change="formWrongTips.description = false"
             />
+            <!-- v-if="formWrongTips.recover" -->
             <div
               class="basicInfo-wrongTips"
-              v-if="formWrongTips.recover"
+              v-if="!form.recover"
             >{{ $t("yield.yield191") }}</div>
 
             <div class="recoverCls">
@@ -545,56 +611,57 @@
           </div>
 
           <div class="flext marb-25">
+            <!-- Network -->
             <div class="basicInfo-left">
-              <!-- Protocols contract -->
+              <!-- Network -->
+              <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("Network") }}</div>
+              <!-- <v-select class="basicInfo-input1 select-all" :items="categoryList" v-model="categoryItem" label="" solo :attach="true" :full-width="true" :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"></v-select> -->
               <div
-                class="basicInfo-subtitle flex"
-                @click="tipsShow = !tipsShow"
-                v-click-outside="hideTipsShow"
-              >
-                <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
-
-                <v-tooltip
-                  bottom
-                  v-model="tipsShow"
-                  :openOnHover="false"
-                  :openOnFocus="false"
-                  :attach="true"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <div
-                      class="flex curPoint"
-                      v-bind="attrs"
-                      v-on="on"
-                    >
-                      <!-- {{ $t('yield.yield61') }} -->
-                      <v-icon
-                        class=""
-                        size="16"
-                        style="margin: 0 0 -2px 4px"
-                      >mdi-information-outline</v-icon>
-                    </div>
-                  </template>
-                  <div style="width: 400px">
-                    {{ $t("yield.yield131") }}
-                    <span
-                      class="curPoint"
-                      @click="openWindow('https://docs.tokenyield.io/contracts/eosio.yield')"
-                    >{{ $t("yield.yield132") }} ></span>
-                  </div>
-                </v-tooltip>
-              </div>
-              <input
-                type="text"
                 class="basicInfo-input1"
-                disabled
-                v-model="eosAccount"
-              />
-              <div
-                class="basicInfo-wrongTips"
-                v-if="accountTip"
-              >{{$t("yield.yield171")}}</div>
+                v-click-outside="networkHide"
+              >
+                <div
+                  class="flex curPoint"
+                  @click="networkShow = !networkShow"
+                  style="min-height: 40px;"
+                >
+                  <div
+                    class="flex-1"
+                    style="padding: 0 10px; color: #ccc;font-size: 12px;"
+                    v-if="!networkItem"
+                  >{{ $t("yield.yield219") }}</div>
+                  <div
+                    class="flex-1"
+                    style="padding: 0 10px"
+                    v-else
+                  >{{ networkItem }}</div>
+                  <v-icon v-if="!networkShow">mdi-menu-down</v-icon>
+                  <v-icon v-else>mdi-menu-up</v-icon>
+                </div>
+                <div
+                  class="basicInfo-wrongTips"
+                  v-if="networkTip"
+                >{{ $t("yield.yield191") }}</div>
+
+                <v-list
+                  class="input1-selectList"
+                  dense
+                  v-if="networkShow == true"
+                >
+                  <v-list-item-group color="primary">
+                    <v-list-item
+                      v-for="(item, index) in networkList"
+                      :key="index"
+                    >
+                      <v-list-item-content @click="selectNetwork(index)">
+                        <v-list-item-title v-html="networkList[index]"></v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </div>
             </div>
+
             <div>
               <!-- Project category -->
               <div class="basicInfo-subtitle"><span class="color-red">*&nbsp;</span>{{ $t("yield.yield61") }}</div>
@@ -657,6 +724,76 @@
             </div>
           </div>
 
+          <div class="flext marb-25" v-if="networkItem">
+            <!-- Add contract -->
+            <div class="basicInfo-left contractList">
+              <!-- Protocols contract -->
+              <div class="flexb title">
+                <div
+                  class="basicInfo-subtitle flex"
+                  @click="tipsShow = !tipsShow"
+                  v-click-outside="hideTipsShow"
+                >
+                  <span class="color-red">*&nbsp;</span>{{ $t("yield.yield78") }}
+                  <v-tooltip
+                    bottom
+                    v-model="tipsShow"
+                    :openOnHover="false"
+                    :openOnFocus="false"
+                    :attach="true"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <div
+                        class="flex curPoint"
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                        <!-- {{ $t('yield.yield61') }} -->
+                        <v-icon
+                          class=""
+                          size="16"
+                          style="margin: 0 0 -2px 4px"
+                        >mdi-information-outline</v-icon>
+                      </div>
+                    </template>
+                    <div style="width: 400px">
+                      {{ $t("yield.yield131") }}
+                      <span
+                        class="curPoint"
+                        @click="openWindow('https://docs.tokenyield.io/contracts/eosio.yield')"
+                      >{{ $t("yield.yield132") }} ></span>
+                    </div>
+                  </v-tooltip>
+                </div>
+                <div class="add pointer" @click="addContractAddress" :style="{'color': addressList.length > 9 ? '#c1c2c4' : '#1c1dff'}">{{ $t("yield.yield221") }}</div>
+              </div>
+              <div class="flex addressBox">
+                <!-- <input
+                  type="text"
+                  class="basicInfo-input1"
+                  disabled
+                  v-model="eosAccount"
+                /> -->
+                <div v-for="(item, index) in addressList" :key="index" class="addressInputBox" :class="{'moreInput':addressLength > 2 }">
+                  <input
+                    type="text"
+                    class="basicInfo-input1 addressInput"
+                    :placeholder="$t('yield.yield217')"
+                    v-model="item.address"
+                    @blur="validateAccount(index)"
+                  />
+                  <div class="basicInfo-wrongTips" v-if="!addressList.some(item => item.address) && index == 0">{{ $t('yield.yield191') }}</div>
+                  <div class="basicInfo-wrongTips" v-if="isDuplicateAddress(item.address)">{{ $t('yield.yield220') }}</div>
+                  <div
+                    class="basicInfo-wrongTips"
+                    v-else-if="item.address && item.isInvalid"
+                  >{{$t("yield.yield218")}}</div>
+                </div>
+              </div>
+              <div style="color: #c1c2c4; font-size: 12px;line-height: 16px;">{{ $t("yield.yield216") }}</div>
+            </div>
+          </div>
+
           <div class="flext marb-25">
             <div class="basicInfo-left">
               <!-- 	Token contract code -->
@@ -686,7 +823,6 @@
                 maxlength="7"
                 v-model="form.tokenSymcode"
                 @change="handleVeriToken"
-                style="width: 100px"
               />
               <div
                 class="basicInfo-wrongTips"
@@ -777,7 +913,7 @@
           </div>
         </div>
 
-        <div class="JoinPC-basicInfo">
+        <div class="JoinPC-basicInfo" id="join" v-if="networkItem === 'EOS'">
           <div class="flex">
             <div>
               <!-- *Contract security -->
@@ -795,9 +931,10 @@
                     v-model="form.recover"
                     @change="formWrongTips.description = false"
                   />
+                  <!-- v-if="formWrongTips.recover" -->
                   <div
                     class="basicInfo-wrongTips"
-                    v-if="formWrongTips.recover"
+                    v-if="!form.recover"
                   >{{ $t("yield.yield191") }}</div>
                 </div>
               </div>
@@ -972,19 +1109,28 @@
 import { mapState } from "vuex"
 import axios from "axios"
 import DApp from "@/utils/wallet/index"
-// import { baseURL } from "../../config";
+import { utils } from 'ethers'
+import { CONTRACT_YIELD } from "../../config";
 
 export default {
   name: "Join",
   data() {
     return {
+      addressLength: 1,
+      addressList:[
+        {
+          address: "",
+          isInvalid: false,
+        }
+      ],
       categoryShow: false,
-
+      networkShow: false,
       tipsShow: false,
       categoryItem: '',
+      networkItem: '',
       categoryList: [this.$t("yield.yield46"), this.$t("yield.yield47"), this.$t("yield.yield48"), this.$t("yield.yield49"), this.$t("yield.yield149")],
       categoryDesList: ["yield.yield144", "yield.yield145", "yield.yield146", "yield.yield147", "yield.yield148"],
-
+      networkList: ['EOS', 'EOS EVM'],
       btnLoading: false,
       uploadLoading: false,
 
@@ -1042,12 +1188,14 @@ export default {
       accountTip: false,
       tokenVeri: false,
       categoryTip: false,
+      networkTip: false,
     }
   },
   watch: {
     "$store.state.app.accountInfo": {
       handler: function () {
         this.form.categoryItem = this.categoryItem
+        this.form.networkItem = this.networkItem
         sessionStorage.setItem('formData', JSON.stringify(this.form)); // 存入一个值
         // window.location.reload()
         this.$nextTick(async () => {
@@ -1055,18 +1203,19 @@ export default {
         })
       }
     },
-    'eosAccount': {
-      handler: async function (val) {
-        if (val) {
-          const autoAccount = await this.getAdminAccount()
-          // is contract account
-          if (!autoAccount) {
-            this.accountTip = true
-          }
-        }
-      },
-      immediate: true
-    },
+    // 'eosAccount': {
+    //   handler: async function (val) {
+    //     if (val) {
+    //       const autoAccount = await this.getAdminAccount()
+    //       console.log(autoAccount, 'autoAccount')
+    //       // is contract account
+    //       if (!autoAccount) {
+    //         this.accountTip = true
+    //       }
+    //     }
+    //   },
+    //   immediate: true
+    // },
     'form.tokenCode': {
       handler: function (val) {
         if (val) {
@@ -1086,6 +1235,20 @@ export default {
     ...mapState({
       isMobile: (state) => state.app.isMobile,
     }),
+    duplicateAddresses() {
+      const counts = {};
+      for (const item of this.addressList) {
+        if (item.address.trim() !== '') {
+          if (!counts[item.address]) {
+            counts[item.address] = 1;
+          } else {
+            counts[item.address]++;
+          }
+        }
+      }
+      return Object.keys(counts).filter((address) => counts[address] > 1);
+    },
+
     eosAccount() {
       // return this.$store.state.app.accountInfo ? this.$store.state.app.accountInfo.account : "",
       if (this.$store.state.app.accountInfo?.account) return this.$store.state.app.accountInfo.account
@@ -1108,8 +1271,9 @@ export default {
   mounted() {
     const formData = JSON.parse(sessionStorage.getItem('formData')) || {}
     this.form = formData
-    if (!this.form.categoryItem) return
+    if (!this.form.categoryItem || !this.form.networkItem) return
     this.categoryItem = this.form.categoryItem
+    this.networkItem = this.form.networkItem
   },
   beforeDestroy() { },
   methods: {
@@ -1117,6 +1281,38 @@ export default {
       this.categoryTip = false
       this.categoryShow = false
       this.categoryItem = this.categoryList[index]
+    },
+    isDuplicateAddress(address) {
+      return this.duplicateAddresses.includes(address);
+    },
+    selectNetwork(index){
+      this.networkTip = false
+      this.networkShow = false
+      this.networkItem = this.networkList[index]
+      // selectNetwork initialize addressList
+      this.addressList = [
+        {
+          address: '',
+          isInvalid: false,
+        }
+      ]
+    },
+    addContractAddress(){
+      if(this.addressList.length > 9) return
+      this.addressList.push({
+        address: '',
+        isInvalid: false,
+      });
+    },
+    hasDuplicateItems(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+          if (arr[i] === arr[j]) {
+            return true;
+          }
+        }
+      }
+      return false;
     },
     async submit() {
       const formName = this.$store.state.app.accountInfo.account
@@ -1128,6 +1324,7 @@ export default {
       let gotoId = ""
       // if (this.form.cmc) this.form.cmc = parseFloat(this.form.cmc)
       // if (this.form.recover) this.form.recover = parseFloat(this.form.recover)
+      // console.log('this.formRules', this.formRules)
       for (let key in this.formRules) {
         if (this.formRules[key].required) {
           if (this.form[key] == null || this.form[key] == "") {
@@ -1147,14 +1344,51 @@ export default {
           }
         }
       }
-      if (gotoId) {
-        this.gotoId(gotoId)
+      const hasValidAddress = this.addressList.some((item) => item.address !== "");
+      const hasInvalidItem = this.addressList.some((item) => item.isInvalid);
+      if (!hasValidAddress || hasInvalidItem) {
+        this.gotoId("basic")
         return
       }
-      if (!this.categoryItem) {
-        this.categoryTip = true;
+
+      let newArr = this.addressList.filter(item => item.address).map(item => item.address);
+      // console.log(newArr, 'newArr')
+      //  ================================================================
+      const isEqual = this.hasDuplicateItems(newArr);
+      // console.log(isEqual);
+      if(isEqual){
+        this.gotoId("basic")
         return
       }
+      // console.log(gotoId, 'gotoId')
+      // console.log(this.networkItem, 'this.networkItem')
+      if(gotoId || !this.categoryItem || !this.networkItem || newArr.length == 0){
+        if(!this.categoryItem){
+          this.categoryTip = true;
+        }
+        if(!this.networkItem){
+          this.networkTip = true;
+        }
+        if(!this.categoryItem || !this.networkItem || newArr.length == 0){
+          this.gotoId("basic")
+          return
+        } else {
+          if(this.networkItem === 'EOS' && (!this.form?.recover || !this.form.recover || this.form.recover === "")){
+            this.gotoId('join')
+            return
+          } else {
+            if(this.networkItem === 'EOS'){
+              this.gotoId(gotoId)
+              return
+            }
+          }
+        }
+      }
+
+      // if (gotoId) {
+      //   this.gotoId(gotoId)
+      //   return
+      // }
       // is contract account
       if (this.accountTip) return
       let metadata = []
@@ -1169,8 +1403,8 @@ export default {
           }
           if (keyName !== 'categoryItem') {
             metadata.push({
-              key: keyName,
-              value: this.form[key],
+              first: keyName,
+              second: this.form[key],
             })
           }
         }
@@ -1189,7 +1423,8 @@ export default {
       }
 
       if (this.tokenVeri) return
-
+      // console.log(metadata, 'metadata')
+      // ============================================
       this.$toastLoading(this.$t("yield.yield151"))
 
       const permission = Array.isArray(this.$store.state.app.accountInfo.permissions) ? this.$store.state.app.accountInfo.permissions[0] : this.$store.state.app.accountInfo.permissions
@@ -1197,9 +1432,31 @@ export default {
         actions: [],
       }
       this.btnLoading = true
+      // console.log(formName, 'formNameformNameformName');
+      params.actions.push(
+        {
+          // account: this.contractE,
+          account: CONTRACT_YIELD,
+          name: "regprotocol",
+          authorization: [
+            {
+              actor: formName,
+              permission: permission || "active",
+            },
+          ],
+          data: {
+            protocol: formName,
+            metadata,
+            category: this.handleCategoryTransform(this.categoryItem),
+            // category: 'cdp',
+          },
+        },
+      )
+      // evm
       params.actions.push({
-        account: this.contractE,
-        name: "regprotocol",
+        // account: this.contractE,
+        account: CONTRACT_YIELD,
+        name: "setcontracts",
         authorization: [
           {
             actor: formName,
@@ -1208,15 +1465,17 @@ export default {
         ],
         data: {
           protocol: formName,
-          metadata,
-          category: this.handleCategoryTransform(this.categoryItem),
-          // category: 'cdp',
+          contracts: this.networkItem === 'EOS' ? newArr : [],
+          evm_contracts: this.networkItem === 'EOS EVM' ? newArr : []
         },
       })
+
+      console.log(params, 'params');
 
       let result = await DApp.transactionApi({
         params,
       })
+      console.log(result, 'result');
 
       this.btnLoading = false
 
@@ -1238,6 +1497,7 @@ export default {
         $router: this.$router,
         successText: this.$t("yield.yield132"),
       })
+      // ==============================================
 
       // this.$toast("submit success!")
     },
@@ -1305,7 +1565,7 @@ export default {
       }
     },
     // getAdminAccount
-    getAdminAccount() {
+    getAdminAccount(val) {
       return new Promise(async (resolve, reject) => {
         axios({
           url: `${this.$store.state.sys.node.httpEndpoint}/v1/chain/get_account`,
@@ -1314,20 +1574,38 @@ export default {
             "content-type": "text/plain;charset=UTF-8",
           },
           data: {
-            account_name: this.eosAccount,
+            account_name: val,
           },
         }).then((res) => {
-          let adminList = res.data?.permissions[0]?.required_auth?.accounts
-          if (adminList.length > 0) {
+          // let adminList = res.data?.permissions[0]?.required_auth?.accounts
+          if (res.data) {
             resolve(true)
           } else {
             resolve(false)
           }
         }).catch((error) => {
           reject(error)
-          console.log(error);
+          // console.log(error);
         })
       })
+    },
+    async validateAccount(index) {
+      const accountName = this.addressList[index].address;
+      if(!accountName){
+        this.addressList[index].isInvalid = false;
+        return
+      }
+      try {
+        if(this.networkItem === 'EOS'){
+          await this.getAdminAccount(accountName);
+          this.addressList[index].isInvalid = false;
+        } else {
+          this.addressList[index].isInvalid = !utils.isAddress(accountName)
+          // console.log(utils.isAddress(accountName))
+        }
+      } catch (error) {
+        this.addressList[index].isInvalid = true;
+      }
     },
     verifiStat() {
       return new Promise(async (resolve) => {
@@ -1355,6 +1633,9 @@ export default {
     },
     categoryHide() {
       this.categoryShow = false
+    },
+    networkHide(){
+      this.networkShow = false
     },
     clearLogo() {
       this.form.logo = ''
@@ -1471,6 +1752,24 @@ export default {
 
     .basicInfo-box {
       margin-bottom: 15px;
+      .title{
+        // width: 400px;
+        // border: 1px solid red;
+      }
+      .add{
+        font-size: 14px;
+        color: #1c1dff;
+        margin-bottom: 10px;
+      }
+      .addressBox{
+        flex-wrap: wrap;
+      }
+      .addressInputBox{
+        width: 100%;
+        height: 60px;
+        // border: 1px solid red;
+        margin-bottom: 20px;
+      }
       .box-name,
       .basicInfo-subtitle {
         font-size: 15px;
@@ -1622,6 +1921,7 @@ export default {
     height: 110px;
     background-color: #fff;
     border-top: 1px solid #e8e8e8;
+    z-index: 11;
     .footer-button {
       display: block;
       // margin-right: 50px;
@@ -1758,6 +2058,28 @@ export default {
     }
     .basicInfo-left {
       width: 390px;
+    }
+    .contractList{
+      width: 100%;
+      .title{
+        width: 340px;
+      }
+      .add{
+        font-size: 14px;
+        color: #1c1dff;
+      }
+      .addressBox{
+        flex-wrap: wrap;
+      }
+      .addressInputBox{
+        height: 60px;
+        // border: 1px solid red;
+        margin-right: 50px;
+        margin-bottom: 20px;
+      }
+      .moreInput{
+        // margin-top: 20px;
+      }
     }
     .basicInfo-title {
       font-size: 20px;

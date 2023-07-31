@@ -42,6 +42,19 @@
                 :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"
               ></v-select>
             </div>
+
+            <v-select
+              class="select-all"
+              :items="chains"
+              v-model="networkVal"
+              item-text="text"
+              item-value="value"
+              label="All"
+              solo
+              :attach="true"
+              :full-width="true"
+              :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"
+            ></v-select>
           </div>
         </div>
       </div>
@@ -112,9 +125,8 @@
       <div class="ProtocolsPC-overLay">
         <div class="ProtocolsPC-layout flex flex-jus-between">
           <!-- Projects -->
-          <div class="overLay-title">{{ $t("yield.yield195") }}</div>
-
-          <div class="overLay-select flex">
+          <div class="overLay-title">
+            <!-- {{ $t("yield.yield195") }} -->
             <div class="select-audit flex flex-align-center">
               <!-- TVL Rankings -->
               <div
@@ -126,15 +138,30 @@
               <!-- Audit -->
               <div
                 class="audit-tips2 flex-1"
-                style="color: #000"
+                style="color: #fff"
                 @click="clickInfoTab('Audit')"
               >{{ $t("yield.yield51") }}</div>
             </div>
+          </div>
 
+          <div class="overLay-select flex">
             <v-select
               class="select-all"
               :items="items"
               v-model="selectVal"
+              item-text="text"
+              item-value="value"
+              label="All"
+              solo
+              :attach="true"
+              :full-width="true"
+              :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"
+            ></v-select>
+
+            <v-select
+              class="select-all"
+              :items="chains"
+              v-model="networkVal"
               item-text="text"
               item-value="value"
               label="All"
@@ -285,7 +312,22 @@ export default {
           value: 'denied'
         }
       ],
+      chains:[
+        {
+          text: this.$t('yield.yield174'),
+          value: undefined,
+        },
+        {
+          text: 'EOS',
+          value: 1
+        },
+        {
+          text: 'EOS EVM',
+          value: 2
+        },
+      ],
       selectVal: this.$t('yield.yield174'),
+      networkVal: this.$t('yield.yield174'),
     }
   },
   props: {},
@@ -314,6 +356,10 @@ export default {
           }
         })
       }
+      this.initList()
+    },
+    networkVal: function (oldVal, newVal) {
+      if (oldVal === newVal) return
       this.initList()
     },
   },
@@ -354,11 +400,17 @@ export default {
       if (this.$route?.query?.state) {
         this.selectVal = this.$route?.query?.state
       }
-      let status = undefined
+      let status = this.selectVal
       if (this.selectVal !== undefined && this.selectVal !== this.$t('yield.yield174')) {
         status = this.selectVal
       } else {
         status = undefined
+      }
+      let network = this.networkVal
+      if (this.networkVal !== this.$t('yield.yield174')) {
+        network = this.networkVal
+      } else {
+        network = undefined
       }
       try {
         this.loading = true
@@ -368,6 +420,7 @@ export default {
           search: this.search.replace(/(^\s*)|(\s*$)/g, ""),
           order: 'create_at',
           status,
+          network,
           order_type: ''
         })
         if (result?.code === 200 && result.data) {
@@ -472,16 +525,16 @@ export default {
       height: 45px;
       line-height: 45px;
       border: 1px solid #000;
-      padding: 0 60px 0 17px;
-      margin-bottom: 16px;
+      padding: 0 8px 0 17px;
       border-radius: 10px;
+      margin-right: 10px;
       img,
       svg {
-        margin-right: 12px;
+        margin-right: 10px;
         width: 20px;
         display: inline-block;
         vertical-align: middle;
-        margin-top: -5px;
+        margin-top: -3px;
       }
       ::-webkit-input-placeholder {
         /* WebKit, Blink, Edge */
@@ -523,7 +576,6 @@ export default {
         }
       }
     }
-
     .title-select {
       gap: 10px;
       .select-audit {
@@ -572,10 +624,12 @@ export default {
       flex: 1;
       height: 45px;
       line-height: 45px;
-      border-radius: 25px;
+      border-radius: 10px;
       border: 1px solid #000;
+      background: transparent;
       ::v-deep .v-input__control {
-        min-width: 80px;
+        // min-width: 80px;
+        width: 25vw;
         height: 45px;
         min-height: 45px;
         margin-bottom: 0;
@@ -584,6 +638,7 @@ export default {
         margin-bottom: 0;
         box-shadow: none;
         min-height: 43px;
+        background: transparent;
       }
       ::v-deep .v-select__selections input {
         display: none;
@@ -595,7 +650,7 @@ export default {
         color: #000;
       }
       ::v-deep .v-select__selections {
-        min-width: 80px;
+        // min-width: 80px;
         width: fit-content;
         display: block;
         min-height: auto;
@@ -655,8 +710,8 @@ export default {
       }
 
       .box-label {
-        min-width: 77px;
-        padding: 0 10px;
+        // min-width: 77px;
+        // padding: 0 10px;
         height: 22px;
         line-height: 22px;
         border-radius: 15px;
@@ -664,8 +719,8 @@ export default {
         margin-bottom: 3px;
         font-size: 10px;
         font-weight: 400;
-        color: #000000;
-        border: 1px solid #d9d9d9;
+        color: #999;
+        // border: 1px solid #d9d9d9;
         text-align: center;
       }
 
@@ -724,9 +779,18 @@ export default {
     height: 240px;
     padding-top: 30px;
     .overLay-title {
-      font-size: 30px;
+      font-size: 24px;
       font-weight: 600;
       color: #ffffff;
+      .audit-tips1, .audit-tips2{
+        cursor: pointer;
+      }
+      .audit-line {
+        width: 1px;
+        margin: 0 15px;
+        height: 20px;
+        background-color: #999;
+      }
     }
     .overLay-select {
       .select-audit {
@@ -746,6 +810,7 @@ export default {
           font-size: 14px;
           font-weight: 500;
           color: #000000;
+          border: 1px solid red;
         }
         .audit-tips2 {
           width: 70px;
@@ -757,13 +822,16 @@ export default {
       }
 
       .select-all {
+        &:nth-child(2){
+          margin: 0 8px;
+        };
         // width: 71px;
         // height: 38px;
         border-radius: 8px;
         // background-color: #ffffff;
         // cursor: pointer;
-        margin-left: 8px;
-        margin-right: 8px;
+        // margin-left: 8px;
+        // margin-right: 8px;
         ::v-deep .v-input__control {
           min-width: 80px;
           height: 38px;

@@ -24,26 +24,54 @@ export default {
   },
   poolChartAction() {
     let myChart = echarts.init(document.getElementById("view1Data"))
+    if (myChart != null) {
+      myChart.clear()
+    }
+    myChart = echarts.init(document.getElementById("view1Data"))
+    let series = []
+    let legendName = []
+    this.chartsData.splice(1).forEach((item) => {
+      legendName.push(item[0])
+      series.push({
+        name: item[0],
+        type: "line",
+        stack: "Total",
+        areaStyle: {},
+        emphasis: {
+          focus: "series",
+        },
+        data: item.splice(1),
+      })
+    })
     myChart.setOption({
       tooltip: {
+        confine: true,
         trigger: "axis",
+        axisPointer: {
+          type: "cross",
+          label: {
+            backgroundColor: "#6a7985",
+          },
+        },
+      },
+      legend: {
+        data: [],
       },
       xAxis: {
         type: "category",
         boundaryGap: false,
         // data: this.chartsData.map(item => moment(item.line_id * 1000).format('YYYY-MM-DD')),
-        data: this.chartsData.map((item) => moment(item.line_id * 1000).format("MM-DD")),
+        data: this.chartsData[0].splice(1).map((i) => moment(i * 1000).format("MM-DD")),
       },
       grid: [
         {
-          left: document.body.clientWidth < 1200 ?'18%': '10%',
-          bottom: "20%",
+          top: '10%',
+          left: document.body.clientWidth < 1200 ? '18%': '10%',
+          bottom: document.body.clientWidth < 1200 ? '18%': '30%',
         },
       ],
       yAxis: {
         type: "value",
-        alignTicks: true,
-        boundaryGap: false,
         axisLabel: {
           fontSize: 12,
           formatter: (value) => {
@@ -52,13 +80,7 @@ export default {
           },
         },
       },
-      series: [
-        {
-          data: this.type === 'USD' ? this.chartsData.map((item) => toFixed(item.tvl_usd, 2)) : this.chartsData.map((item) => toFixed(item.tvl_eos, 2)),
-          type: "line",
-          areaStyle: {},
-        },
-      ],
+      series: series,
     })
 
     window.addEventListener("resize", () => {

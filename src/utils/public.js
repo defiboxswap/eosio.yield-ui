@@ -1,6 +1,5 @@
 import Decimal from "decimal.js"
 import numeral from "numeral"
-import { baseURL } from "../config"
 
 export function toFixed(number, pp) {
   let num = isNaN(number) || !number ? 0 : number
@@ -75,9 +74,23 @@ export function getUrlParams(url) {
 }
 
 //
-export function getReqUrl() {
-  if ( baseURL ) return baseURL;
-  return location.origin;
+export function getReqUrl(hostname) {
+  const env = process.env.NODE_ENV
+  let linkUrl = ""
+  switch (env) {
+    case "tron":
+    case "development":
+      // linkUrl = `http://${process.env.VUE_APP_BASEURL}:${process.env.VUE_APP_PORT1}`
+      linkUrl = `https://dev.api.tokenyield.io`
+      if (hostname) {
+        linkUrl = process.env.VUE_APP_BASEURL
+      }
+      break
+    default:
+      linkUrl = location.origin
+      break
+  }
+  return linkUrl
 }
 
 export function isIOS() {
@@ -481,4 +494,7 @@ export function isHttp(url) {
     return false
   }
   return true
+}
+export function truncateAddress(address){
+  return address.slice(0, 6) + '...' + address.slice(-4);
 }

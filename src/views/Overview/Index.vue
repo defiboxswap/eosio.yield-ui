@@ -36,12 +36,56 @@
               </div>
             </div>
             <div class="tabCls flexb" style="flex-direction: row;">
-              <div class="sup-assets">
-                {{ $t("yield.yield203") }}
-                <img src="@/assets/img/usdt.png" alt="" @click="handleLink('USD')">
-                <img src="@/assets/img/eos.png" alt="" @click="handleLink('EOS')">
+              <div class="flex">
+                <div class="sup-assets">{{ $t("yield.yield203") }}</div>
+                <v-menu
+                  nudge-width="0"
+                  nudge-top="0"
+                  nudge-right="0"
+                  min-width="200"
+                  v-model="assetsVisible"
+                  offset-y
+                  rounded="lg"
+                >
+                <!-- open-on-hover -->
+                  <template v-slot:activator="{ on, attrs }">
+                    <div
+                      v-bind="attrs"
+                      v-on="on"
+                      class="nolineheight"
+                    >
+                      <img src="@/assets/img/usdt.png" alt="">
+                      <img src="@/assets/img/eos.png" alt="">
+                    </div>
+                  </template>
+                  <div class="assets">
+                    <div class="assetBox">EOS</div>
+                    <div v-for="(item, index) in assets" :key="'asset-'+ index" class="item pointer"  @click="handleLink(item.symbol)">
+                      <div class="flex">
+                        <img :src="item.imgUrl" alt="">
+                        <div>
+                          <div class="symbol">{{ item.symbol }}</div>
+                          <div class="contract">{{ item.contract }}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="assetBox">EOS EVM</div>
+                    <div class="item pointer" @click="handleLink('WEOS')">
+                      <div class="flex">
+                        <img src="@/assets/img/eos.png" alt="">
+                        <div>
+                          <div class="symbol">WEOS</div>
+                          <div class="contract">0xc005...0104f</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </v-menu>
               </div>
-              <BaseTab v-model="checkedVal1" />
+              <!-- <BaseTab v-model="checkedVal1" /> -->
+            </div>
+            <div style="padding: 0 20px; margin-top: 15px;">
+              <Select v-model="charts1Value" :list="charts1Items" />
             </div>
             <div
               class="box-data"
@@ -67,7 +111,7 @@
             class="tabCls"
             style="margin-bottom: 15px; margin-top: -20px;"
           >
-            <BaseTab v-model="checkedVal2" />
+            <!-- <BaseTab v-model="checkedVal2" /> -->
           </div>
           <div
             class="tvl-box"
@@ -151,12 +195,56 @@
       <div class="OverviewPC-view1">
         <div class="OverviewPC-layout">
           <div class="tabCls flexb" style="flex-direction: row;">
-            <div class="sup-assets">
-              {{ $t("yield.yield203") }}
-              <img src="@/assets/img/usdt.png" alt="" @click="handleLink('USD')">
-              <img src="@/assets/img/eos.png" alt="" @click="handleLink('EOS')">
+            <div class="flex">
+              <div class="sup-assets">{{ $t("yield.yield203") }}</div>
+              <v-menu
+                nudge-width="0"
+                nudge-top="0"
+                nudge-right="0"
+                min-width="200"
+                v-model="assetsVisible"
+                offset-y
+                rounded="lg"
+                open-on-hover
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <div
+                    v-bind="attrs"
+                    v-on="on"
+                    class="nolineheight"
+                  >
+                    <img src="@/assets/img/usdt.png" alt="" @click="handleLink('USD')">
+                    <img src="@/assets/img/eos.png" alt="" @click="handleLink('EOS')">
+                  </div>
+                </template>
+                <div class="assets">
+                  <div class="assetBox">EOS</div>
+                  <div v-for="(item, index) in assets" :key="'asset-'+ index" class="item pointer"  @click="handleLink(item.symbol)">
+                    <div class="flex">
+                      <img :src="item.imgUrl" alt="">
+                      <div>
+                        <div class="symbol">{{ item.symbol }}</div>
+                        <div class="contract">{{ item.contract }}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="assetBox">EOS EVM</div>
+                  <div class="item pointer" @click="handleLink('WEOS')">
+                    <div class="flex">
+                      <img src="@/assets/img/eos.png" alt="">
+                      <div>
+                        <div class="symbol">WEOS</div>
+                        <div class="contract">0xc005...0104f</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </v-menu>
             </div>
-            <BaseTab v-model="checkedVal1" />
+            <!-- <BaseTab v-model="checkedVal1" /> -->
+            <div style="width: 200px;">
+              <Select v-model="charts1Value" :list="charts1Items" />
+            </div>
           </div>
           <div id="view1Data"></div>
         </div>
@@ -180,7 +268,7 @@
             class="tabCls"
             style="padding-right: 75px"
           >
-            <BaseTab v-model="checkedVal2" />
+            <!-- <BaseTab v-model="checkedVal2" /> -->
           </div>
           <div id="view2Data"></div>
         </div>
@@ -235,14 +323,17 @@ export default {
   name: "Overview",
   data() {
     return {
+      assetsVisible: false,
       overViewData: {
         agg_protocol_count: 0,
         tvl_eos: 0,
         tvl_usd_change: "0.00",
       },
-      chart1Data: [],
+      chart1Data: [[]],
       chart2Data: [[]],
       chart3Data: [[]],
+      charts1Items: [],
+      charts1Value: [],
       charts2Items: [],
       charts2Value: [],
       charts3Items: [],
@@ -285,6 +376,18 @@ export default {
           imgUrl: require('@/assets/img/report/report1.png'),
           jumpLink: 'https://eosnetwork.com/blog/eos-yield-blue-paper'
         },
+      ],
+      assets: [ // EOS chain
+        {
+          imgUrl: require('@/assets/img/eos.png'),
+          symbol: 'EOS',
+          contract: 'eosio.token'
+        },
+        {
+          imgUrl: require('@/assets/img/usdt.png'),
+          symbol: 'USD',
+          contract: 'tethertether'
+        },
       ]
     }
   },
@@ -293,6 +396,28 @@ export default {
   },
   props: {},
   watch: {
+    "charts1Value": {
+      handler: function (val) {
+        try {
+          let res = []
+          const chartData = JSON.parse(JSON.stringify(this.chart1Data))
+          chartData.forEach(v => {
+            if (val.find(vv => vv === v[0])) {
+              res.push(v)
+            }
+          });
+          res.unshift(chartData[0])
+          chart1.init({
+            self: this,
+            data: res,
+            type: this.uint
+          })
+        } catch (error) {
+          console.log(error)
+        }
+      },
+      deep: true
+    },
     "charts2Value": {
       handler: function (val) {
         try {
@@ -307,7 +432,7 @@ export default {
           chart2.init({
             self: this,
             data: res,
-            type: this.checkedVal2
+            type: this.uint
           })
         } catch (error) {
           console.log(error)
@@ -335,6 +460,19 @@ export default {
         }
       },
       deep: true
+    },
+    "$store.state.app.uint": function change(val) {
+      try {
+        this.initView1Data()
+        this.handleCurrentUnit(val);
+        // chart1.init({
+        //   self: this,
+        //   data: this.chart1Data,
+        //   type: val
+        // })
+      } catch (error) {
+        console.log(error)
+      }
     },
     'checkedVal1': {
       handler: async function (val) {
@@ -400,6 +538,7 @@ export default {
   },
   computed: mapState({
     isMobile: (state) => state.app.isMobile,
+    uint: (state) => state.app.uint,
   }),
   created() { },
   mounted() {
@@ -412,15 +551,56 @@ export default {
   },
   beforeDestroy() { },
   methods: {
+    async handleCurrentUnit(val){
+          let value;
+          if (val === 'USD') {
+            value = 'tvl_usd'
+          } else {
+            value = 'tvl_eos'
+          }
+          let res = await lines.lines2('day', value)
+          this.chart2Data = res.data
+          let res1 = []
+          const chartData = JSON.parse(JSON.stringify(this.chart2Data))
+          chartData.forEach(v => {
+            if (this.charts2Value.find(vv => vv === v[0])) {
+              res1.push(v)
+            }
+          });
+          res1.unshift(chartData[0])
+          chart2.init({
+            self: this,
+            data: res1,
+            type: val
+          })
+    },
     async initView1Data() {
       try {
         let res = await lines.lines1()
-        chart1.init({
-          self: this,
-          data: res.data,
-          type: this.checkedVal1,
-        })
-        this.chart1Data = res.data
+        const result = [
+          ['category'],
+          ['EOS'],
+          ['EOS EVM'],
+        ].map((keyArr) => {
+          const key = keyArr[0];
+          const secondArr = res.data.map((item) => (key == 'EOS' || key == 'EOS EVM') ? item[`${(key === 'EOS EVM' ? 'evm' : key.toLowerCase())}_tvl_${this.uint === "EOS" ? 'eos' : 'usd'}`] : item.line_id);
+          return [key].concat(secondArr);
+        });
+
+        this.chart1Data = result
+
+        this.charts1Items = result.map(v => v[0]).slice(1)
+        this.charts1Value = result.map(v => v[0]).slice(1)
+
+        // chart1.init({
+        //   self: this,
+        //   // data: res.data,
+        //   data: result,
+        //   // type: this.checkedVal1,
+        //   type: this.uint,
+        // })
+        // this.chart1Data = res.data
+        this.chart1Data = result
         if (res.data.length > 0) {
           let item = JSON.parse(JSON.stringify(res.data[res.data.length - 1]))
           item.tvl_usd_changeOld = item.tvl_usd_change
@@ -439,7 +619,13 @@ export default {
     },
     async initView2Data() {
       try {
-        let res = await lines.lines2('day', 'tvl_usd')
+        let value;
+        if (this.uint === 'USD') {
+            value = 'tvl_usd'
+          } else {
+            value = 'tvl_eos'
+          }
+        let res = await lines.lines2('day', value)
         this.chart2Data = res.data
         this.charts2Items = this.chart2Data.map(v => v[0]).slice(1)
         this.charts2Value = this.chart2Data.map(v => v[0]).slice(1)
@@ -487,8 +673,10 @@ export default {
     handleLink(type) {
       if (type === 'USD') {
         window.open('https://coinmarketcap.com/currencies/tether/')
-      } else {
+      } else if (type === 'EOS'){
         window.open('https://coinmarketcap.com/currencies/eos/')
+      } else {
+        window.open('https://coinmarketcap.com/currencies/wrapped-eos/')
       }
     },
     getColor(item) {
@@ -555,6 +743,9 @@ export default {
     .tabCls {
       display: flex;
       flex-direction: row-reverse;
+      margin-top: 20px;
+      // border: 1px solid red;
+      padding: 0 10px;
       ::v-deep .change-tab_cont {
         padding: 3px;
         a {
@@ -564,17 +755,18 @@ export default {
       }
       .sup-assets {
         display: flex;
-        padding: 8px 0 0 10px;
+        // padding: 8px 0 0 10px;
         font-weight: bold;
         color: #000;
         cursor: pointer;
         align-items: center;
-        img {
+        margin-right: 10px;
+      }
+      img {
           width: 20px;
           height: 20px;
-          margin-left: 10px;
+          margin-right: 10px;
         }
-      }
     }
   }
   .Overview-dataList {
@@ -716,18 +908,18 @@ export default {
       display: flex;
       flex-direction: row-reverse;
       padding-right: 110px;
-      padding-top: 10px;
+      padding-top: 30px;
       .sup-assets {
         display: flex;
-        padding: 0 30px 0 50px;
+        padding: 0 0px 0 50px;
         font-weight: bold;
         color: #000;
-        cursor: pointer;
         align-items: center;
-        img {
-          width: 30px;
-          margin-left: 15px;
-        }
+        margin-right: 10px;
+      }
+      img {
+        width: 30px;
+        margin-right: 10px;
       }
     }
   }
@@ -856,4 +1048,27 @@ export default {
     }
   }
 }
+.assets{
+    // width: 200px;
+    background-color: #fff;
+    padding: 10px;
+    .assetBox{
+      font-size: 14px;
+    }
+    .item{
+      margin: 10px 0;
+    }
+    img{
+      width: 30px;
+      height: 30px;
+      margin-right: 8px;
+    }
+    .symbol{
+      font-size: 14px;
+      line-height: 15px;
+    }
+    .contract{
+      font-size: 12px;
+    }
+  }
 </style>

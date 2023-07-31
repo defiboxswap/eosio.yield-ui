@@ -27,7 +27,9 @@ img {
 .pointer {
   cursor: pointer;
 }
-
+.nolineheight{
+  line-height: 0;
+}
 input {
   outline: none;
   -webkit-appearance: none;

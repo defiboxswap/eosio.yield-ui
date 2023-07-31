@@ -42,7 +42,22 @@
                 :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"
               ></v-select>
             </div>
-            <div class="title-select flex unit-cls">
+
+            <v-select
+              class="select-all"
+              style="border-radius: 10px"
+              :items="chains"
+              v-model="networkVal"
+              item-text="text"
+              item-value="value"
+              label="All"
+              solo
+              :attach="true"
+              :full-width="true"
+              :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"
+            ></v-select>
+
+            <!-- <div class="title-select flex unit-cls">
               <div class="select-audit flex">
                 <div
                   class="audit-tips1 flex-1"
@@ -55,7 +70,7 @@
                   @click="handleUnit('EOS')"
                 >EOS</div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -80,7 +95,7 @@
                   <div class="box-name">{{ item.metadata_name }}</div>
                   <div class="flex flex-wrap">
                     <div class="box-label">{{ handleCategory(item.category) }}</div>
-                    <div
+                    <!-- <div
                       class="box-label maxTagCls"
                       v-if="item.maxTag"
                     >{{ $t("yield.yield202") }}</div>
@@ -91,7 +106,7 @@
                     <div
                       class="box-label minTagCls"
                       v-if="item.minTag"
-                    >{{ $t("yield.yield200") }}</div>
+                    >{{ $t("yield.yield200") }}</div> -->
                     <!-- <div class="box-label">Corss-chain</div> -->
                     <!-- <div class="box-label"  v-if="handleGrade(item.tvl_eos)">{{ handleGrade(item.tvl_eos) }}</div> -->
                   </div>
@@ -279,14 +294,13 @@
       <div class="ProtocolsPC-overLay">
         <div class="ProtocolsPC-layout flex flex-jus-between">
           <!-- Projects -->
-          <div class="overLay-title">{{ $t("yield.yield195") }}</div>
-
-          <div class="overLay-select flex">
+          <div class="overLay-title">
+            <!-- {{ $t("yield.yield195") }} -->
             <div class="select-audit flex flex-align-center">
               <!-- TVL Rankings -->
               <div
                 class="audit-tips1 flex-1"
-                style="color: #000"
+                style="color: #fff"
                 @click="clickInfoTab('TVLRankings')"
               >{{ $t("yield.yield50") }}</div>
               <div class="audit-line"></div>
@@ -297,7 +311,9 @@
                 @click="clickInfoTab('Audit')"
               >{{ $t("yield.yield51") }}</div>
             </div>
+          </div>
 
+          <div class="overLay-select flex">
             <v-select
               class="select-all"
               :items="items"
@@ -311,21 +327,34 @@
               :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"
             ></v-select>
 
-            <div class="select-audit flex flex-align-center unit-cls" style="margin-right: 8px;">
-              <!-- unit usd -->
+            <v-select
+              class="select-all"
+              :items="chains"
+              v-model="networkVal"
+              item-text="text"
+              item-value="value"
+              label="All"
+              solo
+              :attach="true"
+              :full-width="true"
+              :menu-props="{ offsetY: true, offsetOverflow: true, transition: false }"
+            ></v-select>
+
+            <!-- <div class="select-audit flex flex-align-center unit-cls" style="margin-right: 8px;">
+              unit usd
               <div
                 class="audit-tips1 flex-1"
                 :style="{ color: (unitBoolean ? '#000' : '#999')}"
                 @click="handleUnit('USD')"
               >USD</div>
               <div class="audit-line"></div>
-              <!-- unit eos -->
+              unit eos
               <div
                 class="audit-tips2 flex-1"
                 :style="{ color: (!unitBoolean ? '#000' : '#999')}"
                 @click="handleUnit('EOS')"
               >EOS</div>
-            </div>
+            </div> -->
 
             <div class="select-search flex">
               <!-- <div class="flex-1">{{ $t("yield.yield56") }}</div> -->
@@ -501,7 +530,7 @@
                       <div class="item-name">{{ item.metadata_name }}</div>
                       <div class="flex">
                         <div class="item-label">{{ handleCategory(item.category) }}</div>
-                        <div
+                        <!-- <div
                           class="item-label maxTagCls"
                           v-if="item.maxTag"
                         >{{ $t("yield.yield202") }}</div>
@@ -512,7 +541,7 @@
                         <div
                           class="item-label minTagCls"
                           v-if="item.minTag"
-                        >{{ $t("yield.yield200") }}</div>
+                        >{{ $t("yield.yield200") }}</div> -->
                       </div>
                     </div>
                   </div>
@@ -620,7 +649,22 @@ export default {
           value: 'Liquid Staking'
         }
       ],
+      chains:[
+        {
+          text: this.$t('yield.yield174'),
+          value: undefined
+        },
+        {
+          text: 'EOS',
+          value: 1
+        },
+        {
+          text: 'EOS EVM',
+          value: 2
+        },
+      ],
       selectVal: this.$t('yield.yield174'),
+      networkVal: this.$t('yield.yield174'),
       hasParams: false,
       annualRate: 0,
       unit: 'USD',
@@ -655,6 +699,15 @@ export default {
       }
       this.initList()
     },
+    networkVal: function (oldVal, newVal) {
+      if (oldVal === newVal) return
+      this.initList()
+    },
+    "$store.state.app.uint": function change(val) {
+      // console.log(val, 'val')
+      this.unit = val
+      this.initList()
+    },
   },
   computed: {
     unitBoolean() {
@@ -662,10 +715,12 @@ export default {
       else return false
     },
     ...mapState({
-      isMobile: state => state.app.isMobile
+      isMobile: state => state.app.isMobile,
+      uint: (state) => state.app.uint,
     }),
   },
   async created() {
+    this.unit = this.uint
     await this.getRate()
     await this.eosRateUsd()
     this.initList()
@@ -744,6 +799,12 @@ export default {
       } else {
         category = this.selectVal
       }
+      let network = undefined
+      if (this.networkVal === this.$t('yield.yield174')) {
+        network = undefined
+      } else {
+        network = this.networkVal
+      }
 
       try {
         this.loading = true
@@ -754,6 +815,7 @@ export default {
           order: this.order,
           status: 'active',
           category,
+          network,
           order_type: 'desc'
         })
         if (result?.code === 200 && result.data) {
@@ -882,10 +944,10 @@ export default {
       }
       this.order = type
     },
-    handleUnit(item) {
-      this.unit = item
-      this.initList()
-    },
+    // handleUnit(item) {
+    //   this.unit = item
+    //   this.initList()
+    // },
     getImgUrl(name) {
       return `${baseURL}/v1/protocols/${name}/sparkline?tvl_type=tvl_${this.unit.toLowerCase()}`
     },
@@ -1054,8 +1116,10 @@ export default {
       line-height: 45px;
       border-radius: 25px;
       border: 1px solid #000;
+      background: transparent;
       ::v-deep .v-input__control {
-        min-width: 80px;
+        // min-width: 80px;
+        width: 25vw;
         height: 45px;
         min-height: 45px;
         margin-bottom: 0;
@@ -1064,6 +1128,7 @@ export default {
         margin-bottom: 0;
         box-shadow: none;
         min-height: 43px;
+        background: transparent;
       }
       ::v-deep .v-select__selections input {
         display: none;
@@ -1075,7 +1140,7 @@ export default {
         color: #000;
       }
       ::v-deep .v-select__selections {
-        min-width: 80px;
+        // min-width: 80px;
         width: fit-content;
         display: block;
         min-height: auto;
@@ -1135,8 +1200,8 @@ export default {
       }
 
       .box-label {
-        min-width: 77px;
-        padding: 0 10px;
+        // min-width: 77px;
+        // padding: 0 10px;
         height: 22px;
         line-height: 22px;
         border-radius: 15px;
@@ -1144,8 +1209,9 @@ export default {
         margin-bottom: 3px;
         font-size: 10px;
         font-weight: 400;
-        color: #000000;
-        border: 1px solid #d9d9d9;
+        color: #999;
+        // color: #000000;
+        // border: 1px solid #d9d9d9;
         text-align: center;
       }
 
@@ -1225,9 +1291,18 @@ export default {
     height: 240px;
     padding-top: 30px;
     .overLay-title {
-      font-size: 30px;
+      font-size: 24px;
       font-weight: 600;
       color: #ffffff;
+      .audit-tips1, .audit-tips2{
+        cursor: pointer;
+      }
+      .audit-line {
+        width: 1px;
+        margin: 0 15px;
+        height: 20px;
+        background-color: #999;
+      }
     }
 
     .overLay-select {
@@ -1264,13 +1339,16 @@ export default {
       }
 
       .select-all {
+        &:nth-child(2){
+          margin: 0 8px;
+        };
         // width: 71px;
         // height: 38px;
         border-radius: 8px;
         // background-color: #ffffff;
         // cursor: pointer;
-        margin-left: 8px;
-        margin-right: 8px;
+        // margin-left: 8px;
+        // margin-right: 8px;
         ::v-deep .v-input__control {
           min-width: 80px;
           height: 38px;
@@ -1367,16 +1445,13 @@ export default {
           cursor: pointer;
         }
       }
-
       .box-1 {
         width: 400px;
         padding-left: 20px;
       }
-
       .box-2 {
         width: 150px;
       }
-
       .box-3 {
         width: 150px;
       }
@@ -1421,16 +1496,17 @@ export default {
           margin-bottom: 4px;
         }
         .item-label {
-          min-width: 77px;
-          padding: 0 10px;
+          // min-width: 77px;
+          // padding: 0 10px;
           height: 22px;
           line-height: 22px;
           border-radius: 15px;
-          margin-right: 8px;
+          // margin-right: 8px;
           font-size: 10px;
           font-weight: 400;
-          color: #000000;
-          border: 1px solid #d9d9d9;
+          color: #999;
+          // color: #000000;
+          // border: 1px solid #d9d9d9;
         }
         .maxTagCls {
           color: #13a57a;

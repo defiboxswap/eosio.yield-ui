@@ -30,7 +30,7 @@ const app = {
     klineConfig: {
       interval: '240', // Resolution, time
     },
-    uint: 'EOS',
+    uint: 'USD',
 
     walletLoginVisible: false, // Login Popup
     customCurrencyList: [], // Custom add currency

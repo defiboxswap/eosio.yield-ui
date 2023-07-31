@@ -220,7 +220,12 @@ const items = {
         "yield215": "",
         "yield216": "",
         "yield217": "",
-        "yield218": ""
+        "yield218": "",
+        "yield219": "",
+        "yield220": "",
+        "yield221": "",
+        "yield222": "",
+        "yield223": ""
     },
     "zhTW": {
         "yield1": "首頁",
@@ -232,7 +237,7 @@ const items = {
         "yield7": "項目",
         "yield8": "已領取",
         "yield9": "語言",
-        "yield10": "登錄",
+        "yield10": "連接錢包",
         "yield11": "什麼是Yield+？",
         "yield12": "Yield+ 是一項",
         "yield13": "Yield+階段",
@@ -281,7 +286,7 @@ const items = {
         "yield56": "搜索",
         "yield57": "更多",
         "yield58": "這不是一個合約地址。",
-        "yield59": "登出",
+        "yield59": "斷開連接",
         "yield60": "基本信息",
         "yield61": "協議類型",
         "yield62": "選擇類型",
@@ -437,10 +442,15 @@ const items = {
         "yield212": "Antelope",
         "yield213": "社區計劃，旨在增加 dApp 開發人員獲得獎勵和 EOS 用戶在 EOS 主網上賺取收益的機會。 Yield+ 工作組為 EOS 設計並提出了流動性獎勵計劃。這是一個鏈上計劃，直接衡量和獎勵 EOS 上增加的經濟活動。",
         "yield214": "警告：該項目安全審核級別較低，請您仔細甄別後加入。",
-        "yield215": "",
-        "yield216": "",
-        "yield217": "",
-        "yield218": ""
+        "yield215": "單位",
+        "yield216": "請確認填寫的合約地址是否正確，這將決定項目TVL的統計。一個項目最多可統計10個合約地址，更改後需重新審核。",
+        "yield217": "請輸入合約地址",
+        "yield218": "這不是一個正確的地址",
+        "yield219": "請選擇網絡",
+        "yield220": "不允許重復",
+        "yield221": "添加合約地址",
+        "yield222": "",
+        "yield223": ""
     },
     "en": {
         "yield1": "Home",
@@ -452,7 +462,7 @@ const items = {
         "yield7": "Protocols",
         "yield8": "Claimed",
         "yield9": "Language",
-        "yield10": "Login",
+        "yield10": "Connect Wallet",
         "yield11": "What is  Yield+ ?",
         "yield12": "Yield+ is an",
         "yield13": "Yield+ Stages",
@@ -501,7 +511,7 @@ const items = {
         "yield56": "Search",
         "yield57": "More",
         "yield58": "This is not a contract address .",
-        "yield59": "Logout",
+        "yield59": "Disconnect",
         "yield60": "Basic information",
         "yield61": "Protocol category",
         "yield62": "Choose the category",
@@ -657,10 +667,15 @@ const items = {
         "yield212": "Antelope",
         "yield213": "community initiative designed to increase opportunities for dApp developers to be rewarded and EOS users to earn yield on the EOS mainnet. The Yield+ working group has designed and proposed a Liquidity Rewards Program for EOS. This is an on-chain program that directly measures and rewards increased economic activity on EOS.",
         "yield214": "Warning: The security review level of this project is low, please be cautious if you decide to join.",
-        "yield215": "",
-        "yield216": "",
-        "yield217": "",
-        "yield218": ""
+        "yield215": "Unit",
+        "yield216": "Please confirm the contract address, it will determine the data of the project TVL. A project can count up to 10 contract addresses, any change requires an approval.",
+        "yield217": "Please enter the contract address",
+        "yield218": "This is a wrong address",
+        "yield219": "Please select Network",
+        "yield220": "No repetition allowed",
+        "yield221": "Add contract address",
+        "yield222": "",
+        "yield223": ""
     },
     "ko": {
         "yield1": "집",
@@ -672,7 +687,7 @@ const items = {
         "yield7": "프로젝트",
         "yield8": "주장",
         "yield9": "언어",
-        "yield10": "로그인",
+        "yield10": "지갑 연결",
         "yield11": "수율+ 란 무엇입니까?",
         "yield12": "Yield+는 dApp 개발자가 보상을 받고 EOS 사용자가 EOS 메인넷에서 수익을 얻을 수 있는 기회를 늘리기 위해 고안된",
         "yield13": "수익률+ 단계",
@@ -721,7 +736,7 @@ const items = {
         "yield56": "검색",
         "yield57": "더",
         "yield58": "이것은 계약 주소가 아닙니다.",
-        "yield59": "로그 아웃",
+        "yield59": "연결 끊기",
         "yield60": "기본 정보",
         "yield61": "프로토콜 유형",
         "yield62": "유형을 선택하십시오",
@@ -877,12 +892,17 @@ const items = {
         "yield212": "Antelope",
         "yield213": "커뮤니티 이니셔티브입니다. Yield+ 작업 그룹은 EOS를 위한 유동성 보상 프로그램을 설계하고 제안했습니다. EOS에서 증가된 경제 활동을 직접 측정하고 보상하는 온체인 프로그램입니다.",
         "yield214": "경고:이 프로젝트의 보안 검토 수준은 낮으며, 참여하기로 결정했다면 주의하십시오.",
-        "yield215": "",
-        "yield216": "",
-        "yield217": "",
-        "yield218": ""
+        "yield215": "단위",
+        "yield216": "계약 주소를 확인하십시오. 그러면 프로젝트 TVL의 데이터가 결정됩니다. 프로젝트는 최대 10개의 계약 주소를 계산할 수 있으며 모든 변경에는 승인이 필요합니다.",
+        "yield217": "계약 주소를 입력하세요.",
+        "yield218": "잘못된 주소입니다",
+        "yield219": "네트워크를 선택하십시오.",
+        "yield220": "중복이 허용되지 않음",
+        "yield221": "계약 주소 추가",
+        "yield222": "",
+        "yield223": ""
     }
-  }
+}
 }
 const keys = items.key
 const { en, zhCN, zhTW, ko } = items.list

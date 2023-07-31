@@ -13,9 +13,15 @@ import { commons } from "@/service"
 import { getUrlParams } from "@/utils/public"
 import { mapState } from "vuex"
 export default {
+  metaInfo () {
+    return {
+      meta: this.meta
+    }
+  },
   name: "App",
   data() {
     return {
+      meta: [],
       isMobile: !!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i),
       urlQueryObj: {},
     }
@@ -35,6 +41,61 @@ export default {
         }
       },
       deep: true,
+    },
+    "$route.name": {
+      handler: function(newVal) {
+        if (newVal !== 'ProtocolsDetails') {
+          this.meta = [
+            { // set meta
+              name: 'og:title',
+              content: 'Yield+ | EOS Network Foundation',
+              'data-hid': "og:title"
+            },
+            {
+              content: 'https://eos.mypinata.cloud/ipfs/QmQuDk8w18UJFh2AqedHE7JRhQ1YFPixjLj1o4CqHfFXJa',
+              'data-hid': "og:image",
+              property: 'og:image'
+            },
+            {
+              content: 'Yield+ | EOS Network Foundation',
+              'data-hid': "twitter:title",
+              property: 'twitter:title'
+            },
+            {
+              content: 'https://eos.mypinata.cloud/ipfs/QmQuDk8w18UJFh2AqedHE7JRhQ1YFPixjLj1o4CqHfFXJa',
+              'data-hid': "twitter:image",
+              property: 'twitter:image'
+            },
+            {
+              content: 'https://eos.mypinata.cloud/ipfs/QmQuDk8w18UJFh2AqedHE7JRhQ1YFPixjLj1o4CqHfFXJa',
+              'data-hid': "twitter:url",
+              property: 'https://dev.tokenyield.io'
+            },
+            {
+              content: 'website',
+              property: 'og:type'
+            },
+            {
+              name: 'description',
+              content: 'Designed to build economic activity on $EOS through incentivizing DeFi dApps that increase TVL and generate yield.',
+              property: 'og:type'
+            },
+            {
+              content: 'Designed to build economic activity on $EOS through incentivizing DeFi dApps that increase TVL and generate yield.',
+              property: 'twitter:description'
+            },
+            {
+              content: 'summary_large_image',
+              property: 'twitter:card'
+            },
+            {
+              content: 'website',
+              property: 'twitter:type'
+            }
+          ]
+        }
+      },
+      immediate: true
     },
   },
   computed: {
@@ -153,6 +214,7 @@ export default {
             chainId: eosNode.chainId,
             area: eosNode.area,
           }
+
 
           // setNode
           this.$store.dispatch("setNode", nodeList).then(() => {

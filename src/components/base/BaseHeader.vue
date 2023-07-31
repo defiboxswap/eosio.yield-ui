@@ -38,37 +38,46 @@
         </template>
         <div class="accountMenu">
           <div
-            class="accountMenu-item flext flex-align-center flex-jus-center"
+            class="accountMenu-item"
             v-for="(item, index) in tabList"
             :key="index"
             @click.prevent="gotoRouter(item)"
           >{{ $t(item.name) }}</div>
 
           <div
-            class="accountMenu-item flext flex-align-center flex-jus-center flex-column"
+            class="accountMenu-item"
             @click="languageVisible = true"
           >
-            <div class="flexc">
+            <!-- <div class="flexc"> -->
               <span>{{ $t("yield.yield9") }}</span>
-            </div>
+            <!-- </div> -->
           </div>
           <!-- Node -->
           <div
-            class="accountMenu-item flext flex-align-center flex-jus-center"
+            class="accountMenu-item"
             @click="nodeVisible = true"
           >{{ $t("yield.yield133") }}</div>
-
-          <div
-            class="accountMenu-item flext flex-align-center flex-jus-center flex-column"
-            v-if="$store.state.app.accountInfo.account"
-          >
-            <div class="flexc">
-              <span>{{ $store.state.app.accountInfo.account }}</span>
+          <!-- USD/EOS -->
+          <div class="accountMenu-item">
+            <div>{{ $t("yield.yield215") }}</div>
+            <div class="flex flexb unitBox">
+              <div v-for="(item, index) in unitList" :key="'unit-' + index" class="flexc" :class="{ activited: uint === item.label}" @click="handleCurrencyActive(item.label)">
+                <div>{{ item.label }}</div>
+              </div>
             </div>
           </div>
 
-          <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column">
-            <div class="flexc">
+          <div
+            class="accountMenu-item"
+            v-if="$store.state.app.accountInfo.account"
+          >
+            <!-- <div class="flexc"> -->
+              <span>{{ $store.state.app.accountInfo.account }}</span>
+            <!-- </div> -->
+          </div>
+
+          <div class="accountMenu-item">
+            <!-- <div class="flexc"> -->
               <span
                 v-if="$store.state.app.accountInfo.account"
                 @click="handleLoginOut"
@@ -77,7 +86,7 @@
                 v-else
                 @click="handleWalletLogin"
               >{{ $t("yield.yield10") }}</span>
-            </div>
+            <!-- </div> -->
           </div>
         </div>
       </v-menu>
@@ -150,30 +159,39 @@
           </template>
           <div class="accountMenu">
             <div
-              class="accountMenu-item flext flex-align-center flex-jus-center flex-column"
+              class="accountMenu-item"
               @click="languageVisible = true"
             >
-              <div class="flexc">
+              <!-- <div class="flexc"> -->
                 <span>{{ $t("yield.yield9") }}</span>
-              </div>
+              <!-- </div> -->
             </div>
             <!-- Node -->
             <div
-              class="accountMenu-item flext flex-align-center flex-jus-center"
+              class="accountMenu-item"
               @click="nodeVisible = true"
             >{{ $t("yield.yield133") }}</div>
-
-            <div
-              class="accountMenu-item flext flex-align-center flex-jus-center flex-column"
-              v-if="$store.state.app.accountInfo.account"
-            >
-              <div class="flexc">
-                <span>{{ $store.state.app.accountInfo.account }}</span>
+            <!-- USD/EOS -->
+            <div class="accountMenu-item">
+              <div>{{ $t("yield.yield215") }}</div>
+              <div class="flex flexb unitBox">
+                <div v-for="(item, index) in unitList" :key="'unit-' + index" class="flexc" :class="{ activited: uint === item.label}" @click="handleCurrencyActive(item.label)">
+                  <div>{{ item.label }}</div>
+                </div>
               </div>
             </div>
 
-            <div class="accountMenu-item flext flex-align-center flex-jus-center flex-column">
-              <div class="flexc">
+            <div
+              class="accountMenu-item"
+              v-if="$store.state.app.accountInfo.account"
+            >
+              <!-- <div class="flexc"> -->
+                <span>{{ $store.state.app.accountInfo.account }}</span>
+              <!-- </div> -->
+            </div>
+
+            <div class="accountMenu-item">
+              <!-- <div class="flexc"> -->
                 <span
                   v-if="$store.state.app.accountInfo.account"
                   @click="handleLoginOut"
@@ -182,7 +200,7 @@
                   v-else
                   @click="handleWalletLogin"
                 >{{ $t("yield.yield10") }}</span>
-              </div>
+              <!-- </div> -->
             </div>
           </div>
         </v-menu>
@@ -259,6 +277,16 @@ export default {
           url: "https://docs.tokenyield.io/",
         },
       ],
+      unitList:[
+        {
+          label: 'USD',
+          val: 1
+        },
+        {
+          label: 'EOS',
+          val: 2
+        },
+      ]
     }
   },
   components: {},
@@ -266,11 +294,19 @@ export default {
   watch: {},
   computed: mapState({
     isMobile: (state) => state.app.isMobile,
+    uint: (state) => state.app.uint,
   }),
   created() { },
   mounted() { },
   beforeDestroy() { },
   methods: {
+    // USD / EOS
+    handleCurrencyActive(uint) {
+      if (this.uint == uint) {
+        return
+      }
+      this.$store.dispatch("setUint", uint)
+    },
     gotoRouter(item) {
       if (item.routerName == "Bluepaper") {
         window.open("https://eosnetwork.com/blog/category/yield-reports/")
@@ -386,11 +422,13 @@ export default {
   padding: 9px 9px 0px 9px;
   .accountMenu-item {
     width: 100%;
-    text-align: center;
-    height: 46px;
+    text-align: left;
+    min-height: 46px;
+    line-height: 45px;
     border-bottom: 1px solid #eeeff0;
     font-size: 13px;
     font-weight: 400;
+    padding-left: 10px;
     cursor: pointer;
     color: #222222;
     svg {
@@ -398,6 +436,24 @@ export default {
     }
     &:last-child {
       border-bottom: none;
+    }
+    .unitBox{
+      // border: 1px solid red;
+      margin: -5px 0 15px;
+      & > div{
+        width: 50%;
+        height: 25px;
+        border: 1px solid #eee;
+        margin-right: 15px;
+        border-radius: 5px;
+        font-size: 12px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      .activited{
+        border: 1px solid #000;
+      }
     }
   }
   .h_accountMenu_item {

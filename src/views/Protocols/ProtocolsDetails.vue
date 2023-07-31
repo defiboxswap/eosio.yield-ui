@@ -99,7 +99,7 @@
                       class="box-label"
                       style="text-align: center"
                     >{{ handleCategory(projectInfo.category) }}</div>
-                    <div
+                    <!-- <div
                       class="box-label maxTagCls"
                       v-if="overViewData.maxTag"
                     >{{ $t("yield.yield202") }}</div>
@@ -110,7 +110,7 @@
                     <div
                       class="box-label minTagCls"
                       v-if="overViewData.minTag"
-                    >{{ $t("yield.yield200") }}</div>
+                    >{{ $t("yield.yield200") }}</div> -->
                     <!-- <div class="box-label"  v-if="handleGrade(projectInfo.tvl_eos)">{{ handleGrade(projectInfo.tvl_eos) }}</div> -->
                   </div>
                 </div>
@@ -160,7 +160,7 @@
                               v-bind="attrs"
                               v-on="on"
                             >
-                              <span style="font-size: 16px; margin-right: 5px; font-weight: 600;">{{projectInfo.contracts[0]}}</span>
+                              <span style="font-size: 16px; margin-right: 5px; font-weight: 600;">{{projectInfo.network === 1 ? projectInfo.contracts[0] : truncateAddress(projectInfo.evm[0])}}</span>
                               <img
                                 src="@/assets/img/ProtocolsDetails/out1.png"
                                 width="12"
@@ -170,11 +170,11 @@
 
                           <v-list>
                             <v-list-item
-                              v-for="(item, index) in projectInfo.contracts"
+                              v-for="(item, index) in projectInfo.network === 1 ? projectInfo.contracts : projectInfo.evm"
                               :key="index"
-                              @click="openWindow('https://bloks.io/account/' + item)"
+                              @click="openWindow((projectInfo.network === 1 ? 'https://bloks.io/account/' : 'https://explorer.evm.eosnetwork.com/address/') + item)"
                             >
-                              <v-list-item-title>{{ item }}</v-list-item-title>
+                              <v-list-item-title>{{ projectInfo.network === 1 ? item : truncateAddress(item) }}</v-list-item-title>
                             </v-list-item>
                           </v-list>
                         </v-menu>
@@ -214,9 +214,9 @@
           </div>
           <div class="ProtocolsDetails-data">
             <!-- <div id="view1Data"></div> -->
-            <div class="tabCls">
+            <!-- <div class="tabCls">
               <BaseTab v-model="checkedVal1" />
-            </div>
+            </div> -->
             <div
               id="view1Data"
               v-if="hasData"
@@ -972,7 +972,7 @@
                     </div>
                     <div class="flex flex-wrap">
                       <div class="box1-label">{{ handleCategory(projectInfo.category) }}</div>
-                      <div
+                      <!-- <div
                         class="box1-label maxTagCls"
                         v-if="overViewData.maxTag"
                       >{{ $t("yield.yield202") }}</div>
@@ -983,7 +983,7 @@
                       <div
                         class="box1-label minTagCls"
                         v-if="overViewData.minTag"
-                      >{{ $t("yield.yield200") }}</div>
+                      >{{ $t("yield.yield200") }}</div> -->
                       <!-- <div class="box1-label">Corss-chain</div> -->
                       <!-- <div class="box1-label" v-if="handleGrade(projectInfo.tvl_eos)">{{ handleGrade(projectInfo.tvl_eos) }}</div> -->
                     </div>
@@ -1034,7 +1034,7 @@
                               v-bind="attrs"
                               v-on="on"
                             >
-                              <span style="font-size: 22px; margin-right: 5px; font-weight: 600;">{{projectInfo.contracts[0]}}</span>
+                              <span style="font-size: 22px; margin-right: 5px; font-weight: 600;">{{projectInfo.network === 1 ? projectInfo.contracts[0] : truncateAddress(projectInfo.evm[0])}}</span>
                               <img
                                 src="@/assets/img/ProtocolsDetails/out1.png"
                                 width="12"
@@ -1044,11 +1044,11 @@
 
                           <v-list>
                             <v-list-item
-                              v-for="(item, index) in projectInfo.contracts"
+                              v-for="(item, index) in projectInfo.network === 1 ? projectInfo.contracts : projectInfo.evm"
                               :key="index"
-                              @click="openWindow('https://bloks.io/account/' + item)"
+                              @click="openWindow((projectInfo.network === 1 ? 'https://bloks.io/account/' : 'https://explorer.evm.eosnetwork.com/address/') + item)"
                             >
-                              <v-list-item-title>{{ item }}</v-list-item-title>
+                              <v-list-item-title>{{ projectInfo.network === 1 ? item : truncateAddress(item) }}</v-list-item-title>
                             </v-list-item>
                           </v-list>
                         </v-menu>
@@ -1126,18 +1126,18 @@
               v-if="hasData"
               class="box2-right"
             >
-              <div class="tabCls">
+              <!-- <div class="tabCls">
                 <BaseTab v-model="checkedVal1" />
-              </div>
+              </div> -->
               <div id="view1Data"></div>
             </div>
             <div
               v-else
               class="review"
             >
-              <div class="tabCls">
+              <!-- <div class="tabCls">
                 <BaseTab v-model="checkedVal1" />
-              </div>
+              </div> -->
               <div class="flex flexc review">
                 <img
                   src="@/assets/img/BaseNoData/review.png"
@@ -1883,13 +1883,19 @@
         </div>
         <div class="categoryDialog">
           <div class="categoryDialog-title">{{ $t("yield.yield210") }}</div>
+          <div class="radio-container">
+            <v-radio-group v-model="network" inline class="flex">
+              <v-radio label="EOS" value="1" color="#1c1dff"></v-radio>
+              <v-radio label="EOS EVM" value="2" color="#1c1dff"></v-radio>
+            </v-radio-group>
+          </div>
+
           <input
             class="input-cls"
             type="text"
             v-model="claimFormName"
             :placeholder="$t('yield.yield211')"
           />
-          <!-- <div class="error-cls" v-if="claimFormName === ''">请输入接收账户</div> -->
           <div class="error-cls" v-if="claimFormName && !claimFormNameVeri">{{ $t("yield.yield209") }}</div>
           <div
             class="flex flex-jus-center"
@@ -1913,6 +1919,8 @@ import axios from "axios"
 import chart1 from "./echarts/chart1.js"
 import { mapState } from "vuex"
 import { protocols, lines } from "@/service"
+import { truncateAddress } from "@/utils/public"
+import { utils } from 'ethers'
 export default {
   metaInfo () {
     return {
@@ -1922,6 +1930,7 @@ export default {
   name: "ProtocolsDetails",
   data() {
     return {
+      network: '1', // 1--EOS、2--EOS EVM
       meta: [],
       hasData: 0,
       // categoryItem: "cdp",
@@ -1974,19 +1983,28 @@ export default {
         if (!val) this.claimFormNameVeri = true
       }
     },
-    'checkedVal1': {
-      handler: async function () {
-        try {
-          // let item = JSON.parse(JSON.stringify(this.overViewData1[this.overViewData1.length - 1]))
-          this.formatData(this.overViewData, this.overViewData1)
-          // chart1.init({
-          //   self: this,
-          //   data: this.overViewData1,
-          //   type: val
-          // })
-        } catch (error) {
-          console.log(error)
-        }
+    // 'checkedVal1': {
+    //   handler: async function () {
+    //     try {
+    //       // let item = JSON.parse(JSON.stringify(this.overViewData1[this.overViewData1.length - 1]))
+    //       this.formatData(this.overViewData, this.overViewData1)
+    //       // chart1.init({
+    //       //   self: this,
+    //       //   data: this.overViewData1,
+    //       //   type: val
+    //       // })
+    //     } catch (error) {
+    //       console.log(error)
+    //     }
+    //   }
+    // },
+    "$store.state.app.uint": function change(val) {
+      // console.log(val, 'val')
+      this.checkedVal1 = val
+      try {
+        this.formatData(this.overViewData, this.overViewData1)
+      } catch (error) {
+        console.log(error)
       }
     },
     'isMobile': {
@@ -2000,6 +2018,7 @@ export default {
   computed: {
     ...mapState({
       isMobile: (state) => state.app.isMobile,
+      uint: (state) => state.app.uint,
     }),
     role() {
       if (!this.$store.state.app.accountInfo?.account) return null
@@ -2023,6 +2042,7 @@ export default {
     }
   },
   async created() {
+    this.checkedVal1 = this.uint
     if (!this.$route.params?.contract) this.$router.push("/")
     this.projectName = decodeURIComponent(this.$route.params.contract)
     await this.getRate()
@@ -2329,12 +2349,13 @@ export default {
         name: "approve",
         authorization: [
           {
-            actor: this.contractA,
-            permission: "admin",
-          },
-          {
             actor: formName,
             permission: permission || "active",
+          },
+          {
+            actor: this.contractA,
+            // permission: "admin",
+            permission: this.currentPermission
           },
         ],
         data: {
@@ -2381,13 +2402,14 @@ export default {
         name: "deny",
         authorization: [
           {
-            actor: this.contractA,
-            permission: "admin",
-          },
-          {
             actor: formName,
             permission: permission || "active",
           },
+          {
+            actor: this.contractA,
+            // permission: "admin",
+            permission: this.currentPermission
+          }
           // {
           //   actor: "d.a.yield",
           //   permission: "active",
@@ -2419,7 +2441,12 @@ export default {
       }, 2000)
     },
     async handleClaimLast() {
-      const veriResult = await this.handleGetAccount()
+      let veriResult;
+      if(this.network === '1'){
+        veriResult = await this.handleGetAccount()
+      } else {
+        veriResult = utils.isAddress(this.claimFormName)
+      }
       if (!veriResult) {
         this.claimFormNameVeri = false
         return
@@ -2448,7 +2475,8 @@ export default {
         ],
         data: {
           protocol: this.projectName,
-          receiver: this.claimFormName,
+          receiver: this.network === '1' ? this.claimFormName : null,
+          evm_receiver: this.network === '2' ? this.claimFormName : null,
         },
       })
 
@@ -2496,7 +2524,7 @@ export default {
     },
     // Claim
     async handleClaim() {
-      if (this.rewards == "-" || !this.rewards) return
+      // if (this.rewards == "-" || !this.rewards) return
       this.claimFormNameVeri = true
       this.claimDialogVisible = true
       this.claimFormName = this.$store.state.app.accountInfo.account
@@ -2560,6 +2588,7 @@ export default {
     hideShow4() {
       this.tipsShow4 = false
     },
+    truncateAddress
   },
 }
 </script>
@@ -2610,8 +2639,8 @@ export default {
       }
 
       .box-label {
-        min-width: 77px;
-        padding: 0 10px;
+        // min-width: 77px;
+        // padding: 0 10px;
         height: 22px;
         line-height: 22px;
         border-radius: 15px;
@@ -2619,8 +2648,8 @@ export default {
         margin-bottom: 3px;
         font-size: 10px;
         font-weight: 400;
-        color: #000000;
-        border: 1px solid #d9d9d9;
+        color: #999;
+        // border: 1px solid #d9d9d9;
         text-align: center;
       }
 
@@ -2885,8 +2914,8 @@ export default {
       margin-bottom: 10px;
     }
     .box1-label {
-      min-width: 70px;
-      padding: 0 10px;
+      // min-width: 70px;
+      // padding: 0 10px;
       height: 26px;
       line-height: 26px;
       border-radius: 15px;
@@ -2894,8 +2923,8 @@ export default {
       margin-bottom: 5px;
       font-size: 10px;
       font-weight: 400;
-      color: #000000;
-      border: 1px solid #d9d9d9;
+      color: #999;
+      // border: 1px solid #d9d9d9;
       text-align: center;
     }
 
@@ -3289,6 +3318,23 @@ export default {
   font-weight: bold;
 }
 [v-cloak] {
+  display: none;
+}
+/* 在样式表中添加样式 */
+.radio-container .v-input--selection-controls__input {
+  display: inline-flex;
+}
+::v-deep .v-radio:not(:last-child):not(:only-child){
+  margin-bottom: 0;
+  margin-right: 20px;
+}
+::v-deep .v-input--radio-group__input{
+  width: 100%;
+  // border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+}
+::v-deep .v-messages{
   display: none;
 }
 </style>

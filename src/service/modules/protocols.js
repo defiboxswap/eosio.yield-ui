@@ -67,3 +67,21 @@ export function stat() {
       })
   })
 }
+
+// get protocols sparkline
+export function sparkline(name) {
+  return new Promise((resolve, reject) => {
+    axios({
+      baseURL,
+      method: "get",
+      url: `/v1/protocols/${ name }/sparkline?tvl_type=tvl_usd`,
+      headers: getHeaders(),
+    })
+      .then((result) => {
+        resolve(result.data)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}

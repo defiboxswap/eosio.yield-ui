@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import vuetify from '@/plugins/vuetify';
 // import VueClipboard from 'vue-clipboard2'
+import MetaInfo from 'vue-meta-info';
 import router from './router';
 import store from './store';
 import i18n from './utils/lang';
@@ -13,19 +14,46 @@ import '@/assets/fonts/index.scss'
 // Vue.use(VueClipboard)
 // import Vconsole from 'vconsole';
 // new Vconsole();
-import https from '@/service/axios';
-import { accAdd, toFixed, formatNumber, accDiv, accMul, accSub, getKMBUnit, handleHttp, handleCategory, handleCategoryTransform, deepClone, isHttp } from '@/utils/public'
-import { TRANSACTION_URL, CONTRACT_ORACLE, CONTRACT_ADMIN, CONTRACT_YIELD } from "./config"
+Vue.use(MetaInfo)
 
+import https from '@/service/axios';
 Vue.prototype.$http = https;
 
 Vue.prototype.$openTxid = (Txid) => {
-  window.open(`${ TRANSACTION_URL }${Txid}`)
+  if (process.env.NODE_ENV === "production") window.open(`https://bloks.io/transaction/${Txid}`)
+  else window.open(`https://bloks.io/transaction/${Txid}`)
 };
 
-Vue.prototype.contractO = CONTRACT_ORACLE;
-Vue.prototype.contractA = CONTRACT_ADMIN;
-Vue.prototype.contractE = CONTRACT_YIELD;
+// const origin = window.location.origin.indexOf('https://api.tokenyield.io')
+// const origin1 = window.location.origin.indexOf('https://dev.api.tokenyield.io')
+const currentDomain = window.location.hostname;
+console.log(currentDomain, 'domain')
+if (currentDomain === 'tokenyield.io') {
+  Vue.prototype.currentPermission = 'admin';
+  Vue.prototype.contractO = 'oracle.yield';
+  Vue.prototype.contractA = 'admin.yield';
+  Vue.prototype.contractE = 'eosio.yield';
+} else {
+  Vue.prototype.currentPermission = 'active';
+  Vue.prototype.contractO = 'd.o.yield';
+  Vue.prototype.contractA = 'd.a.yield';
+  Vue.prototype.contractE = 'd.e.yield';
+}
+// if (origin < 0) {
+//   // Vue.prototype.contractO = 'd.o.yield';
+//   // Vue.prototype.contractA = 'd.a.yield';
+//   // Vue.prototype.contractE = 'd.e.yield';
+//   Vue.prototype.contractO = 'oracle.yield';
+//   Vue.prototype.contractA = 'admin.yield';
+//   Vue.prototype.contractE = 'eosio.yield';
+// } else {
+//   Vue.prototype.contractO = 'oracle.yield';
+//   Vue.prototype.contractA = 'admin.yield';
+//   Vue.prototype.contractE = 'eosio.yield';
+// }
+
+console.log(Vue.prototype.contractE)
+import { accAdd, toFixed, formatNumber, accDiv, accMul, accSub, getKMBUnit, handleHttp, handleCategory, handleCategoryTransform, deepClone, isHttp } from '@/utils/public'
 Vue.prototype.accAdd = accAdd
 Vue.prototype.toFixed = toFixed
 Vue.prototype.formatNumber = formatNumber
