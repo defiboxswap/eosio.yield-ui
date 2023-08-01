@@ -2,8 +2,10 @@
 import config from "./config";
 import { Api, JsonRpc } from "eosjs";
 import { numericFromName } from '../util/index'
-import ScatterJS from "@scatterjs/core";
-import ScatterEOS from "@scatterjs/eosjs2";
+// import ScatterJS from "@scatterjs/core";
+// import ScatterEOS from "@scatterjs/eosjs2";
+
+import { ScatterJS, ScatterEOS } from 'scatter-ts';
 const eosioAbi = require("./eosio.system.js");
 
 ScatterJS.plugins(new ScatterEOS());

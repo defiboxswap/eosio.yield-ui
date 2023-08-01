@@ -60,69 +60,68 @@ $-black2: #0d1939;
   color: #ccc !important;
 }
 
-.newCoin {
-  // position: relative;
-  padding-left: 1px;
-  .newCoinImg {
-    // position: absolute;
-    // top: 50%;
-    // right: 0;
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    // margin-top: -14px;
-    background-color: #fff;
-    background-image: url('/static/img/eos1.png');
-    background-size: cover;
-    border-radius: 50%;
-    
-  }
-  .newCoinImgForTron {
-    background-color: #fff;
-    background-image: url('/static/img/chain/tron-default.png');
-    background-size: cover;
-  }
-  .tradeImg {
-    right: 1px;
-    width: 17px;
-    height: 17px;
-    // margin-top: -9px;
-  }
+// .newCoin {
+//   // position: relative;
+//   padding-left: 1px;
+//   .newCoinImg {
+//     // position: absolute;
+//     // top: 50%;
+//     // right: 0;
+//     display: inline-block;
+//     width: 22px;
+//     height: 22px;
+//     // margin-top: -14px;
+//     background-color: #fff;
+//     // background-image: url('/static/img/eos1.png');
+//     background-size: cover;
+//     border-radius: 50%;
+//   }
+//   // .newCoinImgForTron {
+//   //   background-color: #fff;
+//   //   // background-image: url('/static/img/chain/tron-default.png');
+//   //   background-size: cover;
+//   // }
+//   .tradeImg {
+//     right: 1px;
+//     width: 17px;
+//     height: 17px;
+//     // margin-top: -9px;
+//   }
 
-  .newCoinImg,
-  .newCoinImgForTron,
-  .tradeImg {
-    img {
-      width: 22px;
-      height: 22px;
-      background: #fff;
-      border-radius: 50%;
-      overflow: hidden;
-      &::after {
-        content: '';
-        background-image: url('/static/img/eos1.png');
-        background-size: cover;
-        position: absolute;
-        z-index: 2;
-        top: 0;
-        left: 0;
-        width: 23px;
-        height: 23px;
-        background-color: #fff;
-        border-radius: 50%;
-      }
-    }
-  }
-  .newCoinImgForTron {
-    img {
-      &::after {
-        content: '';
-        background-image: url('/static/img/chain/tron-default.png');
-        background-size: cover;
-      }
-    }
-  }
-}
+//   .newCoinImg,
+//   // .newCoinImgForTron,
+//   .tradeImg {
+//     img {
+//       width: 22px;
+//       height: 22px;
+//       background: #fff;
+//       border-radius: 50%;
+//       overflow: hidden;
+//       &::after {
+//         content: '';
+//         background-image: url('/static/img/eos1.png');
+//         background-size: cover;
+//         position: absolute;
+//         z-index: 2;
+//         top: 0;
+//         left: 0;
+//         width: 23px;
+//         height: 23px;
+//         background-color: #fff;
+//         border-radius: 50%;
+//       }
+//     }
+//   }
+//   // .newCoinImgForTron {
+//   //   img {
+//   //     &::after {
+//   //       content: '';
+//   //       background-image: url('/static/img/chain/tron-default.png');
+//   //       background-size: cover;
+//   //     }
+//   //   }
+//   // }
+// }
 
 .text-button {
   text-transform: none !important;

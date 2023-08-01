@@ -1534,7 +1534,7 @@ export default {
     },
     handleOpen(type) {
       if (type === 'discord') {
-        window.open('https://discord.gg/wDqjXVmt')
+        window.open('https://discord.gg/tF6B2PF2um')
       } else if (type === 'telegram') {
         window.open('https://t.me/yieldplus')
       } else {

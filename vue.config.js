@@ -25,7 +25,7 @@ module.exports = {
   css: {
     extract: false,
     sourceMap: false,
-    requireModuleExtension: true, // modules for all css / pre-processor files.
+    // requireModuleExtension: true, // modules for all css / pre-processor files.
     loaderOptions: {
       sass: {}
     }
@@ -56,6 +56,7 @@ module.exports = {
   },
   configureWebpack: (config) => {
 
+    config.resolve.fallback = { "stream": require.resolve("stream-browserify") };
 
     if (isProduction) {
       // config.plugins.push(new VuetifyLoaderPlugin())
